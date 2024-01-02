@@ -1,1 +1,1 @@
-# degree-project
+# My Degree Project
