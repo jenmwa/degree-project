@@ -10,10 +10,10 @@ interface IBooking {
   requestStatus: String;
   requestedDate: DateTime;
   requestedProduct: String;
-  updated_at: null;
+  updated_at: string | null;
 }
 
-const AdminPage = () => {
+export const AdminPage = () => {
   console.log("hello admin");
   const [bookings, setBookings] = useState<IBooking[]>([]);
   const [loading, setLoading] = useState(true);
@@ -39,7 +39,12 @@ const AdminPage = () => {
   return (
     <>
       {" "}
-      <h1>Admin</h1>
+      <h1 className="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
+        <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
+          Hello
+        </span>{" "}
+        Admin
+      </h1>
       {loading ? (
         <p>Laddar...</p>
       ) : (
