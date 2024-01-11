@@ -1,30 +1,16 @@
 "use client";
-import { createClient } from "@supabase/supabase-js";
 import { useEffect } from "react";
 
 const Butiken = () => {
   useEffect(() => {
     const fetchData = async () => {
-      const supabaseUrl: string = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-      const supabaseKey: string = process.env.NEXT_PUBLIC_SUPABASE_KEY || "";
+      try {
+        const response = await fetch("/api/handlers?entity=Product");
+        const data = await response.json();
 
-      if (!supabaseUrl || !supabaseKey) {
-        console.error("Supabase URL or key is missing.");
-      } else {
-        const supabase = createClient(supabaseUrl, supabaseKey);
-        try {
-          const { data: products, error } = await supabase
-            .from("Product")
-            .select("*");
-
-          if (error) {
-            console.error("Error fetching data:", error);
-          } else {
-            console.log("Products:", products);
-          }
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
+        console.log("Products:", data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
       }
     };
 
@@ -32,12 +18,12 @@ const Butiken = () => {
   }, []);
 
   return (
-    <>
-      {" "}
+    <div>
       <br></br>
       <br></br>
-      <br></br>Butiken
-    </>
+      <br></br>
+      <h1>Bookings</h1>
+    </div>
   );
 };
 
