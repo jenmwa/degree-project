@@ -9,7 +9,7 @@ export default function Login() {
       <br></br>
       <form action="/auth/login" method="post">
         <label htmlFor="email">Email</label>
-        <input value="jen@jenwaller.com" name="email" />
+        <input value="jen@jenwaller.se" name="email" />
         <label htmlFor="password">Password</label>
         <input value="hejNEJ" type="password" name="password" />
         <button>Sign in</button>
