@@ -40,7 +40,6 @@
 
 import NextAuth from "next-auth";
 import EmailProvider from "next-auth/providers/email";
-import { SupabaseAdapter } from "@auth/supabase-adapter"
 
 export default NextAuth({
   providers: [
