@@ -1,4 +1,5 @@
 import Image from "next/image";
+import React from "react";
 
 export default function Home() {
   console.log("hello world!");
@@ -20,7 +21,6 @@ export default function Home() {
           priority
         />
       </div>
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left"></div>
     </main>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
-import { supabase } from "@/lib/supabase";
 import { DateTime } from "next-auth/providers/kakao";
 import { useRouter } from "next/router";
+import React from "react";
 import { useEffect, useState } from "react";
 
 interface IBooking {
