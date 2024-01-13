@@ -47,9 +47,9 @@ export const Header = () => {
                 viewBox="0 0 24 24"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
                 />
               </svg>
@@ -68,9 +68,9 @@ export const Header = () => {
                 viewBox="0 0 24 24"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
                 />
               </svg>
@@ -85,7 +85,7 @@ export const Header = () => {
 
           <button
             type="button"
-            className="hidden lg:flex text-white bg-rust-300 hover:bg-rust-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-rust-300 dark:hover:bg-rust-400 dark:focus:ring-rust-500"
+            className="hidden lg:flex text-white bg-rust-300 hover:bg-rust-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center items-center dark:bg-rust-300 dark:hover:bg-rust-400 dark:focus:ring-rust-500"
           >
             Butiken
             <ArrowTopRightOnSquareIcon className="w-5 h-5 ml-2" />
