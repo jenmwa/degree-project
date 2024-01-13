@@ -3,41 +3,40 @@ import { DateTime } from "next-auth/providers/kakao";
 import { useRouter } from "next/router";
 import React from "react";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
+import { IProduct } from "../../_models/IProduct";
+import { IBooking } from "../../_models/IBooking";
 
-interface IBooking {
-  bookingId: string;
-  customer: string;
-  product: string;
-  bookingMessage: string;
-  requestedDate: DateTime;
-  bookingStatus: string;
-  created_at: DateTime;
-  updated_at: DateTime | null;
+interface FetchDataOptions {
+  entity: string;
+}
+
+export async function fetchyData(entity: any) {
+  const response = await fetch(`/api/handlers?entity=${entity}`);
+  const data = await response.json();
+  return data.data;
 }
 
 export const Dashboard = () => {
-  console.log("hello admin");
+  const { data: bookings, error: bookingerror } = useSWR(
+    "/api/handlers?entity=Booking",
+    fetchyData
+  );
+  console.log("Type of bookings:", typeof bookings, bookings);
 
-  const [bookings, setBookings] = useState<IBooking[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: products, error: productserror } = useSWR(
+    "/api/handlers?entity=Product",
+    fetchyData
+  );
+  console.log("Type of produkts:", typeof products, products);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/handlers?entity=Booking");
-        const data = await response.json();
+  if (bookingerror) {
+    return <div>Error fetching data</div>;
+  }
 
-        console.log("Bookings:", data.data);
-        setBookings(data.data);
-      } catch (error) {
-        console.error("Error fetching bookings:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  if (!bookings) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -49,24 +48,29 @@ export const Dashboard = () => {
           </span>{" "}
           Admin aka
         </h1>
-        {loading ? (
-          <p>Laddar...</p>
-        ) : (
-          <div>
-            <p>Orders:</p>
 
-            <ul>
-              {bookings?.map((booking) => (
+        <div>
+          <p>Orders:</p>
+
+          <ul>
+            {Array.isArray(bookings) ? (
+              bookings.map((booking) => (
                 <li key={booking.bookingId}>
-                  Id:
-                  {booking.bookingId}
-                  <br></br>Requested Date:
-                  {booking.requestedDate}
+                  Id: {booking.bookingId}
+                  <br />
+                  Requested Date: {booking.requestedDate.toLocaleDateString()}
                 </li>
-              ))}
-            </ul>
-          </div>
-        )}
+              ))
+            ) : (
+              <div>Data is not an array</div>
+            )}
+          </ul>
+          {/* <ul>
+            {products?.map((product) => (
+              <li key={product.productId}></li>
+            ))}
+          </ul> */}
+        </div>
       </div>
     </>
   );

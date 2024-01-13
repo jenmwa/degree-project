@@ -1,4 +1,6 @@
-import { supabase } from "@/lib/supabase";
+import { supabaseServer } from "../../lib/supabaseServer";
+
+
 
 
 export default async function handler(req: any, res: any) {
@@ -12,7 +14,7 @@ export default async function handler(req: any, res: any) {
       }
 
       // Update the product in the database
-      const { data, error } = await supabase
+      const { data, error } = await supabaseServer
         .from('Product')
         .update({ productPrice })
         .eq('productId', productId)

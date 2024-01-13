@@ -1,19 +1,10 @@
 "use client";
+import React from "react";
 import { useEffect, useState } from "react";
-
-interface IProducts {
-  productId: string;
-  productTitle: String;
-  productLongDescription: string;
-  productShortDescription: string;
-  productImage: string[];
-  productPrice: number;
-  created_at: Date;
-  updated_at: string | null;
-}
+import { IProduct } from "../_models/IProduct";
 
 const Butiken = () => {
-  const [products, setProducts] = useState<IProducts[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
