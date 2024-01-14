@@ -11,7 +11,7 @@ SAD:
 
 - mindre bra självförtroende, och resulterat i en del tvivel. igår heldag med klur och jag fixar ju det jag vill! SÅ jag måste steppa upp det här med att TRO PÅ MIG SJÄLV!
 - effektiviteten och att vara mer strukturerad hade def kunnat hja bättre fokus
-- som vanligt väldigt mycket personliga reflektioner och mindre reflektioner på papper gentemot tekniken. ska se om jagkan lägga in en punkt i min dagbok som berör något tekniskt så jag får utveckla mitt språk och mina tankar kring något specifikt gällande just det.
+- som vanligt väldigt mycket personliga reflektioner och mindre reflektioner på papper gentemot tekniken. ska se om jag kan lägga in en punkt i min dagbok som berör något tekniskt så jag får utveckla mitt språk och mina tankar kring något specifikt gällande just det.
 
 GLAD:
 
@@ -25,8 +25,6 @@ GLAD:
 ![boardw1-2.png](RETROPERSPECTIVE%200e67d4c307494b2d8e2f6b137a935e2f/boardw1-2.png)
 
 # 240114
-
-Created time: January 14, 2024 9:01 AM
 
 **Yesterday I…**
 
