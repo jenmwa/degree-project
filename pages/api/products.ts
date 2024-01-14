@@ -8,12 +8,10 @@ export default async function handler(req: any, res: any) {
     try {
       const { productId, productPrice } = req.body;
 
-      // Validate the presence of required fields
       if (!productId || !productPrice) {
         return res.status(400).json({ error: 'productId and productPrice are required' });
       }
 
-      // Update the product in the database
       const { data, error } = await supabaseServer
         .from('Product')
         .update({ productPrice })

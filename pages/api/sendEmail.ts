@@ -1,7 +1,4 @@
-// var transporter = nodemailer.createTransport({
-//   service: 'Gmail', // no need to set host or port etc.
-//   auth: { ...}
-// });
+
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
@@ -17,7 +14,7 @@ var mailOptions = {
   to: 'myfriend@yahoo.com',
   subject: 'Sending Email using Node.js',
   html: '<h1>Welcome</h1><p>That was easy!</p>'
-  //or   text: 'That was easy!'
+  //eller   text: 'That was easy!'
 }
 
 transporter.sendMail(mailOptions, function (error: any, info: { response: string; }) {
