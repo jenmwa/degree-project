@@ -21,8 +21,8 @@ GLAD:
 - Jag vet att jag inte är bra på backend och logik på rak arm, så varit en väldig utmaning att grotta ner mig i databashanering… vanliga API och fetcha, kul och lagomt klur, men detta med server vs klient och routes, och middlewares och allt? jag är inte bekväm alls, jag drar mitt hår MEN DET GÅR! då glad för att jag ändå inte tar den lätta vägen utan vågar utmana mig.
 - jag är lite stressad men samtidigt pepp så det går åt rätt håll! fredag som sagt, ny sprint, utvärdering, och se hur jag ligger till.
 - OCH! konsekventa commitmeddelanden!
-
-![boardw1-2.png](RETROPERSPECTIVE%200e67d4c307494b2d8e2f6b137a935e2f/boardw1-2.png)
+  
+<img width="1497" alt="boardw1-2" src="https://github.com/jenmwa/degree-project/assets/113125376/a41ce1bd-25ad-4ce2-bad9-0cd65f2735d1">
 
 # 240114
 
