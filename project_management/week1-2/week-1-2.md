@@ -22,7 +22,7 @@ GLAD:
 - jag är lite stressad men samtidigt pepp så det går åt rätt håll! fredag som sagt, ny sprint, utvärdering, och se hur jag ligger till.
 - OCH! konsekventa commitmeddelanden!
 
-![boardw1-2.png](RETROPERSPECTIVE%200e67d4c307494b2d8e2f6b137a935e2f/boardw1-2.png)
+<img width="1497" alt="boardw1-2" src="https://github.com/jenmwa/degree-project/assets/113125376/a41ce1bd-25ad-4ce2-bad9-0cd65f2735d1">
 
 # 240114
 
