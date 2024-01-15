@@ -1,44 +1,11 @@
 "use client";
-import { DateTime } from "next-auth/providers/kakao";
-import { useRouter } from "next/navigation";
 import React from "react";
-import { useEffect, useState } from "react";
-
-interface IBooking {
-  bookingId: string;
-  customer: string;
-  product: string;
-  bookingMessage: string;
-  requestedDate: DateTime;
-  bookingStatus: string;
-  created_at: DateTime;
-  updated_at: DateTime | null;
-}
+import { useProductContext } from "../../_context/ProductsContext";
 
 export const Dashboard = () => {
   console.log("hello admin");
-
-  const [bookings, setBookings] = useState<IBooking[]>([]);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/handlers?entity=Booking");
-        const data = await response.json();
-
-        console.log("Bookings:", data.data);
-        setBookings(data.data);
-      } catch (error) {
-        console.error("Error fetching bookings:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { products, isLoading, isError } = useProductContext();
+  console.log(products);
 
   const signoutAdmin = async () => {
     console.log("sign out please");
@@ -46,10 +13,9 @@ export const Dashboard = () => {
       const response = await fetch("/auth/logout", {
         method: "POST",
       });
-
       if (response.ok) {
         console.log("Sign-out successful");
-        router.refresh();
+        // router.refresh();
       } else {
         // Handle sign-out error
         console.error("Sign-out failed");
@@ -70,19 +36,18 @@ export const Dashboard = () => {
           </span>{" "}
           Admin aka
         </h1>
-        {loading ? (
+        {isLoading ? (
           <p>Laddar...</p>
         ) : (
           <div>
             <p>Orders:</p>
 
             <ul>
-              {bookings?.map((booking) => (
-                <li key={booking.bookingId}>
+              {products?.map((product) => (
+                <li key={product.productId}>
                   Id:
-                  {booking.bookingId}
-                  <br></br>Requested Date:
-                  {booking.requestedDate}
+                  {product.productShortDescription}
+                  {product.productTitle}
                 </li>
               ))}
             </ul>

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "./_components/Header";
 import { Footer } from "./_components/Footer";
 import React from "react";
+import { ProductProvider } from "./_context/ProductsContext";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -23,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="sv">
       <body className={cormorant.className}>
-        <Header />
-        {children}
-        <Footer />
+        <ProductProvider>
+          <Header />
+          {children}
+          <Footer />
+        </ProductProvider>
       </body>
     </html>
   );
