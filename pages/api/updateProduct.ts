@@ -1,8 +1,5 @@
 import { supabaseServer } from "../../lib/supabaseServer";
 
-
-
-
 export default async function handler(req: any, res: any) {
   if (req.method === 'PUT') {
     try {
@@ -14,7 +11,7 @@ export default async function handler(req: any, res: any) {
 
       const { data, error } = await supabaseServer
         .from('Product')
-        .update({ productPrice })
+        .update({ productPrice, updated_at: 'now()' })
         .eq('productId', productId)
         .select('*');
 
