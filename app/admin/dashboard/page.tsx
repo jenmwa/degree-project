@@ -1,11 +1,13 @@
 "use client";
 import React from "react";
 import { useProductContext } from "../../_context/ProductsContext";
+import { useRouter } from "next/navigation";
 
 export const Dashboard = () => {
   console.log("hello admin");
   const { products, isLoading, isError } = useProductContext();
   console.log(products);
+  const router = useRouter();
 
   const signoutAdmin = async () => {
     console.log("sign out please");
@@ -15,7 +17,7 @@ export const Dashboard = () => {
       });
       if (response.ok) {
         console.log("Sign-out successful");
-        // router.refresh();
+        router.push("/admin");
       } else {
         // Handle sign-out error
         console.error("Sign-out failed");
