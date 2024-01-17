@@ -33,8 +33,8 @@ export const Images = () => {
     }
     try {
       const { data, error } = await supabase.storage
-        .from("images")
-        .upload(`/${productID}/${id}.png`, file);
+        .from("productImages")
+        .upload(`/${productID}/${id}.WebP`, file);
 
       if (error) {
         console.error("Error uploading image:", error.message);
@@ -48,15 +48,17 @@ export const Images = () => {
       console.error("Unexpected error:", error);
     }
   };
-
+  console.log(
+    '"https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/d4cc967a-1f74-4036-b977-efa7b890a348'
+  );
   const filepath =
-    // "https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/purple.png";
-    "https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/d4cc967a-1f74-4036-b977-efa7b890a348/8f56e6c4-0ebb-466b-bd37-f26f1de80076";
+    "https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/";
+  //
+  // "https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/purple.png";
+  ("https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/d4cc967a-1f74-4036-b977-efa7b890a348/8f56e6c4-0ebb-466b-bd37-f26f1de80076");
   async function fetchAndLogImages() {
     try {
-      const { data, error } = await supabase.storage
-        .from("images")
-        .getPublicUrl(`${filepath}`);
+      const { data, error } = await supabase.storage.from("images").list();
       console.log(data);
       if (error) {
         console.error("Error fetching images:", error.message);
@@ -78,7 +80,19 @@ export const Images = () => {
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload Image</button>
       <div>
-        <Image src={filepath} alt="" width={200} height={200} />)
+        {imageArray.map((img) => (
+          <>
+            <Image
+              key={img.id}
+              alt={img.name}
+              src={filepath + `${img.name}`}
+              width={200}
+              height={200}
+            ></Image>
+            <p>{img.name}</p>
+          </>
+        ))}
+        {/* <Image src={filepath} alt="" width={200} height={200} />) */}
       </div>
     </>
   );
