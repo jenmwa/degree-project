@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { IProduct } from "@/app/_models/IProduct";
 import { supabase } from "@/lib/supabase";
 import AdminOrderTable from "@/app/_components/AdminOrderTable";
+import { Images } from "@/app/_components/Images";
 
 export const Dashboard = () => {
   console.log("hello admin");
@@ -111,6 +112,7 @@ export const Dashboard = () => {
           </div>
         )}
         <AdminOrderTable></AdminOrderTable>
+        <Images></Images>
       </div>
     </>
   );
