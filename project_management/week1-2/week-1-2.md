@@ -11,7 +11,7 @@ SAD:
 
 - mindre bra självförtroende, och resulterat i en del tvivel. igår heldag med klur och jag fixar ju det jag vill! SÅ jag måste steppa upp det här med att TRO PÅ MIG SJÄLV!
 - effektiviteten och att vara mer strukturerad hade def kunnat hja bättre fokus
-- som vanligt väldigt mycket personliga reflektioner och mindre reflektioner på papper gentemot tekniken. ska se om jagkan lägga in en punkt i min dagbok som berör något tekniskt så jag får utveckla mitt språk och mina tankar kring något specifikt gällande just det.
+- som vanligt väldigt mycket personliga reflektioner och mindre reflektioner på papper gentemot tekniken. ska se om jag kan lägga in en punkt i min dagbok som berör något tekniskt så jag får utveckla mitt språk och mina tankar kring något specifikt gällande just det.
 
 GLAD:
 
@@ -21,12 +21,10 @@ GLAD:
 - Jag vet att jag inte är bra på backend och logik på rak arm, så varit en väldig utmaning att grotta ner mig i databashanering… vanliga API och fetcha, kul och lagomt klur, men detta med server vs klient och routes, och middlewares och allt? jag är inte bekväm alls, jag drar mitt hår MEN DET GÅR! då glad för att jag ändå inte tar den lätta vägen utan vågar utmana mig.
 - jag är lite stressad men samtidigt pepp så det går åt rätt håll! fredag som sagt, ny sprint, utvärdering, och se hur jag ligger till.
 - OCH! konsekventa commitmeddelanden!
-  
+
 <img width="1497" alt="boardw1-2" src="https://github.com/jenmwa/degree-project/assets/113125376/a41ce1bd-25ad-4ce2-bad9-0cd65f2735d1">
 
 # 240114
-
-Created time: January 14, 2024 9:01 AM
 
 **Yesterday I…**
 

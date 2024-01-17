@@ -1,28 +1,9 @@
 "use client";
 import React from "react";
-import { useEffect, useState } from "react";
-import { IProduct } from "../_models/IProduct";
+import { useProductContext } from "../_context/ProductsContext";
 
 const Butiken = () => {
-  const [products, setProducts] = useState<IProduct[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/handlers?entity=Product");
-        const data = await response.json();
-        console.log("Products:", data);
-        setProducts(data.data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { products, isLoading, isError } = useProductContext();
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

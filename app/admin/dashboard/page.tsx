@@ -1,61 +1,57 @@
 "use client";
-import { DateTime } from "next-auth/providers/kakao";
+import React, { ChangeEvent, useState } from "react";
+import { useProductContext } from "../../_context/ProductsContext";
 import { useRouter } from "next/navigation";
-import React from "react";
-import { useEffect, useState } from "react";
-
-interface IBooking {
-  bookingId: string;
-  customer: string;
-  product: string;
-  bookingMessage: string;
-  requestedDate: DateTime;
-  bookingStatus: string;
-  created_at: DateTime;
-  updated_at: DateTime | null;
-}
+import { IProduct } from "@/app/_models/IProduct";
+import { supabase } from "@/lib/supabase";
+import AdminOrderTable from "@/app/_components/AdminOrderTable";
 
 export const Dashboard = () => {
   console.log("hello admin");
-
-  const [bookings, setBookings] = useState<IBooking[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { products, isLoading, isError } = useProductContext();
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
+  const [editedprice, setEditedPrice] = useState<number>(0);
+  console.log(products);
   const router = useRouter();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/handlers?entity=Booking");
-        const data = await response.json();
-
-        console.log("Bookings:", data.data);
-        setBookings(data.data);
-      } catch (error) {
-        console.error("Error fetching bookings:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const signoutAdmin = async () => {
     console.log("sign out please");
+    await supabase.auth.signOut();
+    router.push("/admin");
+  };
+
+  const showProduct = (product: IProduct) => {
+    console.log(product);
+    setSelectedProduct(product);
+    setEditedPrice(product.productPrice);
+  };
+
+  const changePrice = (e: ChangeEvent<HTMLInputElement>) => {
+    setEditedPrice(Number(e.target.value));
+  };
+
+  const updateProduct = async () => {
+    console.log("update Product");
     try {
-      const response = await fetch("/auth/logout", {
-        method: "POST",
+      const response = await fetch("/api/updateProduct", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productId: selectedProduct?.productId,
+          productPrice: editedprice,
+        }),
       });
 
       if (response.ok) {
-        console.log("Sign-out successful");
-        router.refresh();
+        console.log(editedprice);
+        console.log("Product updated successfully");
       } else {
-        // Handle sign-out error
-        console.error("Sign-out failed");
+        console.error("Failed to update product");
       }
     } catch (error) {
-      console.error("Error during sign-out:", error);
+      console.error("Error updating product:", error);
     }
   };
 
@@ -68,26 +64,53 @@ export const Dashboard = () => {
           <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
             Hello
           </span>{" "}
-          Admin aka
+          Admin
         </h1>
-        {loading ? (
+        {isLoading ? (
           <p>Laddar...</p>
         ) : (
           <div>
             <p>Orders:</p>
 
             <ul>
-              {bookings?.map((booking) => (
-                <li key={booking.bookingId}>
+              {products?.map((product) => (
+                <li
+                  key={product.productId}
+                  onClick={() => showProduct(product)}
+                >
                   Id:
-                  {booking.bookingId}
-                  <br></br>Requested Date:
-                  {booking.requestedDate}
+                  {product.productShortDescription}
+                  {product.productTitle}
                 </li>
               ))}
             </ul>
+            {selectedProduct && (
+              <div className="border-double border-4 border-indigo-600">
+                <p>Product Details:</p>
+                <p>Id: {selectedProduct.productId}</p>
+                <p>Title: {selectedProduct.productTitle}</p>
+                <p>
+                  Short Description: {selectedProduct.productShortDescription}
+                </p>
+                <p>
+                  Long Description: {selectedProduct.productLongDescription}
+                </p>
+                <label>
+                  Title:
+                  <input
+                    type="text"
+                    value={editedprice}
+                    onChange={changePrice}
+                  />
+                </label>
+                {/* Add other details as needed */}
+                {/* <button onClick={closeProductDetails}>Close Details</button> */}
+                <button onClick={updateProduct}>UPPDATERA</button>
+              </div>
+            )}
           </div>
         )}
+        <AdminOrderTable></AdminOrderTable>
       </div>
     </>
   );
