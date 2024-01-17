@@ -4,6 +4,7 @@ import { useProductContext } from "../../_context/ProductsContext";
 import { useRouter } from "next/navigation";
 import { IProduct } from "@/app/_models/IProduct";
 import { supabase } from "@/lib/supabase";
+import AdminOrderTable from "@/app/_components/AdminOrderTable";
 
 export const Dashboard = () => {
   console.log("hello admin");
@@ -109,6 +110,7 @@ export const Dashboard = () => {
             )}
           </div>
         )}
+        <AdminOrderTable></AdminOrderTable>
       </div>
     </>
   );
