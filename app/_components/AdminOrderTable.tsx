@@ -1,36 +1,61 @@
-export const AdminOrderTable = () => {
+"use client";
+import React from "react";
+import { IBooking } from "../_models/IBooking";
+
+interface IAdminOrderTableProps {
+  bookings: IBooking[];
+  isLoading: boolean;
+}
+
+export const AdminOrderTable = ({
+  bookings,
+  isLoading,
+}: IAdminOrderTableProps) => {
   return (
     <>
-      <h3>Bookings:</h3>
-      <section>
-        <table className="table-auto">
-          <thead>
+      <section className="relative overflow-x-auto my-16">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th>Order nummer</th>
-              <th>Produkt</th>
-              <th>Datum för produkt</th>
-              <th>Status</th>
+              <th scope="col" className="px-4 py-3">
+                order
+              </th>
+              <th scope="col" className="px-4 py-3">
+                Product
+              </th>
+              <th scope="col" className="px-4 py-3">
+                Date
+              </th>
+              <th scope="col" className="px-4 py-3">
+                Status
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>id</td>
-              <td>Produkt1</td>
-              <td>2024-02-14</td>
-              <td>request</td>
-            </tr>
-            <tr>
-              <td>id</td>
-              <td>Produkt2</td>
-              <td>2024-02-13</td>
-              <td>request</td>
-            </tr>
-            <tr>
-              <td>id</td>
-              <td>Produkt3</td>
-              <td>2024-02-15</td>
-              <td>request</td>
-            </tr>
+            {isLoading ? (
+              <tr>
+                <td colSpan={4}>Laddar...</td>
+              </tr>
+            ) : (
+              bookings?.map((booking) => (
+                <tr
+                  key={booking.bookingId}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                >
+                  <th
+                    scope="row"
+                    className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    {booking.bookingId}
+                  </th>
+                  <td className="px-4 py-4">{booking.product}</td>
+                  <td className="px-4 py-4">
+                    {booking.requestedDate.toLocaleString()}
+                  </td>
+                  <td className="px-4 py-4">{booking.bookingStatus}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </section>

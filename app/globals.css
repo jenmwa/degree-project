@@ -18,14 +18,14 @@
 
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  /* color: rgb(var(--foreground-rgb)); */
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-    height: 100dvh;
+    ) */
+    /* rgb(var(--background-start-rgb)); */
+    min-height: 100dvh;
 }
 
 .bg-hero {
