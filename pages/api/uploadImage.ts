@@ -3,6 +3,9 @@
 // import { randomUUID } from 'crypto';
 // import { supabaseServer } from '@/lib/supabaseServer';
 
+import { supabase } from "@/lib/supabase";
+import { supabaseServer } from "@/lib/supabaseServer";
+
 // export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 //   if (req.method === 'POST') {
 //     try {
@@ -29,5 +32,3 @@
 //     return res.status(405).json({ error: 'Method Not Allowed' });
 //   }
 // }
-
-
