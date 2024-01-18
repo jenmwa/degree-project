@@ -18,7 +18,7 @@ export const EditProduct = ({
     productTitle: selectedProduct.productTitle,
     productLongDescription: selectedProduct.productLongDescription,
     productShortDescription: selectedProduct.productShortDescription,
-    product_images: [],
+    productImagesUrl: selectedProduct.productImagesUrl || [],
     productPrice: selectedProduct.productPrice,
     created_at: selectedProduct.created_at,
     updated_at: null,
@@ -55,6 +55,7 @@ export const EditProduct = ({
     }));
   };
 
+  //LADDA UPP BILD
   const handleFileImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       setFileImage(event.target.files[0]);
@@ -67,23 +68,45 @@ export const EditProduct = ({
     setFileImage(null);
   };
 
-  const handleImageUpload = async () => {
-    const uuid = self.crypto.randomUUID();
-    console.log("check:", fileImage, uuid);
-
-    if (!fileImage) {
-      console.error("No file selected.");
-      return;
-    }
+  const handleFormSubmit = async (e: FormEvent) => {
+    e.preventDefault();
 
     try {
+      const uuid = self.crypto.randomUUID();
+      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${uuid}`;
+
+      // Upload image to storage
+      await handleImageUpload(uuid);
+      console.log("imageUrl", imageUrl);
+      // Update the form data with the image URL
+      const updatedFormData = {
+        ...formData,
+        productImagesUrl: formData.productImagesUrl
+          ? [...formData.productImagesUrl, imageUrl]
+          : [imageUrl],
+      };
+
+      // Call the parent function with updated form data
+      handleFormData(updatedFormData);
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    }
+  };
+
+  const handleImageUpload = async (uuid: string) => {
+    try {
+      if (!fileImage) {
+        console.error("No file selected.");
+        return;
+      }
+
       const { data, error } = await supabase.storage
         .from("productImages")
         .upload(`/${selectedProduct.productId}/${uuid}`, fileImage);
 
       if (error) {
         console.error("Error uploading image:", error.message);
-        return;
+        throw error;
       }
 
       if (data) {
@@ -91,20 +114,8 @@ export const EditProduct = ({
       }
     } catch (error) {
       console.error("Unexpected error:", error);
+      throw error;
     }
-  };
-
-  const handleFormSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const updatedFormData = {
-      ...selectedProduct,
-      ...formData,
-    };
-    handleFormData(updatedFormData);
-  };
-
-  const handleDiscardEdit = () => {
-    console.log("avbryt");
   };
 
   console.log(formData);
@@ -327,7 +338,7 @@ export const EditProduct = ({
               <button
                 type="button"
                 className="text-sm font-semibold leading-6 text-gray-900"
-                onClick={handleDiscardEdit}
+                // onClick={handleDiscardEdit}
               >
                 Avbryt
               </button>

@@ -4,7 +4,8 @@ export interface IProduct {
   productLongDescription: string;
   productShortDescription: string;
   // productImage: string[];
-  product_images: IProduct_images[];
+  // product_images: IProduct_images[];
+  productImagesUrl: string[]
   productPrice: number;
   created_at: Date;
   updated_at: Date | null;
