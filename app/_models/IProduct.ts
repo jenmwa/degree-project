@@ -1,6 +1,6 @@
 export interface IProduct {
   productId: string;
-  productTitle: String;
+  productTitle: string;
   productLongDescription: string;
   productShortDescription: string;
   // productImage: string[];

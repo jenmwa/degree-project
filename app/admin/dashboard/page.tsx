@@ -10,11 +10,25 @@ import { ProductsSection } from "@/app/_components/ProductSection";
 import { IBooking } from "@/app/_models/IBooking";
 import { EditProduct } from "@/app/_components/EditProduct";
 
+export const initialProduct: IProduct = {
+  productId: "",
+  productTitle: "",
+  productLongDescription: "",
+  productShortDescription: "",
+  product_images: [],
+  productPrice: 0,
+  created_at: new Date(),
+  updated_at: null,
+};
+
 export const Dashboard = () => {
   console.log("hello admin");
   const { products, isLoading, isError } = useProductContext();
-  const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
+  const [selectedProduct, setSelectedProduct] =
+    useState<IProduct>(initialProduct);
   const [editedprice, setEditedPrice] = useState<number>(0);
+  const [editedProduct, setEditedProduct] = useState<IProduct>(initialProduct);
+
   console.log(products);
   const router = useRouter();
 
@@ -27,14 +41,20 @@ export const Dashboard = () => {
   const showProduct = (product: IProduct) => {
     console.log(product);
     setSelectedProduct(product);
-    setEditedPrice(product.productPrice);
   };
 
-  const changePrice = (e: ChangeEvent<HTMLInputElement>) => {
-    setEditedPrice(Number(e.target.value));
-  };
+  // const showProduct = (product: IProduct) => {
+  //   console.log(product);
+  //   setSelectedProduct(product);
 
-  const updateProduct = async () => {
+  //   setEditedProduct(product);
+  // };
+
+  // const changePrice = (e: ChangeEvent<HTMLInputElement>) => {
+  //   setEditedPrice(Number(e.target.value));
+  // };
+
+  const handleFormData = async (formData: IProduct) => {
     console.log("update Product");
     try {
       const response = await fetch("/api/updateProduct", {
@@ -43,8 +63,13 @@ export const Dashboard = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          productId: selectedProduct?.productId,
-          productPrice: editedprice,
+          productId: selectedProduct.productId,
+          productPrice: formData.productPrice,
+          productTitle: formData.productTitle,
+          productLongDescription: formData.productLongDescription,
+          productShortDescription: formData.productShortDescription,
+          created_at: selectedProduct.created_at,
+          updated_at: formData.created_at,
         }),
       });
 
@@ -79,7 +104,7 @@ export const Dashboard = () => {
 
     fetchData();
   }, []);
-  console.log("boobkings", bookings);
+  console.log("bookings", bookings);
 
   return (
     <>
@@ -101,7 +126,22 @@ export const Dashboard = () => {
           <p>Laddar...</p>
         ) : (
           <div>
-            {selectedProduct && (
+            <p>Orders:</p>
+
+            {/* <ul>
+              {products?.map((product) => (
+                <li
+                  key={product.productId}
+                  onClick={() => showProduct(product)}
+                >
+                  Id:
+                  {product.productShortDescription}
+                  {product.productTitle}
+                </li>
+              ))}
+            </ul> */}
+
+            {/* {selectedProduct && (
               <div className="border-double border-4 border-indigo-600">
                 <p>Product Details:</p>
                 <p>Id: {selectedProduct.productId}</p>
@@ -121,17 +161,24 @@ export const Dashboard = () => {
                   />
                 </label>
                 {/* <button onClick={closeProductDetails}>Close Details</button> */}
-                <button onClick={updateProduct}>UPPDATERA</button>
-              </div>
-            )}
+            {/* <button onClick={updateProduct}>UPPDATERA</button>
+              </div> */}
+            {/* )} */}
           </div>
         )}
-        <ProductsSection></ProductsSection>
         <AdminOrderTable
           bookings={bookings}
           isLoading={isLoading}
         ></AdminOrderTable>
-        <EditProduct></EditProduct>
+        <ProductsSection
+          // editedProduct={editedProduct}
+          showProduct={showProduct}
+        ></ProductsSection>
+
+        <EditProduct
+          selectedProduct={selectedProduct}
+          handleFormData={handleFormData}
+        ></EditProduct>
         <Images></Images>
       </div>
     </>

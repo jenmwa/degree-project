@@ -1,13 +1,4 @@
-export interface IBooking {
-  bookingId: string;
-  customer: string;
-  product: IProduct;
-  bookingMessage: string;
-  requestedDate: Date;
-  bookingStatus: string;
-  created_at: Date;
-  updated_at: Date | null;
-}
+
 
 export interface IUser {
   userId: string;
@@ -25,15 +16,4 @@ export interface IUser {
 export enum Role {
   Admin = 'ADMIN',
   USER = 'USER',
-}
-
-export interface IProduct {
-  productId: string,
-  productTitle: string,
-  productLongDescription: string,
-  productShortDescription: string,
-  productImage: string[],
-  productPrice: number,
-  created_at: Date,
-  updated_at: Date | null,
 }

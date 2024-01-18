@@ -1,12 +1,60 @@
+"use client";
 import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
-import UserCircleIcon from "@heroicons/react/24/outline/UserCircleIcon";
+import { IProduct } from "../_models/IProduct";
+import { ChangeEvent, FormEvent, useState } from "react";
 
-export const EditProduct = () => {
+interface IEditProductProps {
+  selectedProduct: IProduct;
+  handleFormData: (formData: IProduct) => void;
+}
+
+export const EditProduct = ({
+  selectedProduct,
+  handleFormData,
+}: IEditProductProps) => {
+  const [formData, setFormData] = useState<IProduct>({
+    productId: selectedProduct.productId,
+    productTitle: selectedProduct.productTitle,
+    productLongDescription: selectedProduct.productLongDescription,
+    productShortDescription: selectedProduct.productShortDescription,
+    product_images: [],
+    productPrice: selectedProduct.productPrice,
+    created_at: selectedProduct.created_at,
+    updated_at: null,
+  });
+  console.log("selected product:", selectedProduct);
+  console.log("formData:", formData);
+
+  const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log("handleonChange");
+
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFormSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    handleFormData(formData);
+    console.log("formData:", formData);
+  };
+
+  console.log(formData);
+
   return (
     <>
       <section className="bg-gray-100">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <form className="py-16">
+          <form
+            key={selectedProduct.productId}
+            id="changeProductForm"
+            className="py-16"
+            onSubmit={handleFormSubmit}
+          >
             <div className="space-y-12">
               <div className="border-b border-gray-900/10 pb-12">
                 <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -29,11 +77,11 @@ export const EditProduct = () => {
                       <div className="flex w-full rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-rust-500">
                         <input
                           type="text"
-                          name="produktId"
-                          id="produktId"
+                          name="productId"
+                          id="productId"
                           className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                          placeholder=" UUID"
-                          disabled={true}
+                          readOnly={true}
+                          defaultValue={selectedProduct.productId}
                         />
                       </div>
                     </div>
@@ -41,7 +89,7 @@ export const EditProduct = () => {
 
                   <div className="sm:col-span-3">
                     <label
-                      htmlFor="titel"
+                      htmlFor="productTitle"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       Titel
@@ -49,16 +97,37 @@ export const EditProduct = () => {
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="productTitle"
                         id="productTitle"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:text-sm sm:leading-6"
+                        defaultValue={selectedProduct.productTitle}
+                        onChange={handleOnChange}
+                        name="productTitle"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="productPrice"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Pris
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="number"
+                        id="productPrice"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:text-sm sm:leading-6"
+                        defaultValue={selectedProduct.productPrice}
+                        onChange={handleOnChange}
+                        name="productPrice"
                       />
                     </div>
                   </div>
 
                   <div className="sm:col-span">
                     <label
-                      htmlFor="last-name"
+                      htmlFor="productShortDescription"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       Kort produktbeskrivning
@@ -66,31 +135,35 @@ export const EditProduct = () => {
                     <div className="mt-2">
                       <input
                         type="text"
-                        name="productShortDescription"
                         id="productShortDescription"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:text-sm sm:leading-6"
+                        defaultValue={selectedProduct.productShortDescription}
+                        name="productShortDescription"
+                        onChange={handleOnChange}
                       />
                     </div>
                   </div>
 
                   <div className="col-span-full">
                     <label
-                      htmlFor="about"
+                      htmlFor="productLongDescription"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
                       Lång produktbeskrivning
                     </label>
                     <div className="mt-2">
                       <textarea
-                        id="about"
-                        name="about"
+                        form="changeProductForm"
+                        id="productLongDescription"
                         rows={3}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:text-sm sm:leading-6"
-                        defaultValue={""}
+                        defaultValue={selectedProduct.productLongDescription}
+                        name="productLongDescription"
+                        onChange={handleTextareaChange}
                       />
                     </div>
                     <p className="mt-3 text-sm leading-6 text-gray-600">
-                      Produktinformation.
+                      Lång produktbeskrivning. Skriv allt du vill.
                     </p>
                   </div>
 
@@ -191,3 +264,4 @@ export const EditProduct = () => {
     </>
   );
 };
+export default EditProduct;
