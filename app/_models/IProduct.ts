@@ -7,7 +7,7 @@ export interface IProduct {
   product_images: IProduct_images[];
   productPrice: number;
   created_at: Date;
-  updated_at: string | null;
+  updated_at: Date | null;
 }
 
 export interface IProduct_images {

@@ -63,12 +63,12 @@ export const Dashboard = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          productId: selectedProduct.productId,
+          productId: formData.productId,
           productPrice: formData.productPrice,
           productTitle: formData.productTitle,
           productLongDescription: formData.productLongDescription,
           productShortDescription: formData.productShortDescription,
-          created_at: selectedProduct.created_at,
+          created_at: formData.created_at,
           updated_at: formData.created_at,
         }),
       });

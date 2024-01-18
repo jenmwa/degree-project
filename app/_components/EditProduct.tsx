@@ -1,7 +1,7 @@
 "use client";
 import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
 import { IProduct } from "../_models/IProduct";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 interface IEditProductProps {
   selectedProduct: IProduct;
@@ -25,22 +25,43 @@ export const EditProduct = ({
   console.log("selected product:", selectedProduct);
   console.log("formData:", formData);
 
-  const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  useEffect(() => {
+    updateFormData(selectedProduct);
+  }, [selectedProduct]);
+
+  const updateFormData = (updatedValues: Partial<IProduct>) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      ...updatedValues,
+    }));
   };
 
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log("handleonChange");
-
+  const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
   const handleFormSubmit = (e: FormEvent) => {
     e.preventDefault();
-    handleFormData(formData);
-    console.log("formData:", formData);
+    const updatedFormData = {
+      ...selectedProduct,
+      ...formData,
+    };
+    handleFormData(updatedFormData);
+  };
+
+  const handleDiscardEdit = () => {
+    console.log("avbryt");
   };
 
   console.log(formData);
@@ -166,7 +187,7 @@ export const EditProduct = ({
                       Lång produktbeskrivning. Skriv allt du vill.
                     </p>
                   </div>
-
+                  {/* 
                   <div className="col-span-full">
                     <label
                       htmlFor="photo"
@@ -183,10 +204,10 @@ export const EditProduct = ({
                         type="button"
                         className=" bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
                       >
-                        Välj bild
+                        Välj bild...
                       </button>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="sm:col-span-3">
                     <label
@@ -205,7 +226,7 @@ export const EditProduct = ({
                     </div>
                   </div>
 
-                  <div className="col-span-full">
+                  {/* <div className="col-span-full">
                     <label
                       htmlFor="cover-photo"
                       className="block text-sm font-medium leading-6 text-gray-900"
@@ -223,7 +244,7 @@ export const EditProduct = ({
                             htmlFor="file-upload"
                             className="relative cursor-pointer rounded-md bg-white font-semibold text-rust-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-rust-400 focus-within:ring-offset-2 hover:text-rust-500"
                           >
-                            {/* npm install react-dropzone */}
+                             npm install react-dropzone 
                             <span>Ladda upp en bild</span>
                             <input
                               id="file-upload"
@@ -239,7 +260,7 @@ export const EditProduct = ({
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -248,6 +269,7 @@ export const EditProduct = ({
               <button
                 type="button"
                 className="text-sm font-semibold leading-6 text-gray-900"
+                onClick={handleDiscardEdit}
               >
                 Avbryt
               </button>

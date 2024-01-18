@@ -48,6 +48,7 @@ export const Images = () => {
       console.error("Unexpected error:", error);
     }
   };
+
   console.log(
     '"https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/d4cc967a-1f74-4036-b977-efa7b890a348'
   );
@@ -56,6 +57,7 @@ export const Images = () => {
   //
   // "https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/purple.png";
   ("https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/d4cc967a-1f74-4036-b977-efa7b890a348/8f56e6c4-0ebb-466b-bd37-f26f1de80076");
+
   async function fetchAndLogImages() {
     try {
       const { data, error } = await supabase.storage.from("images").list();
@@ -74,6 +76,7 @@ export const Images = () => {
     }
   }
   console.log(imageArray);
+
   return (
     <>
       <p>hello from images</p>
