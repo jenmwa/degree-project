@@ -1,5 +1,6 @@
 "use client";
-import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
+import Image from "next/image";
+import { supabase } from "@/lib/supabase";
 import { IProduct } from "../_models/IProduct";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
@@ -22,6 +23,8 @@ export const EditProduct = ({
     created_at: selectedProduct.created_at,
     updated_at: null,
   });
+  const [fileImage, setFileImage] = useState<File | null>(null);
+
   console.log("selected product:", selectedProduct);
   console.log("formData:", formData);
 
@@ -43,12 +46,52 @@ export const EditProduct = ({
       [name]: value,
     }));
   };
+
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
+  };
+
+  const handleFileImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setFileImage(event.target.files[0]);
+      //funtion som previewar bild?
+    }
+  };
+  console.log(fileImage);
+
+  const removeSelectedImage = () => {
+    setFileImage(null);
+  };
+
+  const handleImageUpload = async () => {
+    const uuid = self.crypto.randomUUID();
+    console.log("check:", fileImage, uuid);
+
+    if (!fileImage) {
+      console.error("No file selected.");
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase.storage
+        .from("productImages")
+        .upload(`/${selectedProduct.productId}/${uuid}`, fileImage);
+
+      if (error) {
+        console.error("Error uploading image:", error.message);
+        return;
+      }
+
+      if (data) {
+        console.log("Image uploaded successfully:", data);
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    }
   };
 
   const handleFormSubmit = (e: FormEvent) => {
@@ -222,9 +265,24 @@ export const EditProduct = ({
                         name="fileUpload"
                         id="fileUpload"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:text-sm sm:leading-6"
+                        onChange={handleFileImageChange}
                       />
                     </div>
                   </div>
+                  {fileImage && (
+                    <div>
+                      <p>Preview av vald bild:</p>
+                      <Image
+                        src={URL.createObjectURL(fileImage)}
+                        alt="Thumb"
+                        width={200}
+                        height={100}
+                      />
+                      <button onClick={removeSelectedImage}>
+                        Ta bort denna bild.
+                      </button>
+                    </div>
+                  )}
 
                   {/* <div className="col-span-full">
                     <label
@@ -287,3 +345,6 @@ export const EditProduct = ({
   );
 };
 export default EditProduct;
+function uuidv4() {
+  throw new Error("Function not implemented.");
+}
