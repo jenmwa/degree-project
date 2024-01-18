@@ -34,7 +34,7 @@ export const Images = () => {
     try {
       const { data, error } = await supabase.storage
         .from("productImages")
-        .upload(`/${productID}/${id}.WebP`, file);
+        .upload(`/${productID}/${id}`, file);
 
       if (error) {
         console.error("Error uploading image:", error.message);
