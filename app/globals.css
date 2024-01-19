@@ -16,6 +16,11 @@
   }
 }
 
+.cormorant-garamond-regular {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 body {
   /* color: rgb(var(--foreground-rgb)); */
@@ -46,3 +51,34 @@ background: linear-gradient(10deg, rgba(2,0,36,1) 0%, rgba(78,92,81,1) 53%);
   height: unset !important;
 }
 
+input::file-selector-button {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #A8491F;
+  color: #f3f4f6;
+  padding: 0.7em 1.4em;
+  font-size: 0.875rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
+  outline: none;
+  border: 2px solid transparent;
+
+  &:hover,
+  &:focus {
+    background-color: #A0522D;
+    outline-offset: 2px;
+    border-color: #CD853F;
+    border-radius: 0;
+  }
+}
+
+/* .btn {
+  background-color: var(--theme-color);
+   ... 
+}*/
+
+/* .btn {
+  @apply  bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500;
+} */

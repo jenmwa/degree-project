@@ -15,7 +15,7 @@ export const initialProduct: IProduct = {
   productTitle: "",
   productLongDescription: "",
   productShortDescription: "",
-  product_images: [],
+  productImagesUrl: [""],
   productPrice: 0,
   created_at: new Date(),
   updated_at: null,
@@ -27,7 +27,7 @@ export const Dashboard = () => {
   const [selectedProduct, setSelectedProduct] =
     useState<IProduct>(initialProduct);
   const [editedprice, setEditedPrice] = useState<number>(0);
-  const [editedProduct, setEditedProduct] = useState<IProduct>(initialProduct);
+  // const [editedProduct, setEditedProduct] = useState<IProduct>(initialProduct);
 
   console.log(products);
   const router = useRouter();
@@ -55,20 +55,22 @@ export const Dashboard = () => {
   // };
 
   const handleFormData = async (formData: IProduct) => {
-    console.log("update Product");
+    console.log("***update Product:", formData);
     try {
+      console.log("***update Product:", formData);
       const response = await fetch("/api/updateProduct", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          productId: selectedProduct.productId,
+          productId: formData.productId,
           productPrice: formData.productPrice,
           productTitle: formData.productTitle,
           productLongDescription: formData.productLongDescription,
           productShortDescription: formData.productShortDescription,
-          created_at: selectedProduct.created_at,
+          productImagesUrl: formData.productImagesUrl,
+          created_at: formData.created_at,
           updated_at: formData.created_at,
         }),
       });

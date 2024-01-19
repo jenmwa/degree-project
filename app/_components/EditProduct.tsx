@@ -1,7 +1,8 @@
 "use client";
-import PhotoIcon from "@heroicons/react/24/outline/PhotoIcon";
+import Image from "next/image";
+import { supabase } from "@/lib/supabase";
 import { IProduct } from "../_models/IProduct";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 interface IEditProductProps {
   selectedProduct: IProduct;
@@ -17,30 +18,104 @@ export const EditProduct = ({
     productTitle: selectedProduct.productTitle,
     productLongDescription: selectedProduct.productLongDescription,
     productShortDescription: selectedProduct.productShortDescription,
-    product_images: [],
+    productImagesUrl: selectedProduct.productImagesUrl || [],
     productPrice: selectedProduct.productPrice,
     created_at: selectedProduct.created_at,
     updated_at: null,
   });
+  const [fileImage, setFileImage] = useState<File | null>(null);
+
   console.log("selected product:", selectedProduct);
   console.log("formData:", formData);
 
+  useEffect(() => {
+    updateFormData(selectedProduct);
+  }, [selectedProduct]);
+
+  const updateFormData = (updatedValues: Partial<IProduct>) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      ...updatedValues,
+    }));
+  };
+
   const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log("handleonChange");
-
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
-  const handleFormSubmit = (e: FormEvent) => {
+  //LADDA UPP BILD
+  const handleFileImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setFileImage(event.target.files[0]);
+      //funtion som previewar bild?
+    }
+  };
+  console.log(fileImage);
+
+  const removeSelectedImage = () => {
+    setFileImage(null);
+  };
+
+  const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    handleFormData(formData);
-    console.log("formData:", formData);
+
+    try {
+      const uuid = self.crypto.randomUUID();
+      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${uuid}`;
+
+      // Upload image to storage
+      await handleImageUpload(uuid);
+      console.log("imageUrl", imageUrl);
+      // Update the form data with the image URL
+      const updatedFormData = {
+        ...formData,
+        productImagesUrl: formData.productImagesUrl
+          ? [...formData.productImagesUrl, imageUrl]
+          : [imageUrl],
+      };
+
+      // Call the parent function with updated form data
+      handleFormData(updatedFormData);
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    }
+  };
+
+  const handleImageUpload = async (uuid: string) => {
+    try {
+      if (!fileImage) {
+        console.error("No file selected.");
+        return;
+      }
+
+      const { data, error } = await supabase.storage
+        .from("productImages")
+        .upload(`/${selectedProduct.productId}/${uuid}`, fileImage);
+
+      if (error) {
+        console.error("Error uploading image:", error.message);
+        throw error;
+      }
+
+      if (data) {
+        console.log("Image uploaded successfully:", data);
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      throw error;
+    }
   };
 
   console.log(formData);
@@ -166,7 +241,7 @@ export const EditProduct = ({
                       Lång produktbeskrivning. Skriv allt du vill.
                     </p>
                   </div>
-
+                  {/* 
                   <div className="col-span-full">
                     <label
                       htmlFor="photo"
@@ -183,10 +258,10 @@ export const EditProduct = ({
                         type="button"
                         className=" bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
                       >
-                        Välj bild
+                        Välj bild...
                       </button>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="sm:col-span-3">
                     <label
@@ -201,11 +276,26 @@ export const EditProduct = ({
                         name="fileUpload"
                         id="fileUpload"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:text-sm sm:leading-6"
+                        onChange={handleFileImageChange}
                       />
                     </div>
                   </div>
+                  {fileImage && (
+                    <div>
+                      <p>Preview av vald bild:</p>
+                      <Image
+                        src={URL.createObjectURL(fileImage)}
+                        alt="Thumb"
+                        width={200}
+                        height={100}
+                      />
+                      <button onClick={removeSelectedImage}>
+                        Ta bort denna bild.
+                      </button>
+                    </div>
+                  )}
 
-                  <div className="col-span-full">
+                  {/* <div className="col-span-full">
                     <label
                       htmlFor="cover-photo"
                       className="block text-sm font-medium leading-6 text-gray-900"
@@ -223,7 +313,7 @@ export const EditProduct = ({
                             htmlFor="file-upload"
                             className="relative cursor-pointer rounded-md bg-white font-semibold text-rust-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-rust-400 focus-within:ring-offset-2 hover:text-rust-500"
                           >
-                            {/* npm install react-dropzone */}
+                             npm install react-dropzone 
                             <span>Ladda upp en bild</span>
                             <input
                               id="file-upload"
@@ -239,7 +329,7 @@ export const EditProduct = ({
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -248,6 +338,7 @@ export const EditProduct = ({
               <button
                 type="button"
                 className="text-sm font-semibold leading-6 text-gray-900"
+                // onClick={handleDiscardEdit}
               >
                 Avbryt
               </button>
@@ -265,3 +356,6 @@ export const EditProduct = ({
   );
 };
 export default EditProduct;
+function uuidv4() {
+  throw new Error("Function not implemented.");
+}
