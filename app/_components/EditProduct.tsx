@@ -9,10 +9,10 @@ interface IEditProductProps {
   handleFormData: (formData: IProduct) => void;
 }
 
-export const EditProduct = ({
+export default function EditProduct({
   selectedProduct,
   handleFormData,
-}: IEditProductProps) => {
+}: IEditProductProps) {
   const [formData, setFormData] = useState<IProduct>({
     productId: selectedProduct.productId,
     productTitle: selectedProduct.productTitle,
@@ -354,5 +354,4 @@ export const EditProduct = ({
       </section>
     </>
   );
-};
-export default EditProduct;
+}
