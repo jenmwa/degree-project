@@ -11,12 +11,12 @@ import { IBooking } from "@/app/_models/IBooking";
 import EditProduct from "@/app/_components/EditProduct";
 import { initialProduct } from "@/app/initialProduct";
 
-const Dashboard: React.FC = () => {
+export const Dashboard = () => {
   console.log("hello admin");
   const { products, isLoading, isError } = useProductContext();
   const [selectedProduct, setSelectedProduct] =
     useState<IProduct>(initialProduct);
-  const [editedprice, setEditedPrice] = useState<number>(0);
+
   // const [editedProduct, setEditedProduct] = useState<IProduct>(initialProduct);
 
   console.log(products);
@@ -66,7 +66,6 @@ const Dashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        console.log(editedprice);
         console.log("Product updated successfully");
       } else {
         console.error("Failed to update product");

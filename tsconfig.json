@@ -10,7 +10,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
+    // "module": "esnext",
     // "moduleResolution": "bundler",
     "moduleResolution": "node",
     "baseUrl": "./",
@@ -27,19 +27,22 @@
         "./*"
       ]
     },
-    "allowJs": true,
+    // "allowJs": true,
+    "allowJs": false,
     "incremental": true,
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "module": "esnext"
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts" ],
+    ".next/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

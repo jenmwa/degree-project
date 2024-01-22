@@ -2,7 +2,7 @@ import React, { FormEvent } from "react";
 import { useState } from "react";
 import { supabase } from "../../lib/supabase";
 
-const Admin = () => {
+export const Admin = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
 
