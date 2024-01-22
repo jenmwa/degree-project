@@ -1,3 +1,11 @@
+export default function Dashboard() {
+  return (
+    <>
+      <p>hejja</p>
+    </>
+  );
+}
+
 // "use client";
 // import React, { useEffect, useState } from "react";
 // import { useProductContext } from "../../_context/ProductsContext";
