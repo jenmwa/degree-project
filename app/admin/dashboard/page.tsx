@@ -11,7 +11,7 @@ import { IBooking } from "@/app/_models/IBooking";
 import EditProduct from "@/app/_components/EditProduct";
 import { initialProduct } from "@/app/initialProduct";
 
-export const Dashboard = () => {
+export const Dashboard: React.FC = () => {
   console.log("hello admin");
   const { products, isLoading, isError } = useProductContext();
   const [selectedProduct, setSelectedProduct] =
