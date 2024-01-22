@@ -1,17 +1,17 @@
 "use client";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useProductContext } from "../../_context/ProductsContext";
 import { useRouter } from "next/navigation";
 import { IProduct } from "@/app/_models/IProduct";
 import { supabase } from "@/lib/supabase";
 import AdminOrderTable from "@/app/_components/AdminOrderTable";
-import { Images } from "@/app/_components/Images";
-import { ProductsSection } from "@/app/_components/ProductSection";
+import Images from "@/app/_components/Images";
+import ProductSection from "@/app/_components/ProductSection";
 import { IBooking } from "@/app/_models/IBooking";
-import { EditProduct } from "@/app/_components/EditProduct";
+import EditProduct from "@/app/_components/EditProduct";
 import { initialProduct } from "@/app/initialProduct";
 
-export default function Dashboard() {
+export const Dashboard = () => {
   console.log("hello admin");
   const { products, isLoading, isError } = useProductContext();
   const [selectedProduct, setSelectedProduct] =
@@ -162,10 +162,10 @@ export default function Dashboard() {
           bookings={bookings}
           isLoading={isLoading}
         ></AdminOrderTable>
-        <ProductsSection
+        <ProductSection
           // editedProduct={editedProduct}
           showProduct={showProduct}
-        ></ProductsSection>
+        ></ProductSection>
 
         <EditProduct
           selectedProduct={selectedProduct}
@@ -175,4 +175,5 @@ export default function Dashboard() {
       </div>
     </>
   );
-}
+};
+export default Dashboard;

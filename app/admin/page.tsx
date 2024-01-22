@@ -4,7 +4,7 @@ import { useState } from "react";
 import { supabase } from "../../lib/supabase";
 import router from "next/router";
 
-export default function Admin() {
+export const Admin = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -44,4 +44,5 @@ export default function Admin() {
       </form>
     </>
   );
-}
+};
+export default Admin;

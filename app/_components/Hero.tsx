@@ -3,8 +3,8 @@ import { useState } from "react";
 import Image from "next/image";
 import logo from "../../public/bjorbyblomster_logo.svg";
 import { useMediaQuery } from "react-responsive";
-import { Nav } from "./Nav";
-import { MenuOpen } from "./MenuOpen";
+import Nav from "./Nav";
+import MenuOpen from "./MenuOpen";
 
 export interface INavigation {
   name: string;

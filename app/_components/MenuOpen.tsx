@@ -66,3 +66,4 @@ export const MenuOpen = ({
     </>
   );
 };
+export default MenuOpen;

@@ -356,6 +356,3 @@ export const EditProduct = ({
   );
 };
 export default EditProduct;
-function uuidv4() {
-  throw new Error("Function not implemented.");
-}

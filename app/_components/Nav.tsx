@@ -51,3 +51,4 @@ export const Nav = ({ menuOpenClose, navigation }: INavProps) => {
     </>
   );
 };
+export default Nav;
