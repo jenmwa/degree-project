@@ -78,24 +78,24 @@ export const Dashboard = () => {
   const [bookings, setBookings] = useState<IBooking[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/handlers?entity=Booking");
-        const data = await response.json();
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("/api/handlers?entity=Booking");
+  //       const data = await response.json();
 
-        console.log("Bookings:", data.data);
-        setBookings(data.data);
-      } catch (error) {
-        console.error("Error fetching bookings:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  //       console.log("Bookings:", data.data);
+  //       setBookings(data.data);
+  //     } catch (error) {
+  //       console.error("Error fetching bookings:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
-  console.log("bookings", bookings);
+  //   fetchData();
+  // }, []);
+  // console.log("bookings", bookings);
 
   return (
     <>
