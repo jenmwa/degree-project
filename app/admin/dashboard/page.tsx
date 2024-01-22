@@ -10,6 +10,7 @@ import ProductSection from "@/app/_components/ProductSection";
 import { IBooking } from "@/app/_models/IBooking";
 import EditProduct from "@/app/_components/EditProduct";
 import { initialProduct } from "@/app/initialProduct";
+import { Images } from "@/app/_components/Images";
 
 export default function Dashboard() {
   console.log("hello admin");
@@ -44,66 +45,65 @@ export default function Dashboard() {
   //   setEditedPrice(Number(e.target.value));
   // };
 
-  // const handleFormData = async (formData: IProduct) => {
-  //   console.log("***update Product:", formData);
-  //   try {
-  //     console.log("***update Product:", formData);
-  //     const response = await fetch("/api/updateProduct", {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         productId: formData.productId,
-  //         productPrice: formData.productPrice,
-  //         productTitle: formData.productTitle,
-  //         productLongDescription: formData.productLongDescription,
-  //         productShortDescription: formData.productShortDescription,
-  //         productImagesUrl: formData.productImagesUrl,
-  //         created_at: formData.created_at,
-  //         updated_at: formData.created_at,
-  //       }),
-  //     });
+  const handleFormData = async (formData: IProduct) => {
+    console.log("***update Product:", formData);
+    try {
+      console.log("***update Product:", formData);
+      const response = await fetch("/api/updateProduct", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productId: formData.productId,
+          productPrice: formData.productPrice,
+          productTitle: formData.productTitle,
+          productLongDescription: formData.productLongDescription,
+          productShortDescription: formData.productShortDescription,
+          productImagesUrl: formData.productImagesUrl,
+          created_at: formData.created_at,
+          updated_at: formData.created_at,
+        }),
+      });
 
-  //     if (response.ok) {
-  //       console.log("Product updated successfully");
-  //     } else {
-  //       console.error("Failed to update product");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error updating product:", error);
-  //   }
-  // };
+      if (response.ok) {
+        console.log("Product updated successfully");
+      } else {
+        console.error("Failed to update product");
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
+    }
+  };
 
   const [bookings, setBookings] = useState<IBooking[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch("/api/handlers?entity=Booking");
-  //       const data = await response.json();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/handlers?entity=Booking");
+        const data = await response.json();
 
-  //       console.log("Bookings:", data.data);
-  //       setBookings(data.data);
-  //     } catch (error) {
-  //       console.error("Error fetching bookings:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+        console.log("Bookings:", data.data);
+        setBookings(data.data);
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //   fetchData();
-  // }, []);
-  // console.log("bookings", bookings);
+    fetchData();
+  }, []);
+  console.log("bookings", bookings);
 
   return (
     <>
-      {" "}
       <div className="flex flex-1 flex-col px-6 py-12 lg:px-8">
         <button
           className=" bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
-          // onClick={signoutAdmin}
+          onClick={signoutAdmin}
         >
           LOGGA UT
         </button>
@@ -113,26 +113,23 @@ export default function Dashboard() {
           </span>{" "}
           Admin
         </h1>
-        {isLoading ? (
-          <p>Laddar...</p>
-        ) : (
-          <div>
-            <p>Orders:</p>
+        {/* {isLoading ? ( */}
+        {/* <p>Laddar...</p> */}
+        {/* ) : ( */}
+        <div>
+          <p>Orders:</p>
 
-            {/* <ul>
-              {products?.map((product) => (
-                <li
-                  key={product.productId}
-                  onClick={() => showProduct(product)}
-                >
-                  Id:
-                  {product.productShortDescription}
-                  {product.productTitle}
-                </li>
-              ))}
-            </ul> */}
+          <ul>
+            {products?.map((product) => (
+              <li key={product.productId} onClick={() => showProduct(product)}>
+                Id:
+                {product.productShortDescription}
+                {product.productTitle}
+              </li>
+            ))}
+          </ul>
 
-            {/* {selectedProduct && (
+          {/* {selectedProduct && (
               <div className="border-double border-4 border-indigo-600">
                 <p>Product Details:</p>
                 <p>Id: {selectedProduct.productId}</p>
@@ -151,14 +148,14 @@ export default function Dashboard() {
                     onChange={changePrice}
                   />
                 </label>
-                {/* <button onClick={closeProductDetails}>Close Details</button> */}
-            {/* <button onClick={updateProduct}>UPPDATERA</button>
-              </div> */}
-            {/* )} */}
-          </div>
-        )}{" "}
-        <p>hello</p>
-        {/* <AdminOrderTable
+                <button onClick={closeProductDetails}>Close Details</button>
+                <button onClick={updateProduct}>UPPDATERA</button>
+              </div>
+            )}*/}
+        </div>
+        {/* )}{" "} */}
+        {/* <p>hello</p>  */}
+        <AdminOrderTable
           bookings={bookings}
           isLoading={isLoading}
         ></AdminOrderTable>
@@ -166,12 +163,11 @@ export default function Dashboard() {
           // editedProduct={editedProduct}
           showProduct={showProduct}
         ></ProductSection>
-
-        {/* <EditProduct
+        <EditProduct
           selectedProduct={selectedProduct}
           handleFormData={handleFormData}
-        ></EditProduct> */}
-        {/* <Images></Images> */}
+        ></EditProduct>
+        <Images></Images>
       </div>
     </>
   );
