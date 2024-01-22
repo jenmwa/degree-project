@@ -22,11 +22,11 @@ export const Dashboard = () => {
   console.log(products);
   const router = useRouter();
 
-  const signoutAdmin = async () => {
-    console.log("sign out please");
-    await supabase.auth.signOut();
-    router.push("/admin");
-  };
+  // const signoutAdmin = async () => {
+  //   console.log("sign out please");
+  //   await supabase.auth.signOut();
+  //   router.push("/admin");
+  // };
 
   const showProduct = (product: IProduct) => {
     console.log(product);
@@ -103,7 +103,7 @@ export const Dashboard = () => {
       <div className="flex flex-1 flex-col px-6 py-12 lg:px-8">
         <button
           className=" bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
-          onClick={signoutAdmin}
+          // onClick={signoutAdmin}
         >
           LOGGA UT
         </button>
