@@ -5,7 +5,7 @@ import { useState } from "react";
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
-export function Contact() {
+export default function Contact() {
   const [agreed, setAgreed] = useState(false);
 
   return (

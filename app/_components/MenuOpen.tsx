@@ -8,11 +8,11 @@ interface IMenuOpenProps {
   mobileMenuOpen: boolean;
 }
 
-export const MenuOpen = ({
+export default function MenuOpen({
   navigation,
   menuOpenClose,
   mobileMenuOpen,
-}: IMenuOpenProps) => {
+}: IMenuOpenProps) {
   return (
     <>
       <Dialog
@@ -65,5 +65,4 @@ export const MenuOpen = ({
       </Dialog>
     </>
   );
-};
-export default MenuOpen;
+}

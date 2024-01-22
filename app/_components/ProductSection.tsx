@@ -6,7 +6,7 @@ interface IProductsSectionProps {
   showProduct: (product: IProduct) => void;
 }
 
-export const ProductSection = ({ showProduct }: IProductsSectionProps) => {
+export default function ProductSection({ showProduct }: IProductsSectionProps) {
   const imageURL =
     "https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/placeholder-image.jpg";
 
@@ -72,5 +72,4 @@ export const ProductSection = ({ showProduct }: IProductsSectionProps) => {
       </div>
     </>
   );
-};
-export default ProductSection;
+}
