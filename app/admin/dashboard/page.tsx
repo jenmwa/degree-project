@@ -9,17 +9,7 @@ import { Images } from "@/app/_components/Images";
 import { ProductsSection } from "@/app/_components/ProductSection";
 import { IBooking } from "@/app/_models/IBooking";
 import { EditProduct } from "@/app/_components/EditProduct";
-
-export const initialProduct: IProduct = {
-  productId: "",
-  productTitle: "",
-  productLongDescription: "",
-  productShortDescription: "",
-  productImagesUrl: [""],
-  productPrice: 0,
-  created_at: new Date(),
-  updated_at: null,
-};
+import { initialProduct } from "@/app/initialProduct";
 
 export const Dashboard = () => {
   console.log("hello admin");
