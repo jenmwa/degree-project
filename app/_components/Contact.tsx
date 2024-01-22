@@ -5,7 +5,7 @@ import { useState } from "react";
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
-const Contact = () => {
+export function Contact() {
   const [agreed, setAgreed] = useState(false);
 
   return (
@@ -198,4 +198,4 @@ const Contact = () => {
       </div>
     </>
   );
-};
+}
