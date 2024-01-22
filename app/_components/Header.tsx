@@ -8,7 +8,6 @@
 
 import React from "react";
 
-export const Header = () => {
+export function Header() {
   return <></>;
-};
-export default Header;
+}

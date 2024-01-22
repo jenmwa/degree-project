@@ -7,10 +7,10 @@ interface IAdminOrderTableProps {
   isLoading: boolean;
 }
 
-export const AdminOrderTable = ({
+export default function AdminOrderTable({
   bookings,
   isLoading,
-}: IAdminOrderTableProps) => {
+}: IAdminOrderTableProps) {
   return (
     <>
       <section className="relative overflow-x-auto my-16">
@@ -61,5 +61,4 @@ export const AdminOrderTable = ({
       </section>
     </>
   );
-};
-export default AdminOrderTable;
+}

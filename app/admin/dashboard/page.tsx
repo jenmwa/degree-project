@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { IProduct } from "@/app/_models/IProduct";
 import { supabase } from "@/lib/supabase";
 import AdminOrderTable from "@/app/_components/AdminOrderTable";
-import Images from "@/app/_components/Images";
+
 import ProductSection from "@/app/_components/ProductSection";
 import { IBooking } from "@/app/_models/IBooking";
 import EditProduct from "@/app/_components/EditProduct";

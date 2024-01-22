@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-export const Footer = () => {
+export function Footer() {
   return (
     <>
       <div className="lg:bottom-0 lg:left-0 lg:flex lg:w-full lg:justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black">
@@ -23,5 +23,4 @@ export const Footer = () => {
       </div>
     </>
   );
-};
-export default Footer;
+}

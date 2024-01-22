@@ -10,7 +10,7 @@ interface StorageFile {
   type: string;
 }
 
-export const Images = () => {
+export function Images() {
   const [file, setFile] = useState<File | null>(null);
   const productID = "d4cc967a-1f74-4036-b977-efa7b890a348";
   const [imageArray, setImageArray] = useState<StorageFile[]>([]);
@@ -99,5 +99,4 @@ export const Images = () => {
       </div>
     </>
   );
-};
-export default Images;
+}

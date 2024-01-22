@@ -6,7 +6,7 @@ interface INavProps {
   navigation: INavigation[];
 }
 
-export const Nav = ({ menuOpenClose, navigation }: INavProps) => {
+export function Nav({ menuOpenClose, navigation }: INavProps) {
   return (
     <>
       <nav
@@ -50,5 +50,4 @@ export const Nav = ({ menuOpenClose, navigation }: INavProps) => {
       </nav>
     </>
   );
-};
-export default Nav;
+}
