@@ -11,7 +11,7 @@ import { IBooking } from "@/app/_models/IBooking";
 import EditProduct from "@/app/_components/EditProduct";
 import { initialProduct } from "@/app/initialProduct";
 
-const Dashboard = () => {
+export default function Dashboard() {
   console.log("hello admin");
   const { products, isLoading, isError } = useProductContext();
   const [selectedProduct, setSelectedProduct] =
@@ -174,5 +174,4 @@ const Dashboard = () => {
       </div>
     </>
   );
-};
-export default Dashboard;
+}
