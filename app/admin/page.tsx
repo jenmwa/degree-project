@@ -4,7 +4,7 @@ import { useState } from "react";
 import { supabase } from "../../lib/supabase";
 import router from "next/router";
 
-export const Admin = () => {
+const Admin = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
 
