@@ -44,36 +44,36 @@ export const Dashboard = () => {
   //   setEditedPrice(Number(e.target.value));
   // };
 
-  const handleFormData = async (formData: IProduct) => {
-    console.log("***update Product:", formData);
-    try {
-      console.log("***update Product:", formData);
-      const response = await fetch("/api/updateProduct", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productId: formData.productId,
-          productPrice: formData.productPrice,
-          productTitle: formData.productTitle,
-          productLongDescription: formData.productLongDescription,
-          productShortDescription: formData.productShortDescription,
-          productImagesUrl: formData.productImagesUrl,
-          created_at: formData.created_at,
-          updated_at: formData.created_at,
-        }),
-      });
+  // const handleFormData = async (formData: IProduct) => {
+  //   console.log("***update Product:", formData);
+  //   try {
+  //     console.log("***update Product:", formData);
+  //     const response = await fetch("/api/updateProduct", {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         productId: formData.productId,
+  //         productPrice: formData.productPrice,
+  //         productTitle: formData.productTitle,
+  //         productLongDescription: formData.productLongDescription,
+  //         productShortDescription: formData.productShortDescription,
+  //         productImagesUrl: formData.productImagesUrl,
+  //         created_at: formData.created_at,
+  //         updated_at: formData.created_at,
+  //       }),
+  //     });
 
-      if (response.ok) {
-        console.log("Product updated successfully");
-      } else {
-        console.error("Failed to update product");
-      }
-    } catch (error) {
-      console.error("Error updating product:", error);
-    }
-  };
+  //     if (response.ok) {
+  //       console.log("Product updated successfully");
+  //     } else {
+  //       console.error("Failed to update product");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error updating product:", error);
+  //   }
+  // };
 
   const [bookings, setBookings] = useState<IBooking[]>([]);
   const [loading, setLoading] = useState(true);
@@ -166,10 +166,10 @@ export const Dashboard = () => {
           showProduct={showProduct}
         ></ProductSection>
 
-        <EditProduct
+        {/* <EditProduct
           selectedProduct={selectedProduct}
           handleFormData={handleFormData}
-        ></EditProduct>
+        ></EditProduct> */}
         <Images></Images>
       </div>
     </>
