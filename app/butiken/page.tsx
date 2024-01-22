@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useProductContext } from "../_context/ProductsContext";
+import OrderForm from "../_components/OrderForm";
 
 export default function Butiken() {
   const { products, isLoading, isError } = useProductContext();
@@ -23,6 +24,7 @@ export default function Butiken() {
           </li>
         ))}
       </ul>
+      <OrderForm></OrderForm>
     </div>
   );
 }

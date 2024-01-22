@@ -120,6 +120,10 @@ export default function EditProduct({
 
   console.log(formData);
 
+  const handleDiscardEdit = () => {
+    console.log("close this modal");
+  };
+
   return (
     <>
       <section className="bg-gray-100">
@@ -338,7 +342,7 @@ export default function EditProduct({
               <button
                 type="button"
                 className="text-sm font-semibold leading-6 text-gray-900"
-                // onClick={handleDiscardEdit}
+                onClick={handleDiscardEdit}
               >
                 Avbryt
               </button>

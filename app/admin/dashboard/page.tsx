@@ -18,8 +18,6 @@ export default function Dashboard() {
   const [selectedProduct, setSelectedProduct] =
     useState<IProduct>(initialProduct);
 
-  // const [editedProduct, setEditedProduct] = useState<IProduct>(initialProduct);
-
   console.log(products);
   const router = useRouter();
 
@@ -33,17 +31,6 @@ export default function Dashboard() {
     console.log(product);
     setSelectedProduct(product);
   };
-
-  // const showProduct = (product: IProduct) => {
-  //   console.log(product);
-  //   setSelectedProduct(product);
-
-  //   setEditedProduct(product);
-  // };
-
-  // const changePrice = (e: ChangeEvent<HTMLInputElement>) => {
-  //   setEditedPrice(Number(e.target.value));
-  // };
 
   const handleFormData = async (formData: IProduct) => {
     console.log("***update Product:", formData);
@@ -113,61 +100,25 @@ export default function Dashboard() {
           </span>{" "}
           Admin
         </h1>
-        {/* {isLoading ? ( */}
-        {/* <p>Laddar...</p> */}
-        {/* ) : ( */}
-        <div>
-          <p>Orders:</p>
-
-          <ul>
-            {products?.map((product) => (
-              <li key={product.productId} onClick={() => showProduct(product)}>
-                Id:
-                {product.productShortDescription}
-                {product.productTitle}
-              </li>
-            ))}
-          </ul>
-
-          {/* {selectedProduct && (
-              <div className="border-double border-4 border-indigo-600">
-                <p>Product Details:</p>
-                <p>Id: {selectedProduct.productId}</p>
-                <p>Title: {selectedProduct.productTitle}</p>
-                <p>
-                  Short Description: {selectedProduct.productShortDescription}
-                </p>
-                <p>
-                  Long Description: {selectedProduct.productLongDescription}
-                </p>
-                <label>
-                  Title:
-                  <input
-                    type="text"
-                    value={editedprice}
-                    onChange={changePrice}
-                  />
-                </label>
-                <button onClick={closeProductDetails}>Close Details</button>
-                <button onClick={updateProduct}>UPPDATERA</button>
-              </div>
-            )}*/}
-        </div>
-        {/* )}{" "} */}
-        {/* <p>hello</p>  */}
-        <AdminOrderTable
-          bookings={bookings}
-          isLoading={isLoading}
-        ></AdminOrderTable>
-        <ProductSection
-          // editedProduct={editedProduct}
-          showProduct={showProduct}
-        ></ProductSection>
-        <EditProduct
-          selectedProduct={selectedProduct}
-          handleFormData={handleFormData}
-        ></EditProduct>
-        <Images></Images>
+        {isLoading ? (
+          <p>Laddar...</p>
+        ) : (
+          <>
+            <AdminOrderTable
+              bookings={bookings}
+              isLoading={isLoading}
+            ></AdminOrderTable>
+            <ProductSection
+              // editedProduct={editedProduct}
+              showProduct={showProduct}
+            ></ProductSection>
+            <EditProduct
+              selectedProduct={selectedProduct}
+              handleFormData={handleFormData}
+            ></EditProduct>
+            {/* <Images></Images> */}
+          </>
+        )}
       </div>
     </>
   );
