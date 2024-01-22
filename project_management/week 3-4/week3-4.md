@@ -1,3 +1,47 @@
+# 240122
+
+Created time: January 14, 2024 5:22 PM
+
+**Yesterday I…**
+
+blev inte mycket gjort i fredags… migrän och sjuk-helg :/ nya tag!
+
+**today I will…**
+
+- bokning
+- påbörja test-script
+
+**I need help with…**
+
+inget specifikt just nu, utan kör.
+
+**I'm stuck with…**
+
+se ovan.
+
+**TIL…**
+
+Kikade snabbt på vercel igår-kväll ga lite panik, men hur smidigt? 2min och deploy gick bra? Nödlösning iaf!
+
+Reflektion:
+
+Haha, minst sagt ödmjuk, hur mycket jag än vill bara köra på så h’änder livet och förkylningstider är ett faktum.
+Men vi löser detta. Kör en avstämning ikväll igen och uppdaterar.
+
+pratade med Robin i fredags, så kul att stämma av med någon mer som kör Next.js (och att jag inte är ensam med klient/server -funderingarna). kul att få höra och se vad andra gör :)
+
+```jsx
+dagens Kodhighlight:
+```
+
+Remember:
+**3 things to focus on and actually finish today.** Nothing more, nothing less. 1 thing that is funny. 1 good habit.
+
+- dagens fokus Måste: bokningsformulär.
+- dagens måste fokus Roligt: snabb recap test! så längesen men ska bli kul!
+
+- dagens fokus God vana: upp, plugga, lunch, plugga, inte glömma raster, sitta vettig tid!
+
 # 240119
 
 Created time: January 19, 2024 7:54 AM
