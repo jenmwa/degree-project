@@ -1,4 +1,4 @@
-import { Switch } from "@headlessui/react/dist/components/switch/switch";
+import { Switch } from "@headlessui/react";
 import ChevronDownIcon from "@heroicons/react/24/outline/ChevronDownIcon";
 import { useState } from "react";
 
