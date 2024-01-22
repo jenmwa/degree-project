@@ -2,7 +2,7 @@
 import React from "react";
 import { useProductContext } from "../_context/ProductsContext";
 
-const Butiken = () => {
+export default function Butiken() {
   const { products, isLoading, isError } = useProductContext();
 
   return (
@@ -25,6 +25,4 @@ const Butiken = () => {
       </ul>
     </div>
   );
-};
-
-export default Butiken;
+}
