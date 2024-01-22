@@ -3,7 +3,7 @@ import React, { FormEvent } from "react";
 import { useState } from "react";
 import { supabase } from "../../lib/supabase";
 
-export const Admin = () => {
+export default function Admin() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -43,5 +43,4 @@ export const Admin = () => {
       </form>
     </>
   );
-};
-export default Admin;
+}
