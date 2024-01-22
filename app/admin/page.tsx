@@ -1,7 +1,6 @@
 import React, { FormEvent } from "react";
 import { useState } from "react";
 import { supabase } from "../../lib/supabase";
-import router from "next/router";
 
 const Admin = () => {
   const [loading, setLoading] = useState(false);
