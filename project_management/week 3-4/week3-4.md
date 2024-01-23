@@ -1,3 +1,67 @@
+# 240123
+
+Created time: January 14, 2024 5:23 PM
+
+**Yesterday I…**
+
+felsökning a-ö!!! herrejäklar!
+
+- nästlad css och selektorer tillsammans med tailwind och Next.js? Till slut rätt config!
+- Test med jest och supertest? det tog minsann sina timmar att få till configs. haha. men setup redo och tester kan skrivas!
+- och sist men inte minst, deploy-error gällande Next.js, Typescript & Vercel… efter uteslutningsmetoden och tillslut en bättre goggling: Radera 3 filer i pages och SWOOOOSCH så funka allt 🫠
+
+**today I will…**
+
+logik bokning
+
+**I need help with…**
+
+kör bara kör!
+
+**I'm stuck with…**
+
+det tar tid, men det mesta går att fixa! Sen om det är best practice eller ej, det är en annan fråga…
+
+**TIL…**
+
+Inga filer som inte returnerar något i pages-mappen! Simple as that 🎉
+
+Reflektion:
+
+Felsökningsdag minst sagt!
+Skulle bara lite snabbt se till att fixa varningen gällande nästlade CSS-klasser tillsammans med Next och tailwind. En timme senare, test med olika packages för att tillslut inse att det var config som behövdes… Ja.
+men det fungerar felfritt nu och visserligen borde min. nästlade input-file-css gå att göra med tailwind, men nu funhgerar det som det fungerar :)
+Får se om det ska refaktoreras när tid finnes.
+
+Nästa felsök var inför test! Jag är ltie stressad om hur allt ska fungera. så tänkte att jag lite snabbt kunde sätta upp basen. Lite snabbt blev 4h senare men det fungerar!
+Det är alla dessa config-grejjer som gör det svårt för mig. Jag gissar, iom att du kan köra både app-roter och pages-router att alla paket och liknande behöver configeras utefter vad man kör? ytterst få paket (förutom de som hängde med vid inställningen som bara körs, utan det behövs mer. Kul att felsöka och få det att fungera men tidskrävande! Å andra sidan tar jag verkligen emd det och vet mer vart jag ska felsöka nästa gång…
+
+Hursomhelst! en bas är uppsatt, skrev ett snabbt test om min startsida har en heading, och det fungerar 🙂
+
+3:e feslsöker igår var gällande vercel och deploy. Jag ska få upp sidan vid sitt domän, men kände att jag vill dels ha en mellankoll, och dels ha en reserv om det skulle krångla!
+sagt och gjort, CLI med Vercel installerat och alla .env inlagda, men error.
+Uteslutningsmetoden och tog bort del för del som varnades för och till slut en stycke felrad (se nedan i kodrutan) som gixk att googla på och få fram ett stackoverflow-svar….
+
+```jsx
+dagens Kodhighlight: **Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.[missing argument]**
+```
+
+SE TILL ATT INGA FILER I PAGES-MAPPEN INTE RETURNERAR NÅGOT! raderade filer utan return och SWOOOOOSH så fungerade allt.
+Tack.
+
+Hann därefter även med att sätta upp ett formulär bara med html och tailwind, logik är det nästa!
+
+Fortfarande lite stressad, men å andra sidan, bokningslogiken påminner om ändra produktlogiken, bara att vi skapar ny, och bygga in skicka mail på det, vilket inte borde vara några problem.
+En sak i taget, ett steg fram och sen en helhet 🙂
+
+Remember:
+**3 things to focus on and actually finish today.**
+Nothing more, nothing less. 1 thing that is funny. 1 good habit.
+
+- dagens fokus få-klart Måste: logik bokning
+- dagens fokus få-klart Roligt: stämma av tavlan! det är kul att se progress!
+- dagens fokus få-klart God vana: lång dag igår, ok med sovmorgon idag, nu på G! :)
+
 # 240122
 
 Created time: January 14, 2024 5:22 PM
