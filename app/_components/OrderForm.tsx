@@ -34,7 +34,7 @@ export default function OrderForm() {
 
   const [bookingData, setBookingData] = useState<IBooking>({
     bookingId: "",
-    // customer: userData,
+    customer: userData,
     product: selectedProduct,
     bookingMessage: "",
     requestedDate: "",
@@ -86,10 +86,7 @@ export default function OrderForm() {
     setBookingData({ ...bookingData, bookingMessage: e.target.value });
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    console.log("handlesubmit", bookingData);
-    console.log("handlesubmit", userData);
+  const createUser = async (userData: IUser) => {
     try {
       const response = await fetch("/api/createUser", {
         method: "POST",
@@ -100,38 +97,27 @@ export default function OrderForm() {
       });
 
       if (response.ok) {
-        console.log("User created successfully");
+        const data = await response.json();
+        // Check if newUser exists before accessing its properties
+        const userId = data.newUser ? data.newUser.userId : data.userId;
+        return userId;
       } else {
-        const responseBody = await response.json();
-        console.error("Error creating user:", responseBody.error);
+        const errorBody = await response.json();
+        throw new Error(errorBody.error);
       }
     } catch (error) {
-      console.error("Fetch error:", error);
+      console.error("Error creating user:", error);
+      throw error;
     }
   };
-  console.log(selectedProduct);
-  console.log("Bookingdata:", bookingData);
 
-  // const handleSubmit = async (e: FormEvent) => {
-  //   e.preventDefault();
-  //   console.log("handlesubmit", bookingData);
-  //   console.log("handlesubmit", userData);
-
+  // // Step 2: Create Booking
+  // const createBooking = async (bookingData: any, userId: string) => {
   //   try {
-  //     // First, create the user
-  //     const createUserResponse = await fetch("/api/createUser", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(userData),
-  //     });
+  //     // Add userId to the booking data
+  //     bookingData.userId = userId;
+  //     console.log("userId created:", userId);
 
-  //     if (!createUserResponse.ok) {
-  //       throw new Error(`Error creating user: ${createUserResponse.statusText}`);
-  //     }
-
-  //     // User created successfully, now proceed to create the booking
   //     const response = await fetch("/api/createBooking", {
   //       method: "POST",
   //       headers: {
@@ -141,18 +127,35 @@ export default function OrderForm() {
   //     });
 
   //     if (response.ok) {
-  //       // Booking created successfully
-  //       console.log("Booking created successfully");
-  //       // Proceed to submit booking data or perform other actions
+  //       const data = await response.json();
+  //       return data.bookingData; // Return the newly created booking data
   //     } else {
-  //       // Handle error response
-  //       console.error("Error creating booking:", response.statusText);
+  //       const errorBody = await response.json();
+  //       throw new Error(errorBody.error);
   //     }
   //   } catch (error) {
-  //     // Handle fetch error
-  //     console.error("Fetch error:", error);
+  //     console.error("Error creating booking:", error);
+  //     throw error;
   //   }
   // };
+
+  // Usage example
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    try {
+      // Step 1: Create User
+      const newUser = await createUser(userData);
+      console.log("newuser", newUser);
+
+      // Step 2: Create Booking with the obtained userId
+      // const createdBooking = await createBooking(bookingData, newUser.userId);
+
+      // console.log("Booking created successfully:", createdBooking);
+    } catch (error) {
+      console.error("Error handling submission:", error);
+    }
+  };
 
   return (
     <>

@@ -4,7 +4,7 @@ import { IUser } from "./IUser";
 export interface IBooking {
   // data: {}
   bookingId: string;
-  // customer: IUser;
+  customer: IUser;
   product: string;
   bookingMessage: string;
   requestedDate: string;

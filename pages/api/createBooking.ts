@@ -5,22 +5,7 @@ import { supabaseAuthClient } from "@/lib/supabaseAuthClient";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     try {
-      // console.log('createBooking:', req.body);
       const { product, bookingMessage, requestedDate, bookingStatus } = req.body;
-      // console.log('produktId:', JSON.stringify(product))
-      // const { data: productData, error: productError } = await supabaseAuthClient
-      //   .from('Product')
-      //   .select('*')
-      //   .eq('productId', product)
-      //   .single();
-
-      // if (productError) {
-      //   throw productError;
-      // }
-
-      // if (!productData) {
-      //   throw new Error('Product not found');
-      // }
 
       const { data: bookingData, error: bookingError } = await supabaseAuthClient
         .from('Booking')
