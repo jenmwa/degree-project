@@ -89,40 +89,70 @@ export default function OrderForm() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     console.log("handlesubmit", bookingData);
-    // if (
-    //   userData.userFirstName &&
-    //   userData.userLastName &&
-    //   userData.userEmail &&
-    //   userData.userPhoneNumber
-    // ) {
+    console.log("handlesubmit", userData);
     try {
-      const response = await fetch("/api/createBooking", {
+      const response = await fetch("/api/createUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(bookingData),
+        body: JSON.stringify(userData),
       });
 
       if (response.ok) {
-        // User created successfully
         console.log("User created successfully");
-        // Proceed to submit booking data or perform other actions
       } else {
-        // Handle error response
-        console.error("Error creating user:", response.statusText);
+        const responseBody = await response.json();
+        console.error("Error creating user:", responseBody.error);
       }
     } catch (error) {
-      // Handle fetch error
       console.error("Fetch error:", error);
     }
-    // } else {
-    //   // If any required user information is missing, you can handle the error or display a message to the user
-    //   console.log("Please fill in all required fields.");
-    // }
   };
   console.log(selectedProduct);
   console.log("Bookingdata:", bookingData);
+
+  // const handleSubmit = async (e: FormEvent) => {
+  //   e.preventDefault();
+  //   console.log("handlesubmit", bookingData);
+  //   console.log("handlesubmit", userData);
+
+  //   try {
+  //     // First, create the user
+  //     const createUserResponse = await fetch("/api/createUser", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(userData),
+  //     });
+
+  //     if (!createUserResponse.ok) {
+  //       throw new Error(`Error creating user: ${createUserResponse.statusText}`);
+  //     }
+
+  //     // User created successfully, now proceed to create the booking
+  //     const response = await fetch("/api/createBooking", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(bookingData),
+  //     });
+
+  //     if (response.ok) {
+  //       // Booking created successfully
+  //       console.log("Booking created successfully");
+  //       // Proceed to submit booking data or perform other actions
+  //     } else {
+  //       // Handle error response
+  //       console.error("Error creating booking:", response.statusText);
+  //     }
+  //   } catch (error) {
+  //     // Handle fetch error
+  //     console.error("Fetch error:", error);
+  //   }
+  // };
 
   return (
     <>
