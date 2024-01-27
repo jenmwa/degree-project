@@ -1,11 +1,11 @@
+"use client";
+
 import { Switch } from "@headlessui/react";
-import ChevronDownIcon from "@heroicons/react/24/outline/ChevronDownIcon";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
-import { IUser } from "../_models/IUser";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { IUser, Role } from "../_models/IUser";
 import { IBooking } from "../_models/IBooking";
 import { useProductContext } from "../_context/ProductsContext";
 import UserForm from "./UserForm";
-import { IProduct } from "../_models/IProduct";
 import ProductForm from "./ProductForm";
 
 function classNames(...classes: any) {
@@ -20,13 +20,14 @@ export default function OrderForm() {
     userLastName: "",
     userEmail: "",
     userPhoneNumber: 0,
+    role: Role.USER,
     userId: "",
     isDeleted: false,
     isNewsletter: false,
     created_at: null,
     updated_at: null,
   });
-  const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState("");
+  // const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [minDate, setMinDate] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<string>("");
@@ -37,8 +38,8 @@ export default function OrderForm() {
     product: selectedProduct,
     bookingMessage: "",
     requestedDate: "",
-    deliveryalternative: "",
-    bookingStatus: "request",
+    // deliveryalternative: "",
+    bookingStatus: "Request",
     created_at: null,
     updated_at: null,
   });
@@ -57,7 +58,7 @@ export default function OrderForm() {
     const { name, value } = e.target;
     console.log(value);
     setUserData({ ...userData, [name]: value });
-    console.log(userData);
+    console.log("userData:", userData);
   };
 
   const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +69,6 @@ export default function OrderForm() {
       requestedDate: new Date(selectedDateString).toLocaleString(),
     });
   };
-  console.log("Date:", selectedDate);
 
   const handleProductChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedUserProduct = e.target.value;
@@ -85,17 +85,71 @@ export default function OrderForm() {
     setBookingData({ ...bookingData, bookingMessage: e.target.value });
   };
 
-  const handleBookingOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-    const { name, value } = e.target;
-    console.log(value);
-    setBookingData({ ...bookingData, [name]: value });
-    // console.log("Bookingdata:", bookingData);
-  };
-  // console.log("Bookingdata:", bookingData);
+  const createUser = async (userData: IUser) => {
+    try {
+      const response = await fetch("/api/createUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
 
-  console.log(selectedProduct);
-  console.log("Bookingdata:", bookingData);
+      if (response.ok) {
+        const data = await response.json();
+
+        const userId = data.newUser ? data.newUser.userId : data.userId;
+        return userId;
+      } else {
+        const errorBody = await response.json();
+        throw new Error(errorBody.error);
+      }
+    } catch (error) {
+      console.error("Error creating user:", error);
+      throw error;
+    }
+  };
+
+  const createBooking = async (bookingData: any, userId: string) => {
+    try {
+      bookingData.customer = userId;
+      console.log("before booking:", userId, bookingData);
+
+      const response = await fetch("/api/createBooking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return data.bookingData; // Return the newly created booking data
+      } else {
+        const errorBody = await response.json();
+        throw new Error(errorBody.error);
+      }
+    } catch (error) {
+      console.error("Error creating booking:", error);
+      throw error;
+    }
+  };
+
+  // Usage example
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const newUser = await createUser(userData);
+      console.log("newuser", newUser);
+
+      const createdBooking = await createBooking(bookingData, newUser);
+      console.log("Booking created successfully:", createdBooking);
+    } catch (error) {
+      console.error("Error handling submission:", error);
+    }
+  };
 
   return (
     <>
@@ -125,13 +179,12 @@ export default function OrderForm() {
           </p>
         </div>
         <form
-          action="#"
+          // action="/api/createBooking"
           method="POST"
           className="mx-auto mt-16 max-w-xl sm:mt-20"
+          onSubmit={handleSubmit}
         >
-          <p>ANVÄNDARE</p>
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-            <UserForm handleUserOnChange={handleUserOnChange}></UserForm>
             <p>BESTÄLLNING</p>
             {/* <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"></div> */}
             <ProductForm
@@ -142,6 +195,8 @@ export default function OrderForm() {
               handleProductChange={handleProductChange}
               handleUserMessageOnChange={handleUserMessageOnChange}
             ></ProductForm>
+            <p>ANVÄNDARE</p>
+            <UserForm handleUserOnChange={handleUserOnChange}></UserForm>
 
             <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
               <div className="flex h-6 items-center">

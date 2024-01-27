@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useProductContext } from "../../_context/ProductsContext";
 import { useRouter } from "next/navigation";
 import { IProduct } from "@/app/_models/IProduct";
-import { supabase } from "@/lib/supabase";
+import { supabaseAuthClient } from "@/lib/supabaseAuthClient";
 import AdminOrderTable from "@/app/_components/AdminOrderTable";
 
 import ProductSection from "@/app/_components/ProductSection";
@@ -23,7 +23,7 @@ export default function Dashboard() {
 
   const signoutAdmin = async () => {
     console.log("sign out please");
-    await supabase.auth.signOut();
+    await supabaseAuthClient.auth.signOut();
     router.push("/admin");
   };
 

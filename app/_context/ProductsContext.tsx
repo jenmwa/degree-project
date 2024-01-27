@@ -1,6 +1,6 @@
 "use client";
 import { IProduct } from "@/app/_models/IProduct";
-import { supabase } from "@/lib/supabase";
+import { supabaseAuthClient } from "@/lib/supabaseAuthClient";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface ProductContextType {
@@ -43,7 +43,7 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   useEffect(() => {
-    const subscription = supabase
+    const subscription = supabaseAuthClient
       .channel("schema-db-changes")
       .on(
         "postgres_changes",

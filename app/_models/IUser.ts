@@ -7,7 +7,7 @@ export interface IUser {
   userFirstName: string,
   userLastName: string,
   userPhoneNumber: number,
-  // role: Role;
+  role: Role;
   isDeleted: boolean,
   isNewsletter: boolean,
   created_at: Date | null,

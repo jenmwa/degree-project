@@ -8,7 +8,7 @@ export interface IBooking {
   product: string;
   bookingMessage: string;
   requestedDate: string;
-  deliveryalternative: string;
+  // deliveryalternative: string;
   bookingStatus: string;
   created_at: Date | null;
   updated_at: Date | null;
