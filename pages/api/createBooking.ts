@@ -1,16 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { supabaseAuthClient } from "@/lib/supabaseAuthClient";
-// import { createUser } from "./createUser";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     try {
-      const { product, bookingMessage, requestedDate, bookingStatus } = req.body;
+      const { product, bookingMessage, requestedDate, bookingStatus, customer } = req.body;
 
       const { data: bookingData, error: bookingError } = await supabaseAuthClient
         .from('Booking')
         .insert([
-          { product: product, bookingMessage, requestedDate, bookingStatus, created_at: 'now()' },
+          { product: product, bookingMessage, requestedDate, bookingStatus, customer, created_at: 'now()' },
         ])
         .select();
 

@@ -69,7 +69,6 @@ export default function OrderForm() {
       requestedDate: new Date(selectedDateString).toLocaleString(),
     });
   };
-  console.log("Booking:", bookingData, selectedDate);
 
   const handleProductChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedUserProduct = e.target.value;
@@ -98,7 +97,7 @@ export default function OrderForm() {
 
       if (response.ok) {
         const data = await response.json();
-        // Check if newUser exists before accessing its properties
+
         const userId = data.newUser ? data.newUser.userId : data.userId;
         return userId;
       } else {
@@ -111,47 +110,42 @@ export default function OrderForm() {
     }
   };
 
-  // // Step 2: Create Booking
-  // const createBooking = async (bookingData: any, userId: string) => {
-  //   try {
-  //     // Add userId to the booking data
-  //     bookingData.userId = userId;
-  //     console.log("userId created:", userId);
+  const createBooking = async (bookingData: any, userId: string) => {
+    try {
+      bookingData.customer = userId;
+      console.log("before booking:", userId, bookingData);
 
-  //     const response = await fetch("/api/createBooking", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(bookingData),
-  //     });
+      const response = await fetch("/api/createBooking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      });
 
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       return data.bookingData; // Return the newly created booking data
-  //     } else {
-  //       const errorBody = await response.json();
-  //       throw new Error(errorBody.error);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error creating booking:", error);
-  //     throw error;
-  //   }
-  // };
+      if (response.ok) {
+        const data = await response.json();
+        return data.bookingData; // Return the newly created booking data
+      } else {
+        const errorBody = await response.json();
+        throw new Error(errorBody.error);
+      }
+    } catch (error) {
+      console.error("Error creating booking:", error);
+      throw error;
+    }
+  };
 
   // Usage example
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
-      // Step 1: Create User
       const newUser = await createUser(userData);
       console.log("newuser", newUser);
 
-      // Step 2: Create Booking with the obtained userId
-      // const createdBooking = await createBooking(bookingData, newUser.userId);
-
-      // console.log("Booking created successfully:", createdBooking);
+      const createdBooking = await createBooking(bookingData, newUser);
+      console.log("Booking created successfully:", createdBooking);
     } catch (error) {
       console.error("Error handling submission:", error);
     }
