@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { supabase } from "@/lib/supabase";
+import { supabaseAuthClient } from "@/lib/supabaseAuthClient";
 import { IProduct } from "../_models/IProduct";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
@@ -100,7 +100,7 @@ export default function EditProduct({
         return;
       }
 
-      const { data, error } = await supabase.storage
+      const { data, error } = await supabaseAuthClient.storage
         .from("productImages")
         .upload(`/${selectedProduct.productId}/${uuid}`, fileImage);
 
