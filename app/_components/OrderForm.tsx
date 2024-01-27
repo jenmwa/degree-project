@@ -106,11 +106,11 @@ export default function OrderForm() {
 
       if (response.ok) {
         // User created successfully
-        console.log("Booking created successfully");
+        console.log("User created successfully");
         // Proceed to submit booking data or perform other actions
       } else {
         // Handle error response
-        console.error("Error creating booking:", response.statusText);
+        console.error("Error creating user:", response.statusText);
       }
     } catch (error) {
       // Handle fetch error

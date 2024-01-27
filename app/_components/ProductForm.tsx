@@ -21,51 +21,55 @@ export default function ProductForm({
   return (
     <>
       <div className="sm:col-span-2">
-        <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
-          Val av tjänst:
-        </h3>
+        <fieldset>
+          <legend className="mb-2 font-semibold text-gray-900">
+            <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
+              Val av tjänst:
+            </h3>
+          </legend>
 
-        <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200  sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-          {products?.map((product) => (
-            <li
-              key={product.productId}
-              className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
-            >
-              {/* <div className="flex items-center ps-3  "> */}
+          <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200  sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            {products?.map((product) => (
+              <li
+                key={product.productId}
+                className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+              >
+                {/* <div className="flex items-center ps-3  "> */}
+                <label
+                  htmlFor={`horizontal-list-radio-license-${product.productId}`}
+                  className="flex items-center py-3 ps-3 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
+                >
+                  <input
+                    id={`horizontal-list-radio-license-${product.productId}`}
+                    type="radio"
+                    name="product"
+                    value={product.productId}
+                    onChange={handleProductChange}
+                    className="w-4 h-4 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                  />
+                  <span className="ml-2">{product.productTitle}</span>
+                </label>
+                {/* </div> */}
+              </li>
+            ))}
+            <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
               <label
-                htmlFor={`horizontal-list-radio-license-${product.productId}`}
+                htmlFor="horizontal-list-radio-license-other"
                 className="flex items-center py-3 ps-3 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
               >
                 <input
-                  id={`horizontal-list-radio-license-${product.productId}`}
+                  id="horizontal-list-radio-license-other"
                   type="radio"
                   name="product"
-                  value={product.productId}
+                  value={"Others"}
                   onChange={handleProductChange}
                   className="w-4 h-4 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                 />
-                <span className="ml-2">{product.productTitle}</span>
+                <span className="ml-2">Annat</span>
               </label>
-              {/* </div> */}
             </li>
-          ))}
-          <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-            <label
-              htmlFor="horizontal-list-radio-license-other"
-              className="flex items-center py-3 ps-3 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
-            >
-              <input
-                id="horizontal-list-radio-license-other"
-                type="radio"
-                name="product"
-                value={"Others"}
-                onChange={handleProductChange}
-                className="w-4 h-4 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-              />
-              <span className="ml-2">Annat</span>
-            </label>
-          </li>
-        </ul>
+          </ul>
+        </fieldset>
       </div>
 
       <div className="sm:col-span-2">

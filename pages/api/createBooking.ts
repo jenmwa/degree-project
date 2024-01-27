@@ -6,20 +6,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'POST') {
     try {
       console.log('createBooking:', req.body);
-      const { productId, bookingMessage, requestedDate, bookingStatus } = req.body;
+      const { product, bookingMessage, requestedDate, bookingStatus } = req.body;
+      // console.log('produktId:', JSON.stringify(product))
+      // const { data: productData, error: productError } = await supabaseAuthClient
+      //   .from('Product')
+      //   .select('*')
+      //   .eq('productId', product)
+      //   .single();
 
-      const { data, error } = await supabaseAuthClient
+      // if (productError) {
+      //   throw productError;
+      // }
+
+      // if (!productData) {
+      //   throw new Error('Product not found');
+      // }
+
+      const { data: bookingData, error: bookingError } = await supabaseAuthClient
         .from('Booking')
         .insert([
-          { product: productId, bookingMessage, requestedDate, bookingStatus, created_at: 'now()' },
+          { product: product, bookingMessage, requestedDate, bookingStatus, created_at: 'now()' },
         ])
         .select();
 
-      if (error) {
-        throw error;
+      if (bookingError) {
+        throw bookingError;
       }
 
-      res.status(200).json({ success: true, data });
+      res.status(200).json({ success: true, bookingData });
     } catch (error) {
       console.error('Error updating booking:', error);
       res.status(500).json({ error: 'Error updating booking' });
