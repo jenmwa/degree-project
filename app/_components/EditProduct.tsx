@@ -102,7 +102,10 @@ export default function EditProduct({
 
       const { data, error } = await supabaseAuthClient.storage
         .from("productImages")
-        .upload(`/${selectedProduct.productId}/${uuid}`, fileImage);
+        .upload(
+          `/${selectedProduct.productId}/${selectedProduct.productTitle}${uuid}`,
+          fileImage
+        );
 
       if (error) {
         console.error("Error uploading image:", error.message);

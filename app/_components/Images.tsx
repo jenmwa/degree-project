@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabaseAuthClient";
+import { supabaseAuthClient } from "@/lib/supabaseAuthClient";
 import { v4 as uuidv4 } from "uuid";
 import { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
@@ -32,7 +32,7 @@ export function Images() {
       return;
     }
     try {
-      const { data, error } = await supabase.storage
+      const { data, error } = await supabaseAuthClient.storage
         .from("productImages")
         .upload(`/${productID}/${id}`, file);
 
@@ -60,7 +60,9 @@ export function Images() {
 
   async function fetchAndLogImages() {
     try {
-      const { data, error } = await supabase.storage.from("images").list();
+      const { data, error } = await supabaseAuthClient.storage
+        .from("images")
+        .list();
       console.log(data);
       if (error) {
         console.error("Error fetching images:", error.message);
