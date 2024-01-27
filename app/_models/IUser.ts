@@ -3,13 +3,14 @@
 export interface IUser {
   userId: string;
   userEmail: string,
-  userPassword: string,
+  // userPassword: string,
   userFirstName: string,
   userLastName: string,
-  role: Role;
+  userPhoneNumber: number,
+  // role: Role;
   isDeleted: boolean,
   isNewsletter: boolean,
-  created_at: Date,
+  created_at: Date | null,
   updated_at: Date | null,
 }
 

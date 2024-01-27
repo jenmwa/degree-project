@@ -1,12 +1,101 @@
 import { Switch } from "@headlessui/react";
 import ChevronDownIcon from "@heroicons/react/24/outline/ChevronDownIcon";
-import { useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { IUser } from "../_models/IUser";
+import { IBooking } from "../_models/IBooking";
+import { useProductContext } from "../_context/ProductsContext";
+import UserForm from "./UserForm";
+import { IProduct } from "../_models/IProduct";
+import ProductForm from "./ProductForm";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
+
 export default function OrderForm() {
+  const { products, isLoading, isError } = useProductContext();
   const [isAgreed, setIsAgreed] = useState(false);
+  const [userData, setUserData] = useState<IUser>({
+    userFirstName: "",
+    userLastName: "",
+    userEmail: "",
+    userPhoneNumber: 0,
+    userId: "",
+    isDeleted: false,
+    isNewsletter: false,
+    created_at: null,
+    updated_at: null,
+  });
+  const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [minDate, setMinDate] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState<string>("");
+
+  const [bookingData, setBookingData] = useState<IBooking>({
+    bookingId: "",
+    customer: userData,
+    product: selectedProduct,
+    bookingMessage: "",
+    requestedDate: "",
+    deliveryalternative: "",
+    bookingStatus: "request",
+    created_at: null,
+    updated_at: null,
+  });
+
+  useEffect(() => {
+    const today = new Date();
+    const twoDaysFromNow = new Date(today);
+    twoDaysFromNow.setDate(today.getDate() + 3);
+
+    const minDateString = twoDaysFromNow.toISOString().split("T")[0];
+    setMinDate(minDateString);
+  }, []);
+
+  const handleUserOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    const { name, value } = e.target;
+    console.log(value);
+    setUserData({ ...userData, [name]: value });
+    console.log(userData);
+  };
+
+  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const selectedDateString = e.target.value;
+    setSelectedDate(selectedDateString);
+    setBookingData({
+      ...bookingData,
+      requestedDate: new Date(selectedDateString).toLocaleString(),
+    });
+  };
+  console.log("Date:", selectedDate);
+
+  const handleProductChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const selectedUserProduct = e.target.value;
+    console.log(selectedUserProduct);
+    setSelectedProduct(selectedUserProduct);
+    setBookingData((prevBookingData) => ({
+      ...prevBookingData,
+      product: selectedUserProduct,
+    }));
+  };
+
+  const handleUserMessageOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    console.log(e.target.value);
+    setBookingData({ ...bookingData, bookingMessage: e.target.value });
+  };
+
+  const handleBookingOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    const { name, value } = e.target;
+    console.log(value);
+    setBookingData({ ...bookingData, [name]: value });
+    // console.log("Bookingdata:", bookingData);
+  };
+  // console.log("Bookingdata:", bookingData);
+
+  console.log(selectedProduct);
+  console.log("Bookingdata:", bookingData);
 
   return (
     <>
@@ -40,308 +129,19 @@ export default function OrderForm() {
           method="POST"
           className="mx-auto mt-16 max-w-xl sm:mt-20"
         >
+          <p>ANVÄNDARE</p>
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-            <div>
-              <label
-                htmlFor="first-name"
-                className="block text-sm font-semibold leading-6 text-gray-900"
-              >
-                Förnamn
-              </label>
-              <div className="mt-2.5">
-                <input
-                  type="text"
-                  name="first-name"
-                  id="first-name"
-                  autoComplete="given-name"
-                  className="block w-full  border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor="last-name"
-                className="block text-sm font-semibold leading-6 text-gray-900"
-              >
-                Efternamn
-              </label>
-              <div className="mt-2.5">
-                <input
-                  type="text"
-                  name="last-name"
-                  id="last-name"
-                  autoComplete="family-name"
-                  className="block w-full  border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div className="sm:col-span-2">
-              <label
-                htmlFor="email"
-                className="block text-sm font-semibold leading-6 text-gray-900"
-              >
-                Epost
-              </label>
-              <div className="mt-2.5">
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  autoComplete="email"
-                  className="block w-full  border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div className="sm:col-span-2">
-              <label
-                htmlFor="phone-number"
-                className="block text-sm font-semibold leading-6 text-gray-900"
-              >
-                Telefonnummer
-              </label>
-              <div className="relative mt-2.5">
-                <div className="absolute inset-y-0 left-0 flex items-center">
-                  <label htmlFor="country" className="sr-only">
-                    Country
-                  </label>
-                  <select
-                    id="country"
-                    name="country"
-                    className="h-full  border-0 bg-transparent bg-none py-0 pl-4 pr-9 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
-                  >
-                    <option>SE</option>
-                  </select>
-                  <ChevronDownIcon
-                    className="pointer-events-none absolute right-3 top-0 h-full w-5 text-gray-400"
-                    aria-hidden="true"
-                  />
-                </div>
-                <input
-                  type="tel"
-                  name="phone-number"
-                  id="phone-number"
-                  placeholder="070..."
-                  autoComplete="tel"
-                  className="block w-full  border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div className="sm:col-span-2">
-              <label
-                htmlFor="company"
-                className="block text-sm font-semibold leading-6 text-gray-900"
-              >
-                Till vilket datum?
-              </label>
-              <div className="mt-2.5">
-                <input
-                  type="date"
-                  name="company"
-                  id="company"
-                  autoComplete="organization"
-                  className="block w-full border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            {/* 
-            <div className="sm:col-span-2">
-              <label
-                htmlFor="company"
-                className="block text-sm font-semibold leading-6 text-gray-900"
-              >
-                Vilken typ av event?
-              </label>
-              <div className="mt-2.5">
-                <input
-                  type="text"
-                  name="company"
-                  id="company"
-                  autoComplete="organization"
-                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div> */}
-            <div className="sm:col-span-2">
-              <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
-                Val av tjänst:
-              </h3>
-              <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200  sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div className="flex items-center ps-3">
-                    <input
-                      id="horizontal-list-radio-license"
-                      type="radio"
-                      value=""
-                      name="list-radio"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <label
-                      htmlFor="horizontal-list-radio-license"
-                      className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      Bröllop
-                    </label>
-                  </div>
-                </li>
-                <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div className="flex items-center ps-3">
-                    <input
-                      id="horizontal-list-radio-id"
-                      type="radio"
-                      value=""
-                      name="list-radio"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <label
-                      htmlFor="horizontal-list-radio-id"
-                      className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      Begravning
-                    </label>
-                  </div>
-                </li>
-                <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
-                  <div className="flex items-center ps-3">
-                    <input
-                      id="horizontal-list-radio-military"
-                      type="radio"
-                      value=""
-                      name="list-radio"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <label
-                      htmlFor="horizontal-list-radio-military"
-                      className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      Fira
-                    </label>
-                  </div>
-                </li>
-                <li className="w-full dark:border-gray-600">
-                  <div className="flex items-center ps-3">
-                    <input
-                      id="horizontal-list-radio-passport"
-                      type="radio"
-                      value=""
-                      name="list-radio"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-                    />
-                    <label
-                      htmlFor="horizontal-list-radio-passport"
-                      className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    >
-                      Annat
-                    </label>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            {/* <div className="sm:col-span-2">
-              <label
-                htmlFor="company"
-                className="block text-sm font-semibold leading-6 text-gray-900"
-              >
-                Hämta i butik eller utkörning Värmland? *
-              </label>
-              <div className="mt-2.5">
-                <input
-                  type="text"
-                  name="company"
-                  id="company"
-                  autoComplete="organization"
-                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div> */}
-            <div className=" sm:col-span-2">
-              <label
-                htmlFor="deliveryalternative"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Leveransmetod<br></br> (fri utkörning vid beställningar över
-                599kr)
-              </label>
-              <select
-                id="deliveryalternative"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option selected>Leveransmetod</option>
-                <option value="getHome">Hämta i studion hos Emma</option>
-                <option value="getStore">Hämta hos butik x (gatuadress)</option>
-                <option value="DeliveryKD">
-                  Utkörning för 69kr (gäller i Karlstad)
-                </option>
-              </select>
-            </div>
-
-            <div className="sm:col-span-2">
-              <label
-                htmlFor="company"
-                className="block text-sm font-semibold leading-6 text-gray-900"
-              >
-                (if selected utkörning)<br></br>Adress Värmland? *
-              </label>
-              <div className="mt-2.5">
-                <input
-                  type="text"
-                  name="company"
-                  id="company"
-                  autoComplete="organization"
-                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="zip"
-                className="block text-sm font-semibold leading-6 text-gray-900"
-              >
-                Postnummer
-              </label>
-              <div className="mt-2.5">
-                <input
-                  type="text"
-                  name="zip"
-                  id="zip"
-                  className="block w-full border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div>
-              <label
-                htmlFor="city"
-                className="block text-sm font-semibold leading-6 text-gray-900"
-              >
-                Stad
-              </label>
-              <div className="mt-2.5">
-                <input
-                  type="text"
-                  name="city"
-                  id="city"
-                  className="block w-full border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-2">
-              <label
-                htmlFor="message"
-                className="block text-sm font-semibold leading-6 text-gray-900"
-              >
-                Meddelande
-              </label>
-              <div className="mt-2.5">
-                <textarea
-                  name="message"
-                  id="message"
-                  rows={4}
-                  className="block w-full border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  defaultValue={""}
-                />
-              </div>
-            </div>
+            <UserForm handleUserOnChange={handleUserOnChange}></UserForm>
+            <p>BESTÄLLNING</p>
+            {/* <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"></div> */}
+            <ProductForm
+              selectedDate={selectedDate}
+              handleDateChange={handleDateChange}
+              minDate={minDate}
+              products={products}
+              handleProductChange={handleProductChange}
+              handleUserMessageOnChange={handleUserMessageOnChange}
+            ></ProductForm>
 
             <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
               <div className="flex h-6 items-center">
@@ -349,8 +149,8 @@ export default function OrderForm() {
                   checked={isAgreed}
                   onChange={setIsAgreed}
                   className={classNames(
-                    isAgreed ? "bg-indigo-600" : "bg-gray-200",
-                    "flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    isAgreed ? "bg-rust-300" : "bg-gray-200",
+                    "flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
                   )}
                 >
                   <span className="sr-only">Agree to policies</span>
@@ -365,7 +165,10 @@ export default function OrderForm() {
               </div>
               <Switch.Label className="text-sm leading-6 text-gray-600">
                 Genom att klicka i här godkänner du vår
-                <a href="#" className="font-semibold text-indigo-600">
+                <a
+                  href="#"
+                  className="font-semibold text-rust-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-rust-500"
+                >
                   &nbsp;personuppgiftspolicy
                 </a>{" "}
                 och att bli kontaktad gällande beställningen.
@@ -376,9 +179,9 @@ export default function OrderForm() {
             <button
               type="submit"
               className={classNames(
-                " block w-full bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
+                " block w-full bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500",
                 isAgreed
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-rust-300 text-white"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed  hover:bg-gray-300"
               )}
               disabled={!isAgreed}

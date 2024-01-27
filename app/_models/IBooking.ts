@@ -1,11 +1,15 @@
+import { IProduct } from "./IProduct";
+import { IUser } from "./IUser";
+
 export interface IBooking {
-  data: {}
+  // data: {}
   bookingId: string;
-  customer: string;
+  customer: IUser;
   product: string;
   bookingMessage: string;
-  requestedDate: Date;
+  requestedDate: string;
+  deliveryalternative: string;
   bookingStatus: string;
-  created_at: Date;
+  created_at: Date | null;
   updated_at: Date | null;
 }
