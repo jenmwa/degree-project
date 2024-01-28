@@ -1,10 +1,15 @@
 
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from 'next';
 import * as nodemailer from 'nodemailer';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+
   const transporter = nodemailer.createTransport({
-    service: process.env.EMAIL_SERVER_HOST,
+    host: process.env.EMAIL_SERVER_HOST,
     auth: {
       user: process.env.EMAIL_SERVER_USER,
       pass: process.env.EMAIL_SERVER_PASSWORD,
@@ -20,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .json({ message: 'Please fill out the necessary fields' });
   }
 
-  // https://nodemailer.com/message/#common-fields
+
   const mailData = {
     from: process.env.EMAIL_FROM,
     to: process.env.EMAIL_SERVER_USER,
