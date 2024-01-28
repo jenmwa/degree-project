@@ -11,7 +11,7 @@ export default function Admin() {
   //   event.preventDefault();
 
   //   setLoading(true);
-  //   const { error } = await supabase.auth.signInWithOtp({
+  //   const { error } = await supabaseAuthClient.auth.signInWithOtp({
   //     email,
   //   });
 
