@@ -1,7 +1,7 @@
 "use client";
 import React, { FormEvent } from "react";
 import { useState } from "react";
-import { supabase } from "../../lib/supabaseAuthClient";
+import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
 
 export default function Admin() {
   // const [loading, setLoading] = useState(false);
