@@ -1,5 +1,5 @@
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import { INavigation } from "./Hero";
+import { INavigation } from "./MenuOpen";
 
 interface INavProps {
   menuOpenClose: () => void;
@@ -44,7 +44,7 @@ export function Nav({ menuOpenClose, navigation }: INavProps) {
             href="#"
             className="text-sm font-semibold leading-6 text-gray-100 bg-rust-300 px-6 py-3  hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
           >
-            Butiken <span aria-hidden="true">&rarr;</span>
+            Buketter <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </nav>

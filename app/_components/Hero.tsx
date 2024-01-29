@@ -6,26 +6,16 @@ import { useMediaQuery } from "react-responsive";
 
 import MenuOpen from "./MenuOpen";
 import { Nav } from "./Nav";
-
-export interface INavigation {
-  name: string;
-  href: string;
-}
-
-const navigation: INavigation[] = [
-  { name: "Hem", href: "/" },
-  { name: "Emma", href: "/#Emma" },
-  { name: "Kontakt", href: "/#Kontakt" },
-];
+import Link from "next/link";
 
 export function Hero() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  // const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isLGScreen = useMediaQuery({ minWidth: 1024 });
 
-  const menuOpenClose = () => {
-    console.log("click menu");
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
+  // const menuOpenClose = () => {
+  //   console.log("click menu");
+  //   setMobileMenuOpen(!mobileMenuOpen);
+  // };
 
   return (
     <div className="bg-cover bg-no-repeat sm:bg-center lg:bg-top relative bg-hero ">
@@ -74,18 +64,18 @@ export function Hero() {
               för stor eller för liten.
             </p>
             <div className="mt-10 flex items-center justify-center sm:justify-start gap-x-6">
-              <a
-                href="#"
+              <Link
+                href="/buketter"
                 className=" bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
               >
-                Butiken
-              </a>
-              <a
-                href="#"
+                Buketter
+              </Link>
+              <Link
+                href="/#kontakt"
                 className="text-sm font-semibold leading-6 text-gray-100"
               >
                 Kontakta mig <span aria-hidden="true">→</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
