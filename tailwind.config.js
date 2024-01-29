@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      outline: {
+        rust: ["2px solid #4D220F", "2px"],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

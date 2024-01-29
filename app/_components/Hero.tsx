@@ -62,10 +62,10 @@ export function Hero() {
             )}
           </div>
           <div className="text-center sm:text-left lg:w-1/2">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-200 sm:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight light-text sm:text-6xl">
               Blommor för <br></br>livets alla tillfällen
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-100">
+            <p className="mt-6 text-lg leading-8 light-text">
               Jag älskar att få andras dagar att blomstra. Alltifrån bröllop
               till begravning och alla vardagsdagar däremellan. Jag har en
               förkärlek för yviga och vilda blomsterarrangemang och att få skapa

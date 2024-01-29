@@ -75,6 +75,21 @@ input::file-selector-button {
 }
 
 
+.primary-button {
+  @apply block w-full bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400  hover:text-rust-400 focus:outline-none focus:ring-2 focus:ring-opacity-50 focus:ring-rust-500
+}
+
+.text-href {
+  @apply  hover:text-rust-400 focus:outline-none focus:ring-2 focus:ring-opacity-50 focus:ring-rust-500;
+}
+
+.primary-button:disabled {
+  @apply bg-gray-300 text-gray-700 cursor-not-allowed;
+}
+
+a[href]:focus {
+  @apply  hover:text-rust-400 focus:outline-none focus:ring-2 focus:ring-opacity-50 focus:ring-rust-500;
+}
 
 /* .btn {
   background-color: var(--theme-color);
@@ -84,3 +99,12 @@ input::file-selector-button {
 /* .btn {
   @apply  bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500;
 } */
+
+/*TEXT*/
+.dark-text {
+  @apply text-gray-700
+}
+
+.light-text {
+  @apply text-gray-100
+}
