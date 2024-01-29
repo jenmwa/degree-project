@@ -96,7 +96,7 @@ export default function Contact() {
             onChange={handleOnChangeTextarea}
           />
         </div>
-        <button className=" rounded bg-sky-400" type="submit">
+        <button className=" primary-button" type="submit">
           Skicka
         </button>
       </form>

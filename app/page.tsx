@@ -2,6 +2,8 @@ import React from "react";
 import { Hero } from "./_components/Hero";
 import ContactComponent from "./_components/ContactComponent";
 import ImageCarousel from "./_components/ImageCarousel";
+import Emma from "./_components/Emma";
+import Quote from "./_components/Quote";
 
 export default function Home() {
   return (
@@ -14,6 +16,8 @@ export default function Home() {
         </span>{" "}
         & presentation
       </h1> */}
+        <Emma></Emma>
+        <Quote></Quote>
         <ContactComponent></ContactComponent>
         <ImageCarousel></ImageCarousel>
 

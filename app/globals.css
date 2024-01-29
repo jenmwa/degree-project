@@ -76,7 +76,7 @@ input::file-selector-button {
 
 
 .primary-button {
-  @apply block w-full bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400  hover:text-rust-400 focus:outline-none focus:ring-2 focus:ring-opacity-50 focus:ring-rust-500
+  @apply bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500
 }
 
 .text-href {
@@ -91,14 +91,13 @@ a[href]:focus {
   @apply  hover:text-rust-400 focus:outline-none focus:ring-2 focus:ring-opacity-50 focus:ring-rust-500;
 }
 
-/* .btn {
-  background-color: var(--theme-color);
-   ... 
-}*/
+  input:focus {
+  @apply w-4 h-4 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500
+}
 
-/* .btn {
-  @apply  bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500;
-} */
+textarea:focus {
+  @apply outline-none ring-2 ring-opacity-50 ring-rust-500;
+}
 
 /*TEXT*/
 .dark-text {

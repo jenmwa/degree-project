@@ -13,9 +13,9 @@ export interface INavigation {
 }
 
 const navigation: INavigation[] = [
-  { name: "Hem", href: "#" },
-  { name: "Emma", href: "#" },
-  { name: "Kontakt", href: "#" },
+  { name: "Hem", href: "/" },
+  { name: "Emma", href: "/#Emma" },
+  { name: "Kontakt", href: "/#Kontakt" },
 ];
 
 export function Hero() {
@@ -31,7 +31,7 @@ export function Hero() {
     <div className="bg-cover bg-no-repeat sm:bg-center lg:bg-top relative bg-hero ">
       <div className="col-start-1 row-start-1 bg-gray-800 bg-opacity-70 w-full h-full"></div>
 
-      <header className="absolute inset-x-0 top-0 z-50">
+      {/* <header className="absolute inset-x-0 top-0 z-50">
         <Nav menuOpenClose={menuOpenClose} navigation={navigation}></Nav>
 
         <MenuOpen
@@ -39,7 +39,7 @@ export function Hero() {
           menuOpenClose={menuOpenClose}
           mobileMenuOpen={mobileMenuOpen}
         ></MenuOpen>
-      </header>
+      </header> */}
 
       <div className="relative isolate px-6 pt-14 lg:px-8">
         <div className="mx-auto max-w-2xl py-32 sm:py-36 lg:py-56 flex flex-col lg:max-w-4xl lg:flex-row-reverse justify-between lg:gap-10">
