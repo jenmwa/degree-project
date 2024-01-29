@@ -3,7 +3,7 @@ import React from "react";
 import { useProductContext } from "../_context/ProductsContext";
 import OrderForm from "../_components/OrderForm";
 
-export default function Butiken() {
+export default function Buketter() {
   const { products, isLoading, isError } = useProductContext();
 
   return (
