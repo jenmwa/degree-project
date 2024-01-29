@@ -4,18 +4,18 @@ import React from "react";
 export function Footer() {
   return (
     <>
-      <footer className="px-4 divide-y dark:bg-gray-800 dark:text-gray-100">
+      <footer className="px-4 divide-y text-dark">
         <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
           <div className="lg:w-1/3">
             <a
               rel="noopener noreferrer"
-              href="#"
+              href="/"
               className="flex justify-center space-x-3 lg:justify-start"
             >
-              <div className="flex items-center justify-center w-24 h-24 rounded-full dark:bg-violet-400">
+              <div className="flex items-center justify-center w-24 h-24 rounded-full">
                 <Image
                   src="../bjorbyblomster_logo.svg"
-                  className="h-20"
+                  className="h-24"
                   alt="Björby Blomster Logo"
                   width={150}
                   height={150}
