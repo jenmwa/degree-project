@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { useProductContext } from "../_context/ProductsContext";
 import { IProduct } from "../_models/IProduct";
@@ -11,21 +12,6 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
     "https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/placeholder-image.jpg";
 
   const { products, isLoading, isError } = useProductContext();
-
-  //            <p>Orders:</p>
-
-  //   <ul>
-  //   {products?.map((product) => (
-  //     <li
-  //       key={product.productId}
-  //       onClick={() => showProduct(product)}
-  //     >
-  //       Id:
-  //       {product.productShortDescription}
-  //       {product.productTitle}
-  //     </li>
-  //   ))}
-  // </ul>
 
   return (
     <>

@@ -1,5 +1,6 @@
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { INavigation } from "./MenuOpen";
+import Link from "next/link";
 
 interface INavProps {
   menuOpenClose: () => void;
@@ -40,12 +41,9 @@ export function Nav({ menuOpenClose, navigation }: INavProps) {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a
-            href="#"
-            className="text-sm font-semibold leading-6 text-gray-100 bg-rust-300 px-6 py-3  hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
-          >
+          <Link href="/buketter" className="primary-button ">
             Buketter <span aria-hidden="true">&rarr;</span>
-          </a>
+          </Link>
         </div>
       </nav>
     </>

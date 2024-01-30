@@ -62,6 +62,7 @@ export default function MenuOpen({
                     key={item.name}
                     href={item.href}
                     className="-mx-3 block px-3 py-2 text-base font-semibold leading-7  hover:bg-rust-100"
+                    onClick={menuOpenClose}
                   >
                     {item.name}
                   </Link>
@@ -71,6 +72,7 @@ export default function MenuOpen({
                 <Link
                   href="/buketter"
                   className="-mx-3 block px-3 py-2.5 text-base font-semibold leading-7  hover:bg-rust-100"
+                  onClick={menuOpenClose}
                 >
                   Buketter
                 </Link>

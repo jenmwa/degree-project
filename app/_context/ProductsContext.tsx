@@ -11,13 +11,13 @@ interface ProductContextType {
 
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
-export const useProductContext = () => {
+export function useProductContext() {
   const context = useContext(ProductContext);
   if (!context) {
     throw new Error("useProductContext must be used within a ProductProvider");
   }
   return context;
-};
+}
 
 export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({
   children,

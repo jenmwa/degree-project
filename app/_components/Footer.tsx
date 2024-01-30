@@ -12,7 +12,7 @@ export function Footer() {
               href="/"
               className="flex justify-center space-x-3 lg:justify-start"
             >
-              <div className="flex items-center justify-center w-24 h-24 rounded-full">
+              <div className="flex items-center justify-center w-24 h-24 ">
                 <Image
                   src="../bjorbyblomster_logo.svg"
                   className="h-24"

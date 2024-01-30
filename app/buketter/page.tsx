@@ -2,9 +2,15 @@
 import React from "react";
 import { useProductContext } from "../_context/ProductsContext";
 import OrderForm from "../_components/OrderForm";
+import ProductSection from "../_components/ProductSection";
+import { IProduct } from "../_models/IProduct";
 
 export default function Buketter() {
   const { products, isLoading, isError } = useProductContext();
+
+  const showProduct = (product: IProduct) => {
+    console.log("more about product on buketter", product);
+  };
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -24,6 +30,7 @@ export default function Buketter() {
           </li>
         ))}
       </ul>
+      <ProductSection showProduct={showProduct}></ProductSection>
       <OrderForm></OrderForm>
     </div>
   );

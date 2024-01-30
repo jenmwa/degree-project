@@ -2,8 +2,18 @@
 const nextConfig = {
   // reactStrictMode: true,
   images: {
-    domains: ["itbhssqwjunahaltkmza.supabase.co"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "itbhssqwjunahaltkmza.supabase.co",
+        port: "",
+        pathname: "/storage/v1/object/public/images/**",
+      },
+    ],
   },
+  // images: {
+  //   domains: ["itbhssqwjunahaltkmza.supabase.co"],
+  // },
 };
 
 module.exports = nextConfig;
