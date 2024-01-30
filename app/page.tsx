@@ -11,6 +11,7 @@ import ProductSection from "./_components/ProductSection";
 import { IProduct } from "./_models/IProduct";
 import ProductPage from "./_components/ProductPage";
 import ImgSection from "./_components/ImgSection";
+import DialogComponent from "./_components/DialogComponent";
 
 export default function Home() {
   const showProduct = (product: IProduct) => {
@@ -19,6 +20,7 @@ export default function Home() {
 
   return (
     <>
+      <DialogComponent></DialogComponent>
       <Hero></Hero>
       <main className="">
         <Emma></Emma>
