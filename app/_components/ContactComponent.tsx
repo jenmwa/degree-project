@@ -54,27 +54,74 @@ export default function Contact() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center">
-      <div className="relative flex place-items-center p-5 bg-white text-black">
-        <Link href="/">Test</Link>
-      </div>
+    // <main className="flex min-h-screen flex-col items-center">
+    //   <div className="relative flex place-items-center bg-white">
+    //     <Link href="/">Test</Link>
+    //   </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
-      >
-        <div className="mb-4 flex flex-col w-500">
-          <label htmlFor="form-name">Namn </label>
+    //   <form
+    //     onSubmit={handleSubmit}
+    //     className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+    //   >
+    //     <div className="mb-4 flex flex-col w-500">
+    //       <label htmlFor="form-name">Namn </label>
+    //       <input
+    //         id="form-name"
+    //         autoComplete="name"
+    //         maxLength={50}
+    //         name="name"
+    //         className="text-black"
+    //         onChange={handleOnChange}
+    //       />
+
+    //       <label htmlFor="form-email"> Epost:</label>
+    //       <input
+    //         id="form-email"
+    //         required
+    //         autoComplete="email"
+    //         maxLength={80}
+    //         name="email"
+    //         type="email"
+    //         className="text-black"
+    //         onChange={handleOnChange}
+    //       />
+
+    //       <label htmlFor="form-message"> Meddelande: </label>
+    //       <textarea
+    //         id="form-message"
+    //         required
+    //         name="message"
+    //         rows={5}
+    //         className="text-black"
+    //         onChange={handleOnChangeTextarea}
+    //       />
+    //     </div>
+    //     <button className=" primary-button" type="submit">
+    //       Skicka
+    //     </button>
+    //   </form>
+    // </main>
+    <section className="flex flex-col">
+      <div className="relative flex place-items-center bg-white"></div>
+
+      <form onSubmit={handleSubmit} className="mt-8 mb-2 max-w-screen-lg ">
+        <div className="mb-4 flex flex-col w-500 ">
+          <label className="mb-4" htmlFor="form-name">
+            Namn{" "}
+          </label>
           <input
             id="form-name"
             autoComplete="name"
             maxLength={50}
             name="name"
-            className="text-black"
+            className="mb-6 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
             onChange={handleOnChange}
           />
 
-          <label htmlFor="form-email"> Epost:</label>
+          <label className="mb-4" htmlFor="form-email">
+            {" "}
+            Epost:
+          </label>
           <input
             id="form-email"
             required
@@ -82,24 +129,28 @@ export default function Contact() {
             maxLength={80}
             name="email"
             type="email"
-            className="text-black"
+            className="mb-6 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
             onChange={handleOnChange}
           />
 
-          <label htmlFor="form-message"> Meddelande: </label>
+          <label className="mb-4" htmlFor="form-message">
+            {" "}
+            Meddelande:{" "}
+          </label>
           <textarea
             id="form-message"
             required
             name="message"
             rows={5}
-            className="text-black"
+            className="mb-6 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
             onChange={handleOnChangeTextarea}
           />
         </div>
+        <p>Godkänner Spara uppgifter för svar</p>
         <button className=" primary-button" type="submit">
           Skicka
         </button>
       </form>
-    </main>
+    </section>
   );
 }

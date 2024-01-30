@@ -69,28 +69,30 @@ export default function ImageCarousel() {
 
   return (
     <>
-      <Swiper
-        slidesPerView={1}
-        spaceBetween={30}
-        loop={true}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[Pagination, Navigation]}
-        className="mySwiper"
-      >
-        {imgArray.map((img, index) => (
-          <SwiperSlide key={index}>
-            <Image
-              src={img}
-              alt={`Slide ${index + 1}`}
-              width={300}
-              height={200}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <section className="h-screen">
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={30}
+          loop={true}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          className="mySwiper"
+        >
+          {imgArray.map((img, index) => (
+            <SwiperSlide key={index}>
+              <Image
+                src={img}
+                alt={`Slide ${index + 1}`}
+                width={300}
+                height={200}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
     </>
   );
 }
