@@ -1,3 +1,4 @@
+"use client";
 import { Fragment, useRef, useState } from "react";
 
 import {
@@ -16,66 +17,21 @@ export interface IDialog {
 
 export interface IDialogProps {
   dialog: IDialog;
+  closeDialog: () => void;
+  showDialog: boolean;
+  clearEmailFields: () => void;
 }
 
-// const dialog: IDialog = {
-//   type: "ok",
-//   title: "Avaktivera konto",
-//   message:
-//     "Är du säker på att du vill avaktivera ditt konto? Denna åtgärd är permanent och går inte att ångra.",
-//   primaryButton: "Avaktivera konto",
-// };
-
-/* <DialogComponent
-  dialog={{
-    type: "warning",
-    title: "Warning Title",
-    message: "This is a warning message.",
-    primaryButton: "OK",
-  }}
-/>;
-
-// Render an OK dialog
-<DialogComponent
-  dialog={{
-    type: "ok",
-    title: "Success Title",
-    message: "This is a success message.",
-    primaryButton: "OK",
-  }}
-/>; */
-
-// const dialogData: IDialog[] = [
-//   {
-//     type: "warning",
-//     title: "Avaktivera konto",
-//     message:
-//       "Är du säker på att du vill avaktivera ditt konto? Denna åtgärd är permanent och går inte att ångra.",
-//     primaryButton: "Avaktivera konto",
-//   },
-//   {
-//     type: "ok",
-//     title: "Dialog neutralt",
-//     message: "Detta är ett neutralt dialogmeddelande.",
-//     primaryButton: "OK",
-//   },
-// ];
-
-export default function DialogComponent({ dialog }: IDialogProps) {
+export default function DialogComponent({
+  dialog,
+  closeDialog,
+  showDialog,
+  clearEmailFields,
+}: IDialogProps) {
   const cancelButtonRef = useRef(null);
 
-  const [open, setOpen] = useState(true);
-
-  const openDialog = () => {
-    setOpen(true);
-  };
-
-  const closeDialog = () => {
-    setOpen(false);
-  };
-
   return (
-    <Transition.Root show={open} as="div">
+    <Transition.Root show={showDialog} as="div">
       <Dialog
         as="div"
         className="relative z-10"
@@ -147,7 +103,14 @@ export default function DialogComponent({ dialog }: IDialogProps) {
                         ? "button-warning "
                         : "primary-button"
                     }  text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto`}
-                    onClick={closeDialog}
+                    onClick={() => {
+                      if (dialog.type === "warning") {
+                        closeDialog();
+                      } else {
+                        closeDialog();
+                        clearEmailFields();
+                      }
+                    }}
                   >
                     {dialog.primaryButton}
                   </button>

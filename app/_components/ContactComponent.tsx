@@ -34,6 +34,20 @@ export default function Contact() {
     primaryButton: "",
   });
 
+  const closeDialog = () => {
+    setShowDialog(false);
+  };
+
+  const clearEmailFields = () => {
+    console.log("empty fields please!");
+    setEmail({
+      name: "",
+      email: "",
+      confirmEmail: "",
+      message: "",
+    });
+  };
+
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     const { name, value } = e.target;
@@ -82,6 +96,8 @@ export default function Contact() {
           primaryButton: "Ok",
         });
         setShowDialog(true);
+        clearEmailFields();
+        console.log("success", email);
       }
 
       if (res.status === 400) {
@@ -91,7 +107,6 @@ export default function Contact() {
           message: "Vänligen försök igen.",
           primaryButton: "Ok",
         });
-
         setShowDialog(true);
       }
     } catch (err) {
@@ -105,11 +120,11 @@ export default function Contact() {
 
       <form onSubmit={handleSubmit} className="mt-8 mb-2 max-w-screen-lg ">
         <div className="mb-4 flex flex-col w-500 ">
-          <label className="mb-4" htmlFor="form-name">
+          <label className="mb-4" htmlFor="name">
             Namn{" "}
           </label>
           <input
-            id="form-name"
+            id="name"
             autoComplete="name"
             maxLength={50}
             name="name"
@@ -117,12 +132,12 @@ export default function Contact() {
             onChange={handleOnChange}
           />
 
-          <label className="mb-4" htmlFor="form-email">
+          <label className="mb-4" htmlFor="email">
             {" "}
             Epost:
           </label>
           <input
-            id="form-email"
+            id="email"
             required
             autoComplete="email"
             maxLength={80}
@@ -133,11 +148,11 @@ export default function Contact() {
           />
           {validateEmail(email.email) && (
             <>
-              <label className="mb-4" htmlFor="form-confirm-email">
+              <label className="mb-4" htmlFor="confirm-email">
                 Confirm Email
               </label>
               <input
-                id="form-confirm-email"
+                id="confirm-email"
                 required
                 autoComplete="email"
                 maxLength={80}
@@ -149,12 +164,12 @@ export default function Contact() {
             </>
           )}
 
-          <label className="mb-4" htmlFor="form-message">
+          <label className="mb-4" htmlFor="message">
             {" "}
             Meddelande:{" "}
           </label>
           <textarea
-            id="form-message"
+            id="message"
             required
             name="message"
             rows={5}
@@ -177,7 +192,14 @@ export default function Contact() {
           Skicka
         </button>
       </form>
-      {showDialog && <DialogComponent dialog={dialog} />}
+      {showDialog && (
+        <DialogComponent
+          dialog={dialog}
+          closeDialog={closeDialog}
+          showDialog={showDialog}
+          clearEmailFields={clearEmailFields}
+        />
+      )}
     </section>
   );
 }
