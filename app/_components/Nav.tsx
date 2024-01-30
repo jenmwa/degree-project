@@ -15,14 +15,14 @@ export function Nav({ menuOpenClose, navigation }: INavProps) {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Björby Blomster</span>
-          </a>
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center p-2.5 text-gray-100"
+            className="-m-2.5 inline-flex items-center justify-center p-2.5 "
             onClick={menuOpenClose}
           >
             <span className="sr-only">Öppna menyn</span>
@@ -34,7 +34,7 @@ export function Nav({ menuOpenClose, navigation }: INavProps) {
             <a
               key={item.name}
               href={item.href}
-              className="text-sm font-semibold leading-6 text-gray-100"
+              className="text-sm font-semibold leading-6"
             >
               {item.name}
             </a>

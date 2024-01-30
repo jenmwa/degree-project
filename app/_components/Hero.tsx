@@ -31,7 +31,7 @@ export function Hero() {
         ></MenuOpen>
       </header> */}
 
-      <div className="relative isolate px-6 pt-14 lg:px-8">
+      <div className="relative isolate px-6 pt-14 lg:px-8" text-dark>
         <div className="mx-auto max-w-2xl py-32 sm:py-36 lg:py-56 flex flex-col lg:max-w-4xl lg:flex-row-reverse justify-between lg:gap-10">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center m:w-1/4 lg:w-1/2 relative ">
             {isLGScreen ? (
@@ -51,11 +51,12 @@ export function Hero() {
               ></Image>
             )}
           </div>
+
           <div className="text-center sm:text-left lg:w-1/2">
-            <h1 className="text-4xl font-bold tracking-tight light-text sm:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight  sm:text-6xl">
               Blommor för <br></br>livets alla tillfällen
             </h1>
-            <p className="mt-6 text-lg leading-8 light-text">
+            <p className="mt-6 text-lg leading-8">
               Jag älskar att få andras dagar att blomstra. Alltifrån bröllop
               till begravning och alla vardagsdagar däremellan. Jag har en
               förkärlek för yviga och vilda blomsterarrangemang och att få skapa
@@ -63,16 +64,14 @@ export function Hero() {
               dagarna långa. Hör av dig om du vill ha min hjälp. Ingen fråga är
               för stor eller för liten.
             </p>
+
             <div className="mt-10 flex items-center justify-center sm:justify-start gap-x-6">
-              <Link
-                href="/buketter"
-                className=" bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
-              >
+              <Link href="/buketter" className="primary-button ">
                 Buketter
               </Link>
               <Link
                 href="/#kontakt"
-                className="text-sm font-semibold leading-6 text-gray-100"
+                className="text-sm font-semibold leading-6"
               >
                 Kontakta mig <span aria-hidden="true">→</span>
               </Link>

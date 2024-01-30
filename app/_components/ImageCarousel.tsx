@@ -69,7 +69,7 @@ export default function ImageCarousel() {
 
   return (
     <>
-      <section className="h-screen">
+      <section className="">
         <Swiper
           slidesPerView={1}
           spaceBetween={30}
@@ -88,6 +88,7 @@ export default function ImageCarousel() {
                 alt={`Slide ${index + 1}`}
                 width={300}
                 height={200}
+                className="object-cover w-full h-full"
               />
             </SwiperSlide>
           ))}
