@@ -8,14 +8,17 @@ import { useProductContext } from "../_context/ProductsContext";
 import UserForm from "./UserForm";
 import ProductForm from "./ProductForm";
 import Link from "next/link";
+import ConfirmSwitch from "./ConfirmSwitch";
 
-function classNames(...classes: any) {
+export function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function OrderForm() {
   const { products, isLoading, isError } = useProductContext();
   const [isAgreed, setIsAgreed] = useState(false);
+  console.log("switch is:", isAgreed, "in Order");
+
   const [userData, setUserData] = useState<IUser>({
     userFirstName: "",
     userLastName: "",
@@ -198,8 +201,11 @@ export default function OrderForm() {
             ></ProductForm>
             <p>ANVÄNDARE</p>
             <UserForm handleUserOnChange={handleUserOnChange}></UserForm>
-
-            <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
+            <ConfirmSwitch
+              isAgreed={isAgreed}
+              setIsAgreed={setIsAgreed}
+            ></ConfirmSwitch>
+            {/* <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
               <div className="flex h-6 items-center">
                 <Switch
                   checked={isAgreed}
@@ -232,7 +238,7 @@ export default function OrderForm() {
                 </Link>{" "}
                 och att bli kontaktad gällande beställningen.
               </Switch.Label>
-            </Switch.Group>
+            </Switch.Group> */}
           </div>
           <div className="mt-10">
             <button

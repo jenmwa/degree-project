@@ -7,20 +7,24 @@ import {
 import { Transition } from "@headlessui/react";
 import { Dialog } from "@headlessui/react";
 
-interface IDialog {
-  type: "warning" | "ok";
+export interface IDialog {
+  type: "warning" | "ok" | "";
   title: string;
   message: string;
   primaryButton: string;
 }
 
-const dialog = {
-  type: "warning",
-  title: "Avaktivera konto",
-  message:
-    "Är du säker på att du vill avaktivera ditt konto? Denna åtgärd är permanent och går inte att ångra.",
-  primaryButton: "Avaktivera konto",
-};
+export interface IDialogProps {
+  dialog: IDialog;
+}
+
+// const dialog: IDialog = {
+//   type: "ok",
+//   title: "Avaktivera konto",
+//   message:
+//     "Är du säker på att du vill avaktivera ditt konto? Denna åtgärd är permanent och går inte att ångra.",
+//   primaryButton: "Avaktivera konto",
+// };
 
 /* <DialogComponent
   dialog={{
@@ -41,25 +45,26 @@ const dialog = {
   }}
 />; */
 
-const dialogData: IDialog[] = [
-  {
-    type: "warning",
-    title: "Avaktivera konto",
-    message:
-      "Är du säker på att du vill avaktivera ditt konto? Denna åtgärd är permanent och går inte att ångra.",
-    primaryButton: "Avaktivera konto",
-  },
-  {
-    type: "ok",
-    title: "Dialog neutralt",
-    message: "Detta är ett neutralt dialogmeddelande.",
-    primaryButton: "OK",
-  },
-];
+// const dialogData: IDialog[] = [
+//   {
+//     type: "warning",
+//     title: "Avaktivera konto",
+//     message:
+//       "Är du säker på att du vill avaktivera ditt konto? Denna åtgärd är permanent och går inte att ångra.",
+//     primaryButton: "Avaktivera konto",
+//   },
+//   {
+//     type: "ok",
+//     title: "Dialog neutralt",
+//     message: "Detta är ett neutralt dialogmeddelande.",
+//     primaryButton: "OK",
+//   },
+// ];
 
-export default function DialogComponent() {
-  const [open, setOpen] = useState(true);
+export default function DialogComponent({ dialog }: IDialogProps) {
   const cancelButtonRef = useRef(null);
+
+  const [open, setOpen] = useState(true);
 
   const openDialog = () => {
     setOpen(true);
@@ -68,6 +73,7 @@ export default function DialogComponent() {
   const closeDialog = () => {
     setOpen(false);
   };
+
   return (
     <Transition.Root show={open} as="div">
       <Dialog

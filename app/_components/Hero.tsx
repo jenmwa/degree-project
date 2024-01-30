@@ -33,7 +33,7 @@ export function Hero() {
         ></MenuOpen>
       </header> */}
 
-      <div className="relative isolate px-6 pt-14 lg:px-8" text-dark>
+      <div className="relative isolate px-6 pt-14 lg:px-8 text-dark">
         <div className="mx-auto max-w-2xl py-32 sm:py-36 lg:py-56 flex flex-col lg:max-w-4xl lg:flex-row-reverse justify-between lg:gap-10">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center m:w-1/4 lg:w-1/2 relative ">
             {isLGScreen ? (

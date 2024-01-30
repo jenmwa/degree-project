@@ -20,7 +20,7 @@ export default function Home() {
 
   return (
     <>
-      <DialogComponent></DialogComponent>
+      {/* <DialogComponent></DialogComponent> */}
       <Hero></Hero>
       <main className="">
         <Emma></Emma>
