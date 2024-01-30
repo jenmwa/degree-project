@@ -20,16 +20,6 @@ export default function ProductPage() {
               <span className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                 Bukettinfo
               </span>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Maiores impedit perferendis suscipit eaque, iste dolor
-                cupiditate blanditiis ratione.
-              </p>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Maiores impedit perferendis suscipit eaque, iste dolor
-                cupiditate blanditiis ratione.
-              </p>
               <ProductInfo></ProductInfo>
             </div>
           </div>

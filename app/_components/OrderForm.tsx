@@ -7,6 +7,7 @@ import { IBooking } from "../_models/IBooking";
 import { useProductContext } from "../_context/ProductsContext";
 import UserForm from "./UserForm";
 import ProductForm from "./ProductForm";
+import Link from "next/link";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -159,7 +160,7 @@ export default function OrderForm() {
           aria-hidden="true"
         >
           <div
-            className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
+            className="bg-blob"
             style={{
               clipPath:
                 "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
@@ -208,7 +209,9 @@ export default function OrderForm() {
                     "flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
                   )}
                 >
-                  <span className="sr-only">Agree to policies</span>
+                  <span className="sr-only">
+                    Godkänner personuppgiftspolicy
+                  </span>
                   <span
                     aria-hidden="true"
                     className={classNames(
@@ -218,14 +221,15 @@ export default function OrderForm() {
                   />
                 </Switch>
               </div>
-              <Switch.Label className="text-sm leading-6 text-gray-600">
+              <Switch.Label className="text-sm leading-6">
                 Genom att klicka i här godkänner du vår
-                <a
-                  href="#"
+                <Link
+                  href="/personuppgiftspolicy"
+                  target="_blank"
                   className="font-semibold text-rust-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-rust-500"
                 >
                   &nbsp;personuppgiftspolicy
-                </a>{" "}
+                </Link>{" "}
                 och att bli kontaktad gällande beställningen.
               </Switch.Label>
             </Switch.Group>
@@ -234,10 +238,8 @@ export default function OrderForm() {
             <button
               type="submit"
               className={classNames(
-                " block w-full bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500",
-                isAgreed
-                  ? "bg-rust-300 text-white"
-                  : "bg-gray-300 text-gray-500 cursor-not-allowed  hover:bg-gray-300"
+                "primary-button",
+                isAgreed ? "primary-button" : "primary-button:disabled"
               )}
               disabled={!isAgreed}
             >

@@ -19,7 +19,9 @@ export function Hero() {
 
   return (
     <div className="bg-cover bg-no-repeat sm:bg-center lg:bg-top relative bg-hero ">
-      <div className="col-start-1 row-start-1 bg-gray-800 bg-opacity-70 w-full h-full"></div>
+      <div className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
+        <div className="bg-blob" />
+      </div>
 
       {/* <header className="absolute inset-x-0 top-0 z-50">
         <Nav menuOpenClose={menuOpenClose} navigation={navigation}></Nav>
