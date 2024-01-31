@@ -1,13 +1,16 @@
-"use client";
+"use Client";
 
-import React, { ChangeEvent, useState } from "react";
+import { supabaseAuthClient } from "@/lib/supabaseAuthClient";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import logoisch from "/public/img/logoisch.png";
-import LoginMagic from "../_components/LoginMagic";
+import { useState, ChangeEvent } from "react";
+import LoginMagic from "./LoginMagic";
 
-export default function Login() {
+export default function ResetPasswordLoginTest() {
   const [showLoginMagic, setShowLoginMagic] = useState(false);
   const [resetPassword, setResetPassword] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
 
   const forgottenPassword = () => {
     setResetPassword(true);
@@ -15,6 +18,32 @@ export default function Login() {
 
   const emailadressOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
+    setEmail(e.target.value);
+  };
+
+  const sendResetPassword = async (emailValue: string) => {
+    console.log(emailValue);
+    try {
+      const { error } = await supabaseAuthClient.auth.resetPasswordForEmail(
+        emailValue,
+        {
+          redirectTo: `/reset`,
+        }
+      );
+
+      if (!error) {
+        console.log("Password reset request successful");
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const router = useRouter(); // Move the useRouter call inside the function
+        router.push("/reset"); // R// Redirect programmatically
+      } else {
+        console.error("Error resetting password:", error.message);
+        // Handle error, such as displaying an error message to the user
+      }
+    } catch (error) {
+      console.error("Error resetting password:", error);
+      // Handle unexpected errors, such as network issues
+    }
   };
 
   const handleLoginMagicClick = () => {
@@ -60,13 +89,22 @@ export default function Login() {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Lösenord
-                  </label>
-
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="password"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Lösenord
+                    </label>
+                    <div className="text-sm">
+                      <div
+                        onClick={forgottenPassword}
+                        className="font-semibold text-rust-300 hover:text-rust-500 cursor-pointer"
+                      >
+                        Glömt lösenord?
+                      </div>
+                    </div>
+                  </div>
                   <div className="mt-2">
                     <input
                       id="password"
@@ -122,6 +160,12 @@ export default function Login() {
                 />
               </div>
             </div>
+            <button
+              className="primary-button"
+              onClick={() => sendResetPassword(email)}
+            >
+              Skicka återställningslänk
+            </button>
           </div>
         )}
       </section>
