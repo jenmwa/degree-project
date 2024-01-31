@@ -89,6 +89,10 @@ export default function OrderForm() {
     setBookingData({ ...bookingData, bookingMessage: e.target.value });
   };
 
+  const handleSwitchOnChange = () => {
+    setIsAgreed(!isAgreed);
+  };
+
   const createUser = async (userData: IUser) => {
     try {
       const response = await fetch("/api/createUser", {
@@ -203,7 +207,7 @@ export default function OrderForm() {
             <UserForm handleUserOnChange={handleUserOnChange}></UserForm>
             <ConfirmSwitch
               isAgreed={isAgreed}
-              setIsAgreed={setIsAgreed}
+              handleSwitchOnChange={handleSwitchOnChange}
             ></ConfirmSwitch>
             {/* <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
               <div className="flex h-6 items-center">

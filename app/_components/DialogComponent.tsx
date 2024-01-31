@@ -1,32 +1,21 @@
 "use client";
 import { useRef } from "react";
 
-import {
-  CheckIcon,
-  ExclamationTriangleIcon,
-} from "@heroicons/react/24/outline";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { Transition } from "@headlessui/react";
 import { Dialog } from "@headlessui/react";
-
-export interface IDialog {
-  type: "warning" | "ok" | "";
-  title: string;
-  message: string;
-  primaryButton: string;
-}
+import { IDialog } from "../_models/IDialog";
 
 export interface IDialogProps {
   dialog: IDialog;
   closeDialog: () => void;
   showDialog: boolean;
-  clearEmailFields: () => void;
 }
 
 export default function DialogComponent({
   dialog,
   closeDialog,
   showDialog,
-  clearEmailFields,
 }: IDialogProps) {
   const cancelButtonRef = useRef(null);
 

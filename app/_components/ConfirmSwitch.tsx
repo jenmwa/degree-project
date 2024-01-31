@@ -5,12 +5,12 @@ import { classNames } from "./OrderForm";
 
 interface IConfirmSwitchProps {
   isAgreed: boolean;
-  setIsAgreed: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSwitchOnChange: () => void;
 }
 
 export default function ConfirmSwitch({
   isAgreed,
-  setIsAgreed,
+  handleSwitchOnChange,
 }: IConfirmSwitchProps) {
   return (
     <>
@@ -18,7 +18,7 @@ export default function ConfirmSwitch({
         <div className="flex h-6 items-center">
           <Switch
             checked={isAgreed}
-            onChange={setIsAgreed}
+            onChange={handleSwitchOnChange}
             className={classNames(
               isAgreed ? "bg-rust-300" : "bg-gray-200",
               "flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
