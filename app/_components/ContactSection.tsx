@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ContactComponent from "./ContactComponent";
+import logoisch from "/public/img/logoisch.png";
 
 export default function ContactSection() {
   return (
@@ -24,7 +25,7 @@ export default function ContactSection() {
           </div>
           <div className="mx-auto w-[24rem] max-w-none shadow-xl ring-1 ring-gray-400/10 sm:w-[40rem] md:-ml-4 lg:-ml-0">
             <Image
-              src="/../img/logoisch.png"
+              src={logoisch}
               alt="Your Image"
               width={600}
               height={400}

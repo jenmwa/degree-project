@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useRef, useState } from "react";
+import { useRef } from "react";
 
 import {
   CheckIcon,
@@ -104,12 +104,7 @@ export default function DialogComponent({
                         : "primary-button"
                     }  text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto`}
                     onClick={() => {
-                      if (dialog.type === "warning") {
-                        closeDialog();
-                      } else {
-                        closeDialog();
-                        clearEmailFields();
-                      }
+                      dialog.type === "warning" ? closeDialog() : closeDialog();
                     }}
                   >
                     {dialog.primaryButton}

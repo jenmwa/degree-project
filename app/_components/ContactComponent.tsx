@@ -126,6 +126,7 @@ export default function Contact() {
           <input
             id="name"
             autoComplete="name"
+            value={email.name}
             maxLength={50}
             name="name"
             className="mb-6 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
@@ -140,6 +141,7 @@ export default function Contact() {
             id="email"
             required
             autoComplete="email"
+            value={email.email}
             maxLength={80}
             name="email"
             type="email"
@@ -155,6 +157,7 @@ export default function Contact() {
                 id="confirm-email"
                 required
                 autoComplete="email"
+                value={email.confirmEmail}
                 maxLength={80}
                 name="confirmEmail"
                 type="email"
@@ -172,6 +175,7 @@ export default function Contact() {
             id="message"
             required
             name="message"
+            value={email.message}
             rows={5}
             className="mb-6 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
             onChange={handleOnChangeTextarea}
