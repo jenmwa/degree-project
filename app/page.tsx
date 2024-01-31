@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
 import { Hero } from "./_components/Hero";
-import ContactComponent from "./_components/ContactComponent";
-import ImageCarousel from "./_components/ImageCarousel";
 import Emma from "./_components/Emma";
 import Quote from "./_components/Quote";
 import ContactSection from "./_components/ContactSection";
@@ -19,7 +17,6 @@ export default function Home() {
 
   return (
     <>
-      {/* <DialogComponent></DialogComponent> */}
       <Hero></Hero>
       <main className="">
         <Emma></Emma>
@@ -29,7 +26,6 @@ export default function Home() {
 
         <Quote></Quote>
         <ImgSection></ImgSection>
-        {/* <ImageCarousel></ImageCarousel> */}
         <ContactSection></ContactSection>
       </main>
     </>

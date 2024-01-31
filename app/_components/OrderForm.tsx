@@ -1,13 +1,11 @@
 "use client";
 
-import { Switch } from "@headlessui/react";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { IUser, Role } from "../_models/IUser";
 import { IBooking } from "../_models/IBooking";
 import { useProductContext } from "../_context/ProductsContext";
 import UserForm from "./UserForm";
 import ProductForm from "./ProductForm";
-import Link from "next/link";
 import ConfirmSwitch from "./ConfirmSwitch";
 
 export function classNames(...classes: any) {
