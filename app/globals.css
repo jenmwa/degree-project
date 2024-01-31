@@ -37,23 +37,7 @@ background: linear-gradient(
     min-height: 100dvh;
 }
 
-.bg-hero {
-  /* background: rgb(2,0,36); */
-/* background: linear-gradient(10deg, rgba(2,0,36,1) 0%, rgba(78,92,81,1) 53%);  */
-  /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/img/hero.png') slate; */
 
-}
-
-.image-container {
-  /* position: unset !important; */
-}
-
-.image {
-  /* object-fit: contain;
-  width: 100% !important;
-  position: relative !important;
-  height: unset !important; */
-}
 
 input::file-selector-button {
   font-family: "Cormorant Garamond", serif;
