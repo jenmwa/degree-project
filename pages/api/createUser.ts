@@ -1,5 +1,6 @@
+import { supabaseAuthClient } from "lib/supabaseAuthClient";
 import { NextApiRequest, NextApiResponse } from "next";
-import { supabaseAuthClient } from "@/lib/supabaseAuthClient";
+
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
