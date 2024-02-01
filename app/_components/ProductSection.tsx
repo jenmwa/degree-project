@@ -36,7 +36,7 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
                           alt={product.productShortDescription}
                           className="h-full w-full object-cover object-center"
                           width={100}
-                          height={200}
+                          height={100}
                         ></Image>
                       </div>
                       <div className="bg-gray-200 w-4/5 mx-auto relative p-10 z-10 text-center -mt-16 lg:-mt-12 sm:-mt-16">
