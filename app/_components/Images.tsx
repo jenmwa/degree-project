@@ -1,7 +1,7 @@
-import { supabaseAuthClient } from "@/lib/supabaseAuthClient";
 import { v4 as uuidv4 } from "uuid";
 import { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
+import { supabaseAuthClient } from "lib/supabaseAuthClient";
 
 interface StorageFile {
   id: string;

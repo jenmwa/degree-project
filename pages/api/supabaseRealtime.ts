@@ -1,4 +1,4 @@
-// import { supabase } from "@/lib/supabase";
+
 // import { useEffect } from "react";
 
 // interface RealTimeProps {
