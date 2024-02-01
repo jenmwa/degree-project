@@ -1,6 +1,6 @@
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import * as nodemailer from 'nodemailer';
+import nodemailer from 'nodemailer';
 
 
 export default async function handler(
