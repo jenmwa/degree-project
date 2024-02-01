@@ -18,6 +18,10 @@ export default function Buketter() {
   const router = useRouter();
   const imageSizeSM = 200;
 
+  const foundProduct = products?.find(
+    (product) => product.productId === "e882cbce-fa72-43c9-af7d-dc631c927278"
+  );
+
   const showProduct = (product: IProduct) => {
     console.log("more about product on buketter", product);
     console.log("Clicked on product:", product.productId);
@@ -31,7 +35,7 @@ export default function Buketter() {
           <div className="bg-blob" />
         </div>
 
-        {/* <ImageCarousel foundProduct={imgObject}></ImageCarousel> */}
+        <ImageCarousel foundProduct={foundProduct}></ImageCarousel>
         <div>
           <ProductSection showProduct={showProduct}></ProductSection>
           {/* <OrderForm></OrderForm> */}
