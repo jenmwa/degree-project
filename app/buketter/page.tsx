@@ -10,13 +10,17 @@ import logo from "../../public/bjorbyblomster_logo.svg";
 import ImageCarousel from "app/_components/ImageCarousel";
 import Link from "next/link";
 import PageNotFound from "app/_components/PageNotFound";
+import { useRouter } from "next/navigation";
 
 export default function Buketter() {
   const { products, isLoading, isError } = useProductContext();
+  const router = useRouter();
   const imageSizeSM = 200;
 
   const showProduct = (product: IProduct) => {
     console.log("more about product on buketter", product);
+    console.log("Clicked on product:", product.productId);
+    router.push(`/buketter/${product.productId}`);
   };
 
   return (
