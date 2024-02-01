@@ -102,7 +102,7 @@ const config: Config = {
   moduleNameMapper: {
     // ...
     '^@/components/(.*)$': '<rootDir>/components/$1',
-    '^@supabase/(.*)$': '<rootDir>/node_modules/@supabase/$1',
+    // '^@supabase/(.*)$': '<rootDir>/node_modules/@supabase/$1',
     '^lib/(.*)$': '<rootDir>/lib/$1',
   },
 
