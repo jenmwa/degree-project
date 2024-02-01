@@ -1,6 +1,8 @@
+"use client";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { INavigation } from "./MenuOpen";
 import Link from "next/link";
+import { usePathname } from "next/navigation"; // Import useRouter from next/router
 
 interface INavProps {
   menuOpenClose: () => void;
@@ -8,6 +10,15 @@ interface INavProps {
 }
 
 export function Nav({ menuOpenClose, navigation }: INavProps) {
+  const pathname = usePathname();
+  let linkText = "Buketter";
+  let href = "/buketter";
+
+  if (pathname === "/buketter") {
+    linkText = "Till Startsidan";
+    href = "/";
+  }
+
   return (
     <>
       <nav
@@ -41,8 +52,8 @@ export function Nav({ menuOpenClose, navigation }: INavProps) {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link href="/buketter" className="primary-button ">
-            Buketter <span aria-hidden="true">&rarr;</span>
+          <Link href={href} className="link-button">
+            {linkText} <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
       </nav>
