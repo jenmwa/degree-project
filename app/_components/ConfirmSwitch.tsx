@@ -1,7 +1,7 @@
 "use client";
 import { Switch } from "@headlessui/react";
-import Link from "next/link";
 import { classNames } from "./OrderForm";
+import { useRouter } from "next/navigation";
 
 interface IConfirmSwitchProps {
   isAgreed: boolean;
@@ -12,6 +12,18 @@ export default function ConfirmSwitch({
   isAgreed,
   handleSwitchOnChange,
 }: IConfirmSwitchProps) {
+  const router = useRouter();
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.open("/personuppgiftspolicy", "_blank");
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      handleLinkClick(e as unknown as React.MouseEvent<HTMLAnchorElement>);
+    }
+  };
   return (
     <>
       <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
@@ -36,13 +48,15 @@ export default function ConfirmSwitch({
         </div>
         <Switch.Label className="text-sm leading-6">
           Genom att klicka i här godkänner du vår
-          <Link
-            href="/personuppgiftspolicy"
-            target="_blank"
-            className="font-semibold text-rust-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-rust-500"
+          <a
+            onClick={(e) => handleLinkClick(e)}
+            onKeyDown={(e) => handleKeyDown(e)}
+            className=" cursor-pointer font-semibold text-rust-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-rust-500"
+            tabIndex={0}
           >
-            &nbsp;personuppgiftspolicy
-          </Link>{" "}
+            &nbsp;personuppgiftspolicy&nbsp;
+          </a>
+          {""}
           och att bli kontaktad gällande beställningen.
         </Switch.Label>
       </Switch.Group>

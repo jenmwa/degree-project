@@ -1,7 +1,9 @@
+import PageNotFound from "app/_components/PageNotFound";
+
 export default function Bokningsvillkor() {
   return (
     <>
-      <h2>Bokningsvillkor</h2>
+      <PageNotFound></PageNotFound>
     </>
   );
 }

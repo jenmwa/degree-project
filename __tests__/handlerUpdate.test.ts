@@ -11,7 +11,7 @@ describe('PUT /api/updateProduct', () => {
 
     const requestBody = {
       productId: 'e882cbce-fa72-43c9-af7d-dc631c927278',
-      productPrice: 99.99,
+      productPrice: 9999,
       productTitle: 'Updated Product Title',
     };
 
@@ -28,7 +28,7 @@ describe('PUT /api/updateProduct', () => {
     const responseBody = JSON.parse(res._getData());
     expect(responseBody).toHaveProperty('updatedProduct');
     expect(responseBody.updatedProduct).toHaveProperty('productId', 'e882cbce-fa72-43c9-af7d-dc631c927278');
-    expect(responseBody.updatedProduct.productPrice).toBe(99.99);
+    expect(responseBody.updatedProduct.productPrice).toBe(9999);
   });
 
 });

@@ -1,7 +1,9 @@
+import PageNotFound from "app/_components/PageNotFound";
+
 export default function Personuppgiftspolicy() {
   return (
     <>
-      <h2>Personuppgiftspolicy</h2>
+      <PageNotFound></PageNotFound>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import logoisch from "/public/img/logoisch.png";
 /*
   This example requires some changes to your config:
   
@@ -58,14 +59,17 @@ export default function ImgSection() {
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {products.map((product) => (
             <div key={product.id} className="group relative">
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                <Image
-                  src={product.imageSrc}
-                  alt={product.imageAlt}
-                  className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-                  width={100}
-                  height={200}
-                />
+              <div className="flex justify-center items-center mx-auto shadow-xl ring-1 ring-gray-400/10 ">
+                <div className="max-w-full w-full">
+                  <Image
+                    src={logoisch}
+                    alt="Björnby blomster"
+                    layout="responsive"
+                    width={100}
+                    height={100}
+                    objectFit="contain"
+                  />
+                </div>
               </div>
               <div className="mt-4 flex justify-between">
                 <div>

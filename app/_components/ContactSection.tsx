@@ -23,14 +23,17 @@ export default function ContactSection() {
               <ContactComponent></ContactComponent>
             </div>
           </div>
-          <div className="mx-auto w-[24rem] max-w-none shadow-xl ring-1 ring-gray-400/10 sm:w-[40rem] md:-ml-4 lg:-ml-0">
-            <Image
-              src={logoisch}
-              alt="Your Image"
-              width={600}
-              height={400}
-              className="object-cover w-full h-full"
-            />
+          <div className="two-column-img ">
+            <div className="max-w-full w-full">
+              <Image
+                src={logoisch}
+                alt="Björnby blomster"
+                layout="responsive"
+                width={400}
+                height={400}
+                objectFit="contain"
+              />
+            </div>
           </div>
         </div>
       </div>
