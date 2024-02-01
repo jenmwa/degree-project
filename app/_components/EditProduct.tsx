@@ -73,10 +73,10 @@ export default function EditProduct({
     e.preventDefault();
 
     try {
-      const uuid = self.crypto.randomUUID();
-      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${selectedProduct.productTitle}`;
+      // const uuid = self.crypto.randomUUID();
+      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${selectedProduct.productTitle}${fileImage?.name}`;
 
-      await handleImageUpload(uuid);
+      await handleImageUpload();
       console.log("imageUrl", imageUrl);
 
       const updatedFormData = {
@@ -92,7 +92,7 @@ export default function EditProduct({
     }
   };
 
-  const handleImageUpload = async (uuid: string) => {
+  const handleImageUpload = async () => {
     try {
       if (!fileImage) {
         console.error("No file selected.");
@@ -102,7 +102,7 @@ export default function EditProduct({
       const { data, error } = await supabaseAuthClient.storage
         .from("productImages")
         .upload(
-          `/${selectedProduct.productId}/${selectedProduct.productTitle}${uuid}`,
+          `/${selectedProduct.productId}/${selectedProduct.productTitle}${fileImage.name}`,
           fileImage
         );
 
