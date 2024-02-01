@@ -1,11 +1,11 @@
 "use Client";
 
-import { supabaseAuthClient } from "@/lib/supabaseAuthClient";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import logoisch from "/public/img/logoisch.png";
 import { useState, ChangeEvent } from "react";
 import LoginMagic from "./LoginMagic";
+import { supabaseAuthClient } from "lib/supabaseAuthClient";
 
 export default function ResetPasswordLoginTest() {
   const [showLoginMagic, setShowLoginMagic] = useState(false);

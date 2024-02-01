@@ -1,6 +1,6 @@
 "use client";
 
-import { supabaseAuthClient } from "@/lib/supabaseAuthClient";
+import { supabaseAuthClient } from "lib/supabaseAuthClient";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
