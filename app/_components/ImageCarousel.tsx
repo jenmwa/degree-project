@@ -11,7 +11,6 @@ import "../styles/_swiper.css";
 // import img from "../../public/img/hero.png";
 import Image from "next/image";
 import { IProduct } from "app/_models/IProduct";
-import { Inder } from "next/font/google";
 
 interface IImgArrayProps {
   foundProduct: IProduct | undefined;

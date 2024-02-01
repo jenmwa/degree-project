@@ -10,6 +10,24 @@ interface IEditProductProps {
   handleFormData: (formData: IProduct) => void;
 }
 
+// import { createClient } from '@supabase/supabase-js'
+
+// const supabase = createClient('https://<your-project-id>.supabase.co', '<your-anon-key>')
+
+// const listFolder = async () => {
+//   const { data, error } = await supabase.storage.from('myBucket').list('myFolder')
+//   if (error) {
+//     console.log('Error listing folder:', error.message)
+//     return
+//   }
+//   console.log('Files and folders inside myFolder:', data)
+// }
+
+// listFolder()
+
+export const SUPABASE_STORAGE_IMG =
+  "https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/";
+
 export default function EditProduct({
   selectedProduct,
   handleFormData,
@@ -248,26 +266,26 @@ export default function EditProduct({
                     </p>
                   </div>
                   {/* 
-                  <div className="col-span-full">
-                    <label
-                      htmlFor="photo"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Ladda upp bild
-                    </label>
-                    <div className="mt-2 flex items-center gap-x-3">
-                      <PhotoIcon
-                        className="h-12 w-12 text-gray-300"
-                        aria-hidden="true"
-                      />
-                      <button
-                        type="button"
-                        className=" bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
+                    <div className="col-span-full">
+                      <label
+                        htmlFor="photo"
+                        className="block text-sm font-medium leading-6 text-gray-900"
                       >
-                        Välj bild...
-                      </button>
-                    </div>
-                  </div> */}
+                        Ladda upp bild
+                      </label>
+                      <div className="mt-2 flex items-center gap-x-3">
+                        <PhotoIcon
+                          className="h-12 w-12 text-gray-300"
+                          aria-hidden="true"
+                        />
+                        <button
+                          type="button"
+                          className=" bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
+                        >
+                          Välj bild...
+                        </button>
+                      </div>
+                    </div> */}
 
                   <div className="sm:col-span-3">
                     <label
@@ -286,6 +304,14 @@ export default function EditProduct({
                       />
                     </div>
                   </div>
+                  <div>
+                    <p>Bilder</p>
+                    <ul>
+                      {selectedProduct.productImagesUrl.map((img, index) => (
+                        <li key={index}>{img}</li>
+                      ))}
+                    </ul>
+                  </div>
                   {fileImage && (
                     <div>
                       <p>Preview av vald bild:</p>
@@ -302,40 +328,40 @@ export default function EditProduct({
                   )}
 
                   {/* <div className="col-span-full">
-                    <label
-                      htmlFor="cover-photo"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Ladda upp bild
-                    </label>
-                    <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                      <div className="text-center">
-                        <PhotoIcon
-                          className="mx-auto h-12 w-12 text-gray-400"
-                          aria-hidden="true"
-                        />
-                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                          <label
-                            htmlFor="file-upload"
-                            className="relative cursor-pointer rounded-md bg-white font-semibold text-rust-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-rust-400 focus-within:ring-offset-2 hover:text-rust-500"
-                          >
-                             npm install react-dropzone 
-                            <span>Ladda upp en bild</span>
-                            <input
-                              id="file-upload"
-                              name="file-upload"
-                              type="file"
-                              className="sr-only"
-                            />
-                          </label>
-                          <p className="pl-1">eller drag and drop</p>
+                      <label
+                        htmlFor="cover-photo"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Ladda upp bild
+                      </label>
+                      <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                        <div className="text-center">
+                          <PhotoIcon
+                            className="mx-auto h-12 w-12 text-gray-400"
+                            aria-hidden="true"
+                          />
+                          <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                            <label
+                              htmlFor="file-upload"
+                              className="relative cursor-pointer rounded-md bg-white font-semibold text-rust-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-rust-400 focus-within:ring-offset-2 hover:text-rust-500"
+                            >
+                               npm install react-dropzone 
+                              <span>Ladda upp en bild</span>
+                              <input
+                                id="file-upload"
+                                name="file-upload"
+                                type="file"
+                                className="sr-only"
+                              />
+                            </label>
+                            <p className="pl-1">eller drag and drop</p>
+                          </div>
+                          <p className="text-xs leading-5 text-gray-600">
+                            PNG, JPG, GIF upp till 10MB
+                          </p>
                         </div>
-                        <p className="text-xs leading-5 text-gray-600">
-                          PNG, JPG, GIF upp till 10MB
-                        </p>
                       </div>
-                    </div>
-                  </div> */}
+                    </div> */}
                 </div>
               </div>
             </div>
