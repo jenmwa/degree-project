@@ -2,6 +2,7 @@ import Image from "next/image";
 import flowers from "public/svg/flowers-bouquet-svgrepo-com.svg";
 import leaves from "/public/svg/four-leaves-svgrepo-com.svg";
 import heart from "/public/svg/heart-svgrepo-com.svg";
+import logoisch from "/public/img/logoisch.png";
 
 const features = [
   {
@@ -63,14 +64,17 @@ export default function ContactSection() {
             </div>
           </div>
 
-          <div className="mx-auto w-[24rem] max-w-none shadow-xl ring-1 ring-gray-400/10 sm:w-[40rem] md:-ml-4 lg:-ml-0">
-            <Image
-              src="/../img/logoisch.png"
-              alt="Your Image"
-              width={600}
-              height={400}
-              className="object-cover w-full h-full"
-            />
+          <div className="two-column-img ">
+            <div className="max-w-full w-full">
+              <Image
+                src={logoisch}
+                alt="Björnby blomster"
+                layout="responsive"
+                width={400}
+                height={400}
+                objectFit="contain"
+              />
+            </div>
           </div>
         </div>
       </div>

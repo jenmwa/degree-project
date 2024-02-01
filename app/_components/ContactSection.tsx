@@ -23,7 +23,7 @@ export default function ContactSection() {
               <ContactComponent></ContactComponent>
             </div>
           </div>
-          <div className="flex justify-center items-center mx-auto w-[400px] h-[400px] shadow-xl ring-1 ring-gray-400/10 ">
+          <div className="two-column-img ">
             <div className="max-w-full w-full">
               <Image
                 src={logoisch}
