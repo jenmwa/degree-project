@@ -11,12 +11,12 @@ import "../styles/_swiper.css";
 import img from "../../public/img/hero.png";
 import Image from "next/image";
 
-const imgArray = [img, img, img, img];
+export const imgArray = [img, img, img, img];
 
 export default function ImageCarousel() {
   return (
     <>
-      <section className="">
+      <section className="image-carousel">
         <Swiper
           slidesPerView={1}
           spaceBetween={30}

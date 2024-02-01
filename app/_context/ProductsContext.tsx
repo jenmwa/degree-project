@@ -1,6 +1,7 @@
 "use client";
-import { IProduct } from "@/app/_models/IProduct";
-import { supabaseAuthClient } from "@/lib/supabaseAuthClient";
+
+import { IProduct } from "app/_models/IProduct";
+import { supabaseAuthClient } from "lib/supabaseAuthClient";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface ProductContextType {

@@ -1,6 +1,6 @@
 "use client";
 
-import { supabaseAuthClient } from "@/lib/supabaseAuthClient";
+import { supabaseAuthClient } from "lib/supabaseAuthClient";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 export default function LoginMagic() {
