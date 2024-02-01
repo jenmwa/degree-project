@@ -2,6 +2,7 @@ import { Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface IMenuOpenProps {
   navigation: INavigation[];
@@ -24,6 +25,14 @@ export default function MenuOpen({
   menuOpenClose,
   mobileMenuOpen,
 }: IMenuOpenProps) {
+  const pathname = usePathname();
+  let linkText = "Buketter";
+  let href = "/buketter";
+
+  if (pathname === "/buketter") {
+    linkText = "Till Startsidan";
+    href = "/";
+  }
   return (
     <>
       <Dialog
@@ -70,11 +79,11 @@ export default function MenuOpen({
               </div>
               <div className="py-6">
                 <Link
-                  href="/buketter"
+                  href={href}
                   className="-mx-3 block px-3 py-2.5 text-base font-semibold leading-7  hover:bg-rust-100"
                   onClick={menuOpenClose}
                 >
-                  Buketter
+                  {linkText}
                 </Link>
               </div>
             </div>

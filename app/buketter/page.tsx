@@ -32,7 +32,11 @@ export default function Buketter() {
       </div>
 
       {/* <ImageCarousel></ImageCarousel> */}
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div>
+        <ProductSection showProduct={showProduct}></ProductSection>
+        <OrderForm></OrderForm>
+      </div>
+      {/* <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <h1 className="mt-24 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
           <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
             Buketter
@@ -49,9 +53,7 @@ export default function Buketter() {
             </li>
           ))}
         </ul>
-        <ProductSection showProduct={showProduct}></ProductSection>
-        <OrderForm></OrderForm>
-      </div>
+      </div> */}
     </>
   );
 }

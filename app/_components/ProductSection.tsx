@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useProductContext } from "../_context/ProductsContext";
 import { IProduct } from "../_models/IProduct";
+import ImageCarousel from "./ImageCarousel";
 
 interface IProductsSectionProps {
   showProduct: (product: IProduct) => void;
@@ -22,7 +23,9 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
               <p>Laddar...</p>
             ) : (
               <>
-                <h2 className="text-2xl font-bold text-gray-900">Produkter</h2>
+                <h2 className="text-2xl font-bold text-gray-900">Buketter</h2>
+                <p>Lorem ipsum dolar</p>
+                <p>Klicka för att läsa mer.</p>
                 <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-12 lg:space-y-0 cursor-pointer">
                   {products?.map((product) => (
                     <div
@@ -31,13 +34,16 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
                       onClick={() => showProduct(product)}
                     >
                       <div className="relative h-80 w-full overflow-hidden bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-96">
+                        <ImageCarousel />
+                        {/* Replace Image with ImageCarousel */}
+                        {/* <div className="relative h-80 w-full overflow-hidden bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-96">
                         <Image
                           src={imageURL}
                           alt={product.productShortDescription}
                           className="h-full w-full object-cover object-center"
                           width={100}
                           height={100}
-                        ></Image>
+                        ></Image> */}
                       </div>
                       <div className="bg-gray-200 w-4/5 mx-auto relative p-10 z-10 text-center -mt-16 lg:-mt-12 sm:-mt-16">
                         <h3 className="mt-6 text-sm text-gray-500">
