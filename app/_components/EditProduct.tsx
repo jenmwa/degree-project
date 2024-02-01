@@ -74,12 +74,11 @@ export default function EditProduct({
 
     try {
       const uuid = self.crypto.randomUUID();
-      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${uuid}`;
+      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${selectedProduct.productTitle}`;
 
-      // Upload image to storage
       await handleImageUpload(uuid);
       console.log("imageUrl", imageUrl);
-      // Update the form data with the image URL
+
       const updatedFormData = {
         ...formData,
         productImagesUrl: formData.productImagesUrl
@@ -87,7 +86,6 @@ export default function EditProduct({
           : [imageUrl],
       };
 
-      // Call the parent function with updated form data
       handleFormData(updatedFormData);
     } catch (error) {
       console.error("Unexpected error:", error);

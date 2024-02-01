@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ProductInfo from "./ProductInfo";
-import emma from "/public/img/emma.jpg";
+import emma from "../../public/img/emma.jpg";
 
 export default function Emma() {
   return (

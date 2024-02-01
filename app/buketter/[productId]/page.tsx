@@ -1,17 +1,24 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import Image from "next/image";
-import logoisch from "/public/img/logoisch.png";
 import { useProductContext } from "app/_context/ProductsContext";
+import ImageCarousel from "app/_components/ImageCarousel";
+import OrderForm from "app/_components/OrderForm";
+// import { useState } from "react";
+
+interface IImgObject {
+  img: string;
+}
 
 export default function ProductPage() {
   const params = useParams<{ productId: string }>();
   const { products, isLoading, isError } = useProductContext();
+  // const [imgArray, setImgArray] = useState<IImgObject[]>([]);
 
   const foundProduct = products?.find(
     (product) => product.productId === params?.productId
   );
+  console.log(foundProduct?.productImagesUrl);
 
   return (
     <div className="overflow-hidden bg-white py-24 sm:py-32">
@@ -26,38 +33,34 @@ export default function ProductPage() {
                 {foundProduct?.productTitle}
               </span>
               <p className="mt-6 text-lg leading-8 text-gray-600">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Maiores impedit perferendis suscipit eaque, iste dolor
-                cupiditate blanditiis ratione.
+                {foundProduct?.productShortDescription}
               </p>
             </div>
             <div>
-              <h1>Product Page</h1>
-              <div>My Post: {params?.productId}</div>
+              <p>{foundProduct?.productLongDescription}</p>
               <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa
-                facere eius, quae tenetur impedit ad architecto, repellendus
-                repellat, laudantium doloremque quibusdam nulla. Quidem atque
-                ducimus nam ipsum corporis nihil ipsa?
+                Pris: <span>{foundProduct?.productPrice}</span> sek
               </p>
-              <p>Product ID: {params?.productId}</p>
             </div>
+            <button className="primary-button ">Boka</button>
           </div>
 
           <div className="two-column-img ">
             <div className="max-w-full w-full">
-              <Image
+              <ImageCarousel foundProduct={foundProduct}></ImageCarousel>
+              {/* <Image
                 src={logoisch}
                 alt="Björnby blomster"
                 layout="responsive"
                 width={400}
                 height={400}
                 objectFit="contain"
-              />
+              /> */}
             </div>
           </div>
         </div>
       </div>
+      <OrderForm></OrderForm>
     </div>
   );
 }
