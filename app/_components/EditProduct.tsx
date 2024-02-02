@@ -78,7 +78,14 @@ export default function EditProduct({
     setFileImage(null);
   };
 
-  //LADDA UPP BILD
+  // const constructImageUrl = (
+  //   productId: string,
+  //   uuid: string
+  //   // filename: string
+  // ) => {
+  //   return `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${productId}/${uuid}`;
+  // };
+
   const handleFileImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       console.log(event.target.files);
@@ -86,36 +93,34 @@ export default function EditProduct({
     }
   };
 
-  const handleImageUpload = async (uuid: string) => {
-    try {
-      if (!fileImage) {
-        console.error("No file selected.");
-        return;
-      }
-
-      // const uuid = self.crypto.randomUUID();
-      const { data, error } = await supabaseAuthClient.storage
-        .from("productImages")
-        .upload(`/${formData.productId}/${uuid}`, fileImage);
-
-      if (error) {
-        console.error("Error uploading image:", error.message);
-        throw error;
-      }
-
-      if (data) {
-        console.log("Image uploaded successfully, DATA:", data);
-        return data.path; // Return the UUID path of the uploaded image
-      }
-    } catch (error) {
-      console.error("Unexpected error:", error);
-      throw error;
-    }
-  };
-
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
+    try {
+      const image = await handleImageUpload();
+      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${image}`;
+      console.log("imageUrl:", imageUrl);
+
+      console.log("Uploaded image URL:", SUPABASE_STORAGE_IMG, imageUrl);
+
+      const updatedProductImagesUrl = formData.productImagesUrl
+        ? formData.productImagesUrl.filter((url) => typeof url === "string")
+        : [];
+
+      const updatedFormData = {
+        ...formData,
+        productImagesUrl: [...updatedProductImagesUrl, imageUrl],
+      } as IProduct;
+
+      handleFormData(updatedFormData);
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    }
+  };
+
+  console.log("fooooormdata:", formData);
+
+  const handleImageUpload = async () => {
     try {
       if (!fileImage) {
         console.error("No file selected.");
@@ -123,23 +128,27 @@ export default function EditProduct({
       }
 
       const uuid = self.crypto.randomUUID();
-      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${uuid}/${fileImage.name}`;
+      const { data, error } = await supabaseAuthClient.storage
+        .from("productImages")
+        .upload(`/${selectedProduct.productId}/${uuid}/`, fileImage);
 
-      await handleImageUpload(uuid); // Pass the UUID to the upload function
-      console.log("imageUrl", imageUrl);
+      if (error) {
+        console.error("Error uploading image:", error.message);
+        throw error;
+      }
 
-      const updatedFormData = {
-        ...formData,
-        productImagesUrl: formData.productImagesUrl
-          ? [...formData.productImagesUrl, imageUrl]
-          : [imageUrl],
-      };
-
-      handleFormData(updatedFormData);
+      if (data) {
+        console.log("Image uploaded successfully, DATA:", data, data.path);
+        return data.path;
+      }
     } catch (error) {
       console.error("Unexpected error:", error);
+      throw error;
     }
   };
+
+  // const handleDiscardEdit = () => {
+  //   console.log("close this modal");
 
   return (
     <>
@@ -309,7 +318,7 @@ export default function EditProduct({
                       ))}
                     </ul>
                   </div>
-                  {/* {fileImage && (
+                  {fileImage && (
                     <div>
                       <p>Preview av vald bild:</p>
                       <Image
@@ -322,7 +331,7 @@ export default function EditProduct({
                         Ta bort denna bild.
                       </button>
                     </div>
-                  )} */}
+                  )}
 
                   {/* <div className="col-span-full">
                       <label
