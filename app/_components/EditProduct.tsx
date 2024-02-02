@@ -97,9 +97,10 @@ export default function EditProduct({
     e.preventDefault();
 
     try {
-      const image = await handleImageUpload();
-      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${image}`;
-      console.log("imageUrl:", imageUrl);
+      const uuid = await handleImageUpload();
+      // const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${image}`;
+      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${uuid}/`;
+      console.log("imageUrl:", uuid, imageUrl);
 
       console.log("Uploaded image URL:", SUPABASE_STORAGE_IMG, imageUrl);
 
@@ -139,7 +140,8 @@ export default function EditProduct({
 
       if (data) {
         console.log("Image uploaded successfully, DATA:", data, data.path);
-        return data.path;
+        // return data.path;
+        return uuid;
       }
     } catch (error) {
       console.error("Unexpected error:", error);
