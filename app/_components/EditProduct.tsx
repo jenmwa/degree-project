@@ -74,26 +74,27 @@ export default function EditProduct({
     }));
   };
 
+  const removeSelectedImage = () => {
+    setFileImage(null);
+  };
+
   //LADDA UPP BILD
   const handleFileImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
+      console.log(event.target.files);
       setFileImage(event.target.files[0]);
       //funtion som previewar bild?
     }
   };
-  console.log(fileImage);
-
-  const removeSelectedImage = () => {
-    setFileImage(null);
-  };
+  console.log("fileimg:", fileImage?.name);
 
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
       // const uuid = self.crypto.randomUUID();
-      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${selectedProduct.productTitle}${fileImage?.name}`;
-
+      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${fileImage?.name}`;
+      //https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/e882cbce-fa72-43c9-af7d-dc631c927278/Fira0392ddc5-97dc-4e6d-8a99-81d785d79e3a
       await handleImageUpload();
       console.log("imageUrl", imageUrl);
 
@@ -119,10 +120,7 @@ export default function EditProduct({
 
       const { data, error } = await supabaseAuthClient.storage
         .from("productImages")
-        .upload(
-          `/${selectedProduct.productId}/${selectedProduct.productTitle}${fileImage.name}`,
-          fileImage
-        );
+        .upload(`/${selectedProduct.productId}/${fileImage.name}`, fileImage);
 
       if (error) {
         console.error("Error uploading image:", error.message);
