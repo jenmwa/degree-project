@@ -86,14 +86,14 @@ export default function EditProduct({
     }
   };
 
-  const handleImageUpload = async () => {
+  const handleImageUpload = async (uuid: string) => {
     try {
       if (!fileImage) {
         console.error("No file selected.");
         return;
       }
 
-      const uuid = self.crypto.randomUUID();
+      // const uuid = self.crypto.randomUUID();
       const { data, error } = await supabaseAuthClient.storage
         .from("productImages")
         .upload(`/${formData.productId}/${uuid}`, fileImage);
@@ -122,34 +122,23 @@ export default function EditProduct({
         return;
       }
 
-      // Upload the image and get the UUID path
-      const path = await handleImageUpload();
-      // const imageUrl = await handleImageUpload();
-      const imageUrl = `${SUPABASE_STORAGE_IMG}/${path}`;
+      const uuid = self.crypto.randomUUID();
+      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${uuid}/${fileImage.name}`;
 
-      console.log("Uploaded image URL:", SUPABASE_STORAGE_IMG, imageUrl);
+      await handleImageUpload(uuid); // Pass the UUID to the upload function
+      console.log("imageUrl", imageUrl);
 
-      // Filter out any undefined values from the productImagesUrl array
-      const updatedProductImagesUrl = formData.productImagesUrl
-        ? formData.productImagesUrl.filter((url) => typeof url === "string")
-        : [];
-
-      // Update the form data with the filtered productImagesUrl array
       const updatedFormData = {
         ...formData,
-        productImagesUrl: [...updatedProductImagesUrl, imageUrl],
-      } as IProduct; // Type assertion
+        productImagesUrl: formData.productImagesUrl
+          ? [...formData.productImagesUrl, imageUrl]
+          : [imageUrl],
+      };
 
       handleFormData(updatedFormData);
     } catch (error) {
       console.error("Unexpected error:", error);
     }
-  };
-
-  console.log("fooooormdata:", formData);
-
-  const handleDiscardEdit = () => {
-    console.log("close this modal");
   };
 
   return (
