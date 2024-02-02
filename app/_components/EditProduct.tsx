@@ -99,7 +99,7 @@ export default function EditProduct({
     try {
       const uuid = await handleImageUpload();
       // const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${image}`;
-      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${selectedProduct.productTitle}${uuid}/`;
+      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${uuid}/`;
       console.log("imageUrl:", uuid, imageUrl);
 
       console.log("Uploaded image URL:", SUPABASE_STORAGE_IMG, imageUrl);
