@@ -83,31 +83,6 @@ export default function EditProduct({
     if (event.target.files) {
       console.log(event.target.files);
       setFileImage(event.target.files[0]);
-      //funtion som previewar bild?
-    }
-  };
-  console.log("fileimg:", fileImage?.name);
-
-  const handleFormSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    try {
-      // const uuid = self.crypto.randomUUID();
-      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${fileImage?.name}`;
-      //https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/e882cbce-fa72-43c9-af7d-dc631c927278/Fira0392ddc5-97dc-4e6d-8a99-81d785d79e3a
-      await handleImageUpload();
-      console.log("imageUrl", imageUrl);
-
-      const updatedFormData = {
-        ...formData,
-        productImagesUrl: formData.productImagesUrl
-          ? [...formData.productImagesUrl, imageUrl]
-          : [imageUrl],
-      };
-
-      handleFormData(updatedFormData);
-    } catch (error) {
-      console.error("Unexpected error:", error);
     }
   };
 
@@ -118,9 +93,10 @@ export default function EditProduct({
         return;
       }
 
+      const uuid = self.crypto.randomUUID();
       const { data, error } = await supabaseAuthClient.storage
         .from("productImages")
-        .upload(`/${selectedProduct.productId}/${fileImage.name}`, fileImage);
+        .upload(`/${formData.productId}/${uuid}`, fileImage);
 
       if (error) {
         console.error("Error uploading image:", error.message);
@@ -128,7 +104,8 @@ export default function EditProduct({
       }
 
       if (data) {
-        console.log("Image uploaded successfully:", data);
+        console.log("Image uploaded successfully, DATA:", data);
+        return data.path; // Return the UUID path of the uploaded image
       }
     } catch (error) {
       console.error("Unexpected error:", error);
@@ -136,7 +113,40 @@ export default function EditProduct({
     }
   };
 
-  console.log(formData);
+  const handleFormSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    try {
+      if (!fileImage) {
+        console.error("No file selected.");
+        return;
+      }
+
+      // Upload the image and get the UUID path
+      const path = await handleImageUpload();
+      // const imageUrl = await handleImageUpload();
+      const imageUrl = `${SUPABASE_STORAGE_IMG}/${path}`;
+
+      console.log("Uploaded image URL:", SUPABASE_STORAGE_IMG, imageUrl);
+
+      // Filter out any undefined values from the productImagesUrl array
+      const updatedProductImagesUrl = formData.productImagesUrl
+        ? formData.productImagesUrl.filter((url) => typeof url === "string")
+        : [];
+
+      // Update the form data with the filtered productImagesUrl array
+      const updatedFormData = {
+        ...formData,
+        productImagesUrl: [...updatedProductImagesUrl, imageUrl],
+      } as IProduct; // Type assertion
+
+      handleFormData(updatedFormData);
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    }
+  };
+
+  console.log("fooooormdata:", formData);
 
   const handleDiscardEdit = () => {
     console.log("close this modal");
@@ -310,7 +320,7 @@ export default function EditProduct({
                       ))}
                     </ul>
                   </div>
-                  {fileImage && (
+                  {/* {fileImage && (
                     <div>
                       <p>Preview av vald bild:</p>
                       <Image
@@ -323,7 +333,7 @@ export default function EditProduct({
                         Ta bort denna bild.
                       </button>
                     </div>
-                  )}
+                  )} */}
 
                   {/* <div className="col-span-full">
                       <label
