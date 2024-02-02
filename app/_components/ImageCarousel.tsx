@@ -20,7 +20,7 @@ interface IImgArrayProps {
 export default function ImageCarousel({ foundProduct }: IImgArrayProps) {
   return (
     <>
-      <section className="image-carousel">
+      <section className="relative w-full overflow-hidden bg-black sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 ">
         <Swiper
           slidesPerView={1}
           spaceBetween={30}
@@ -38,15 +38,17 @@ export default function ImageCarousel({ foundProduct }: IImgArrayProps) {
         >
           {foundProduct?.productImagesUrl.map((img, index) => (
             <SwiperSlide key={foundProduct.productId + index}>
-              <Image
-                src={img}
-                alt={`Björby Blomster- ${
-                  foundProduct.productTitle + index + 1
-                }`}
-                width={300}
-                height={200}
-                className="object-cover w-full h-full"
-              />
+              <div className="swiper-image-container">
+                <Image
+                  src={img}
+                  alt={`Björby Blomster- ${
+                    foundProduct.productTitle + index + 1
+                  }`}
+                  width={300}
+                  height={200}
+                  className="swiper-image"
+                />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
