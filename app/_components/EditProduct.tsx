@@ -32,12 +32,14 @@ export default function EditProduct({
   selectedProduct,
   handleFormData,
 }: IEditProductProps) {
+  const [media, setMedia] = useState([]);
   const [formData, setFormData] = useState<IProduct>({
     productId: selectedProduct.productId,
     productTitle: selectedProduct.productTitle,
     productLongDescription: selectedProduct.productLongDescription,
     productShortDescription: selectedProduct.productShortDescription,
     productImagesUrl: selectedProduct.productImagesUrl || [],
+    product_images: [],
     productPrice: selectedProduct.productPrice,
     created_at: selectedProduct.created_at,
     updated_at: null,
@@ -104,16 +106,16 @@ export default function EditProduct({
 
       console.log("Uploaded image URL:", SUPABASE_STORAGE_IMG, imageUrl);
 
-      const updatedProductImagesUrl = formData.productImagesUrl
-        ? formData.productImagesUrl.filter((url) => typeof url === "string")
-        : [];
+      // const updatedProductImagesUrl = formData.productImagesUrl
+      //   ? formData.productImagesUrl.filter((url) => typeof url === "string")
+      //   : [];
 
-      const updatedFormData = {
-        ...formData,
-        productImagesUrl: [...updatedProductImagesUrl, imageUrl],
-      } as IProduct;
+      // const updatedFormData = {
+      //   ...formData,
+      //   productImagesUrl: [...updatedProductImagesUrl, imageUrl],
+      // } as IProduct;
 
-      handleFormData(updatedFormData);
+      // handleFormData(updatedFormData);
     } catch (error) {
       console.error("Unexpected error:", error);
     }
@@ -140,7 +142,8 @@ export default function EditProduct({
 
       if (data) {
         console.log("Image uploaded successfully, DATA:", data, data.path);
-        // return data.path;
+        getMedia(data.path);
+
         return uuid;
       }
     } catch (error) {
@@ -149,6 +152,49 @@ export default function EditProduct({
     }
   };
 
+  async function getMedia(productId: string) {
+    try {
+      const { data, error } = await supabaseAuthClient.storage
+        .from("productImages")
+        .list(`${productId}/`, {
+          limit: 10,
+          offset: 0,
+        });
+
+      if (error) {
+        console.error("Error fetching images:", error);
+        return;
+      }
+
+      if (data) {
+        console.log("getting images from storage:", data);
+
+        // Process the fetched data and update formData accordingly
+        const productImages = formData.product_images || [];
+        const productImagesUrl = formData.productImagesUrl || [];
+
+        data.forEach((item: any) => {
+          if (!productImages.includes(item.id)) {
+            // Add the image ID to the product_images array
+            productImages.push(item.id);
+
+            // Construct the image URL and add it to the productImagesUrl array
+            const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${productId}/${item.name}/`;
+            productImagesUrl.push(imageUrl);
+          }
+        });
+
+        // Update formData with the new data
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          product_images: productImages,
+          productImagesUrl: productImagesUrl,
+        }));
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+    }
+  }
   // const handleDiscardEdit = () => {
   //   console.log("close this modal");
 
