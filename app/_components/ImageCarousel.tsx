@@ -8,14 +8,12 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "../styles/_swiper.css";
 
-// import img from "../../public/img/hero.png";
 import Image from "next/image";
 import { IProduct } from "app/_models/IProduct";
 
 interface IImgArrayProps {
   foundProduct: IProduct | undefined;
 }
-// export const imgArray = [img, img, img, img];
 
 export default function ImageCarousel({ foundProduct }: IImgArrayProps) {
   return (
