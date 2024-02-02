@@ -31,7 +31,12 @@ export default function Dashboard() {
   };
 
   const handleFormData = async (formData: IProduct) => {
-    console.log("***update Product:", formData);
+    console.log(
+      "***update Product FORMDATA:",
+      formData,
+      "imageURL:",
+      formData.productImagesUrl
+    );
     try {
       console.log("***update Product:", formData);
       const response = await fetch("/api/updateProduct", {

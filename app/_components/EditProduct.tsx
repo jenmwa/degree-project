@@ -10,6 +10,24 @@ interface IEditProductProps {
   handleFormData: (formData: IProduct) => void;
 }
 
+// import { createClient } from '@supabase/supabase-js'
+
+// const supabase = createClient('https://<your-project-id>.supabase.co', '<your-anon-key>')
+
+// const listFolder = async () => {
+//   const { data, error } = await supabase.storage.from('myBucket').list('myFolder')
+//   if (error) {
+//     console.log('Error listing folder:', error.message)
+//     return
+//   }
+//   console.log('Files and folders inside myFolder:', data)
+// }
+
+// listFolder()
+
+export const SUPABASE_STORAGE_IMG =
+  "https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/";
+
 export default function EditProduct({
   selectedProduct,
   handleFormData,
@@ -56,35 +74,44 @@ export default function EditProduct({
     }));
   };
 
-  //LADDA UPP BILD
-  const handleFileImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setFileImage(event.target.files[0]);
-      //funtion som previewar bild?
-    }
-  };
-  console.log(fileImage);
-
   const removeSelectedImage = () => {
     setFileImage(null);
+  };
+
+  // const constructImageUrl = (
+  //   productId: string,
+  //   uuid: string
+  //   // filename: string
+  // ) => {
+  //   return `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${productId}/${uuid}`;
+  // };
+
+  const handleFileImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      console.log(event.target.files);
+      setFileImage(event.target.files[0]);
+    }
   };
 
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
-      const uuid = self.crypto.randomUUID();
-      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${selectedProduct.productTitle}`;
+      const uuid = await handleImageUpload();
+      // const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${image}`;
+      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${uuid}/`;
+      console.log("imageUrl:", uuid, imageUrl);
 
-      await handleImageUpload(uuid);
-      console.log("imageUrl", imageUrl);
+      console.log("Uploaded image URL:", SUPABASE_STORAGE_IMG, imageUrl);
+
+      const updatedProductImagesUrl = formData.productImagesUrl
+        ? formData.productImagesUrl.filter((url) => typeof url === "string")
+        : [];
 
       const updatedFormData = {
         ...formData,
-        productImagesUrl: formData.productImagesUrl
-          ? [...formData.productImagesUrl, imageUrl]
-          : [imageUrl],
-      };
+        productImagesUrl: [...updatedProductImagesUrl, imageUrl],
+      } as IProduct;
 
       handleFormData(updatedFormData);
     } catch (error) {
@@ -92,19 +119,19 @@ export default function EditProduct({
     }
   };
 
-  const handleImageUpload = async (uuid: string) => {
+  console.log("fooooormdata:", formData);
+
+  const handleImageUpload = async () => {
     try {
       if (!fileImage) {
         console.error("No file selected.");
         return;
       }
 
+      const uuid = self.crypto.randomUUID();
       const { data, error } = await supabaseAuthClient.storage
         .from("productImages")
-        .upload(
-          `/${selectedProduct.productId}/${selectedProduct.productTitle}${uuid}`,
-          fileImage
-        );
+        .upload(`/${selectedProduct.productId}/${uuid}/`, fileImage);
 
       if (error) {
         console.error("Error uploading image:", error.message);
@@ -112,7 +139,9 @@ export default function EditProduct({
       }
 
       if (data) {
-        console.log("Image uploaded successfully:", data);
+        console.log("Image uploaded successfully, DATA:", data, data.path);
+        // return data.path;
+        return uuid;
       }
     } catch (error) {
       console.error("Unexpected error:", error);
@@ -120,11 +149,8 @@ export default function EditProduct({
     }
   };
 
-  console.log(formData);
-
-  const handleDiscardEdit = () => {
-    console.log("close this modal");
-  };
+  // const handleDiscardEdit = () => {
+  //   console.log("close this modal");
 
   return (
     <>
@@ -248,26 +274,26 @@ export default function EditProduct({
                     </p>
                   </div>
                   {/* 
-                  <div className="col-span-full">
-                    <label
-                      htmlFor="photo"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Ladda upp bild
-                    </label>
-                    <div className="mt-2 flex items-center gap-x-3">
-                      <PhotoIcon
-                        className="h-12 w-12 text-gray-300"
-                        aria-hidden="true"
-                      />
-                      <button
-                        type="button"
-                        className=" bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
+                    <div className="col-span-full">
+                      <label
+                        htmlFor="photo"
+                        className="block text-sm font-medium leading-6 text-gray-900"
                       >
-                        Välj bild...
-                      </button>
-                    </div>
-                  </div> */}
+                        Ladda upp bild
+                      </label>
+                      <div className="mt-2 flex items-center gap-x-3">
+                        <PhotoIcon
+                          className="h-12 w-12 text-gray-300"
+                          aria-hidden="true"
+                        />
+                        <button
+                          type="button"
+                          className=" bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
+                        >
+                          Välj bild...
+                        </button>
+                      </div>
+                    </div> */}
 
                   <div className="sm:col-span-3">
                     <label
@@ -286,6 +312,14 @@ export default function EditProduct({
                       />
                     </div>
                   </div>
+                  <div>
+                    <p>Bilder</p>
+                    <ul>
+                      {selectedProduct.productImagesUrl.map((img, index) => (
+                        <li key={index}>{img}</li>
+                      ))}
+                    </ul>
+                  </div>
                   {fileImage && (
                     <div>
                       <p>Preview av vald bild:</p>
@@ -302,40 +336,40 @@ export default function EditProduct({
                   )}
 
                   {/* <div className="col-span-full">
-                    <label
-                      htmlFor="cover-photo"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Ladda upp bild
-                    </label>
-                    <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                      <div className="text-center">
-                        <PhotoIcon
-                          className="mx-auto h-12 w-12 text-gray-400"
-                          aria-hidden="true"
-                        />
-                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                          <label
-                            htmlFor="file-upload"
-                            className="relative cursor-pointer rounded-md bg-white font-semibold text-rust-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-rust-400 focus-within:ring-offset-2 hover:text-rust-500"
-                          >
-                             npm install react-dropzone 
-                            <span>Ladda upp en bild</span>
-                            <input
-                              id="file-upload"
-                              name="file-upload"
-                              type="file"
-                              className="sr-only"
-                            />
-                          </label>
-                          <p className="pl-1">eller drag and drop</p>
+                      <label
+                        htmlFor="cover-photo"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        Ladda upp bild
+                      </label>
+                      <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                        <div className="text-center">
+                          <PhotoIcon
+                            className="mx-auto h-12 w-12 text-gray-400"
+                            aria-hidden="true"
+                          />
+                          <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                            <label
+                              htmlFor="file-upload"
+                              className="relative cursor-pointer rounded-md bg-white font-semibold text-rust-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-rust-400 focus-within:ring-offset-2 hover:text-rust-500"
+                            >
+                               npm install react-dropzone 
+                              <span>Ladda upp en bild</span>
+                              <input
+                                id="file-upload"
+                                name="file-upload"
+                                type="file"
+                                className="sr-only"
+                              />
+                            </label>
+                            <p className="pl-1">eller drag and drop</p>
+                          </div>
+                          <p className="text-xs leading-5 text-gray-600">
+                            PNG, JPG, GIF upp till 10MB
+                          </p>
                         </div>
-                        <p className="text-xs leading-5 text-gray-600">
-                          PNG, JPG, GIF upp till 10MB
-                        </p>
                       </div>
-                    </div>
-                  </div> */}
+                    </div> */}
                 </div>
               </div>
             </div>
@@ -344,7 +378,7 @@ export default function EditProduct({
               <button
                 type="button"
                 className="text-sm font-semibold leading-6 text-gray-900"
-                onClick={handleDiscardEdit}
+                // onClick={handleDiscardEdit}
               >
                 Avbryt
               </button>
