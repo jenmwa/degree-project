@@ -11,12 +11,8 @@ export interface IProduct {
   updated_at: Date | null;
 }
 
-export interface IProduct_images {
-  id: string,
-  created_at: Date;
-  image_id: string,
-  images: string[],
-  alt_text: string,
-  isDeleted: boolean,
-  // product_id: string
-}
+// export interface IProduct_images {
+//   id: string,
+//   name: string
+//   // product_id: string
+// }

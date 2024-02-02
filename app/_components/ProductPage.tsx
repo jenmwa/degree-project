@@ -1,5 +1,3 @@
-import Image from "next/image";
-import ContactComponent from "./ContactComponent";
 import ProductInfo from "./ProductInfo";
 import ImageCarousel from "./ImageCarousel";
 import { useProductContext } from "app/_context/ProductsContext";
