@@ -4,37 +4,21 @@ import DialogComponent from "./DialogComponent";
 import { IContactEmail } from "../_models/IContactEmail";
 import ContactForm from "./ContactForm";
 import { IDialog } from "../_models/IDialog";
+import { initialContactEmail } from "app/_helpers/initialContactEmail";
+import { initialDialog } from "app/_helpers/initialDialog";
 
 export default function Contact() {
   const [isAgreed, setIsAgreed] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
-  const [email, setEmail] = useState<IContactEmail>({
-    type: "contact",
-    name: "",
-    email: "",
-    confirmEmail: "",
-    message: "",
-  });
-
-  const [dialog, setDialog] = useState<IDialog>({
-    type: "",
-    title: "",
-    message: "",
-    primaryButton: "",
-  });
+  const [email, setEmail] = useState<IContactEmail>(initialContactEmail);
+  const [dialog, setDialog] = useState<IDialog>(initialDialog);
 
   const closeDialog = () => {
     setShowDialog(false);
   };
 
   const clearEmailFields = () => {
-    setEmail({
-      type: "contact",
-      name: "",
-      email: "",
-      confirmEmail: "",
-      message: "",
-    });
+    setEmail(initialContactEmail);
     setIsAgreed(false);
   };
 
