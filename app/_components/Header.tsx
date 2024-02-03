@@ -2,23 +2,16 @@
 import React, { useState } from "react";
 import { Nav } from "./Nav";
 import MenuOpen from "./MenuOpen";
-import router from "next/router";
-import { usePathname } from "next/navigation";
-
-export interface INavigation {
-  name: string;
-  href: string;
-}
+import { INavigation } from "app/_models/INavigation";
 
 const navigation: INavigation[] = [
   { name: "Hem", href: "/" },
-  { name: "Emma", href: "/#Emma" },
-  { name: "Kontakt", href: "/#Kontakt" },
+  { name: "Emma", href: "/#emma" },
+  { name: "Kontakt", href: "/#contact" },
 ];
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(true);
 
   const menuOpenClose = () => {
     console.log("click menu");

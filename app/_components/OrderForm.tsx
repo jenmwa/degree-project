@@ -28,18 +28,16 @@ export default function OrderForm() {
     created_at: null,
     updated_at: null,
   });
-  // const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState("");
+
   const [selectedDate, setSelectedDate] = useState("");
   const [minDate, setMinDate] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<string>("");
-
   const [bookingData, setBookingData] = useState<IBooking>({
     bookingId: "",
     customer: userData,
     product: selectedProduct,
     bookingMessage: "",
     requestedDate: "",
-    // deliveryalternative: "",
     bookingStatus: "Request",
     created_at: null,
     updated_at: null,
@@ -124,7 +122,7 @@ export default function OrderForm() {
     }
   };
 
-  const createBooking = async (bookingData: any, userId: string) => {
+  const createBooking = async (bookingData: IBooking, userId: IUser) => {
     try {
       bookingData.customer = userId;
       console.log("before booking:", userId, bookingData);
