@@ -15,8 +15,9 @@ export default function ProductIdSection({
 }: IProductsectionProps) {
   const router = useRouter();
 
-  const handleRequestOffer = (productId: string) => {
-    if (productId) {
+  const handleRequestOffer = (product: string) => {
+    if (product) {
+      localStorage.setItem("product", product);
       router.push("/buketter/bestallningsforfragan");
     } else {
       console.error("Product not found");

@@ -2,6 +2,7 @@ import { ChangeEvent } from "react";
 import { IProduct } from "../_models/IProduct";
 
 interface IProductFormProps {
+  selectedProduct: string;
   selectedDate: string;
   handleDateChange: (e: ChangeEvent<HTMLInputElement>) => void;
   minDate: string;
@@ -11,6 +12,7 @@ interface IProductFormProps {
 }
 
 export default function ProductForm({
+  selectedProduct,
   selectedDate,
   handleDateChange,
   minDate,
@@ -44,7 +46,16 @@ export default function ProductForm({
                     type="radio"
                     name="product"
                     value={product.productId}
-                    onChange={handleProductChange}
+                    checked={
+                      selectedProduct === product.productId ||
+                      (localStorage.getItem("product") ===
+                        product.productTitle &&
+                        selectedProduct !== "Others")
+                    }
+                    onChange={(e) => {
+                      handleProductChange(e);
+                      localStorage.setItem("product", product.productTitle);
+                    }}
                     className="w-4 h-4 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                   />
                   <span className="ml-2">{product.productTitle}</span>
@@ -52,7 +63,7 @@ export default function ProductForm({
                 {/* </div> */}
               </li>
             ))}
-            <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+            {/* <li className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
               <label
                 htmlFor="horizontal-list-radio-license-other"
                 className="flex items-center py-3 ps-3 text-sm font-medium text-gray-900 dark:text-gray-300 cursor-pointer"
@@ -67,7 +78,7 @@ export default function ProductForm({
                 />
                 <span className="ml-2">Annat</span>
               </label>
-            </li>
+            </li> */}
           </ul>
         </fieldset>
       </div>

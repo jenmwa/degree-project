@@ -7,10 +7,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const { product, bookingMessage, requestedDate, bookingStatus, customer } = req.body;
 
+      const userId = req.body.customer;
+
       const { data: bookingData, error: bookingError } = await supabaseAuthClient
         .from('Booking')
         .insert([
-          { product: product, bookingMessage, requestedDate, bookingStatus, customer, created_at: 'now()' },
+          { product: product, bookingMessage, requestedDate, bookingStatus, customer: userId, created_at: 'now()' },
         ])
         .select();
 
