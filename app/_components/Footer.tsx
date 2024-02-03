@@ -1,7 +1,15 @@
+import { INavigation } from "app/_models/INavigation";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 export function Footer() {
+  const navigationFooter: INavigation[] = [
+    { name: "Startsida", href: "/" },
+    { name: "Om", href: "/#about" },
+    { name: "Emma", href: "/#emma" },
+    { name: "Buketter", href: "/buketter" },
+    { name: "Kontakt", href: "/#contact" },
+  ];
   return (
     <>
       <footer className="px-4 divide-y text-dark">
@@ -37,26 +45,13 @@ export function Footer() {
             <div className="py-2">
               <h3 className="uppercase dark-text">Hemsidan</h3>
               <ul className="mt-1">
-                <li>
-                  <Link href="#" className="hover:underline">
-                    Om
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:underline">
-                    Emma
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/buketter" className="hover:underline">
-                    Buketter
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:underline">
-                    Kontakt
-                  </Link>
-                </li>
+                {navigationFooter.map((item, index) => (
+                  <li key={index}>
+                    <Link href={item.href} className="hover:underline">
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 

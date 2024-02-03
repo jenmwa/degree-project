@@ -9,10 +9,12 @@ import ProductSection from "./_components/ProductSection";
 import { IProduct } from "./_models/IProduct";
 import ProductPage from "./_components/ProductPage";
 import ImgSection from "./_components/ImgSection";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const showProduct = (product: IProduct) => {
-    console.log("more about product on landingpage", product);
+    router.push(`/buketter/${product.productId}`);
   };
 
   return (
@@ -23,7 +25,6 @@ export default function Home() {
         <ProductSection showProduct={showProduct}></ProductSection>
         <ProductPage></ProductPage>
         <About></About>
-
         <Quote></Quote>
         <ImgSection></ImgSection>
         <ContactSection></ContactSection>

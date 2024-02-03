@@ -7,7 +7,7 @@ import EditProduct from "app/_components/EditProduct";
 import ProductSection from "app/_components/ProductSection";
 import { IBooking } from "app/_models/IBooking";
 import { IProduct } from "app/_models/IProduct";
-import { initialProduct } from "app/initialProduct";
+import { initialProduct } from "app/_helpers/initialProduct";
 import { supabaseAuthClient } from "lib/supabaseAuthClient";
 
 export default function Dashboard() {

@@ -1,5 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { INavigation } from "app/_models/INavigation";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,15 +11,10 @@ interface IMenuOpenProps {
   mobileMenuOpen: boolean;
 }
 
-export interface INavigation {
-  name: string;
-  href: string;
-}
-
 const navigation: INavigation[] = [
   { name: "Hem", href: "/" },
-  { name: "Emma", href: "/#Emma" },
-  { name: "Kontakt", href: "/#Kontakt" },
+  { name: "Emma", href: "/#emma" },
+  { name: "Kontakt", href: "/#contact" },
 ];
 
 export default function MenuOpen({
@@ -58,7 +54,7 @@ export default function MenuOpen({
               className="-m-2.5 p-2.5 dark-text"
               onClick={menuOpenClose}
             >
-              {/* <span className="sr-only">Stäng meny</span> */}
+              <span className="sr-only">Stäng meny</span>
               <XMarkIcon className="h-12 w-12" aria-hidden="true" />
             </button>
           </div>

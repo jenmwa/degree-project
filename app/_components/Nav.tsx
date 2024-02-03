@@ -1,6 +1,7 @@
 "use client";
 import { Bars3Icon } from "@heroicons/react/24/outline";
-import { INavigation } from "./MenuOpen";
+import { INavigation } from "app/_models/INavigation";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation"; // Import useRouter from next/router
 
@@ -42,13 +43,14 @@ export function Nav({ menuOpenClose, navigation }: INavProps) {
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           {navigation.map((item) => (
-            <a
+            <Link
               key={item.name}
               href={item.href}
+              passHref
               className="text-sm font-semibold leading-6"
             >
-              {item.name}
-            </a>
+              <span> {item.name}</span>
+            </Link>
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">

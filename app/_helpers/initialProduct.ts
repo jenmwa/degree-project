@@ -1,4 +1,4 @@
-import { IProduct } from "./_models/IProduct";
+import { IProduct } from "../_models/IProduct";
 
 export const initialProduct: IProduct = {
   productId: "",

@@ -15,7 +15,6 @@ export function classNames(...classes: any) {
 export default function OrderForm() {
   const { products, isLoading, isError } = useProductContext();
   const [isAgreed, setIsAgreed] = useState(false);
-  console.log("switch is:", isAgreed, "in Order");
 
   const [userData, setUserData] = useState<IUser>({
     userFirstName: "",
@@ -29,18 +28,16 @@ export default function OrderForm() {
     created_at: null,
     updated_at: null,
   });
-  // const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState("");
+
   const [selectedDate, setSelectedDate] = useState("");
   const [minDate, setMinDate] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<string>("");
-
   const [bookingData, setBookingData] = useState<IBooking>({
     bookingId: "",
     customer: userData,
     product: selectedProduct,
     bookingMessage: "",
     requestedDate: "",
-    // deliveryalternative: "",
     bookingStatus: "Request",
     created_at: null,
     updated_at: null,
@@ -53,6 +50,15 @@ export default function OrderForm() {
 
     const minDateString = twoDaysFromNow.toISOString().split("T")[0];
     setMinDate(minDateString);
+
+    const produkt = localStorage.getItem("product");
+    if (produkt) {
+      setSelectedProduct(produkt);
+      setBookingData((prevBookingData) => ({
+        ...prevBookingData,
+        product: produkt,
+      }));
+    }
   }, []);
 
   const handleUserOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -116,7 +122,7 @@ export default function OrderForm() {
     }
   };
 
-  const createBooking = async (bookingData: any, userId: string) => {
+  const createBooking = async (bookingData: IBooking, userId: IUser) => {
     try {
       bookingData.customer = userId;
       console.log("before booking:", userId, bookingData);
@@ -131,7 +137,7 @@ export default function OrderForm() {
 
       if (response.ok) {
         const data = await response.json();
-        return data.bookingData; // Return the newly created booking data
+        return data.bookingData;
       } else {
         const errorBody = await response.json();
         throw new Error(errorBody.error);
@@ -142,7 +148,6 @@ export default function OrderForm() {
     }
   };
 
-  // Usage example
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -159,22 +164,16 @@ export default function OrderForm() {
 
   return (
     <>
-      <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
+      <div className="isolate bg-white px-6 py-8 sm:py-16 lg:px-8">
         <div
           className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
           aria-hidden="true"
         >
-          <div
-            className="bg-blob"
-            style={{
-              clipPath:
-                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-            }}
-          />
+          <div className="bg-blob" />
         </div>
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Beställning
+        <div className="mx-auto max-w-2xl text-left">
+          <h2 className="text-3xl font-bold tracking-tightsm:text-4xl">
+            Beställningsförfrågan
           </h2>
           <p className="mt-2 text-lg leading-8 text-gray-600">
             Fyll i formuläret nedan på det du önskar beställa så återkommer jag
@@ -191,9 +190,9 @@ export default function OrderForm() {
           onSubmit={handleSubmit}
         >
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-            <p>BESTÄLLNING</p>
             {/* <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"></div> */}
             <ProductForm
+              selectedProduct={selectedProduct}
               selectedDate={selectedDate}
               handleDateChange={handleDateChange}
               minDate={minDate}
@@ -207,40 +206,6 @@ export default function OrderForm() {
               isAgreed={isAgreed}
               handleSwitchOnChange={handleSwitchOnChange}
             ></ConfirmSwitch>
-            {/* <Switch.Group as="div" className="flex gap-x-4 sm:col-span-2">
-              <div className="flex h-6 items-center">
-                <Switch
-                  checked={isAgreed}
-                  onChange={setIsAgreed}
-                  className={classNames(
-                    isAgreed ? "bg-rust-300" : "bg-gray-200",
-                    "flex w-8 flex-none cursor-pointer rounded-full p-px ring-1 ring-inset ring-gray-900/5 transition-colors duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
-                  )}
-                >
-                  <span className="sr-only">
-                    Godkänner personuppgiftspolicy
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className={classNames(
-                      isAgreed ? "translate-x-3.5" : "translate-x-0",
-                      "h-4 w-4 transform rounded-full bg-white shadow-sm ring-1 ring-gray-900/5 transition duration-200 ease-in-out"
-                    )}
-                  />
-                </Switch>
-              </div>
-              <Switch.Label className="text-sm leading-6">
-                Genom att klicka i här godkänner du vår
-                <Link
-                  href="/personuppgiftspolicy"
-                  target="_blank"
-                  className="font-semibold text-rust-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-rust-500"
-                >
-                  &nbsp;personuppgiftspolicy
-                </Link>{" "}
-                och att bli kontaktad gällande beställningen.
-              </Switch.Label>
-            </Switch.Group> */}
           </div>
           <div className="mt-10">
             <button
