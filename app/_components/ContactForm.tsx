@@ -29,6 +29,7 @@ export default function ContactForm({
             Namn{" "}
           </label>
           <input
+            required
             id="name"
             autoComplete="name"
             value={email.name}

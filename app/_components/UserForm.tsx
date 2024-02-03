@@ -53,6 +53,7 @@ export default function UserForm({ handleUserOnChange }: IUserFormProps) {
         </label>
         <div className="mt-2.5">
           <input
+            required
             type="email"
             name="userEmail"
             id="userEmail"

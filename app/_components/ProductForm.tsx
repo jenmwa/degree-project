@@ -38,6 +38,7 @@ export default function ProductForm({
                   className="flex items-center py-3 ps-3 text-sm font-medium  cursor-pointer"
                 >
                   <input
+                    required
                     id={`horizontal-list-radio-license-${product.productId}`}
                     type="radio"
                     name="product"

@@ -2,7 +2,7 @@ import { IDialog } from "app/_models/IDialog";
 
 export const CONTACT_SUCCESS_DIALOG: IDialog = {
   type: "ok",
-  title: "Epost är skickat!",
+  title: "Epost är skickad!",
   message:
     "Vi återkommer med svar till epostadressen du angett så snart vi kan.",
   primaryButton: "Ok",
@@ -30,3 +30,12 @@ export const REQUEST_SUCCESS_DIALOG: IDialog = {
     "Vi återkommer med svar till epostadressen du angett inom kort.",
   primaryButton: "Ok",
 };
+
+export const REQUEST_MISSINGFIELDS_DIALOG: IDialog = {
+  type: "warning",
+  title: "E-postadress saknas.",
+  message:
+    "För att kunna göra en beställningsförfrågan är detta fält obligatoriskt.",
+  primaryButton: "Ok",
+};
+

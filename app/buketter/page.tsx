@@ -29,7 +29,6 @@ export default function Buketter() {
         <ImageCarousel foundProduct={foundProduct}></ImageCarousel>
         <div>
           <ProductSection showProduct={showProduct}></ProductSection>
-          {/* <OrderForm></OrderForm> */}
         </div>
       </section>
     </>

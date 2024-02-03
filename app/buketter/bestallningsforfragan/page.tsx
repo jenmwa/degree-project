@@ -1,6 +1,10 @@
 "use client";
 import DialogComponent from "app/_components/Dialog/DialogComponent";
-import { REQUEST_SUCCESS_DIALOG } from "app/_components/Dialog/DialogMessage";
+import {
+  CONTACT_400_DIALOG,
+  REQUEST_MISSINGFIELDS_DIALOG,
+  REQUEST_SUCCESS_DIALOG,
+} from "app/_components/Dialog/DialogMessage";
 import OrderForm from "app/_components/OrderForm";
 import Stepper from "app/_components/Stepper";
 import { useProductContext } from "app/_context/ProductsContext";
@@ -108,6 +112,11 @@ export default function Page() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
+    if (!userData.userEmail) {
+      setDialog(REQUEST_MISSINGFIELDS_DIALOG);
+      setShowDialog(true);
+      return;
+    }
     try {
       const newUser = await createUser(userData);
       console.log("newuser", newUser);
@@ -133,6 +142,10 @@ export default function Page() {
         const data = await response.json();
         const userId = data.newUser ? data.newUser.userId : data.userId;
         return userId;
+      }
+      if (response.status === 400) {
+        setDialog(CONTACT_400_DIALOG);
+        setShowDialog(true);
       } else {
         const errorBody = await response.json();
         throw new Error(errorBody.error);
@@ -158,9 +171,9 @@ export default function Page() {
 
       if (response.ok) {
         const data = await response.json();
-        return data.bookingData;
         setDialog(REQUEST_SUCCESS_DIALOG);
         setShowDialog(true);
+        return data.bookingData;
       } else {
         const errorBody = await response.json();
         throw new Error(errorBody.error);
@@ -182,10 +195,8 @@ export default function Page() {
             handleSubmit={handleSubmit}
             selectedProduct={selectedProduct}
             selectedDate={selectedDate}
-            // handleDateChange={handleDateChange}
             minDate={minDate}
             products={products}
-            // handleProductChange={handleProductChange}
             handleOnChange={handleOnChange}
             handleUserMessageOnChange={handleUserMessageOnChange}
             handleUserOnChange={handleUserOnChange}
