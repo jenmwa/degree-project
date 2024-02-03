@@ -1,25 +1,23 @@
 "use client";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { INavigation } from "app/_models/INavigation";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // Import useRouter from next/router
 
 interface INavProps {
   menuOpenClose: () => void;
   navigation: INavigation[];
+  linkText: string;
+  href: string;
+  signoutAdmin: () => void;
 }
 
-export function Nav({ menuOpenClose, navigation }: INavProps) {
-  const pathname = usePathname();
-  let linkText = "Buketter";
-  let href = "/buketter";
-
-  if (pathname === "/buketter") {
-    linkText = "Till Startsidan";
-    href = "/";
-  }
-
+export function Nav({
+  menuOpenClose,
+  navigation,
+  href,
+  linkText,
+  signoutAdmin,
+}: INavProps) {
   return (
     <>
       <nav
@@ -46,7 +44,6 @@ export function Nav({ menuOpenClose, navigation }: INavProps) {
             <Link
               key={item.name}
               href={item.href}
-              passHref
               className="text-sm font-semibold leading-6"
             >
               <span> {item.name}</span>
@@ -54,7 +51,15 @@ export function Nav({ menuOpenClose, navigation }: INavProps) {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link href={href} className="link-button">
+          <Link
+            href={href}
+            className="link-button"
+            onClick={() => {
+              if (linkText === "Logga ut") {
+                signoutAdmin();
+              }
+            }}
+          >
             {linkText} <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>

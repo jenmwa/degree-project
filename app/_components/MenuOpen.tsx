@@ -1,7 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { INavigation } from "app/_models/INavigation";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -9,26 +8,19 @@ interface IMenuOpenProps {
   navigation: INavigation[];
   menuOpenClose: () => void;
   mobileMenuOpen: boolean;
+  href: string;
+  linkText: string;
+  signoutAdmin: () => void;
 }
 
-const navigation: INavigation[] = [
-  { name: "Hem", href: "/" },
-  { name: "Emma", href: "/#emma" },
-  { name: "Kontakt", href: "/#contact" },
-];
-
 export default function MenuOpen({
+  navigation,
+  href,
+  linkText,
   menuOpenClose,
   mobileMenuOpen,
+  signoutAdmin,
 }: IMenuOpenProps) {
-  const pathname = usePathname();
-  let linkText = "Buketter";
-  let href = "/buketter";
-
-  if (pathname === "/buketter") {
-    linkText = "Till Startsidan";
-    href = "/";
-  }
   return (
     <>
       <Dialog
@@ -41,14 +33,6 @@ export default function MenuOpen({
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-100 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <h2 className="text-4xl font-extrabold ">Björby Blomster</h2>
-            {/* <Image
-              src="../bjorbyblomster_logo.svg"
-              className="h-16"
-              alt="Björby Blomster Logo"
-              width={50}
-              height={50}
-            /> */}
-
             <button
               type="button"
               className="-m-2.5 p-2.5 dark-text"
@@ -77,7 +61,12 @@ export default function MenuOpen({
                 <Link
                   href={href}
                   className="-mx-3 block px-3 py-2.5 text-base font-semibold leading-7  hover:bg-rust-100"
-                  onClick={menuOpenClose}
+                  onClick={() => {
+                    if (linkText === "Logga ut") {
+                      signoutAdmin();
+                      menuOpenClose();
+                    }
+                  }}
                 >
                   {linkText}
                 </Link>

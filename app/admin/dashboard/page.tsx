@@ -9,6 +9,7 @@ import { IBooking } from "app/_models/IBooking";
 import { IProduct } from "app/_models/IProduct";
 import { initialProduct } from "app/_helpers/initialProduct";
 import { supabaseAuthClient } from "lib/supabaseAuthClient";
+import { useMenuOptions } from "app/_hooks/useMenuOptions";
 
 export default function Dashboard() {
   console.log("hello admin");
