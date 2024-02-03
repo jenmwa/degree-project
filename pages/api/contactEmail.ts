@@ -17,22 +17,34 @@ export default async function handler(
     secure: false,
   });
 
-  const { name, email, message } = req.body;
+  const { name, email, message, type } = req.body;
 
-  if (!message || !name || !message) {
-    return res
-      .status(400)
-      .json({ message: 'Please fill out the necessary fields' });
+  if (!name || !email || !message || !type) {
+    return res.status(400).json({ message: 'Invalid request' });
   }
 
+  let mailData;
 
-  const mailData = {
-    from: process.env.EMAIL_FROM,
-    to: process.env.EMAIL_SERVER_USER,
-    subject: `Message from ${name}`,
-    text: `website contact: ${message} | Sent from: ${email}`,
-    html: `<div>${message}</div><p>Sent from: ${email}</p>`,
-  };
+  if (type === 'contact') {
+    mailData = {
+      from: process.env.EMAIL_FROM,
+      to: process.env.EMAIL_SERVER_USER,
+      subject: `${type} Message from ${name}`,
+      text: `Website contact: ${message} | Sent from: ${email}`,
+      html: `<div>${message}</div><p>Sent from: ${email}</p>`,
+    };
+  } else if (type === 'order_confirmation') {
+    // Construct the order confirmation email content based on the message field
+    mailData = {
+      from: process.env.EMAIL_FROM,
+      to: email,
+      subject: `${type}: Order Confirmation`,
+      text: `Order Confirmation: ${message}`,
+      html: `<div>${message}</div>`,
+    };
+  } else {
+    return res.status(400).json({ message: 'Invalid request type' });
+  }
 
   await new Promise((resolve, reject) => {
     transporter.sendMail(mailData, (err: Error | null, info: any) => {

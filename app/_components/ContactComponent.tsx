@@ -9,6 +9,7 @@ export default function Contact() {
   const [isAgreed, setIsAgreed] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
   const [email, setEmail] = useState<IContactEmail>({
+    type: "contact",
     name: "",
     email: "",
     confirmEmail: "",
@@ -28,6 +29,7 @@ export default function Contact() {
 
   const clearEmailFields = () => {
     setEmail({
+      type: "contact",
       name: "",
       email: "",
       confirmEmail: "",
@@ -65,6 +67,7 @@ export default function Contact() {
     }
 
     try {
+      email.type = "contact";
       const res = await fetch("/api/contactEmail", {
         method: "POST",
         headers: {
