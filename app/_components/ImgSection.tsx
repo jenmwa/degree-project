@@ -1,19 +1,6 @@
 import Image from "next/image";
 import logoisch from "/public/img/logoisch.png";
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
+
 const products = [
   {
     id: 1,
