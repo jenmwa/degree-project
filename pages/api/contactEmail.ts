@@ -1,4 +1,5 @@
 
+import { IMailData } from 'app/_models/IMailData';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
@@ -23,7 +24,7 @@ export default async function handler(
     return res.status(400).json({ message: 'Invalid request' });
   }
 
-  let mailData;
+  let mailData: IMailData;
 
   if (type === 'contact') {
     mailData = {
