@@ -1,5 +1,5 @@
-import OrderForm from "../OrderForm";
-import Stepper from "../Stepper";
+import OrderForm from "../Order/OrderForm";
+import Stepper from "../Order/Stepper";
 
 export default function ReqestOfferComponent() {
   return (

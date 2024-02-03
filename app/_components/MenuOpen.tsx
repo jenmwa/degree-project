@@ -2,7 +2,6 @@ import { Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { INavigation } from "app/_models/INavigation";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 interface IMenuOpenProps {
   navigation: INavigation[];

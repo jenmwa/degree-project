@@ -1,5 +1,5 @@
 import Image from "next/image";
-import flowers from "public/svg/flowers-bouquet-svgrepo-com.svg";
+import logo from "../../public/img/logoisch.png";
 
 export default function Quote() {
   return (
@@ -21,7 +21,7 @@ export default function Quote() {
             <figcaption className="mt-10">
               <Image
                 className="mx-auto h-40 w-48"
-                src="/../img/logoisch.png"
+                src={logo}
                 alt=""
                 width={300}
                 height={300}

@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react";
-import { IProduct } from "../_models/IProduct";
+import { IProduct } from "../../_models/IProduct";
 
 interface IProductFormProps {
   selectedProduct: string;

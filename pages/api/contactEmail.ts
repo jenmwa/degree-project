@@ -35,10 +35,9 @@ export default async function handler(
       html: `<div>${message}</div><p>Sent from: ${email}</p>`,
     };
   } else if (type === 'order_confirmation') {
-    // Construct the order confirmation email content based on the message field
     mailData = {
       from: process.env.EMAIL_FROM,
-      to: email,
+      to: [email, process.env.EMAIL_SERVER_USER],
       subject: `${type}: Order Confirmation`,
       text: `Order Confirmation: ${message}`,
       html: `<div>${message}</div>`,
