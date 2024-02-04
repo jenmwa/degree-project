@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { supabaseAuthClient } from "../../../lib/supabaseAuthClient";
-import { useMenuOptions } from "../../_hooks/useMenuOptions";
+import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
+import { useMenuOptions } from "../_hooks/useMenuOptions";
 import MenuOpen from "./MenuOpen";
 import { Nav } from "./Nav";
 import { useRouter } from "next/navigation";

@@ -5,11 +5,11 @@ import { useRouter } from "next/navigation";
 import { initialProduct } from "../../_helpers/initialProduct";
 import { supabaseAuthClient } from "../../../lib/supabaseAuthClient";
 
-import EditProduct from "../../_components/admin/EditProduct";
+import EditProduct from "../../_components/EditProduct";
 import ProductSection from "../../_components/ProductSection";
 import { IBooking } from "../../_models/IBooking";
 import { IProduct } from "../../_models/IProduct";
-import AdminOrderTable from "../../_components/Admin/AdminOrderTable";
+import AdminOrderTable from "../../_components/AdminOrderTable";
 
 export default function Dashboard() {
   console.log("hello admin");

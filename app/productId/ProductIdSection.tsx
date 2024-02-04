@@ -2,9 +2,10 @@
 
 import React from "react";
 import ImageCarousel from "../../app/_components/ImageCarousel";
-import Spinner from "../../app/_components/Shared/Spinner";
+
 import { IProduct } from "../../app/_models/IProduct";
 import { useRouter } from "next/navigation";
+import Spinner from "../_components/Spinner";
 
 interface IProductsectionProps {
   foundProduct: IProduct | undefined;

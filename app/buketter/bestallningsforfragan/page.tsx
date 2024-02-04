@@ -1,14 +1,14 @@
 "use client";
-import DialogComponent from "../../_components/dialog/DialogComponent";
+import DialogComponent from "../../_components/DialogComponent";
 import {
   CONTACT_400_DIALOG,
   REQUEST_MISSINGFIELDS_DIALOG,
   REQUEST_SUCCESS_DIALOG,
-} from "../../_components/dialog/DialogMessage";
+} from "../../_components/DialogMessage";
 
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import React from "react";
-import OrderForm from "../../_components/order/OrderForm";
+import OrderForm from "../../_components/OrderForm";
 import { useProductContext } from "../../_context/ProductsContext";
 import { initialUser } from "../../_helpers/initialUser";
 import { initialDialog } from "../../_helpers/initialDialog";
@@ -17,7 +17,7 @@ import { IDialog } from "../../_models/IDialog";
 import { IUser } from "../../_models/IUser";
 import { validatePhone } from "../../_validation/validation";
 import { IOrderMailData } from "../../_models/IOrderMailData";
-import Stepper from "../../_components/order/Stepper";
+import Stepper from "../../_components/Stepper";
 
 export default function Page() {
   const [showDialog, setShowDialog] = useState(false);

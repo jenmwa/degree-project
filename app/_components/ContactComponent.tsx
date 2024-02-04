@@ -1,18 +1,18 @@
 "use client";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import { IContactEmail } from "../../_models/IContactEmail";
+import { IContactEmail } from "../_models/IContactEmail";
 import ContactForm from "./ContactForm";
-import { initialContactEmail } from "../../_helpers/initialContactEmail";
-import { initialDialog } from "../../_helpers/initialDialog";
-import { IDialog } from "../../_models/IDialog";
+import { initialContactEmail } from "../_helpers/initialContactEmail";
+import { initialDialog } from "../_helpers/initialDialog";
+import { IDialog } from "../_models/IDialog";
 
 import {
   CONTACT_400_DIALOG,
   CONTACT_EMAILMISMATCH_DIALOG,
   CONTACT_SUCCESS_DIALOG,
-} from "../dialog/DialogMessage";
-import DialogComponent from "../dialog/DialogComponent";
+} from "./DialogMessage";
+import DialogComponent from "./DialogComponent";
 import React from "react";
 
 export default function Contact() {

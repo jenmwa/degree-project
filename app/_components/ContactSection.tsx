@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import React from "react";
 import ContactComponent from "./ContactComponent";
+import logo from "/img/logoisch.png";
 
 export default function ContactSection() {
   return (
@@ -27,7 +28,7 @@ export default function ContactSection() {
           <div className="two-column-img ">
             <div className="max-w-full w-full">
               <Image
-                src={"/public/img/logoisch.png"}
+                src={logo}
                 alt="Björnby blomster"
                 layout="responsive"
                 width={400}

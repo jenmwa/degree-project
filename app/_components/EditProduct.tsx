@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
 
-import { IProduct } from "../../_models/IProduct";
+import { IProduct } from "../_models/IProduct";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { supabaseAuthClient } from "../../../lib/supabaseAuthClient";
+import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
 import React from "react";
 
 interface IEditProductProps {

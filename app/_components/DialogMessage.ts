@@ -1,4 +1,4 @@
-import { IDialog } from "../../_models/IDialog";
+import { IDialog } from "../_models/IDialog";
 
 
 export const CONTACT_SUCCESS_DIALOG: IDialog = {

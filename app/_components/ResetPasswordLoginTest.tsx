@@ -2,11 +2,11 @@
 
 import { useRouter } from "next/router";
 import Image from "next/image";
-
 import { useState, ChangeEvent } from "react";
 import LoginMagic from "./LoginMagic";
 import React from "react";
 import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
+import logo from "/img/logoisch.png";
 
 export default function ResetPasswordLoginTest() {
   const [showLoginMagic, setShowLoginMagic] = useState(false);
@@ -57,7 +57,7 @@ export default function ResetPasswordLoginTest() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <Image
             className="mx-auto h-10 w-auto"
-            src={"/public/img/logoisch.png"}
+            src={logo}
             alt="Björby Blomster"
             width={50}
             height={50}

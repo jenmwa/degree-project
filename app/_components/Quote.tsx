@@ -1,6 +1,6 @@
 import Image from "next/image";
-
 import React from "react";
+import logo from "/img/logoisch.png";
 
 export default function Quote() {
   return (
@@ -22,7 +22,7 @@ export default function Quote() {
             <figcaption className="mt-10">
               <Image
                 className="mx-auto h-40 w-48"
-                src={"/public/img/logoisch.png"}
+                src={logo}
                 alt=""
                 width={300}
                 height={300}

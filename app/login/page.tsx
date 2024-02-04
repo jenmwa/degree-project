@@ -2,8 +2,8 @@
 
 import React, { ChangeEvent, useState } from "react";
 import Image from "next/image";
-
 import LoginMagic from "../_components/LoginMagic";
+import logo from "/img/logoisch.png";
 
 export default function Login() {
   const [showLoginMagic, setShowLoginMagic] = useState(false);
@@ -27,7 +27,7 @@ export default function Login() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <Image
             className="mx-auto h-10 w-auto"
-            src={"/public/img/logoisch.png"}
+            src={logo}
             alt="Björby Blomster"
             width={50}
             height={50}
