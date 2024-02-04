@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import logo from "../../public/bjorbyblomster_logo.svg";
+
 import Link from "next/link";
+import React from "react";
 
 export function Hero() {
   const imageSizeSM = 200;
@@ -19,12 +20,12 @@ export function Hero() {
             <Image
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              src={logo}
+              src={"/public/bjorbyblomster_logo.svg"}
               alt="logo"
             />
 
             <Image
-              src={logo}
+              src={"/public/bjorbyblomster_logo.svg"}
               alt="logo"
               width={imageSizeSM}
               height={imageSizeSM}

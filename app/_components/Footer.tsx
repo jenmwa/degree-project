@@ -1,7 +1,7 @@
-import { INavigation } from "app/_models/INavigation";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { INavigation } from "../_models/INavigation";
 export function Footer() {
   const navigationFooter: INavigation[] = [
     { name: "Startsida", href: "/" },

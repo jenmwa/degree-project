@@ -1,10 +1,10 @@
 "use Client";
 
-import ImageCarousel from "app/_components/ImageCarousel";
-import Spinner from "app/_components/Shared/Spinner";
-import { IProduct } from "app/_models/IProduct";
+import React from "react";
+import ImageCarousel from "../../app/_components/ImageCarousel";
+import Spinner from "../../app/_components/Shared/Spinner";
+import { IProduct } from "../../app/_models/IProduct";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 interface IProductsectionProps {
   foundProduct: IProduct | undefined;

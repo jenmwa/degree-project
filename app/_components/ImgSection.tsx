@@ -1,5 +1,6 @@
 import Image from "next/image";
-import logoisch from "/public/img/logoisch.png";
+
+import React from "react";
 
 const products = [
   {
@@ -49,7 +50,7 @@ export default function ImgSection() {
               <div className="flex justify-center items-center mx-auto shadow-xl ring-1 ring-gray-400/10 ">
                 <div className="max-w-full w-full">
                   <Image
-                    src={logoisch}
+                    src={"/public/img/logoisch.png"}
                     alt="Björnby blomster"
                     layout="responsive"
                     width={100}

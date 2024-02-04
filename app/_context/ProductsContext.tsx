@@ -1,8 +1,9 @@
 "use client";
 
-import { IProduct } from "app/_models/IProduct";
-import { supabaseAuthClient } from "lib/supabaseAuthClient";
 import { createContext, useContext, useEffect, useState } from "react";
+import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
+import { IProduct } from "../_models/IProduct";
+import React from "react";
 
 interface ProductContextType {
   products: IProduct[] | null;
@@ -78,7 +79,6 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({
       )
       .subscribe();
 
-    // Unsubscribe when the component unmounts
     return () => {
       subscription.unsubscribe();
     };

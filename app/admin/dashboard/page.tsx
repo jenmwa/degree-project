@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { useProductContext } from "../../_context/ProductsContext";
 import { useRouter } from "next/navigation";
-import AdminOrderTable from "app/_components/Admin/AdminOrderTable";
-import EditProduct from "app/_components/Admin/EditProduct";
-import ProductSection from "app/_components/ProductSection";
-import { IBooking } from "app/_models/IBooking";
-import { IProduct } from "app/_models/IProduct";
-import { initialProduct } from "app/_helpers/initialProduct";
-import { supabaseAuthClient } from "lib/supabaseAuthClient";
-import { useMenuOptions } from "app/_hooks/useMenuOptions";
+import { initialProduct } from "../../_helpers/initialProduct";
+import { supabaseAuthClient } from "../../../lib/supabaseAuthClient";
+
+import EditProduct from "../../_components/admin/EditProduct";
+import ProductSection from "../../_components/ProductSection";
+import { IBooking } from "../../_models/IBooking";
+import { IProduct } from "../../_models/IProduct";
+import AdminOrderTable from "../../_components/Admin/AdminOrderTable";
 
 export default function Dashboard() {
   console.log("hello admin");

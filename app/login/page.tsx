@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent, useState } from "react";
 import Image from "next/image";
-import logoisch from "/public/img/logoisch.png";
+
 import LoginMagic from "../_components/LoginMagic";
 
 export default function Login() {
@@ -27,7 +27,7 @@ export default function Login() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <Image
             className="mx-auto h-10 w-auto"
-            src={logoisch}
+            src={"/public/img/logoisch.png"}
             alt="Björby Blomster"
             width={50}
             height={50}

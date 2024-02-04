@@ -1,9 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 import { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
-import { supabaseAuthClient } from "lib/supabaseAuthClient";
-import { fetchAndLogImages } from "app/_services/fetchAndLogImages";
+
 import { error } from "console";
+import { fetchAndLogImages } from "../_services/fetchAndLogImages";
+import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
+import React from "react";
 
 interface StorageFile {
   id: string;

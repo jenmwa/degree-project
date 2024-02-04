@@ -1,27 +1,25 @@
 import Image from "next/image";
-import flowers from "public/svg/flowers-bouquet-svgrepo-com.svg";
-import leaves from "/public/svg/four-leaves-svgrepo-com.svg";
-import heart from "/public/svg/heart-svgrepo-com.svg";
-import logoisch from "/public/img/logoisch.png";
+
+import React from "react";
 
 const features = [
   {
     name: "Lokalt & småskaligt.",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
-    img: flowers,
+    // img: flowers,
   },
   {
     name: "Kreativt efter säsong.",
     description:
       "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.",
-    img: leaves,
+    // img: leaves,
   },
   {
     name: "Personligt och Unikt.",
     description:
       "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
-    img: heart,
+    // img: heart,
   },
 ];
 
@@ -47,14 +45,14 @@ export default function ContactSection() {
                 {features.map((feature) => (
                   <div key={feature.name} className="relative pl-9">
                     <dt className="inline font-semibold">
-                      <Image
+                      {/* <Image
                         src={feature.img}
                         className="absolute left-1 top-1 h-5 w-5 text-rust-500"
                         aria-hidden="true"
                         alt={feature.name}
                         height={24}
                         width={24}
-                      />
+                      /> */}
                       {feature.name}
                     </dt>{" "}
                     <dd className="inline">{feature.description}</dd>
@@ -67,7 +65,7 @@ export default function ContactSection() {
           <div className="two-column-img ">
             <div className="max-w-full w-full">
               <Image
-                src={logoisch}
+                src={"/public/img/logoisch.png"}
                 alt="Björnby blomster"
                 layout="responsive"
                 width={400}

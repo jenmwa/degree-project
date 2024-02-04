@@ -1,7 +1,8 @@
 "use client";
-import PageNotFound from "app/_components/PageNotFound";
-import { supabaseAuthClient } from "lib/supabaseAuthClient";
+
 import React from "react";
+import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
+import PageNotFound from "../_components/PageNotFound";
 
 export default function Admin() {
   async function signInWithEmail() {

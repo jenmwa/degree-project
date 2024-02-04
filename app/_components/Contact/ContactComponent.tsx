@@ -3,15 +3,17 @@ import { ChangeEvent, FormEvent, useState } from "react";
 
 import { IContactEmail } from "../../_models/IContactEmail";
 import ContactForm from "./ContactForm";
+import { initialContactEmail } from "../../_helpers/initialContactEmail";
+import { initialDialog } from "../../_helpers/initialDialog";
 import { IDialog } from "../../_models/IDialog";
-import { initialContactEmail } from "app/_helpers/initialContactEmail";
-import { initialDialog } from "app/_helpers/initialDialog";
+
 import {
   CONTACT_400_DIALOG,
   CONTACT_EMAILMISMATCH_DIALOG,
   CONTACT_SUCCESS_DIALOG,
-} from "../Dialog/DialogMessage";
-import DialogComponent from "../Dialog/DialogComponent";
+} from "../dialog/DialogMessage";
+import DialogComponent from "../dialog/DialogComponent";
+import React from "react";
 
 export default function Contact() {
   const [isAgreed, setIsAgreed] = useState(false);
