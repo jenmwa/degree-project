@@ -11,7 +11,6 @@ import { useProductContext } from "app/_context/ProductsContext";
 import { initialDialog } from "app/_helpers/initialDialog";
 import { initialUser } from "app/_helpers/initialUser";
 import { IBooking } from "app/_models/IBooking";
-import { IContactEmail } from "app/_models/IContactEmail";
 import { IDialog } from "app/_models/IDialog";
 import { IOrderMailData } from "app/_models/IOrderMailData";
 import { IUser } from "app/_models/IUser";
@@ -111,16 +110,7 @@ export default function Page() {
       updated_at: null,
     });
   };
-  // const clearEmailFields = () => {
-  //   setEmail({
-  //     type: "contact",
-  //     name: "",
-  //     email: "",
-  //     confirmEmail: "",
-  //     message: "",
-  //   });
-  //   setIsAgreed(false);
-  // };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -142,7 +132,8 @@ export default function Page() {
         message: "Your order has been confirmed. Details: ",
       };
 
-      await sendEmail(emailData);
+      await sendEmail(emailData, bookingData, userData);
+      clearInputFields();
 
       console.log("Booking created successfully:", createdBooking);
     } catch (error) {
@@ -163,7 +154,6 @@ export default function Page() {
       if (response.ok) {
         const data = await response.json();
         const userId = data.newUser ? data.newUser.userId : data.userId;
-        clearInputFields();
         return userId;
       }
       if (response.status === 400) {
@@ -207,7 +197,13 @@ export default function Page() {
     }
   };
 
-  const sendEmail = async (emailData: IOrderMailData) => {
+  const sendEmail = async (
+    emailData: IOrderMailData,
+    bookingData: IBooking,
+    userData: IUser
+  ) => {
+    const values = { emailData, bookingData, userData };
+    console.log(values);
     try {
       emailData.type = "order_confirmation";
       const res = await fetch("/api/contactEmail", {
@@ -215,7 +211,7 @@ export default function Page() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(emailData),
+        body: JSON.stringify(values),
       });
 
       const body = await res.json();
