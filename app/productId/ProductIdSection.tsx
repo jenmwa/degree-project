@@ -1,7 +1,7 @@
 "use Client";
 
 import ImageCarousel from "app/_components/ImageCarousel";
-import Spinner from "app/_components/Spinner";
+import Spinner from "app/_components/Shared/Spinner";
 import { IProduct } from "app/_models/IProduct";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

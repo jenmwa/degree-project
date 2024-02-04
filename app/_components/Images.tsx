@@ -2,6 +2,8 @@ import { v4 as uuidv4 } from "uuid";
 import { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { supabaseAuthClient } from "lib/supabaseAuthClient";
+import { fetchAndLogImages } from "app/_services/fetchAndLogImages";
+import { error } from "console";
 
 interface StorageFile {
   id: string;
@@ -14,9 +16,22 @@ export function Images() {
   const [file, setFile] = useState<File | null>(null);
   const productID = "d4cc967a-1f74-4036-b977-efa7b890a348";
   const [imageArray, setImageArray] = useState<StorageFile[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    fetchAndLogImages();
+    const fetchData = async () => {
+      setIsLoading(true);
+      const result = await fetchAndLogImages();
+      setIsLoading(false);
+
+      if (result && "data" in result) {
+        setImageArray(result.data);
+      } else if (result && "error" in result) {
+        console.log(result);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,30 +73,31 @@ export function Images() {
   // "https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/purple.png";
   ("https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/d4cc967a-1f74-4036-b977-efa7b890a348/8f56e6c4-0ebb-466b-bd37-f26f1de80076");
 
-  async function fetchAndLogImages() {
-    try {
-      const { data, error } = await supabaseAuthClient.storage
-        .from("images")
-        .list();
-      console.log(data);
-      if (error) {
-        console.error("Error fetching images:", error.message);
-        return;
-      }
+  // async function fetchAndLogImages() {
+  //   try {
+  //     const { data, error } = await supabaseAuthClient.storage
+  //       .from("images")
+  //       .list();
+  //     console.log(data);
+  //     if (error) {
+  //       console.error("Error fetching images:", error.message);
+  //       return;
+  //     }
 
-      if (data) {
-        console.log("List of images:", data);
-        setImageArray(data as unknown as StorageFile[]);
-      }
-    } catch (error) {
-      console.error("Unexpected error:", error);
-    }
-  }
-  console.log(imageArray);
+  //     if (data) {
+  //       console.log("List of images:", data);
+  //       setImageArray(data as unknown as StorageFile[]);
+  //     }
+  //   } catch (error) {
+  //     console.error("Unexpected error:", error);
+  //   }
+  // }
+  // console.log(imageArray);
 
   return (
     <>
       <p>hello from images</p>
+      {isLoading && <p>Loading...</p>}
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload Image</button>
       <div>

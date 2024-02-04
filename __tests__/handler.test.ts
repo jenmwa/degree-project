@@ -21,9 +21,14 @@ describe('Contact Email API', () => {
     const req = {
       method: 'POST',
       body: {
-        name: 'John Doe',
-        email: 'john@example.com',
-        message: 'Test message',
+        emailData: {
+          name: 'John Doe',
+          email: 'john@example.com',
+          message: 'Test message',
+          type: 'contact'
+        },
+        bookingData: { productId: 'product123' },
+        userData: { userFirstName: 'John' },
       },
     } as NextApiRequest;
 

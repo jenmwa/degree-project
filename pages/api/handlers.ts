@@ -1,4 +1,5 @@
-import { supabaseServer } from "../../lib/supabaseServer";
+import { supabaseAuthClient } from "lib/supabaseAuthClient";
+import { supabase } from "../../lib/supabase";
 
 //hämtar alla produkter eller alla bokningar
 export default async function handler(req: any, res: any) {
@@ -6,7 +7,7 @@ export default async function handler(req: any, res: any) {
 
   if (req.method === 'GET') {
     try {
-      let { data, error } = await supabaseServer
+      let { data, error } = await supabaseAuthClient
         .from(entity)
         .select('*');
       console.log('get:', data)

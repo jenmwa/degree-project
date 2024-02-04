@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent } from "react";
-import { IContactEmail } from "../_models/IContactEmail";
-import { validateEmail } from "../_validation/validateEmail";
-import ConfirmSwitch from "./ConfirmSwitch";
-import { classNames } from "./OrderForm";
+import { IContactEmail } from "../../_models/IContactEmail";
+import { validateEmail } from "../../_validation/validation";
+import ConfirmSwitch from "../Shared/ConfirmSwitch";
+import { classNames } from "../Order/OrderForm";
 
 interface IContactFormProps {
   handleSubmit: (event: FormEvent) => void;
@@ -29,6 +29,7 @@ export default function ContactForm({
             Namn{" "}
           </label>
           <input
+            required
             id="name"
             autoComplete="name"
             value={email.name}

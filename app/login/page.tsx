@@ -32,7 +32,7 @@ export default function Login() {
             width={50}
             height={50}
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
             {resetPassword ? "reset password" : "Logga in"}
           </h2>
         </div>
@@ -43,7 +43,7 @@ export default function Login() {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    className="block text-sm font-medium leading-6 "
                   >
                     Epost
                   </label>

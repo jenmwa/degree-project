@@ -8,6 +8,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.log('createUser:', req.body);
       const { userFirstName, userLastName, userEmail, userPhoneNumber } = req.body;
 
+      if (!userEmail) {
+        return res.status(400).json({ error: 'userEmail is required' });
+      }
+
       const { data: existingUser, error: existingUserError } = await supabaseAuthClient
         .from('User')
         .select('userId')

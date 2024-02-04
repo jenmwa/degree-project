@@ -1,11 +1,17 @@
 "use client";
 import { ChangeEvent, FormEvent, useState } from "react";
-import DialogComponent from "./DialogComponent";
-import { IContactEmail } from "../_models/IContactEmail";
+
+import { IContactEmail } from "../../_models/IContactEmail";
 import ContactForm from "./ContactForm";
-import { IDialog } from "../_models/IDialog";
+import { IDialog } from "../../_models/IDialog";
 import { initialContactEmail } from "app/_helpers/initialContactEmail";
 import { initialDialog } from "app/_helpers/initialDialog";
+import {
+  CONTACT_400_DIALOG,
+  CONTACT_EMAILMISMATCH_DIALOG,
+  CONTACT_SUCCESS_DIALOG,
+} from "../Dialog/DialogMessage";
+import DialogComponent from "../Dialog/DialogComponent";
 
 export default function Contact() {
   const [isAgreed, setIsAgreed] = useState(false);
@@ -39,13 +45,7 @@ export default function Contact() {
     event.preventDefault();
 
     if (email.email !== email.confirmEmail) {
-      setDialog({
-        type: "warning",
-        title: "E-postadresserna matchar inte",
-        message:
-          "De angivna e-postadresserna matchar inte. Var vänlig kontrollera att de är desamma.",
-        primaryButton: "Ok",
-      });
+      setDialog(CONTACT_EMAILMISMATCH_DIALOG);
       setShowDialog(true);
       return;
     }
@@ -64,24 +64,13 @@ export default function Contact() {
       console.log(body);
 
       if (res.ok) {
-        setDialog({
-          type: "ok",
-          title: "Epost är skickat!",
-          message:
-            "Vi återkommer med svar till adressen du angett så snart vi kan.",
-          primaryButton: "Ok",
-        });
+        setDialog(CONTACT_SUCCESS_DIALOG);
         setShowDialog(true);
         clearEmailFields();
       }
 
       if (res.status === 400) {
-        setDialog({
-          type: "warning",
-          title: "Något gick fel",
-          message: "Vänligen försök igen.",
-          primaryButton: "Ok",
-        });
+        setDialog(CONTACT_400_DIALOG);
         setShowDialog(true);
       }
     } catch (err) {

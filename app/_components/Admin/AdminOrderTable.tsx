@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { IBooking } from "../_models/IBooking";
+import { IBooking } from "../../_models/IBooking";
 
 interface IAdminOrderTableProps {
   bookings: IBooking[];
@@ -18,13 +18,13 @@ export default function AdminOrderTable({
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-4 py-3">
-                order
+                Order
               </th>
               <th scope="col" className="px-4 py-3">
-                Product
+                Produkter
               </th>
               <th scope="col" className="px-4 py-3">
-                Date
+                Datum
               </th>
               <th scope="col" className="px-4 py-3">
                 Status

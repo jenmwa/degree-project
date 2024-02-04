@@ -1,4 +1,4 @@
-import { supabaseServer } from "../../lib/supabaseServer";
+import { supabase } from "lib/supabase";
 
 export default async function handler(req: any, res: any) {
   if (req.method === 'PUT') {
@@ -10,7 +10,7 @@ export default async function handler(req: any, res: any) {
         return res.status(400).json({ error: 'productId and productPrice are required' });
       }
 
-      const { data, error } = await supabaseServer
+      const { data, error } = await supabase
         .from('Product')
         .update({ productPrice, productTitle, productImagesUrl, productLongDescription, productShortDescription, updated_at: 'now()' })
         .eq('productId', productId)
