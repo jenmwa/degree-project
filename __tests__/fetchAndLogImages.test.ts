@@ -2,34 +2,60 @@
  * @jest-environment jsdom
  */
 
+import { supabaseAuthClient } from "lib/supabaseAuthClient";
 import { fetchAndLogImages } from "../app/_services/fetchAndLogImages";
 
-jest.mock('lib/supabaseAuthClient.ts', () => ({
+jest.mock('../lib/supabaseAuthClient', () => ({
   supabaseAuthClient: {
     storage: {
-      from: jest.fn(() => ({
-        list: jest.fn().mockResolvedValue({ data: [{ image1: 'url1' }, { image2: 'url2' }] }),
-      })),
-    },
-  },
+      from: () => ({
+        list: async () => ({
+          data: [
+            { id: '1', name: 'image1' },
+            { id: '2', name: 'image2' }
+          ],
+          error: null
+        })
+      })
+    }
+  }
 }));
 
-describe('fetchAndLogImages', () => {
-  it('fetches images and console.log them', async () => {
-
-    const originalLog = console.log;
-    console.log = jest.fn();
-
-
-    await fetchAndLogImages();
-
-
-    expect(console.log).toHaveBeenCalledTimes(1);
-    expect(console.log).toHaveBeenCalledWith('List of images:', [{ image1: 'url1' }, { image2: 'url2' }]);
-
-    console.log = originalLog;
-  });
-
+test("should get data correctly", async () => {
+  const result = await fetchAndLogImages();
+  expect(result.data).toEqual([
+    { id: '1', name: 'image1', size: 0, type: 'image/png' },
+    { id: '2', name: 'image2', size: 0, type: 'image/png' }
+  ]);
 });
 
+test("should get error getting data", async () => {
+  const result = await fetchAndLogImages();
+  expect(result.error).toBeUndefined();
+});
 
+test("should return error when fetching images fails", async () => {
+  const mockFrom = jest.spyOn(supabaseAuthClient.storage, "from").mockImplementation(() => {
+    throw new Error("Failed to fetch images");
+  });
+
+  const result = await fetchAndLogImages();
+  expect(result.error).toBe("Failed to fetch images");
+
+  mockFrom.mockRestore();
+});
+
+test("should return data of the correct type and format", async () => {
+  const result = await fetchAndLogImages();
+
+  expect(result).toHaveProperty("data");
+
+  expect(Array.isArray(result.data)).toBe(true);
+
+  result.data.forEach((item) => {
+    expect(item).toHaveProperty("id");
+    expect(item).toHaveProperty("name");
+    expect(typeof item.id).toBe("string");
+    expect(typeof item.name).toBe("string");
+  });
+});

@@ -10,13 +10,15 @@ import { IProduct } from "./_models/IProduct";
 import ProductPage from "./_components/ProductPage";
 import ImgSection from "./_components/ImgSection";
 import { useRouter } from "next/navigation";
+import { fetchAndLogImages } from "./_services/fetchAndLogImages";
 
 export default function Home() {
   const router = useRouter();
   const showProduct = (product: IProduct) => {
     router.push(`/buketter/${product.productId}`);
   };
-
+  const result = fetchAndLogImages();
+  console.log("result:", result);
   return (
     <>
       <Hero></Hero>

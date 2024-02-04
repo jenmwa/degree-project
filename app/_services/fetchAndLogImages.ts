@@ -3,8 +3,8 @@ import { supabaseAuthClient } from "lib/supabaseAuthClient";
 interface FileObject {
   id: string;
   name: string;
-
 }
+
 interface StorageFile {
   id: string;
   name: string;
@@ -20,7 +20,7 @@ export async function fetchAndLogImages() {
 
     if (error) {
       console.error('Error fetching images:', error.message);
-      return { error: error.message, data: [] };
+      return { error: 'Failed to fetch images', data: [] };
     }
 
     if (data) {
@@ -34,9 +34,8 @@ export async function fetchAndLogImages() {
     }
   } catch (error) {
     console.error('Unexpected error:', error);
-    return { error: 'Unexpected error occurred', data: [] };
+    return { error: 'Failed to fetch images', data: [] };
   }
 
-
-  return { error: 'Unexpected error occurred', data: [] };
+  return { error: 'Failed to fetch images', data: [] };
 }
