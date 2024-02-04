@@ -3,7 +3,7 @@
 import React, { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import LoginMagic from "../_components/LoginMagic";
-import logo from "/img/logoisch.png";
+import logo from "../../public/img/logoisch.png";
 
 export default function Login() {
   const [showLoginMagic, setShowLoginMagic] = useState(false);

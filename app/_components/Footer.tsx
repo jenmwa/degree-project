@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { INavigation } from "../_models/INavigation";
-import logo from "/img/logoisch.png";
+import logo from "../../public/img/logoisch.png";
 
 export function Footer() {
   const navigationFooter: INavigation[] = [

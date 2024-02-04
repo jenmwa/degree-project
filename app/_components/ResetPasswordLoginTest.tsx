@@ -6,7 +6,7 @@ import { useState, ChangeEvent } from "react";
 import LoginMagic from "./LoginMagic";
 import React from "react";
 import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
-import logo from "/img/logoisch.png";
+import logo from "../../public/img/logoisch.png";
 
 export default function ResetPasswordLoginTest() {
   const [showLoginMagic, setShowLoginMagic] = useState(false);
