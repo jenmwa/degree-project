@@ -3,7 +3,7 @@ import React from "react";
 import { Hero } from "./_components/Hero";
 import Emma from "./_components/Emma";
 import Quote from "./_components/Quote";
-import ContactSection from "./_components/ContactSection";
+import ContactSection from "./_components/Contact/ContactSection";
 import About from "./_components/About";
 import ProductSection from "./_components/ProductSection";
 import { IProduct } from "./_models/IProduct";

@@ -1,6 +1,6 @@
 "use client";
 import { Switch } from "@headlessui/react";
-import { classNames } from "./Order/OrderForm";
+import { classNames } from "../Order/OrderForm";
 import { useRouter } from "next/navigation";
 
 interface IConfirmSwitchProps {

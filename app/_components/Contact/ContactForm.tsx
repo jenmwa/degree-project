@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent } from "react";
-import { IContactEmail } from "../_models/IContactEmail";
-import { validateEmail } from "../_validation/validation";
-import ConfirmSwitch from "./ConfirmSwitch";
-import { classNames } from "./Order/OrderForm";
+import { IContactEmail } from "../../_models/IContactEmail";
+import { validateEmail } from "../../_validation/validation";
+import ConfirmSwitch from "../Shared/ConfirmSwitch";
+import { classNames } from "../Order/OrderForm";
 
 interface IContactFormProps {
   handleSubmit: (event: FormEvent) => void;

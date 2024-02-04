@@ -1,16 +1,17 @@
 "use client";
 import { ChangeEvent, FormEvent, useState } from "react";
-import DialogComponent from "./Dialog/DialogComponent";
-import { IContactEmail } from "../_models/IContactEmail";
+
+import { IContactEmail } from "../../_models/IContactEmail";
 import ContactForm from "./ContactForm";
-import { IDialog } from "../_models/IDialog";
+import { IDialog } from "../../_models/IDialog";
 import { initialContactEmail } from "app/_helpers/initialContactEmail";
 import { initialDialog } from "app/_helpers/initialDialog";
 import {
   CONTACT_400_DIALOG,
   CONTACT_EMAILMISMATCH_DIALOG,
   CONTACT_SUCCESS_DIALOG,
-} from "./Dialog/DialogMessage";
+} from "../Dialog/DialogMessage";
+import DialogComponent from "../Dialog/DialogComponent";
 
 export default function Contact() {
   const [isAgreed, setIsAgreed] = useState(false);

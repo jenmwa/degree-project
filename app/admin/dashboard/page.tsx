@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { useProductContext } from "../../_context/ProductsContext";
 import { useRouter } from "next/navigation";
-import AdminOrderTable from "app/_components/AdminOrderTable";
-import EditProduct from "app/_components/EditProduct";
+import AdminOrderTable from "app/_components/Admin/AdminOrderTable";
+import EditProduct from "app/_components/Admin/EditProduct";
 import ProductSection from "app/_components/ProductSection";
 import { IBooking } from "app/_models/IBooking";
 import { IProduct } from "app/_models/IProduct";

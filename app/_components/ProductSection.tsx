@@ -2,7 +2,7 @@
 import { useProductContext } from "../_context/ProductsContext";
 import { IProduct } from "../_models/IProduct";
 import ImageCarousel from "./ImageCarousel";
-import Spinner from "./Spinner";
+import Spinner from "./Shared/Spinner";
 
 interface IProductsSectionProps {
   showProduct: (product: IProduct) => void;

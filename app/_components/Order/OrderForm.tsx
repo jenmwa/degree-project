@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent } from "react";
 
 import UserForm from "./UserForm";
 import ProductForm from "./ProductForm";
-import ConfirmSwitch from "../ConfirmSwitch";
+import ConfirmSwitch from "../Shared/ConfirmSwitch";
 import OrderInfo from "./OrderInfo";
 
 import { IProduct } from "app/_models/IProduct";
