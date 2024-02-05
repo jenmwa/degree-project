@@ -1,5 +1,6 @@
-import { supabaseAuthClient } from "lib/supabaseAuthClient";
-import { supabase } from "../../lib/supabase";
+
+
+import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
 
 //hämtar alla produkter eller alla bokningar
 export default async function handler(req: any, res: any) {

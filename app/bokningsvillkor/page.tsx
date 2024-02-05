@@ -1,4 +1,5 @@
-import PageNotFound from "app/_components/PageNotFound";
+import React from "react";
+import PageNotFound from "../_components/PageNotFound";
 
 export default function Bokningsvillkor() {
   return (

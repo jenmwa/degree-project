@@ -1,3 +1,8 @@
+import React from "react";
+import Link from "next/link";
+
+const EPOST_INFO = "info@bjorbyblomster.se";
+
 export default function PageNotFound() {
   return (
     <>
@@ -11,11 +16,12 @@ export default function PageNotFound() {
             Något verkar ha gått fel, sidan du försöker besöka kan inte visas.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <a href="#" className="primary-button">
+            <Link href="/" className="primary-button">
               Tillbaka till startsidan
-            </a>
+            </Link>
             <a
-              href={`mailto:${process.env.EMAIL_SERVER_USER}`}
+              href={`mailto:info@bjorbyblomster.se`}
+              target="_blank"
               className="text-sm font-semibold"
             >
               Kontakta oss <span aria-hidden="true">&rarr;</span>

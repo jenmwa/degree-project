@@ -4,7 +4,8 @@ import { useRef } from "react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { Transition } from "@headlessui/react";
 import { Dialog } from "@headlessui/react";
-import { IDialog } from "../../_models/IDialog";
+import { IDialog } from "../_models/IDialog";
+import React from "react";
 
 export interface IDialogProps {
   dialog: IDialog;

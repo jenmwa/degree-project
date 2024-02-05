@@ -1,12 +1,13 @@
 import Image from "next/image";
-import logoisch from "/public/img/logoisch.png";
+import React from "react";
+import logo from "../../public/img/logoisch.png";
 
 const products = [
   {
     id: 1,
     name: "Fira",
     href: "#",
-    imageSrc: "/../img/logoisch.png",
+    imageSrc: { logo },
     imageAlt: "Bukett av tema Fira",
     price: "{productprice}",
   },
@@ -14,7 +15,7 @@ const products = [
     id: 2,
     name: "Fira",
     href: "#",
-    imageSrc: "/../img/logoisch.png",
+    imageSrc: { logo },
     imageAlt: "Bukett av tema Fira",
     price: "{productprice}",
   },
@@ -22,7 +23,7 @@ const products = [
     id: 3,
     name: "Fira",
     href: "#",
-    imageSrc: "/../img/logoisch.png",
+    imageSrc: { logo },
     imageAlt: "Bukett av tema Fira",
     price: "{productprice}",
   },
@@ -30,7 +31,7 @@ const products = [
     id: 4,
     name: "Fira",
     href: "#",
-    imageSrc: "/../img/logoisch.png",
+    imageSrc: { logo },
     imageAlt: "Bukett av tema Fira",
     price: "{productprice}",
   },
@@ -49,7 +50,7 @@ export default function ImgSection() {
               <div className="flex justify-center items-center mx-auto shadow-xl ring-1 ring-gray-400/10 ">
                 <div className="max-w-full w-full">
                   <Image
-                    src={logoisch}
+                    src={logo}
                     alt="Björnby blomster"
                     layout="responsive"
                     width={100}

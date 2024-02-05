@@ -1,8 +1,9 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useProductContext } from "app/_context/ProductsContext";
-import ProductIdSection from "app/productId/ProductIdSection";
+import React from "react";
+import { useProductContext } from "../../_context/ProductsContext";
+import ProductIdSection from "../../productId/ProductIdSection";
 
 export default function ProductPage() {
   const params = useParams<{ productId: string }>();

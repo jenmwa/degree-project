@@ -1,4 +1,5 @@
-import { IDialog } from "app/_models/IDialog";
+import { IDialog } from "../_models/IDialog";
+
 
 export const CONTACT_SUCCESS_DIALOG: IDialog = {
   type: "ok",
@@ -19,7 +20,7 @@ export const CONTACT_EMAILMISMATCH_DIALOG: IDialog = {
   type: "warning",
   title: "E-postadresserna matchar inte",
   message:
-    "De angivna e-postadresserna matchar inte. Var vänlig kontrollera att de är desamma.",
+    "De angivna e-postadresserna matchar inte. Var vänlig kontrollera att de är matchar.",
   primaryButton: "Ok",
 }
 

@@ -1,7 +1,9 @@
-import { INavigation } from "app/_models/INavigation";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { INavigation } from "../_models/INavigation";
+import logo from "../../public/img/logoisch.png";
+
 export function Footer() {
   const navigationFooter: INavigation[] = [
     { name: "Startsida", href: "/" },
@@ -18,7 +20,7 @@ export function Footer() {
             <div className="flex justify-center space-x-3 lg:justify-start">
               <div className="flex items-center justify-center w-24 h-24 ">
                 <Image
-                  src="../bjorbyblomster_logo.svg"
+                  src={logo}
                   className="h-24"
                   alt="Björby Blomster Logo"
                   width={150}

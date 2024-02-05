@@ -9,7 +9,7 @@ import "swiper/css/navigation";
 import "../styles/_swiper.css";
 
 import Image from "next/image";
-import { IProduct } from "app/_models/IProduct";
+import { IProduct } from "../_models/IProduct";
 
 interface IImgArrayProps {
   foundProduct: IProduct | undefined;

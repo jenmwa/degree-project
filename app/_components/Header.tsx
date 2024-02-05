@@ -1,11 +1,11 @@
 "use client";
+
 import React, { useState } from "react";
-import { Nav } from "./Nav";
+import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
+import { useMenuOptions } from "../_hooks/useMenuOptions";
 import MenuOpen from "./MenuOpen";
-import { INavigation } from "app/_models/INavigation";
-import { usePathname, useRouter } from "next/navigation";
-import { useMenuOptions } from "app/_hooks/useMenuOptions";
-import { supabaseAuthClient } from "lib/supabaseAuthClient";
+import { Nav } from "./Nav";
+import { useRouter } from "next/navigation";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

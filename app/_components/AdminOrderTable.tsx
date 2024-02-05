@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { IBooking } from "../../_models/IBooking";
+import { IBooking } from "../_models/IBooking";
 
 interface IAdminOrderTableProps {
   bookings: IBooking[];

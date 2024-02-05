@@ -4,10 +4,11 @@ import { ChangeEvent, FormEvent } from "react";
 
 import UserForm from "./UserForm";
 import ProductForm from "./ProductForm";
-import ConfirmSwitch from "../Shared/ConfirmSwitch";
+import ConfirmSwitch from "./ConfirmSwitch";
 import OrderInfo from "./OrderInfo";
 
-import { IProduct } from "app/_models/IProduct";
+import React from "react";
+import { IProduct } from "../_models/IProduct";
 
 export function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");

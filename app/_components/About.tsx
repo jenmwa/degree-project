@@ -1,8 +1,9 @@
 import Image from "next/image";
-import flowers from "public/svg/flowers-bouquet-svgrepo-com.svg";
-import leaves from "/public/svg/four-leaves-svgrepo-com.svg";
-import heart from "/public/svg/heart-svgrepo-com.svg";
-import logoisch from "/public/img/logoisch.png";
+import React from "react";
+import logo from "../../public/img/logoisch.png";
+import flowers from "../../public/svg/flowers-bouquet-svgrepo-com.svg";
+import leaves from "../../public/svg/four-leaves-svgrepo-com.svg";
+import heart from "../../public/svg/heart-svgrepo-com.svg";
 
 const features = [
   {
@@ -67,7 +68,7 @@ export default function ContactSection() {
           <div className="two-column-img ">
             <div className="max-w-full w-full">
               <Image
-                src={logoisch}
+                src={logo}
                 alt="Björnby blomster"
                 layout="responsive"
                 width={400}

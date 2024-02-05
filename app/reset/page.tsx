@@ -1,8 +1,9 @@
 "use client";
 
-import { supabaseAuthClient } from "lib/supabaseAuthClient";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
+import React from "react";
 
 export default function Reset() {
   const [data, setData] = useState<{

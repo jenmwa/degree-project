@@ -1,8 +1,9 @@
 "use client";
+import React from "react";
 import { useProductContext } from "../_context/ProductsContext";
 import { IProduct } from "../_models/IProduct";
 import ImageCarousel from "./ImageCarousel";
-import Spinner from "./Shared/Spinner";
+import Spinner from "./Spinner";
 
 interface IProductsSectionProps {
   showProduct: (product: IProduct) => void;

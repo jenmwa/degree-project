@@ -4,7 +4,7 @@ import "./globals.css";
 
 import React from "react";
 import { ProductProvider } from "./_context/ProductsContext";
-import { Header } from "./_components/header/Header";
+import { Header } from "./_components/Header";
 import { Footer } from "./_components/Footer";
 
 const cormorant = Cormorant_Garamond({

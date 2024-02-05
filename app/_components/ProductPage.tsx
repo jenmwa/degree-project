@@ -1,6 +1,8 @@
 import ProductInfo from "./ProductInfo";
 import ImageCarousel from "./ImageCarousel";
-import { useProductContext } from "app/_context/ProductsContext";
+
+import React from "react";
+import { useProductContext } from "../_context/ProductsContext";
 
 export default function ProductPage() {
   const { products, isLoading, isError } = useProductContext();

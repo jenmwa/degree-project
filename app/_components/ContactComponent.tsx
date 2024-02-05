@@ -1,17 +1,20 @@
 "use client";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-import { IContactEmail } from "../../_models/IContactEmail";
+import { IContactEmail } from "../_models/IContactEmail";
 import ContactForm from "./ContactForm";
-import { IDialog } from "../../_models/IDialog";
-import { initialContactEmail } from "app/_helpers/initialContactEmail";
-import { initialDialog } from "app/_helpers/initialDialog";
+import { initialContactEmail } from "../_helpers/initialContactEmail";
+import { initialDialog } from "../_helpers/initialDialog";
+import { IDialog } from "../_models/IDialog";
+import { contactEmailService } from "../_services/contactEmailService";
+
 import {
   CONTACT_400_DIALOG,
   CONTACT_EMAILMISMATCH_DIALOG,
   CONTACT_SUCCESS_DIALOG,
-} from "../Dialog/DialogMessage";
-import DialogComponent from "../Dialog/DialogComponent";
+} from "./DialogMessage";
+import DialogComponent from "./DialogComponent";
+import React from "react";
 
 export default function Contact() {
   const [isAgreed, setIsAgreed] = useState(false);
@@ -44,37 +47,19 @@ export default function Contact() {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    if (email.email !== email.confirmEmail) {
-      setDialog(CONTACT_EMAILMISMATCH_DIALOG);
-      setShowDialog(true);
-      return;
-    }
+    const result = await contactEmailService(email);
 
-    try {
-      email.type = "contact";
-      const res = await fetch("/api/contactEmail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(email),
-      });
-
-      const body = await res.json();
-      console.log(body);
-
-      if (res.ok) {
-        setDialog(CONTACT_SUCCESS_DIALOG);
-        setShowDialog(true);
-        clearEmailFields();
-      }
-
-      if (res.status === 400) {
+    if (!result?.success) {
+      if (result?.error === "Email addresses do not match") {
+        setDialog(CONTACT_EMAILMISMATCH_DIALOG);
+      } else {
         setDialog(CONTACT_400_DIALOG);
-        setShowDialog(true);
       }
-    } catch (err) {
-      console.error("Something went wrong: ", err);
+      setShowDialog(true);
+    } else {
+      setDialog(CONTACT_SUCCESS_DIALOG);
+      setShowDialog(true);
+      clearEmailFields();
     }
   }
 

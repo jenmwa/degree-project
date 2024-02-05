@@ -1,4 +1,5 @@
 import Image from "next/image";
+import React from "react";
 import logo from "../../public/img/logoisch.png";
 
 export default function Quote() {
@@ -22,7 +23,7 @@ export default function Quote() {
               <Image
                 className="mx-auto h-40 w-48"
                 src={logo}
-                alt=""
+                alt="Björby blomster logo"
                 width={300}
                 height={300}
               />

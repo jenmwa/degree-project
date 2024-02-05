@@ -1,7 +1,8 @@
 import { Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { INavigation } from "app/_models/INavigation";
+import { INavigation } from "../_models/INavigation";
 import Link from "next/link";
+import React from "react";
 
 interface IMenuOpenProps {
   navigation: INavigation[];
@@ -63,8 +64,8 @@ export default function MenuOpen({
                   onClick={() => {
                     if (linkText === "Logga ut") {
                       signoutAdmin();
-                      menuOpenClose();
                     }
+                    menuOpenClose();
                   }}
                 >
                   {linkText}

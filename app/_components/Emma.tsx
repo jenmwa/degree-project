@@ -2,6 +2,8 @@ import Image from "next/image";
 import ProductInfo from "./ProductInfo";
 import emma from "../../public/img/emma.jpg";
 
+import React from "react";
+
 export default function Emma() {
   return (
     <>
