@@ -1,33 +1,20 @@
 "use client";
-import Image from "next/image";
 
 import { IProduct } from "../_models/IProduct";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
 import React from "react";
+import { imageUploadService } from "app/_services/imageUploadService";
+import { generateImageUrl } from "app/_utilities/generateImageUrl";
+import { updateFormDataWithImageUrl } from "app/_utilities/updateFormDataWithImageUrl";
+import DialogComponent from "./DialogComponent";
+import { initialDialog } from "app/_helpers/initialDialog";
+import { IDialog } from "app/_models/IDialog";
+import EditProductForm from "./EditProductForm";
 
 interface IEditProductProps {
   selectedProduct: IProduct;
   handleFormData: (formData: IProduct) => void;
 }
-
-// import { createClient } from '@supabase/supabase-js'
-
-// const supabase = createClient('https://<your-project-id>.supabase.co', '<your-anon-key>')
-
-// const listFolder = async () => {
-//   const { data, error } = await supabase.storage.from('myBucket').list('myFolder')
-//   if (error) {
-//     console.log('Error listing folder:', error.message)
-//     return
-//   }
-//   console.log('Files and folders inside myFolder:', data)
-// }
-
-// listFolder()
-
-export const SUPABASE_STORAGE_IMG =
-  "https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/";
 
 export default function EditProduct({
   selectedProduct,
@@ -44,13 +31,16 @@ export default function EditProduct({
     updated_at: null,
   });
   const [fileImage, setFileImage] = useState<File | null>(null);
-
-  console.log("selected product:", selectedProduct);
-  console.log("formData:", formData);
+  const [showDialog, setShowDialog] = useState(false);
+  const [dialog, setDialog] = useState<IDialog>(initialDialog);
 
   useEffect(() => {
     updateFormData(selectedProduct);
   }, [selectedProduct]);
+
+  const closeDialog = () => {
+    setShowDialog(false);
+  };
 
   const updateFormData = (updatedValues: Partial<IProduct>) => {
     setFormData((prevFormData) => ({
@@ -79,18 +69,10 @@ export default function EditProduct({
     setFileImage(null);
   };
 
-  // const constructImageUrl = (
-  //   productId: string,
-  //   uuid: string
-  //   // filename: string
-  // ) => {
-  //   return `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${productId}/${uuid}`;
-  // };
-
-  const handleFileImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      console.log(event.target.files);
-      setFileImage(event.target.files[0]);
+  const handleFileImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      console.log(e.target.files);
+      setFileImage(e.target.files[0]);
     }
   };
 
@@ -98,300 +80,44 @@ export default function EditProduct({
     e.preventDefault();
 
     try {
-      const uuid = await handleImageUpload();
-      // const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${image}`;
-      const imageUrl = `https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/productImages/${selectedProduct.productId}/${uuid}`;
-      console.log("imageUrl:", uuid, imageUrl);
+      let imageUrl = "";
 
-      console.log("Uploaded image URL:", SUPABASE_STORAGE_IMG, imageUrl);
+      if (fileImage) {
+        const uuid = await imageUploadService(fileImage, selectedProduct);
+        if (uuid) {
+          imageUrl = generateImageUrl(uuid, selectedProduct.productId);
+        } else {
+          console.error("Image upload service returned undefined UUID");
+          return;
+        }
+      }
 
-      const updatedProductImagesUrl = formData.productImagesUrl
-        ? formData.productImagesUrl.filter((url) => typeof url === "string")
-        : [];
-
-      const updatedFormData = {
-        ...formData,
-        productImagesUrl: [...updatedProductImagesUrl, imageUrl],
-      } as IProduct;
-
+      const updatedFormData = updateFormDataWithImageUrl(formData, imageUrl);
       handleFormData(updatedFormData);
     } catch (error) {
       console.error("Unexpected error:", error);
     }
   };
 
-  console.log("fooooormdata:", formData);
-
-  const handleImageUpload = async () => {
-    try {
-      if (!fileImage) {
-        console.error("No file selected.");
-        return;
-      }
-
-      const uuid = self.crypto.randomUUID();
-      const { data, error } = await supabaseAuthClient.storage
-        .from("productImages")
-        .upload(`/${selectedProduct.productId}/${uuid}`, fileImage);
-
-      if (error) {
-        console.error("Error uploading image:", error.message);
-        throw error;
-      }
-
-      if (data) {
-        console.log("Image uploaded successfully, DATA:", data, data.path);
-        // return data.path;
-        return uuid;
-      }
-    } catch (error) {
-      console.error("Unexpected error:", error);
-      throw error;
-    }
-  };
-
-  // const handleDiscardEdit = () => {
-  //   console.log("close this modal");
-
   return (
     <>
-      <section className="bg-gray-100">
+      <section className="bg-gray-50">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <form
-            key={selectedProduct.productId}
-            id="changeProductForm"
-            className="py-16"
-            onSubmit={handleFormSubmit}
-          >
-            <div className="space-y-12">
-              <div className="border-b border-gray-900/10 pb-12">
-                <h2 className="text-base font-semibold leading-7 text-gray-900">
-                  Ändra Produkt
-                </h2>
-                <p className="mt-1 text-sm leading-6 text-gray-600">
-                  Genom att ändra information här så ändrar du direkt på
-                  hemsidan.
-                </p>
-
-                <div className="w-full mt-10 grid grid-cols-1  gap-y-8 ">
-                  <div className="w-full block">
-                    <label
-                      htmlFor="productId"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      ProduktId
-                    </label>
-                    <div className="mt-2">
-                      <div className="flex w-full rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-rust-500">
-                        <input
-                          type="text"
-                          name="productId"
-                          id="productId"
-                          className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                          readOnly={true}
-                          defaultValue={selectedProduct.productId}
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="productTitle"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Titel
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        id="productTitle"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:text-sm sm:leading-6"
-                        defaultValue={selectedProduct.productTitle}
-                        onChange={handleOnChange}
-                        name="productTitle"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="productPrice"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Pris
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="number"
-                        id="productPrice"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:text-sm sm:leading-6"
-                        defaultValue={selectedProduct.productPrice}
-                        onChange={handleOnChange}
-                        name="productPrice"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span">
-                    <label
-                      htmlFor="productShortDescription"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Kort produktbeskrivning
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        id="productShortDescription"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:text-sm sm:leading-6"
-                        defaultValue={selectedProduct.productShortDescription}
-                        name="productShortDescription"
-                        onChange={handleOnChange}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-span-full">
-                    <label
-                      htmlFor="productLongDescription"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Lång produktbeskrivning
-                    </label>
-                    <div className="mt-2">
-                      <textarea
-                        form="changeProductForm"
-                        id="productLongDescription"
-                        rows={3}
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:text-sm sm:leading-6"
-                        defaultValue={selectedProduct.productLongDescription}
-                        name="productLongDescription"
-                        onChange={handleTextareaChange}
-                      />
-                    </div>
-                    <p className="mt-3 text-sm leading-6 text-gray-600">
-                      Lång produktbeskrivning. Skriv allt du vill.
-                    </p>
-                  </div>
-                  {/* 
-                    <div className="col-span-full">
-                      <label
-                        htmlFor="photo"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Ladda upp bild
-                      </label>
-                      <div className="mt-2 flex items-center gap-x-3">
-                        <PhotoIcon
-                          className="h-12 w-12 text-gray-300"
-                          aria-hidden="true"
-                        />
-                        <button
-                          type="button"
-                          className=" bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
-                        >
-                          Välj bild...
-                        </button>
-                      </div>
-                    </div> */}
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="file"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Ladda upp bild
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="file"
-                        name="fileUpload"
-                        id="fileUpload"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:text-sm sm:leading-6"
-                        onChange={handleFileImageChange}
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <p>Bilder</p>
-                    <ul>
-                      {selectedProduct.productImagesUrl.map((img, index) => (
-                        <li key={index}>{img}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  {fileImage && (
-                    <div>
-                      <p>Preview av vald bild:</p>
-                      <Image
-                        src={URL.createObjectURL(fileImage)}
-                        alt="Thumb"
-                        width={200}
-                        height={100}
-                      />
-                      <button onClick={removeSelectedImage}>
-                        Ta bort denna bild.
-                      </button>
-                    </div>
-                  )}
-
-                  {/* <div className="col-span-full">
-                      <label
-                        htmlFor="cover-photo"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Ladda upp bild
-                      </label>
-                      <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                        <div className="text-center">
-                          <PhotoIcon
-                            className="mx-auto h-12 w-12 text-gray-400"
-                            aria-hidden="true"
-                          />
-                          <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                            <label
-                              htmlFor="file-upload"
-                              className="relative cursor-pointer rounded-md bg-white font-semibold text-rust-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-rust-400 focus-within:ring-offset-2 hover:text-rust-500"
-                            >
-                               npm install react-dropzone 
-                              <span>Ladda upp en bild</span>
-                              <input
-                                id="file-upload"
-                                name="file-upload"
-                                type="file"
-                                className="sr-only"
-                              />
-                            </label>
-                            <p className="pl-1">eller drag and drop</p>
-                          </div>
-                          <p className="text-xs leading-5 text-gray-600">
-                            PNG, JPG, GIF upp till 10MB
-                          </p>
-                        </div>
-                      </div>
-                    </div> */}
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6 flex items-center justify-end gap-x-6">
-              <button
-                type="button"
-                className="text-sm font-semibold leading-6 text-gray-900"
-                // onClick={handleDiscardEdit}
-              >
-                Avbryt
-              </button>
-              <button
-                type="submit"
-                className=" bg-rust-300 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-rust-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500"
-              >
-                Uppdatera produkt
-              </button>
-            </div>
-          </form>
+          <EditProductForm
+            handleFormSubmit={handleFormSubmit}
+            selectedProduct={selectedProduct}
+            handleOnChange={handleOnChange}
+            handleTextareaChange={handleTextareaChange}
+            fileImage={fileImage}
+            handleFileImageChange={handleFileImageChange}
+            removeSelectedImage={removeSelectedImage}
+          ></EditProductForm>
         </div>
+        <DialogComponent
+          dialog={dialog}
+          closeDialog={closeDialog}
+          showDialog={showDialog}
+        ></DialogComponent>
       </section>
     </>
   );
