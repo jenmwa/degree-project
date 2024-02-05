@@ -64,8 +64,8 @@ export default function MenuOpen({
                   onClick={() => {
                     if (linkText === "Logga ut") {
                       signoutAdmin();
-                      menuOpenClose();
                     }
+                    menuOpenClose();
                   }}
                 >
                   {linkText}

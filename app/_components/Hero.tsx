@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import logo from "../../public/img/logoisch.png";
+import logo from "../../public/bjorbyblomster_logo.svg";
 
 export function Hero() {
   const imageSizeSM = 200;

@@ -18,10 +18,6 @@ export default function Admin() {
   return (
     <>
       <PageNotFound></PageNotFound>
-      <form onSubmit={signInWithEmail}>
-        <input type="email"></input>
-        <button type="submit">LOGGA IN</button>
-      </form>
     </>
   );
 }

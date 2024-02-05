@@ -15,7 +15,7 @@ import { initialDialog } from "../../_helpers/initialDialog";
 import { IBooking } from "../../_models/IBooking";
 import { IDialog } from "../../_models/IDialog";
 import { IUser } from "../../_models/IUser";
-import { validatePhone } from "../../_validation/validation";
+import { validatePhone } from "../../_utilities/validation";
 import { IOrderMailData } from "../../_models/IOrderMailData";
 import Stepper from "../../_components/Stepper";
 

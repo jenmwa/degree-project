@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ProductInfo from "./ProductInfo";
+import emma from "../../public/img/emma.jpg";
 
 import React from "react";
 
@@ -11,7 +12,7 @@ export default function Emma() {
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div className="">
               <Image
-                src={"/public/img/emma.jpg"}
+                src={emma}
                 alt="alt"
                 width={300}
                 height={400}

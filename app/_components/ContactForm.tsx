@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent } from "react";
 import { IContactEmail } from "../_models/IContactEmail";
-import { validateEmail } from "../_validation/validation";
+import { validateEmail } from "../_utilities/validation";
 import ConfirmSwitch from "./ConfirmSwitch";
 import { classNames } from "./OrderForm";
 import React from "react";
@@ -36,7 +36,7 @@ export default function ContactForm({
             value={email.name}
             maxLength={50}
             name="name"
-            className="mb-6 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+            className="mb-6 input-base"
             onChange={handleOnChange}
           />
 
@@ -52,7 +52,7 @@ export default function ContactForm({
             maxLength={80}
             name="email"
             type="email"
-            className="mb-6 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+            className="mb-6 input-base"
             onChange={handleOnChange}
           />
           {validateEmail(email.email) && (
@@ -68,7 +68,7 @@ export default function ContactForm({
                 maxLength={80}
                 name="confirmEmail"
                 type="email"
-                className="mb-6 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                className="mb-6 input-base"
                 onChange={handleOnChange}
               />
             </>
@@ -84,7 +84,7 @@ export default function ContactForm({
             name="message"
             value={email.message}
             rows={5}
-            className="mb-6 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+            className="mb-6 block w-full input-base bg-white"
             onChange={handleOnChangeTextarea}
           />
         </div>
