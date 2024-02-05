@@ -95,7 +95,6 @@ export default function EditProduct({
           return;
         }
       }
-
       const updatedFormData = updateFormDataWithImageUrl(formData, imageUrl);
       handleFormData(updatedFormData);
     } catch (error) {

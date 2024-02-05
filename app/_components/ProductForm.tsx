@@ -68,7 +68,9 @@ export default function ProductForm({
       <div className="sm:col-span-2">
         <label htmlFor="date" className="block text-sm font-semibold leading-6">
           Till vilket datum?{" "}
-          <span className="font-normal ">( kan lämnas tomt )</span>
+          <span className="font-normal ">
+            ( frivilligt fält, kan lämnas tomt )
+          </span>
         </label>
         <div className="mt-2.5">
           <input
@@ -93,6 +95,7 @@ export default function ProductForm({
         </label>
         <div className="mt-2.5">
           <textarea
+            required
             name="message"
             id="message"
             rows={4}

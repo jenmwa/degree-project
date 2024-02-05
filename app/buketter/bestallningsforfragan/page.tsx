@@ -2,6 +2,7 @@
 import DialogComponent from "../../_components/DialogComponent";
 import {
   CONTACT_400_DIALOG,
+  CONTACT_SUCCESS_DIALOG,
   REQUEST_MISSINGFIELDS_DIALOG,
   REQUEST_SUCCESS_DIALOG,
 } from "../../_components/DialogMessage";
@@ -18,6 +19,9 @@ import { IUser } from "../../_models/IUser";
 import { validatePhone } from "../../_utilities/validation";
 import { IOrderMailData } from "../../_models/IOrderMailData";
 import Stepper from "../../_components/Stepper";
+import { sendEmailService } from "app/_services/sendEmailService";
+import { createUserService } from "app/_services/createUserService";
+import { createBookingService } from "app/_services/createBookingService";
 
 export default function Page() {
   const [showDialog, setShowDialog] = useState(false);
@@ -44,7 +48,6 @@ export default function Page() {
     const today = new Date();
     const twoDaysFromNow = new Date(today);
     twoDaysFromNow.setDate(today.getDate() + 3);
-
     const minDateString = twoDaysFromNow.toISOString().split("T")[0];
     setMinDate(minDateString);
 
@@ -122,10 +125,9 @@ export default function Page() {
       return;
     }
     try {
-      const newUser = await createUser(userData);
-      console.log("newuser", newUser);
+      const user = await createUserService(userData);
+      const createdBooking = await createBookingService(bookingData, user);
 
-      const createdBooking = await createBooking(bookingData, newUser);
       const userEmail = userData.userEmail;
       const emailData = {
         type: "order_confirmation",
@@ -134,7 +136,10 @@ export default function Page() {
         message: "Your order has been confirmed. Details: ",
       };
 
-      await sendEmail(emailData, bookingData, userData);
+      await sendEmailService(emailData, bookingData, userData);
+      setDialog(CONTACT_SUCCESS_DIALOG);
+      setShowDialog(true);
+
       clearInputFields();
 
       console.log("Booking created successfully:", createdBooking);
@@ -143,98 +148,128 @@ export default function Page() {
     }
   };
 
-  const createUser = async (userData: IUser) => {
-    try {
-      const response = await fetch("/api/createUser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
+  // const createUser = async (userData: IUser) => {
+  //   try {
+  //     const response = await fetch("/api/createUser", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(userData),
+  //     });
 
-      if (response.ok) {
-        const data = await response.json();
-        const userId = data.newUser ? data.newUser.userId : data.userId;
-        return userId;
-      }
-      if (response.status === 400) {
-        setDialog(CONTACT_400_DIALOG);
-        setShowDialog(true);
-      } else {
-        const errorBody = await response.json();
-        throw new Error(errorBody.error);
-      }
-    } catch (error) {
-      console.error("Error creating user:", error);
-      throw error;
-    }
-  };
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       const userId = data.newUser ? data.newUser.userId : data.userId;
+  //       return userId;
+  //     }
+  //     if (response.status === 400) {
+  //       setDialog(CONTACT_400_DIALOG);
+  //       setShowDialog(true);
+  //     } else {
+  //       const errorBody = await response.json();
+  //       throw new Error(errorBody.error);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error creating user:", error);
+  //     throw error;
+  //   }
+  // };
 
-  const createBooking = async (bookingData: IBooking, userId: IUser) => {
-    try {
-      bookingData.customer = userId;
-      console.log("before booking:", userId, bookingData);
+  // const createBooking = async (bookingData: IBooking, userId: IUser) => {
+  //   try {
+  //     bookingData.customer = userId;
+  //     console.log("before booking:", userId, bookingData);
 
-      const response = await fetch("/api/createBooking", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(bookingData),
-      });
+  //     const response = await fetch("/api/createBooking", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(bookingData),
+  //     });
 
-      if (response.ok) {
-        const data = await response.json();
-        setDialog(REQUEST_SUCCESS_DIALOG);
-        setShowDialog(true);
-        return data.bookingData;
-      } else {
-        const errorBody = await response.json();
-        throw new Error(errorBody.error);
-      }
-    } catch (error) {
-      console.error("Error creating booking:", error);
-      throw error;
-    }
-  };
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setDialog(REQUEST_SUCCESS_DIALOG);
+  //       setShowDialog(true);
+  //       return data.bookingData;
+  //     } else {
+  //       const errorBody = await response.json();
+  //       throw new Error(errorBody.error);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error creating booking:", error);
+  //     throw error;
+  //   }
+  // };
 
-  const sendEmail = async (
-    emailData: IOrderMailData,
-    bookingData: IBooking,
-    userData: IUser
-  ) => {
-    const values = { emailData, bookingData, userData };
-    console.log(values);
-    try {
-      emailData.type = "order_confirmation";
-      const res = await fetch("/api/contactEmail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+  //  const sendEmail = async (
+  //     emailData: IOrderMailData,
+  //     bookingData: IBooking,
+  //     userData: IUser
+  //   ) => {
+  //     const values = { emailData, bookingData, userData };
+  //     console.log(values);
+  //     try {
+  //       emailData.type = "order_confirmation";
+  //       const res = await fetch("/api/contactEmail", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(values),
+  //       });
 
-      const body = await res.json();
+  //       const body = await res.json();
 
-      console.log(body);
+  //       console.log(body);
 
-      if (res.ok) {
-        // setDialog(CONTACT_SUCCESS_DIALOG);
-        // setShowDialog(true);
-        // clearEmailFields();
-      } else if (res.status === 400) {
-        // setDialog(CONTACT_400_DIALOG);
-        // setShowDialog(true);
-      } else {
-        throw new Error(body.error);
-      }
-    } catch (error) {
-      console.error("Error sending email", error);
-      throw error;
-    }
-  };
+  //       if (res.ok) {
+  //         // setDialog(CONTACT_SUCCESS_DIALOG);
+  //         // setShowDialog(true);
+  //         // clearEmailFields();
+  //       } else if (res.status === 400) {
+  //         // setDialog(CONTACT_400_DIALOG);
+  //         // setShowDialog(true);
+  //       } else {
+  //         throw new Error(body.error);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error sending email", error);
+  //       throw error;
+  //     }
+  //   };
+  // try {
+  //   emailData.type = "order_confirmation";
+
+  //   const res = await fetch("/api/contactEmail", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(values),
+  //   });
+
+  //   const body = await res.json();
+
+  //   console.log(body);
+
+  //     if (res.ok) {
+  //       // setDialog(CONTACT_SUCCESS_DIALOG);
+  //       // setShowDialog(true);
+  //       // clearEmailFields();
+  //     } else if (res.status === 400) {
+  //       // setDialog(CONTACT_400_DIALOG);
+  //       // setShowDialog(true);
+  //     } else {
+  //       throw new Error(body.error);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error sending email", error);
+  //     throw error;
+  //   }
+  // };
 
   return (
     <>

@@ -23,8 +23,8 @@ export async function contactEmailService(email: IContactEmail) {
     if (res.status === 400) {
       return { success: false, error: "Bad request" };
     }
-  } catch (err) {
-    console.error("Something went wrong: ", err);
+  } catch (error) {
+    console.error("Something went wrong: ", error);
     return { success: false, error: "Something went wrong" };
   }
 }

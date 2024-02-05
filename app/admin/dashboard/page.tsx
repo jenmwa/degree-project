@@ -1,24 +1,34 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useProductContext } from "../../_context/ProductsContext";
-import { useRouter } from "next/navigation";
 import { initialProduct } from "../../_helpers/initialProduct";
-import { supabaseAuthClient } from "../../../lib/supabaseAuthClient";
-import EditProduct from "../../_components/EditProduct";
 import ProductSection from "../../_components/ProductSection";
 import { IBooking } from "../../_models/IBooking";
 import { IProduct } from "../../_models/IProduct";
 import AdminOrderTable from "../../_components/AdminOrderTable";
 import EditProductModal from "../../_components/EditProductModal";
+import { getBookingsService } from "app/_services/getBookingsService";
+import { updateProductService } from "app/_services/updateProductService";
 
 export default function Dashboard() {
   const { products, isLoading, isError } = useProductContext();
+  const [bookings, setBookings] = useState<IBooking[]>([]);
   const [selectedProduct, setSelectedProduct] =
     useState<IProduct>(initialProduct);
-  const router = useRouter();
-
-  // const [open, setOpen] = useState(true);
   const [showDialog, setShowDialog] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getBookingsService();
+        setBookings(data);
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const close = () => {
     console.log("close this modal");
@@ -30,12 +40,6 @@ export default function Dashboard() {
     console.log("onClick, Modal is:", showDialog);
   };
 
-  const signoutAdmin = async () => {
-    console.log("sign out please");
-    await supabaseAuthClient.auth.signOut();
-    router.push("/admin");
-  };
-
   const showProduct = (product: IProduct) => {
     setSelectedProduct(product);
     handleShowDialog();
@@ -43,62 +47,12 @@ export default function Dashboard() {
   };
 
   const handleFormData = async (formData: IProduct) => {
-    console.log(
-      "***update Product FORMDATA:",
-      formData,
-      "imageURL:",
-      formData.productImagesUrl
-    );
     try {
-      console.log("***update Product:", formData);
-      const response = await fetch("/api/updateProduct", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productId: formData.productId,
-          productPrice: formData.productPrice,
-          productTitle: formData.productTitle,
-          productLongDescription: formData.productLongDescription,
-          productShortDescription: formData.productShortDescription,
-          productImagesUrl: formData.productImagesUrl,
-          created_at: formData.created_at,
-          updated_at: formData.created_at,
-        }),
-      });
-
-      if (response.ok) {
-        console.log("Product updated successfully");
-      } else {
-        console.error("Failed to update product");
-      }
+      await updateProductService(formData);
     } catch (error) {
       console.error("Error updating product:", error);
     }
   };
-
-  const [bookings, setBookings] = useState<IBooking[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/handlers?entity=Booking");
-        const data = await response.json();
-
-        console.log("Bookings:", data.data);
-        setBookings(data.data);
-      } catch (error) {
-        console.error("Error fetching bookings:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-  console.log("bookings", bookings);
 
   return (
     <>
@@ -109,9 +63,7 @@ export default function Dashboard() {
           </span>{" "}
           Admin
         </h1>
-        <button className="primary-button" onClick={signoutAdmin}>
-          LOGGA UT
-        </button>
+
         {isLoading ? (
           <p>Laddar...</p>
         ) : (
@@ -124,29 +76,15 @@ export default function Dashboard() {
                 handleFormData={handleFormData}
               ></EditProductModal>
             )}
-
-            {/* {open && (
-              <EditProductModal
-                selectedProduct={selectedProduct}
-                handleFormData={handleFormData}
-                closeModal={closeModal}
-                open={open}
-              ></EditProductModal>
-            )} */}
             <AdminOrderTable
               bookings={bookings}
               isLoading={isLoading}
             ></AdminOrderTable>
             <ProductSection
               showProduct={showProduct}
-              // handleShowDialog={handleShowDialog}
+              products={products}
+              isLoading={isLoading}
             ></ProductSection>
-            {/* <EditProduct
-              selectedProduct={selectedProduct}
-              handleFormData={handleFormData}
-            ></EditProduct> */}
-
-            {/* <Images></Images> */}
           </>
         )}
       </div>

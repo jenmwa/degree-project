@@ -13,7 +13,6 @@ export function Header() {
   const router = useRouter();
 
   const signoutAdmin = async () => {
-    console.log("sign out please");
     await supabaseAuthClient.auth.signOut();
     router.push("/admin");
   };
