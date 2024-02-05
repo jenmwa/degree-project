@@ -10,7 +10,6 @@ interface IEditProductsFormProps {
   handleFileImageChange: (e: ChangeEvent<HTMLInputElement>) => void;
   fileImage: File | null;
   removeSelectedImage: () => void;
-  handleDiscardEdit: () => void;
 }
 
 export default function EditProductForm({
@@ -21,7 +20,6 @@ export default function EditProductForm({
   fileImage,
   handleFileImageChange,
   removeSelectedImage,
-  handleDiscardEdit,
 }: IEditProductsFormProps) {
   return (
     <>
@@ -189,7 +187,7 @@ export default function EditProductForm({
           <button
             type="button"
             className="text-sm font-semibold leading-6 text-gray-900"
-            onClick={handleDiscardEdit}
+            onClick={() => close()}
           >
             Avbryt
           </button>

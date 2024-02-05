@@ -6,6 +6,7 @@ import { Transition } from "@headlessui/react";
 import { Dialog } from "@headlessui/react";
 import { IDialog } from "../_models/IDialog";
 import React from "react";
+import Link from "next/link";
 
 export interface IDialogProps {
   dialog: IDialog;
@@ -20,11 +21,23 @@ export default function DialogComponent({
 }: IDialogProps) {
   const cancelButtonRef = useRef(null);
 
+  // const handlePrimaryButtonClick = () => {
+  //   setShowDialog(false);
+  // close()
+  //   if (dialog.redirectLink) {
+  //     return (
+  //       <Link href={dialog.redirectLink}>
+  //         <a>{dialog.primaryButton}</a>
+  //       </Link>
+  //     );
+  //   }
+  // };
+
   return (
     <Transition.Root show={showDialog} as="div">
       <Dialog
         as="div"
-        className="relative z-10"
+        className="relative z-70"
         onClose={closeDialog}
         initialFocus={cancelButtonRef}
       >
@@ -102,7 +115,7 @@ export default function DialogComponent({
                   <button
                     type="button"
                     className="mt-4 inline-flex justify-center w-full sm:w-auto button-secondary sm:mt-0 sm:justify-start"
-                    onClick={closeDialog}
+                    onClick={() => close()}
                     ref={cancelButtonRef}
                   >
                     Avbryt
