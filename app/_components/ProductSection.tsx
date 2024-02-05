@@ -7,14 +7,13 @@ import Spinner from "./Spinner";
 
 interface IProductsSectionProps {
   showProduct: (product: IProduct) => void;
-  handleShowDialog: () => void;
+  // handleShowDialog: () => void;
 }
 
 export default function ProductSection({
   showProduct,
-
-  handleShowDialog,
-}: IProductsSectionProps) {
+}: // handleShowDialog,
+IProductsSectionProps) {
   const { products, isLoading, isError } = useProductContext();
 
   return (
@@ -40,7 +39,6 @@ export default function ProductSection({
                         // onClick={() => showProduct(foundProduct)}
                         onClick={() => {
                           showProduct(foundProduct);
-                          handleShowDialog();
                         }}
                       >
                         <h3 className="mt-6 text-sm text-gray-500">

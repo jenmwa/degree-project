@@ -10,9 +10,6 @@ import { IBooking } from "../../_models/IBooking";
 import { IProduct } from "../../_models/IProduct";
 import AdminOrderTable from "../../_components/AdminOrderTable";
 import EditProductModal from "../../_components/EditProductModal";
-import DialogComponent from "app/_components/DialogComponent";
-import { IDialog } from "app/_models/IDialog";
-import { initialDialog } from "app/_helpers/initialDialog";
 
 export default function Dashboard() {
   const { products, isLoading, isError } = useProductContext();
@@ -41,6 +38,7 @@ export default function Dashboard() {
 
   const showProduct = (product: IProduct) => {
     setSelectedProduct(product);
+    handleShowDialog();
     console.log("click on product:", product.productTitle);
   };
 
@@ -141,12 +139,12 @@ export default function Dashboard() {
             ></AdminOrderTable>
             <ProductSection
               showProduct={showProduct}
-              handleShowDialog={handleShowDialog}
+              // handleShowDialog={handleShowDialog}
             ></ProductSection>
-            <EditProduct
+            {/* <EditProduct
               selectedProduct={selectedProduct}
               handleFormData={handleFormData}
-            ></EditProduct>
+            ></EditProduct> */}
 
             {/* <Images></Images> */}
           </>
