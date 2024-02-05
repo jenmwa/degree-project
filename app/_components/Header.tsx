@@ -22,6 +22,11 @@ export function Header() {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const close = () => {
+    console.log("close this modal");
+    setMobileMenuOpen(false);
+  };
+
   return (
     <>
       <header className="absolute inset-x-0 top-0 z-50">
@@ -41,6 +46,7 @@ export function Header() {
             menuOpenClose={menuOpenClose}
             mobileMenuOpen={mobileMenuOpen}
             signoutAdmin={signoutAdmin}
+            close={close}
           ></MenuOpen>
         </>
       </header>

@@ -76,6 +76,10 @@ export default function EditProduct({
     }
   };
 
+  const handleDiscardEdit = () => {
+    console.log("close this modal");
+  };
+
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -111,6 +115,7 @@ export default function EditProduct({
             fileImage={fileImage}
             handleFileImageChange={handleFileImageChange}
             removeSelectedImage={removeSelectedImage}
+            handleDiscardEdit={handleDiscardEdit}
           ></EditProductForm>
         </div>
         <DialogComponent

@@ -4,21 +4,34 @@ import { useProductContext } from "../../_context/ProductsContext";
 import { useRouter } from "next/navigation";
 import { initialProduct } from "../../_helpers/initialProduct";
 import { supabaseAuthClient } from "../../../lib/supabaseAuthClient";
-
 import EditProduct from "../../_components/EditProduct";
 import ProductSection from "../../_components/ProductSection";
 import { IBooking } from "../../_models/IBooking";
 import { IProduct } from "../../_models/IProduct";
 import AdminOrderTable from "../../_components/AdminOrderTable";
+import EditProductModal from "../../_components/EditProductModal";
+import DialogComponent from "app/_components/DialogComponent";
+import { IDialog } from "app/_models/IDialog";
+import { initialDialog } from "app/_helpers/initialDialog";
 
 export default function Dashboard() {
-  console.log("hello admin");
   const { products, isLoading, isError } = useProductContext();
   const [selectedProduct, setSelectedProduct] =
     useState<IProduct>(initialProduct);
-
-  console.log(products);
   const router = useRouter();
+
+  // const [open, setOpen] = useState(true);
+  const [showDialog, setShowDialog] = useState(false);
+
+  const close = () => {
+    console.log("close this modal");
+    setShowDialog(false);
+  };
+
+  const handleShowDialog = () => {
+    setShowDialog(true);
+    console.log("onClick, Modal is:", showDialog);
+  };
 
   const signoutAdmin = async () => {
     console.log("sign out please");
@@ -27,8 +40,8 @@ export default function Dashboard() {
   };
 
   const showProduct = (product: IProduct) => {
-    console.log(product);
     setSelectedProduct(product);
+    console.log("click on product:", product.productTitle);
   };
 
   const handleFormData = async (formData: IProduct) => {
@@ -92,7 +105,7 @@ export default function Dashboard() {
   return (
     <>
       <div className="flex flex-1 flex-col px-6 py-12 lg:px-8">
-        <h1 className="mt-24 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
+        <h1 className="mt-24 text-3xl font-extraboldmd:text-5xl lg:text-6xl">
           <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
             Hello
           </span>{" "}
@@ -105,18 +118,36 @@ export default function Dashboard() {
           <p>Laddar...</p>
         ) : (
           <>
+            {showDialog && (
+              <EditProductModal
+                close={close}
+                showDialog={showDialog}
+                selectedProduct={selectedProduct}
+                handleFormData={handleFormData}
+              ></EditProductModal>
+            )}
+
+            {/* {open && (
+              <EditProductModal
+                selectedProduct={selectedProduct}
+                handleFormData={handleFormData}
+                closeModal={closeModal}
+                open={open}
+              ></EditProductModal>
+            )} */}
             <AdminOrderTable
               bookings={bookings}
               isLoading={isLoading}
             ></AdminOrderTable>
             <ProductSection
-              // editedProduct={editedProduct}
               showProduct={showProduct}
+              handleShowDialog={handleShowDialog}
             ></ProductSection>
             <EditProduct
               selectedProduct={selectedProduct}
               handleFormData={handleFormData}
             ></EditProduct>
+
             {/* <Images></Images> */}
           </>
         )}
