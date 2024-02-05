@@ -10,6 +10,8 @@ import DialogComponent from "./DialogComponent";
 import { initialDialog } from "app/_helpers/initialDialog";
 import { IDialog } from "app/_models/IDialog";
 import EditProductForm from "./EditProductForm";
+import { PRODUCTUPDATE_SUCCESS_DIALOG } from "./DialogMessage";
+import Link from "next/link";
 
 interface IEditProductProps {
   selectedProduct: IProduct;
@@ -76,10 +78,6 @@ export default function EditProduct({
     }
   };
 
-  const handleDiscardEdit = () => {
-    console.log("close this modal");
-  };
-
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -95,9 +93,13 @@ export default function EditProduct({
           return;
         }
       }
-
       const updatedFormData = updateFormDataWithImageUrl(formData, imageUrl);
       handleFormData(updatedFormData);
+      setDialog(PRODUCTUPDATE_SUCCESS_DIALOG);
+      setShowDialog(true);
+
+      // clearInputFields();
+      console.log("SUCCESS updating");
     } catch (error) {
       console.error("Unexpected error:", error);
     }
@@ -115,7 +117,6 @@ export default function EditProduct({
             fileImage={fileImage}
             handleFileImageChange={handleFileImageChange}
             removeSelectedImage={removeSelectedImage}
-            handleDiscardEdit={handleDiscardEdit}
           ></EditProductForm>
         </div>
         <DialogComponent

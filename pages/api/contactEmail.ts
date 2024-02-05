@@ -4,7 +4,7 @@ import { readFileSync } from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
-const template = readFileSync('app/_components/Order/orderConfirmationTemplate.html', 'utf-8');
+const template = readFileSync('app/_components/orderConfirmationTemplate.html', 'utf-8');
 
 
 
@@ -35,22 +35,23 @@ export default async function handler(
   let mailData: IMailData;
 
   const htmlContent = template
-  // .replace('{{ email }}', `${emailData.email}`)
-  // .replace('{{ bookingData }}', `${bookingData.productId}`)
-  // .replace('{{ userData }}', `${userData.userFirstName}`)
+    .replace('{{ email }}', `${emailData.email}`)
+    .replace('{{ bookingData }}', `${bookingData.productId}`)
+    .replace('{{ userData }}', `${userData.userFirstName}`)
 
   if (emailData.type === 'contact') {
     mailData = {
       from: process.env.EMAIL_FROM,
       to: process.env.EMAIL_SERVER_USER,
-      subject: `${emailData.type} Message from ${name}`,
+      subject: `${emailData.type} Message from ${userData.name}`,
       text: `Website contact: ${emailData.message} | Sent from: ${emailData.email}`,
       html: `<div>${emailData.message}</div><p>Sent from: ${emailData.email}</p>`,
     };
   } else if (emailData.type === 'order_confirmation') {
     mailData = {
       from: process.env.EMAIL_FROM,
-      to: [emailData.mail, process.env.EMAIL_SERVER_USER],
+      to: `${emailData.email}`,
+      bcc: process.env.EMAIL_SERVER_USER,
       subject: `${emailData.type}: Order Confirmation`,
       text: `Order Confirmation: ${emailData.message}`,
       html: htmlContent,

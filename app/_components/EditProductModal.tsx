@@ -1,13 +1,9 @@
 "use client";
 
 import { Transition, Dialog } from "@headlessui/react";
-import {
-  ExclamationTriangleIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useRef } from "react";
 import EditProduct from "./EditProduct";
-import { IDialog } from "app/_models/IDialog";
 import { IProduct } from "app/_models/IProduct";
 
 export interface IDialogProps {

@@ -3,4 +3,5 @@ export interface IDialog {
   title: string;
   message: string;
   primaryButton: string;
+  redirectLink?: string;
 }
