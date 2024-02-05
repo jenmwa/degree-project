@@ -80,11 +80,7 @@ export default function Dashboard() {
               bookings={bookings}
               isLoading={isLoading}
             ></AdminOrderTable>
-            <ProductSection
-              showProduct={showProduct}
-              products={products}
-              isLoading={isLoading}
-            ></ProductSection>
+            <ProductSection showProduct={showProduct}></ProductSection>
           </>
         )}
       </div>
