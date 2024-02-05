@@ -46,7 +46,7 @@ export function Nav({
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm font-semibold leading-6"
+              className="font-semibold leading-6"
             >
               <span> {item.name}</span>
             </Link>

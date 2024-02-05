@@ -28,7 +28,7 @@ export function Header() {
 
   return (
     <>
-      <header className="absolute inset-x-0 top-0 z-50">
+      <header className="fixed inset-x-0 top-0 z-50 bg-white bg-opacity-85">
         <>
           <Nav
             menuOpenClose={menuOpenClose}

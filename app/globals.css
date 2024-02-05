@@ -129,3 +129,9 @@ textarea:focus {
 .two-column-img {
 @apply flex justify-center items-center mx-auto w-[400px] h-[400px] shadow-xl ring-1 ring-gray-400/10 
 }
+
+
+/*PRIVACYPOLICY*/
+.icon-list {
+  @apply mt-1 h-5 w-5 flex-none text-rust-500
+}
