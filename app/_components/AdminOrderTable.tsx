@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { IBooking } from "../_models/IBooking";
+import { getUserService } from "app/_services/getUserService";
 
 interface IAdminOrderTableProps {
   bookings: IBooking[];
@@ -11,8 +12,22 @@ export default function AdminOrderTable({
   bookings,
   isLoading,
 }: IAdminOrderTableProps) {
+  const userId = "4f7b657b-a75f-456b-b58b-823dc1f8310f";
+
+  const fetchData = async (userId: string) => {
+    try {
+      const response = await getUserService(userId);
+
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+
   return (
     <>
+      <button onClick={() => fetchData(userId)}>CLICK TO GET USER</button>
       <section className="relative overflow-x-auto my-16">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -42,12 +57,6 @@ export default function AdminOrderTable({
                   key={booking.bookingId}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                 >
-                  <th
-                    scope="row"
-                    className="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    {booking.bookingId}
-                  </th>
                   <td className="px-4 py-4">{booking.product}</td>
                   <td className="px-4 py-4">
                     {booking.requestedDate.toLocaleString()}
