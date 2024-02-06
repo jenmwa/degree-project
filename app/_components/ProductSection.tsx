@@ -41,7 +41,7 @@ IProductsSectionProps) {
                       <div
                         tabIndex={0}
                         aria-label={`Läs mer om ${foundProduct.productTitle}`}
-                        className="cursor-pointer bg-gray-200 w-4/5 mx-auto relative p-10 z-10 text-center -mt-16 lg:-mt-12 sm:-mt-16 hover:bg-gray-300 dark:hover:bg-gray-700       // clearInputFields();
+                        className="cursor-pointer  min-h-48 bg-gray-200 w-4/5 mx-auto relative p-10 z-10 text-center -mt-16 lg:-mt-12 sm:-mt-16 hover:bg-gray-300 dark:hover:bg-gray-700       // clearInputFields();
                         "
                         onClick={(e) => {
                           e.currentTarget.focus();
