@@ -9,8 +9,6 @@ export async function POST(req: NextRequest) {
   const email = String(formData.get('email'))
   const password = String(formData.get('password'))
 
-  console.log(email, password)
-
   const supabase = createRouteHandlerClient({
     cookies: () => cookieStore
   });
@@ -20,9 +18,6 @@ export async function POST(req: NextRequest) {
     .signInWithPassword({
       email, password,
     });
-
-  if (data) console.log(data);
-  if (error) console.log(error);
 
   if (data?.user) {
     const dashboardUrl = new URL('/admin/dashboard', `http://${req.headers.get('host')}`);

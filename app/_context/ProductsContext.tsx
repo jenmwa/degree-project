@@ -4,6 +4,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
 import { IProduct } from "../_models/IProduct";
 import React from "react";
+import { getProductsService } from "app/_services/getProductsService";
+import { updateProductState } from "app/_utilities/updateProductState";
 
 interface ProductContextType {
   products: IProduct[] | null;
@@ -31,9 +33,8 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/handlers?entity=Product");
-        const data = await response.json();
-        setProducts(data.data);
+        const data = await getProductsService();
+        setProducts(data);
       } catch (error) {
         setIsError(true);
       } finally {
@@ -55,26 +56,28 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({
           table: "Product",
         },
         async (payload) => {
-          setProducts((prevProducts: IProduct[] | null) => {
-            if (prevProducts) {
-              const updatedProduct = payload.new as IProduct;
-              const updatedIndex = prevProducts.findIndex(
-                (product) => product.productId === updatedProduct.productId
-              );
+          setProducts((prevProducts: IProduct[] | null) =>
+            updateProductState(prevProducts, payload)
+          );
+          // setProducts((prevProducts: IProduct[] | null) => {
+          //   if (prevProducts) {
+          //     const updatedProduct = payload.new as IProduct;
+          //     const updatedIndex = prevProducts.findIndex(
+          //       (product) => product.productId === updatedProduct.productId
+          //     );
 
-              if (updatedIndex !== -1) {
-                const newProducts = [...prevProducts];
-                newProducts[updatedIndex] = updatedProduct;
-                console.log("Updated Products:", newProducts);
-                return newProducts;
-              } else {
-                return [...prevProducts, updatedProduct];
-              }
-            } else {
-              console.log("No Previous Products");
-              return prevProducts;
-            }
-          });
+          //     if (updatedIndex !== -1) {
+          //       const newProducts = [...prevProducts];
+          //       newProducts[updatedIndex] = updatedProduct;
+          //       return newProducts;
+          //     } else {
+          //       return [...prevProducts, updatedProduct];
+          //     }
+          //   } else {
+          //     console.log("No Previous Products");
+          //     return prevProducts;
+          //   }
+          // });
         }
       )
       .subscribe();

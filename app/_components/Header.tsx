@@ -13,7 +13,6 @@ export function Header() {
   const router = useRouter();
 
   const signoutAdmin = async () => {
-    console.log("sign out please");
     await supabaseAuthClient.auth.signOut();
     router.push("/admin");
   };
@@ -22,9 +21,17 @@ export function Header() {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const close = () => {
+    console.log("close this modal");
+    setMobileMenuOpen(false);
+  };
+
   return (
     <>
-      <header className="absolute inset-x-0 top-0 z-50">
+      <header
+        data-testid="header"
+        className="fixed inset-x-0 top-0 z-50 bg-white bg-opacity-85"
+      >
         <>
           <Nav
             menuOpenClose={menuOpenClose}
@@ -41,6 +48,7 @@ export function Header() {
             menuOpenClose={menuOpenClose}
             mobileMenuOpen={mobileMenuOpen}
             signoutAdmin={signoutAdmin}
+            close={close}
           ></MenuOpen>
         </>
       </header>

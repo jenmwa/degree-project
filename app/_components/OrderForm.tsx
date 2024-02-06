@@ -51,7 +51,7 @@ export default function OrderForm({
         <OrderInfo></OrderInfo>
         <form
           // action="/api/createBooking"
-          method="POST"
+          // method="POST"
           className="mx-auto mt-16 max-w-xl sm:mt-20"
           onSubmit={handleSubmit}
         >

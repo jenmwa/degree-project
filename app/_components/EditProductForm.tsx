@@ -187,7 +187,7 @@ export default function EditProductForm({
           <button
             type="button"
             className="text-sm font-semibold leading-6 text-gray-900"
-            // onClick={handleDiscardEdit}
+            onClick={() => close()}
           >
             Avbryt
           </button>

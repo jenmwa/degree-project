@@ -1,6 +1,5 @@
 "use client";
 import { Bars3Icon } from "@heroicons/react/24/outline";
-
 import Link from "next/link";
 import React from "react";
 import { INavigation } from "../_models/INavigation";
@@ -23,6 +22,7 @@ export function Nav({
   return (
     <>
       <nav
+        data-testid="nav-component"
         className="flex items-center justify-between p-6 lg:px-8"
         aria-label="Global"
       >
@@ -46,7 +46,7 @@ export function Nav({
             <Link
               key={item.name}
               href={item.href}
-              className="text-sm font-semibold leading-6"
+              className="font-semibold leading-6"
             >
               <span> {item.name}</span>
             </Link>

@@ -11,6 +11,7 @@ interface IMenuOpenProps {
   href: string;
   linkText: string;
   signoutAdmin: () => void;
+  close: () => void;
 }
 
 export default function MenuOpen({
@@ -20,6 +21,7 @@ export default function MenuOpen({
   menuOpenClose,
   mobileMenuOpen,
   signoutAdmin,
+  close,
 }: IMenuOpenProps) {
   return (
     <>
@@ -27,7 +29,7 @@ export default function MenuOpen({
         as="div"
         className="lg:hidden"
         open={mobileMenuOpen}
-        onClose={menuOpenClose}
+        onClose={close}
       >
         <div className="fixed inset-0 z-50" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-100 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">

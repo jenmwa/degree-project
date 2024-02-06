@@ -8,11 +8,20 @@ import nextJest from 'next/jest.js'
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
   dir: './',
+
 })
 
 
 const config: Config = {
 
+  transform: {
+    // Transform jose library to use babel-jest
+    '^.+\\.js$': 'babel-jest',
+  },
+
+  transformIgnorePatterns: [
+    '/node_modules/(?!(jose)/)',
+  ],
 
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -96,13 +105,13 @@ const config: Config = {
   //   "json",
   //   "node"
   // ],
-
+  testEnvironment: 'jest-environment-jsdom',
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   // moduleNameMapper: {},
   moduleNameMapper: {
-    // ...
-    '^@/components/(.*)$': '<rootDir>/components/$1',
-    // '^@supabase/(.*)$': '<rootDir>/node_modules/@supabase/$1',
+    '^jose$': '<rootDir>/__mocks__/jose.js',
+    '^app/_components/(.*)$': '<rootDir>/app/_components/$1',
+    // '^app/_components/(.*)$': '<rootDir>/app/_components/$1',
     '^lib/(.*)$': '<rootDir>/lib/$1',
   },
 
@@ -182,7 +191,7 @@ const config: Config = {
   testPathIgnorePatterns: [
     "<rootDir>/node_modules/",
     "<rootDir>/.next/",
-    "<rootDir>/__mocks__/",
+
   ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
