@@ -9,9 +9,9 @@ export default function Login() {
   const [showLoginMagic, setShowLoginMagic] = useState(false);
   const [resetPassword, setResetPassword] = useState<boolean>(false);
 
-  const forgottenPassword = () => {
-    setResetPassword(true);
-  };
+  // const forgottenPassword = () => {
+  //   setResetPassword(true);
+  // };
 
   const emailadressOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);

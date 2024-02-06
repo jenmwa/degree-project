@@ -1,11 +1,9 @@
-/**
- * @jest-environment jsdom
- */
 
-import { supabaseAuthClient } from "lib/supabaseAuthClient";
-import { fetchAndLogImages } from "../app/_services/fetchAndLogImages";
 
-jest.mock('../lib/supabaseAuthClient', () => ({
+import { supabaseAuthClient } from "/Users/jennywaller/Documents/degree-project/lib/supabaseAuthClient";
+import { fetchAndLogImages } from "/Users/jennywaller/Documents/degree-project/app/_services/fetchAndLogImages";
+
+jest.mock('/Users/jennywaller/Documents/degree-project/lib/supabaseAuthClient', () => ({
   supabaseAuthClient: {
     storage: {
       from: () => ({

@@ -19,13 +19,14 @@
     },
     "jsx": "preserve",
     "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "noEmit": true,
     "types": [
       "node"
     ],
     
-    "allowJs": false,
+    "allowJs": true,
     "incremental": true,
     "plugins": [
       {
@@ -39,6 +40,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.js",
+    "__mocks__/next/**/*.ts"
  ],
   "exclude": [
     "node_modules"

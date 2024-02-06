@@ -28,7 +28,10 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 bg-white bg-opacity-85">
+      <header
+        data-testid="header"
+        className="fixed inset-x-0 top-0 z-50 bg-white bg-opacity-85"
+      >
         <>
           <Nav
             menuOpenClose={menuOpenClose}
