@@ -30,7 +30,6 @@
     "vercel": "^33.2.0"
   },
   "devDependencies": {
-    "@babel/preset-typescript": "^7.23.3",
     "@jest/globals": "^29.7.0",
     "@tailwindcss/forms": "^0.5.7",
     "@testing-library/jest-dom": "^6.4.0",
