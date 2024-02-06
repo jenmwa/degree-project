@@ -31,9 +31,7 @@ export default function EditProductForm({
       >
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Ändra Produkt
-            </h2>
+            <h2 className="text-base font-semibold leading-7">Ändra Produkt</h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
               Genom att ändra information här så ändrar du direkt på hemsidan.
             </p>
@@ -42,7 +40,7 @@ export default function EditProductForm({
               <div className="w-full block">
                 <label
                   htmlFor="productId"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block text-sm font-medium leading-6 "
                 >
                   ProduktId
                 </label>
@@ -99,7 +97,7 @@ export default function EditProductForm({
                 </div>
               </div>
 
-              <div className="sm:col-span">
+              <div className="sm:col-span-3">
                 <label
                   htmlFor="productShortDescription"
                   className="block text-sm font-medium leading-6 "
@@ -118,7 +116,7 @@ export default function EditProductForm({
                 </div>
               </div>
 
-              <div className="col-span-full">
+              <div className="sm:col-span-3 col-span-full">
                 <label
                   htmlFor="productLongDescription"
                   className="block text-sm font-medium leading-6 "

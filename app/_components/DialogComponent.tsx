@@ -37,7 +37,7 @@ export default function DialogComponent({
     <Transition.Root show={showDialog} as="div">
       <Dialog
         as="div"
-        className="relative z-70"
+        className="fixed inset-0 z-50"
         onClose={closeDialog}
         initialFocus={cancelButtonRef}
       >
