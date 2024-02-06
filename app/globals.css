@@ -121,6 +121,14 @@ textarea:focus {
   @apply text-gray-100
 }
 
+@layer components {
+  .custom-shadow {
+    /* Define your custom styles here */
+    text-shadow: 2px 2px 4px black;
+  }
+}
+
+
 .bg-blob {
   @apply relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#657368] to-[#EEE7CD] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem];
 }
