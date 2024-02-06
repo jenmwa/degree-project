@@ -30,7 +30,7 @@ IProductsSectionProps) {
             ) : (
               <>
                 <h2 className="text-2xl font-bold">Buketter</h2>
-                <p>Lorem ipsum dolar</p>
+                <p>Blomsterarrangemang för livets alla tillfällen.</p>
                 <p>Klicka för att läsa mer.</p>
                 <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-12 lg:space-y-0 ">
                   {products?.map((foundProduct) => (
@@ -39,10 +39,18 @@ IProductsSectionProps) {
                         <ImageCarousel foundProduct={foundProduct} />
                       </div>
                       <div
-                        className="cursor-pointer bg-gray-200 w-4/5 mx-auto relative p-10 z-10 text-center -mt-16 lg:-mt-12 sm:-mt-16"
-                        // onClick={() => showProduct(foundProduct)}
-                        onClick={() => {
+                        tabIndex={0}
+                        aria-label={`Läs mer om ${foundProduct.productTitle}`}
+                        className="cursor-pointer bg-gray-200 w-4/5 mx-auto relative p-10 z-10 text-center -mt-16 lg:-mt-12 sm:-mt-16 hover:bg-gray-300 dark:hover:bg-gray-700       // clearInputFields();
+                        "
+                        onClick={(e) => {
+                          e.currentTarget.focus();
                           showProduct(foundProduct);
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            showProduct(foundProduct);
+                          }
                         }}
                       >
                         <h3 className="mt-6 text-sm text-gray-500">

@@ -19,7 +19,7 @@ export default function EditProductComponent({
   handleFormData,
   selectedProduct,
 }: IDialogProps) {
-  const cancelButtonRef = useRef(null);
+  // const cancelButtonRef = useRef(null);
 
   return (
     <Transition.Root show={showDialog} as="div">
@@ -27,7 +27,7 @@ export default function EditProductComponent({
         as="div"
         className="fixed inset-0 z-50 overflow-y-auto"
         onClose={close}
-        initialFocus={cancelButtonRef}
+        // initialFocus={cancelButtonRef}
       >
         <Transition.Child
           as="div"
@@ -53,7 +53,10 @@ export default function EditProductComponent({
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <Dialog.Panel className="pointer-events-auto relative w-screen max-w-md">
+                <Dialog.Panel
+                  className="pointer-events-auto relative w-screen max-w-md "
+                  tabIndex={0}
+                >
                   <Transition.Child
                     as={Fragment}
                     enter="ease-in-out duration-500"

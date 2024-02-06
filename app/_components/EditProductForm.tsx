@@ -38,7 +38,7 @@ export default function EditProductForm({
               Genom att ändra information här så ändrar du direkt på hemsidan.
             </p>
 
-            <div className="w-full mt-10 grid grid-cols-1  gap-y-8 ">
+            <div className="w-full mt-10 grid grid-cols-1 gap-y-8">
               <div className="w-full block">
                 <label
                   htmlFor="productId"
@@ -47,12 +47,13 @@ export default function EditProductForm({
                   ProduktId
                 </label>
                 <div className="mt-2">
-                  <div className="flex w-full shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-rust-500">
+                  <div className="flex w-full shadow-sm ring-1 ring-inset  ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-rust-500">
                     <input
+                      disabled
                       type="text"
                       name="productId"
                       id="productId"
-                      className="block input-base flex-1 border-0 bg-white-100 py-1.5 pl-1  placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                      className="block pl-4 bg-rust-500 text-white flex-1 border-0 py-1.5 focus:ring-0 sm:text-sm sm:leading-6"
                       readOnly={true}
                       defaultValue={selectedProduct.productId}
                     />
