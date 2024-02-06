@@ -3,7 +3,7 @@ import React from "react";
 import { useProductContext } from "../_context/ProductsContext";
 import ProductSection from "../_components/ProductSection";
 import { IProduct } from "../_models/IProduct";
-import ImageCarousel from "app/_components/ImageCarousel";
+import ImageCarousel from "../_components/ImageCarousel";
 
 import { useRouter } from "next/navigation";
 
