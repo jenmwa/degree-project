@@ -19,11 +19,10 @@ export default function DialogComponent({
   closeDialog,
   showDialog,
 }: IDialogProps) {
-  const cancelButtonRef = useRef(null);
+  // const cancelButtonRef = useRef(null);
 
   // const handlePrimaryButtonClick = () => {
-  //   setShowDialog(false);
-  // close()
+  //   close();
   //   if (dialog.redirectLink) {
   //     return (
   //       <Link href={dialog.redirectLink}>

@@ -5,8 +5,6 @@ import nodemailer from 'nodemailer';
 
 const template = readFileSync('app/_components/orderConfirmationTemplate.html', 'utf-8');
 
-
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -20,8 +18,7 @@ export default async function handler(
     },
     secure: false,
   });
-  // const { emailData } = req.body;
-  // console.log('emailData is:', emailData)
+
   const { emailData, bookingData, userData } = req.body;
   console.log(req.body)
   console.log('userData:', userData)
@@ -39,15 +36,7 @@ export default async function handler(
     .replace('{{ bookingData }}', `${bookingData.productId}`)
     .replace('{{ userData }}', `${userData.userFirstName}`)
 
-  if (emailData.type === 'contact') {
-    mailData = {
-      from: process.env.EMAIL_FROM,
-      to: process.env.EMAIL_SERVER_USER,
-      subject: `${emailData.type} Message from ${emailData.name}`,
-      text: `Website contact: ${emailData.message} | Sent from: ${emailData.email}`,
-      html: `<div>${emailData.message}</div><p>Sent from: ${emailData.email}</p>`,
-    };
-  } else if (emailData.type === 'order_confirmation') {
+  if (emailData.type === 'order_confirmation') {
     mailData = {
       from: process.env.EMAIL_FROM,
       to: `${emailData.email}`,

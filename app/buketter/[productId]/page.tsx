@@ -7,7 +7,7 @@ import ProductIdSection from "../../productId/ProductIdSection";
 
 export default function ProductPage() {
   const params = useParams<{ productId: string }>();
-  const { products, isLoading, isError } = useProductContext();
+  const { products } = useProductContext();
 
   const foundProduct = products?.find(
     (product) => product.productId === params?.productId

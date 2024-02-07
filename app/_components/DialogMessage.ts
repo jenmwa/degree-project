@@ -10,7 +10,7 @@ export const CONTACT_SUCCESS_DIALOG: IDialog = {
   // redirectLink?: string;
 };
 
-export const CONTACT_400_DIALOG: IDialog = {
+export const CONTACT_ERROR_DIALOG: IDialog = {
   type: "warning",
   title: "Något gick fel",
   message: "Vänligen försök igen.",
@@ -33,14 +33,23 @@ export const REQUEST_SUCCESS_DIALOG: IDialog = {
   message:
     "Vi återkommer med svar till epostadressen du angett inom kort.",
   primaryButton: "Ok",
-  // redirectLink?: string;
+  redirectLink: '/buketter',
 };
 
 export const REQUEST_MISSINGFIELDS_DIALOG: IDialog = {
   type: "warning",
-  title: "E-postadress saknas.",
+  title: "Obligatoriska fält saknas.",
   message:
-    "För att kunna göra en beställningsförfrågan är detta fält obligatoriskt.",
+    "För att kunna komma i kontakt med oss gällande beställningsförfrågan måste vi ha ditt namn, din epost samt ett meddelande.",
+  primaryButton: "Ok",
+  // redirectLink?: string;
+};
+
+export const REQUEST_ERROR_DIALOG: IDialog = {
+  type: "warning",
+  title: "Något gick fel.",
+  message:
+    "Bokningen kunde inte uppdateras. Vänligen försök igen eller kontakta IT-ansvarig.",
   primaryButton: "Ok",
   // redirectLink?: string;
 };

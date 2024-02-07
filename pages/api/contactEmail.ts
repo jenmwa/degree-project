@@ -33,15 +33,6 @@ export default async function handler(
       text: `Website contact: ${message} | Sent from: ${email}`,
       html: `<div>${message}</div><p>Sent from: ${email}</p>`,
     };
-  } else if (type === 'order_confirmation') {
-    // Construct the order confirmation email content based on the message field
-    mailData = {
-      from: process.env.EMAIL_FROM,
-      to: email,
-      subject: `${type}: Order Confirmation`,
-      text: `Order Confirmation: ${message}`,
-      html: `<div>${message}</div>`,
-    };
   } else {
     return res.status(400).json({ message: 'Invalid request type' });
   }

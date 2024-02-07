@@ -11,7 +11,7 @@ import { initialDialog } from "app/_helpers/initialDialog";
 import { IDialog } from "app/_models/IDialog";
 import EditProductForm from "./EditProductForm";
 import {
-  CONTACT_400_DIALOG,
+  CONTACT_ERROR_DIALOG,
   PRODUCTUPDATE_SUCCESS_DIALOG,
 } from "./DialogMessage";
 
@@ -114,7 +114,7 @@ export default function EditProduct({
           error.message ===
             "Invalid file type. Please upload a JPEG, JPG, or PNG file."
         ) {
-          setDialog(CONTACT_400_DIALOG);
+          setDialog(CONTACT_ERROR_DIALOG);
           setShowDialog(true);
         }
       }

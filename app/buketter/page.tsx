@@ -3,17 +3,17 @@ import React from "react";
 import { useProductContext } from "../_context/ProductsContext";
 import ProductSection from "../_components/ProductSection";
 import { IProduct } from "../_models/IProduct";
-import ImageCarousel from "../_components/ImageCarousel";
 
 import { useRouter } from "next/navigation";
+import { Hero } from "app/_components/Hero";
 
 export default function Buketter() {
-  const { products } = useProductContext();
+  // const { products } = useProductContext();
   const router = useRouter();
 
-  const foundProduct = products?.find(
-    (product) => product.productId === "e882cbce-fa72-43c9-af7d-dc631c927278"
-  );
+  // const foundProduct = products?.find(
+  //   (product) => product.productId === "e882cbce-fa72-43c9-af7d-dc631c927278"
+  // );
 
   const showProduct = (product: IProduct) => {
     router.push(`/buketter/${product.productId}`);
@@ -26,7 +26,7 @@ export default function Buketter() {
           <div className="bg-blob" />
         </div>
 
-        <ImageCarousel foundProduct={foundProduct}></ImageCarousel>
+        <Hero></Hero>
         <div>
           <ProductSection showProduct={showProduct}></ProductSection>
         </div>
