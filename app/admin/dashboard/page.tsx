@@ -3,25 +3,39 @@ import React, { useEffect, useState } from "react";
 import { useProductContext } from "../../_context/ProductsContext";
 import { initialProduct } from "../../_helpers/initialProduct";
 import ProductSection from "../../_components/ProductSection";
-import { IBooking } from "../../_models/IBooking";
+import { IBooking, IBookingWithCustomerEmail } from "../../_models/IBooking";
 import { IProduct } from "../../_models/IProduct";
-import AdminOrderTable from "../../_components/AdminOrderTable";
 import EditProductModal from "../../_components/EditProductModal";
 import { getBookingsService } from "app/_services/getBookingsService";
 import { updateProductService } from "app/_services/updateProductService";
+import ReviewRequestModal from "app/_components/ReviewRequestModal";
+import AdminTable from "../../_components/AdminTable";
 
 export default function Dashboard() {
-  const { products, isLoading, isError } = useProductContext();
-  const [bookings, setBookings] = useState<IBooking[]>([]);
+  const { isLoading } = useProductContext();
+  const [bookings, setBookings] = useState<IBookingWithCustomerEmail[]>([]);
   const [selectedProduct, setSelectedProduct] =
     useState<IProduct>(initialProduct);
-  const [showDialog, setShowDialog] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showTableModal, setShowTableModal] = useState(true);
+  const [selectedBooking, setSelectedBooking] = useState<
+    IBookingWithCustomerEmail | undefined
+  >();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getBookingsService();
-        setBookings(data);
+        const updatedBookings = data.map(
+          (booking: {
+            bookingId: string;
+            customerEmail: string;
+            product: string;
+          }) => {
+            return booking;
+          }
+        );
+        setBookings(updatedBookings);
       } catch (error) {
         console.error("Error fetching bookings:", error);
       }
@@ -31,19 +45,17 @@ export default function Dashboard() {
   }, []);
 
   const close = () => {
-    console.log("close this modal");
-    setShowDialog(false);
+    setShowModal(false);
+    setShowTableModal(false);
   };
 
   const handleShowDialog = () => {
-    setShowDialog(true);
-    console.log("onClick, Modal is:", showDialog);
+    setShowModal(true);
   };
 
   const showProduct = (product: IProduct) => {
     setSelectedProduct(product);
     handleShowDialog();
-    console.log("click on product:", product.productTitle);
   };
 
   const handleFormData = async (formData: IProduct) => {
@@ -54,35 +66,56 @@ export default function Dashboard() {
     }
   };
 
+  const handleReviewModal = (booking: IBooking) => {
+    console.log("click on:", booking.bookingId);
+    setShowTableModal(true);
+    if (booking) {
+      setSelectedBooking(booking);
+    }
+  };
+
   return (
     <>
       <div className="flex flex-1 flex-col px-6 py-12 lg:px-8">
-        <h1 className="mt-24 text-3xl font-extraboldmd:text-5xl lg:text-6xl">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
-            Hello
-          </span>{" "}
-          Admin
-        </h1>
+        <span className="mt-24">Dagens datum:</span>
+        {/* <h1 className=" text-3xl font-extraboldmd:text-5xl lg:text-6xl">
+          {new Date().toLocaleDateString()}
+        </h1> */}
+        <br></br>
+        jag vill: Ändra produkt eller kolla förfrågningar
+        {/* {isLoading ? ( */}
+        {/* <p>Laddar...</p> */}
+        {/* ) : ( */}
+        <>
+          {showModal && (
+            <EditProductModal
+              close={close}
+              showModal={showModal}
+              selectedProduct={selectedProduct}
+              handleFormData={handleFormData}
+            ></EditProductModal>
+          )}
+          {/* <AdminTableSection
+            handleReviewModal={handleReviewModal}
+            bookings={bookings}
+            isLoading={false}
+          ></AdminTableSection> */}
+          <p>GÖM TABELLEN MED EN KNAPP /EXPAND/DECREASE</p>
+          <AdminTable
+            bookings={bookings}
+            handleReviewModal={handleReviewModal}
+            isLoading={isLoading}
+          ></AdminTable>
 
-        {isLoading ? (
-          <p>Laddar...</p>
-        ) : (
-          <>
-            {showDialog && (
-              <EditProductModal
-                close={close}
-                showDialog={showDialog}
-                selectedProduct={selectedProduct}
-                handleFormData={handleFormData}
-              ></EditProductModal>
-            )}
-            <AdminOrderTable
-              bookings={bookings}
-              isLoading={isLoading}
-            ></AdminOrderTable>
-            <ProductSection showProduct={showProduct}></ProductSection>
-          </>
-        )}
+          <ProductSection showProduct={showProduct}></ProductSection>
+          {showTableModal && selectedBooking && (
+            <ReviewRequestModal
+              selectedBooking={selectedBooking}
+              showTableModal={showTableModal}
+              close={close}
+            ></ReviewRequestModal>
+          )}
+        </>{" "}
       </div>
     </>
   );

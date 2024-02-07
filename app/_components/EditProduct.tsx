@@ -14,16 +14,17 @@ import {
   CONTACT_400_DIALOG,
   PRODUCTUPDATE_SUCCESS_DIALOG,
 } from "./DialogMessage";
-import Link from "next/link";
 
 interface IEditProductProps {
   selectedProduct: IProduct;
   handleFormData: (formData: IProduct) => void;
+  close: () => void;
 }
 
 export default function EditProduct({
   selectedProduct,
   handleFormData,
+  close,
 }: IEditProductProps) {
   const [formData, setFormData] = useState<IProduct>({
     productId: selectedProduct.productId,
@@ -100,7 +101,7 @@ export default function EditProduct({
       handleFormData(updatedFormData);
       setDialog(PRODUCTUPDATE_SUCCESS_DIALOG);
       setShowDialog(true);
-
+      closeDialog();
       // clearInputFields();
       console.log("SUCCESS updating");
     } catch (error) {
@@ -132,6 +133,7 @@ export default function EditProduct({
             fileImage={fileImage}
             handleFileImageChange={handleFileImageChange}
             removeSelectedImage={removeSelectedImage}
+            close={close}
           ></EditProductForm>
         </div>
         <DialogComponent

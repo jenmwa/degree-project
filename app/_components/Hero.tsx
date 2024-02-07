@@ -1,10 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import logo from "/public/img/logoisch.png";
-import hero from "/public/img/hero.webp";
 
 export function Hero() {
   const imageSizeSM = 200;
@@ -48,10 +45,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-      {/* <div
-          className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-          aria-hidden="true"
-        ></div> */}
     </div>
   );
 }

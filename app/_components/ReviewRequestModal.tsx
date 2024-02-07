@@ -3,31 +3,38 @@
 import { Transition, Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useRef } from "react";
-import EditProduct from "./EditProduct";
-import { IProduct } from "app/_models/IProduct";
+
+import ReviewRequestData from "./ReviewRequestData";
+import { IBookingWithCustomerEmail } from "app/_models/IBooking";
 
 export interface IDialogProps {
   close: () => void;
-  showModal: boolean;
-  selectedProduct: IProduct;
-  handleFormData: (formData: IProduct) => void;
+  showTableModal: boolean;
+  selectedBooking: IBookingWithCustomerEmail;
+  // closeModal: () => void;
+  // selectedProduct: IProduct;
+  // handleFormData: (formData: IProduct) => void;
 }
 
-export default function EditProductComponent({
+export default function ReviewRequestModal({
   close,
-  showModal,
-  handleFormData,
-  selectedProduct,
-}: IDialogProps) {
-  // const cancelButtonRef = useRef(null);
+  showTableModal,
+  selectedBooking,
+}: // closeModal,
+// handleFormData,
+// selectedProduct,
+IDialogProps) {
+  const cancelButtonRef = useRef(null);
+  const modalTitle = " förhandsvisa förfrågan";
+  const srOnlyCloseMessage = "förhandsvisa förfrågan";
 
   return (
-    <Transition.Root show={showModal} as="div">
+    <Transition.Root show={showTableModal} as="div">
       <Dialog
         as="div"
         className="fixed inset-0 z-50 overflow-y-auto"
         onClose={close}
-        // initialFocus={cancelButtonRef}
+        initialFocus={cancelButtonRef}
       >
         <Transition.Child
           as="div"
@@ -74,24 +81,23 @@ export default function EditProductComponent({
                       >
                         <span className="absolute -inset-2.5" />
                         <span className="sr-only">
-                          Stäng Sidopanel Ändra produkt
-                        </span>
+                          {" "}
+                          {srOnlyCloseMessage}
+                        </span>{" "}
                         <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
                     </div>
                   </Transition.Child>
                   <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
                     <div className="px-4 sm:px-6">
-                      <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
-                        Ändra Produkt
+                      <Dialog.Title className="text-base font-semibold leading-6">
+                        {modalTitle}
                       </Dialog.Title>
                     </div>
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">
-                      <EditProduct
-                        close={close}
-                        selectedProduct={selectedProduct}
-                        handleFormData={handleFormData}
-                      ></EditProduct>
+                      <ReviewRequestData
+                        selectedBooking={selectedBooking}
+                      ></ReviewRequestData>
                     </div>
                   </div>
                 </Dialog.Panel>

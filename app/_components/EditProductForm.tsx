@@ -10,6 +10,7 @@ interface IEditProductsFormProps {
   handleFileImageChange: (e: ChangeEvent<HTMLInputElement>) => void;
   fileImage: File | null;
   removeSelectedImage: () => void;
+  close: () => void;
 }
 
 export default function EditProductForm({
@@ -20,6 +21,7 @@ export default function EditProductForm({
   fileImage,
   handleFileImageChange,
   removeSelectedImage,
+  close,
 }: IEditProductsFormProps) {
   return (
     <>
