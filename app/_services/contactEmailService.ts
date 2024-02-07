@@ -1,6 +1,8 @@
 import { IContactEmail } from "app/_models/IContactEmail";
 
 export async function contactEmailService(email: IContactEmail) {
+  console.log('EMAIL IS', email)
+
   try {
     if (email.email !== email.confirmEmail) {
       return { success: false, error: "Email addresses do not match" };
@@ -14,7 +16,7 @@ export async function contactEmailService(email: IContactEmail) {
     });
 
     const body = await res.json();
-    console.log(body);
+    console.log('body is', body);
 
     if (res.ok) {
       return { success: true, data: body };

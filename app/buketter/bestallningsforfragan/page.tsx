@@ -11,12 +11,12 @@ import OrderForm from "../../_components/OrderForm";
 import { useProductContext } from "../../_context/ProductsContext";
 import { initialUser } from "../../_helpers/initialUser";
 import { initialDialog } from "../../_helpers/initialDialog";
-import { IBooking } from "../../_models/IBooking";
+import { IBooking, bookingStatus } from "../../_models/IBooking";
 import { IDialog } from "../../_models/IDialog";
 import { IUser } from "../../_models/IUser";
 import { validatePhone } from "../../_utilities/validation";
 import Stepper from "../../_components/Stepper";
-import { sendEmailService } from "app/_services/sendEmailService";
+import { serviceEmailService } from "app/_services/serviceEmailService";
 import { createUserService } from "app/_services/createUserService";
 import { createBookingService } from "app/_services/createBookingService";
 
@@ -36,7 +36,7 @@ export default function Page() {
     product: selectedProduct,
     bookingMessage: "",
     requestedDate: "",
-    bookingStatus: "Request",
+    bookingStatus: bookingStatus.Request,
     created_at: null,
     updated_at: null,
   });
@@ -105,7 +105,7 @@ export default function Page() {
       product: selectedProduct,
       bookingMessage: "",
       requestedDate: "",
-      bookingStatus: "Request",
+      bookingStatus: bookingStatus.Request,
       created_at: null,
       updated_at: null,
     });
@@ -121,6 +121,7 @@ export default function Page() {
     }
     try {
       const user = await createUserService(userData);
+      console.log(user);
       const createdBooking = await createBookingService(bookingData, user);
 
       const userEmail = userData.userEmail;
@@ -131,7 +132,7 @@ export default function Page() {
         message: "Your order has been confirmed. Details: ",
       };
 
-      await sendEmailService(emailData, bookingData, userData);
+      await serviceEmailService(emailData, bookingData, userData);
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
 

@@ -6,7 +6,6 @@ export default async function handler(req: any, res: any) {
     try {
       const { productId, productPrice, productTitle, productImagesUrl, productShortDescription, productLongDescription } = req.body;
 
-      //OBS: kolla skillnader innan submit!
       if (!productId || !productPrice) {
         return res.status(400).json({ error: 'productId and productPrice are required' });
       }

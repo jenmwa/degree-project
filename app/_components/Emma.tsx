@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ProductInfo from "./ProductInfo";
-import emma from "../../public/img/emma.jpg";
+import emma from "../../public/img/emma2.jpg";
 
 import React from "react";
 

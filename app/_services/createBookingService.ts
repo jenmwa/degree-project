@@ -5,6 +5,7 @@ import { IUser } from "app/_models/IUser";
 export async function createBookingService(bookingData: IBooking, userId: IUser) {
   try {
     bookingData.customer = userId;
+    console.log('createbookingservice:', bookingData, userId)
 
     const response = await fetch("/api/createBooking", {
       method: "POST",

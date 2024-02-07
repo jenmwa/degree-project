@@ -10,17 +10,21 @@ import DialogComponent from "./DialogComponent";
 import { initialDialog } from "app/_helpers/initialDialog";
 import { IDialog } from "app/_models/IDialog";
 import EditProductForm from "./EditProductForm";
-import { PRODUCTUPDATE_SUCCESS_DIALOG } from "./DialogMessage";
-import Link from "next/link";
+import {
+  CONTACT_400_DIALOG,
+  PRODUCTUPDATE_SUCCESS_DIALOG,
+} from "./DialogMessage";
 
 interface IEditProductProps {
   selectedProduct: IProduct;
   handleFormData: (formData: IProduct) => void;
+  close: () => void;
 }
 
 export default function EditProduct({
   selectedProduct,
   handleFormData,
+  close,
 }: IEditProductProps) {
   const [formData, setFormData] = useState<IProduct>({
     productId: selectedProduct.productId,
@@ -97,11 +101,23 @@ export default function EditProduct({
       handleFormData(updatedFormData);
       setDialog(PRODUCTUPDATE_SUCCESS_DIALOG);
       setShowDialog(true);
-
+      closeDialog();
       // clearInputFields();
       console.log("SUCCESS updating");
     } catch (error) {
-      console.error("Unexpected error:", error);
+      console.error("Error submitting form:", error);
+
+      if (error instanceof Error) {
+        // Set dialog for invalid file
+        if (
+          error.message === "No file selected." ||
+          error.message ===
+            "Invalid file type. Please upload a JPEG, JPG, or PNG file."
+        ) {
+          setDialog(CONTACT_400_DIALOG);
+          setShowDialog(true);
+        }
+      }
     }
   };
 
@@ -117,6 +133,7 @@ export default function EditProduct({
             fileImage={fileImage}
             handleFileImageChange={handleFileImageChange}
             removeSelectedImage={removeSelectedImage}
+            close={close}
           ></EditProductForm>
         </div>
         <DialogComponent

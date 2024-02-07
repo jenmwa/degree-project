@@ -22,7 +22,6 @@ export function Header() {
   };
 
   const close = () => {
-    console.log("close this modal");
     setMobileMenuOpen(false);
   };
 

@@ -8,7 +8,7 @@ import ImageCarousel from "../_components/ImageCarousel";
 import { useRouter } from "next/navigation";
 
 export default function Buketter() {
-  const { products, isLoading, isError } = useProductContext();
+  const { products } = useProductContext();
   const router = useRouter();
 
   const foundProduct = products?.find(

@@ -123,8 +123,8 @@ textarea:focus {
 
 @layer components {
   .custom-shadow {
-    /* Define your custom styles here */
-    text-shadow: 2px 2px 4px black;
+
+    text-shadow: 2px 2px 4px #2d2d2d;
   }
 }
 

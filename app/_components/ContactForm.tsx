@@ -6,7 +6,7 @@ import { classNames } from "./OrderForm";
 import React from "react";
 
 interface IContactFormProps {
-  handleSubmit: (event: FormEvent) => void;
+  handleSubmit: (e: FormEvent) => void;
   email: IContactEmail;
   handleOnChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleOnChangeTextarea: (e: ChangeEvent<HTMLTextAreaElement>) => void;

@@ -62,7 +62,6 @@ export default function Contact() {
       clearEmailFields();
     }
   }
-
   return (
     <section className="flex flex-col">
       <div className="relative flex place-items-center bg-white"></div>

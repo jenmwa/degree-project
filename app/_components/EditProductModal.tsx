@@ -8,26 +8,26 @@ import { IProduct } from "app/_models/IProduct";
 
 export interface IDialogProps {
   close: () => void;
-  showDialog: boolean;
+  showModal: boolean;
   selectedProduct: IProduct;
   handleFormData: (formData: IProduct) => void;
 }
 
 export default function EditProductComponent({
   close,
-  showDialog,
+  showModal,
   handleFormData,
   selectedProduct,
 }: IDialogProps) {
-  const cancelButtonRef = useRef(null);
+  // const cancelButtonRef = useRef(null);
 
   return (
-    <Transition.Root show={showDialog} as="div">
+    <Transition.Root show={showModal} as="div">
       <Dialog
         as="div"
         className="fixed inset-0 z-50 overflow-y-auto"
         onClose={close}
-        initialFocus={cancelButtonRef}
+        // initialFocus={cancelButtonRef}
       >
         <Transition.Child
           as="div"
@@ -53,7 +53,10 @@ export default function EditProductComponent({
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <Dialog.Panel className="pointer-events-auto relative w-screen max-w-md">
+                <Dialog.Panel
+                  className="pointer-events-auto relative w-screen max-w-md "
+                  tabIndex={0}
+                >
                   <Transition.Child
                     as={Fragment}
                     enter="ease-in-out duration-500"
@@ -85,6 +88,7 @@ export default function EditProductComponent({
                     </div>
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">
                       <EditProduct
+                        close={close}
                         selectedProduct={selectedProduct}
                         handleFormData={handleFormData}
                       ></EditProduct>
