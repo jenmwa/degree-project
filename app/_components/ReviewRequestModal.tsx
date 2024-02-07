@@ -15,10 +15,6 @@ export interface IDialogProps {
     status: bookingStatus,
     selectedBooking: IBookingWithCustomerEmail
   ) => void;
-
-  // closeModal: () => void;
-  // selectedProduct: IProduct;
-  // handleFormData: (formData: IProduct) => void;
 }
 
 export default function ReviewRequestModal({
@@ -26,12 +22,7 @@ export default function ReviewRequestModal({
   showTableModal,
   selectedBooking,
   updateBooking,
-}: // closeModal,
-// handleFormData,
-// selectedProduct,
-IDialogProps) {
-  const cancelButtonRef = useRef(null);
-  const modalTitle = " förhandsvisa förfrågan";
+}: IDialogProps) {
   const srOnlyCloseMessage = "förhandsvisa förfrågan";
 
   return (
@@ -40,7 +31,6 @@ IDialogProps) {
         as="div"
         className="fixed inset-0 z-50 overflow-y-auto"
         onClose={close}
-        initialFocus={cancelButtonRef}
       >
         <Transition.Child
           as="div"
@@ -95,11 +85,6 @@ IDialogProps) {
                     </div>
                   </Transition.Child>
                   <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                    <div className="px-4 sm:px-6">
-                      <Dialog.Title className="text-base font-semibold leading-6">
-                        {modalTitle}
-                      </Dialog.Title>
-                    </div>
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">
                       <ReviewRequestData
                         selectedBooking={selectedBooking}

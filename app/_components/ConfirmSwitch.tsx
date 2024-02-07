@@ -13,7 +13,7 @@ export default function ConfirmSwitch({
   isAgreed,
   handleSwitchOnChange,
 }: IConfirmSwitchProps) {
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -47,7 +47,7 @@ export default function ConfirmSwitch({
             />
           </Switch>
         </div>
-        <Switch.Label className="text-sm leading-6">
+        <Switch.Label className=" leading-6">
           Genom att klicka i här godkänner du vår
           <a
             onClick={(e) => handleLinkClick(e)}

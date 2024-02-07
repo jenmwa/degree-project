@@ -8,8 +8,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const { product, bookingMessage, requestedDate, bookingStatus } = req.body;
 
       const userId = req.body.customer;
-      // const createdAt = new Date().toISOString();
-      // console.log('created at', createdAt)
 
       const bookingObject: any = {
         product: product,
@@ -18,7 +16,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         customer: userId,
       };
 
-      // Only include requestedDate if it's provided
       if (requestedDate) {
         bookingObject.requestedDate = requestedDate;
       }

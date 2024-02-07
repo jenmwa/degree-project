@@ -23,15 +23,10 @@ export function Nav({
     <>
       <nav
         data-testid="nav-component"
-        className="flex items-center justify-between p-6 lg:px-8"
+        className="flex items-center p-6 lg:px-8 justify-end"
         aria-label="Global"
       >
-        <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Björby Blomster</span>
-          </Link>
-        </div>
-        <div className="flex lg:hidden">
+        <div className="flex lg:hidden sm:flex-1 sm:justify-end">
           <button
             type="button"
             className="-m-2.5 inline-flex items-center justify-center p-2.5 "
@@ -41,7 +36,7 @@ export function Nav({
             <Bars3Icon className="h-12 w-12" aria-hidden="true" />
           </button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-12">
+        <div className="hidden lg:flex lg:gap-x-12 lg:flex-1 lg:justify-end">
           {navigation.map((item) => (
             <Link
               key={item.name}
@@ -52,7 +47,7 @@ export function Nav({
             </Link>
           ))}
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden pl-12 lg:flex lg:justify-end">
           <Link
             href={href}
             className="link-button"

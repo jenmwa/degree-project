@@ -27,13 +27,12 @@ export default function ProductForm({
             <h3 className="mb-4 font-semibold ">Val av tjänst:</h3>
           </legend>
 
-          <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200  sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+          <ul className="items-center w-full text-sm font-medium bg-white border border-gray-200  sm:flex">
             {products?.map((product) => (
               <li
                 key={product.productId}
                 className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
               >
-                {/* <div className="flex items-center ps-3  "> */}
                 <label
                   htmlFor={`horizontal-list-radio-license-${product.productId}`}
                   className="flex items-center py-3 ps-3 text-sm font-medium  cursor-pointer"
@@ -54,7 +53,7 @@ export default function ProductForm({
                       handleOnChange(e);
                       localStorage.setItem("product", product.productId);
                     }}
-                    className="w-4 h-4 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                    className="w-4 h-4 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-3000 focus:ring-2 "
                   />
                   <span className="ml-2">{product.productTitle}</span>
                 </label>
@@ -81,7 +80,7 @@ export default function ProductForm({
             onChange={handleOnChange}
             min={minDate}
             autoComplete="date"
-            className="block w-full  input-base"
+            className="block w-full input-base"
           />
         </div>
       </div>

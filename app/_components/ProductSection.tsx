@@ -7,17 +7,9 @@ import Spinner from "./Spinner";
 
 interface IProductsSectionProps {
   showProduct: (product: IProduct) => void;
-  // products: IProduct[] | null;
-  // isLoading: boolean;
-  // handleShowDialog: () => void;
 }
 
-export default function ProductSection({
-  showProduct,
-}: // products,
-// isLoading,
-// handleShowDialog,
-IProductsSectionProps) {
+export default function ProductSection({ showProduct }: IProductsSectionProps) {
   const { products, isLoading, isError } = useProductContext();
 
   return (

@@ -11,7 +11,9 @@ import { initialDialog } from "app/_helpers/initialDialog";
 import { IDialog } from "app/_models/IDialog";
 import EditProductForm from "./EditProductForm";
 import {
-  CONTACT_400_DIALOG,
+  CONTACT_ERROR_DIALOG,
+  PRODUCTUPDATE_IMGSRC_DIALOG,
+  PRODUCTUPDATE_IMGSUCCESS_DIALOG,
   PRODUCTUPDATE_SUCCESS_DIALOG,
 } from "./DialogMessage";
 
@@ -99,22 +101,16 @@ export default function EditProduct({
       }
       const updatedFormData = updateFormDataWithImageUrl(formData, imageUrl);
       handleFormData(updatedFormData);
-      setDialog(PRODUCTUPDATE_SUCCESS_DIALOG);
-      setShowDialog(true);
-      closeDialog();
-      // clearInputFields();
-      console.log("SUCCESS updating");
     } catch (error) {
       console.error("Error submitting form:", error);
 
       if (error instanceof Error) {
-        // Set dialog for invalid file
         if (
           error.message === "No file selected." ||
           error.message ===
             "Invalid file type. Please upload a JPEG, JPG, or PNG file."
         ) {
-          setDialog(CONTACT_400_DIALOG);
+          setDialog(PRODUCTUPDATE_IMGSRC_DIALOG);
           setShowDialog(true);
         }
       }
