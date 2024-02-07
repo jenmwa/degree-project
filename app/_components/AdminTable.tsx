@@ -9,50 +9,25 @@ interface IAdminOrderTableProps {
   handleReviewModal: (booking: IBooking) => void;
 }
 
-// interface ITableHeaders {
-//   name: string;
-// }
-
-// export const tableHeader: ITableHeaders[] = [
-//   {
-//     name: "id",
-//   },
-//   {
-//     name: "Datum",
-//   },
-//   {
-//     name: "Produkter",
-//   },
-//   {
-//     name: "från",
-//   },
-//   {
-//     name: "önskat datum",
-//   },
-//   {
-//     name: "status",
-//   },
-// ];
-
 export default function AdminTable({
   bookings,
   isLoading,
   handleReviewModal,
 }: IAdminOrderTableProps) {
-  const userId = "4f7b657b-a75f-456b-b58b-823dc1f8310f";
+  // const userId = "4f7b657b-a75f-456b-b58b-823dc1f8310f";
 
-  const fetchData = async (userId: string) => {
-    try {
-      const response = await getUserService(userId);
-      return response;
-    } catch (error) {
-      console.error("Error fetching users:", error);
-    }
-  };
+  // const fetchData = async (userId: string) => {
+  //   try {
+  //     const response = await getUserService(userId);
+  //     return response;
+  //   } catch (error) {
+  //     console.error("Error fetching users:", error);
+  //   }
+  // };
 
   return (
     <>
-      <button onClick={() => fetchData(userId)}>CLICK TO GET USER</button>
+      {/* <button onClick={() => fetchData(userId)}>CLICK TO GET USER</button> */}
 
       <section className="relative overflow-x-auto my-16">
         <table className="w-full text-left rtl:text-right text-gray-500 ">

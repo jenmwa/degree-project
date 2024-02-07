@@ -38,7 +38,7 @@ export default function ProductIdSection({
               <h2 className="text-base font-semibold leading-7 text-rust-500">
                 Buketter
               </h2>
-              <span className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              <span className="mt-4 text-3xl font-bold tracking-tight text-rust-500 sm:text-4xl">
                 {foundProduct?.productTitle}
               </span>
               <p className="mt-6 text-lg leading-8 text-gray-600">

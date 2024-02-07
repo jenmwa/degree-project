@@ -34,7 +34,7 @@ export default function EditProductForm({
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base font-semibold leading-7">Ändra Produkt</h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
+            <p className="mt-1 leading-6 text-gray-600">
               Genom att ändra information här så ändrar du direkt på hemsidan.
             </p>
 
@@ -42,7 +42,7 @@ export default function EditProductForm({
               <div className="w-full block">
                 <label
                   htmlFor="productId"
-                  className="block text-sm font-medium leading-6 "
+                  className="block font-medium leading-6 "
                 >
                   ProduktId
                 </label>
@@ -53,7 +53,7 @@ export default function EditProductForm({
                       type="text"
                       name="productId"
                       id="productId"
-                      className="block pl-4 bg-rust-500 text-white flex-1 border-0 py-1.5 focus:ring-0 sm:text-sm sm:leading-6"
+                      className="block pl-4 bg-rust-500 text-white flex-1 border-0 py-1.5 focus:ring-0 sm:leading-6"
                       readOnly={true}
                       defaultValue={selectedProduct.productId}
                     />
@@ -64,7 +64,7 @@ export default function EditProductForm({
               <div className="sm:col-span-3">
                 <label
                   htmlFor="productTitle"
-                  className="block text-sm font-medium leading-6"
+                  className="block font-medium leading-6"
                 >
                   Titel
                 </label>
@@ -83,7 +83,7 @@ export default function EditProductForm({
               <div className="sm:col-span-3">
                 <label
                   htmlFor="productPrice"
-                  className="block text-sm font-medium leading-6 "
+                  className="block font-medium leading-6 "
                 >
                   Pris
                 </label>
@@ -102,7 +102,7 @@ export default function EditProductForm({
               <div className="sm:col-span-3">
                 <label
                   htmlFor="productShortDescription"
-                  className="block text-sm font-medium leading-6 "
+                  className="block font-medium leading-6 "
                 >
                   Kort produktbeskrivning
                 </label>
@@ -121,7 +121,7 @@ export default function EditProductForm({
               <div className="sm:col-span-3 col-span-full">
                 <label
                   htmlFor="productLongDescription"
-                  className="block text-sm font-medium leading-6 "
+                  className="block  font-medium leading-6 "
                 >
                   Lång produktbeskrivning
                 </label>
@@ -136,7 +136,7 @@ export default function EditProductForm({
                     onChange={handleTextareaChange}
                   />
                 </div>
-                <p className="mt-3 text-sm leading-6 text-gray-600">
+                <p className="mt-3 leading-6 text-gray-600">
                   Lång produktbeskrivning. Skriv allt du vill.
                 </p>
               </div>
@@ -144,7 +144,7 @@ export default function EditProductForm({
               <div className="sm:col-span-3">
                 <label
                   htmlFor="file"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block font-medium leading-6 text-gray-900"
                 >
                   Ladda upp bild
                 </label>
@@ -187,7 +187,7 @@ export default function EditProductForm({
         <div className="mt-6 flex items-center justify-end gap-x-6">
           <button
             type="button"
-            className="text-sm font-semibold leading-6 text-gray-900"
+            className=" font-semibold leading-6 text-gray-900"
             onClick={() => close()}
           >
             Avbryt

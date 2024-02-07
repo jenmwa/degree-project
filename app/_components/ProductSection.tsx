@@ -33,9 +33,7 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
                       <div
                         tabIndex={0}
                         aria-label={`Läs mer om ${foundProduct.productTitle}`}
-                        className="cursor-pointer  min-h-48 bg-gray-200 w-4/5 mx-auto relative p-10 z-10 text-center -mt-16 lg:-mt-12 sm:-mt-16 hover:bg-gray-300 dark:hover:bg-gray-700 "
-                        // clearInputFields();
-
+                        className="cursor-pointer  min-h-48 bg-gray-200 w-4/5 mx-auto relative p-10 z-10 text-center -mt-16 lg:-mt-12 sm:-mt-16 hover:bg-gray-300"
                         onClick={(e) => {
                           e.currentTarget.focus();
                           showProduct(foundProduct);
@@ -46,7 +44,7 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
                           }
                         }}
                       >
-                        <h3 className="mt-6 text-sm text-gray-500">
+                        <h3 className="mt-6 text-rust-500">
                           <span className="absolute inset-0" />
                           {foundProduct.productTitle}
                         </h3>

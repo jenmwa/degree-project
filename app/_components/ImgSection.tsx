@@ -21,6 +21,7 @@ export default function ImgSection() {
 
     fetchData();
   }, []);
+
   const URL =
     "https://itbhssqwjunahaltkmza.supabase.co/storage/v1/object/public/images/";
   return (

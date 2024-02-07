@@ -27,15 +27,15 @@ export default function ProductForm({
             <h3 className="mb-4 font-semibold ">Val av tjänst:</h3>
           </legend>
 
-          <ul className="items-center w-full text-sm font-medium bg-white border border-gray-200  sm:flex">
+          <ul className="items-center w-full font-medium bg-white border border-gray-200  sm:flex">
             {products?.map((product) => (
               <li
                 key={product.productId}
-                className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+                className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r "
               >
                 <label
                   htmlFor={`horizontal-list-radio-license-${product.productId}`}
-                  className="flex items-center py-3 ps-3 text-sm font-medium  cursor-pointer"
+                  className="flex items-center py-3 ps-3 font-medium  cursor-pointer"
                 >
                   <input
                     required
@@ -65,7 +65,7 @@ export default function ProductForm({
       </div>
 
       <div className="sm:col-span-2">
-        <label htmlFor="date" className="block text-sm font-semibold leading-6">
+        <label htmlFor="date" className="block font-semibold leading-6">
           Till vilket datum?{" "}
           <span className="font-normal ">
             ( frivilligt fält, kan lämnas tomt )
@@ -86,10 +86,7 @@ export default function ProductForm({
       </div>
 
       <div className="sm:col-span-2">
-        <label
-          htmlFor="message"
-          className="block text-sm font-semibold leading-6"
-        >
+        <label htmlFor="message" className="block font-semibold leading-6">
           Meddelande
         </label>
         <div className="mt-2.5">

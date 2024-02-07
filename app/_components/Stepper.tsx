@@ -3,7 +3,7 @@ import React from "react";
 export default function Stepper() {
   return (
     <>
-      <ol className="flex items-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4 rtl:space-x-reverse">
+      <ol className="flex items-center w-full p-3 space-x-2 font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm  sm:p-4 sm:space-x-4 rtl:space-x-reverse">
         <li className="flex items-center text-rust-500 ">
           <span className="flex items-center justify-center w-5 h-5 me-2 text-xs border border-rust-500 rounded-full shrink-0">
             1
@@ -27,7 +27,7 @@ export default function Stepper() {
           </svg>
         </li>
         <li className="flex items-center">
-          <span className="flex items-center justify-center w-5 h-5 me-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
+          <span className="flex items-center justify-center w-5 h-5 me-2 text-xs border border-gray-500 rounded-full shrink-0 ">
             2
           </span>
           Beställare <span className="hidden sm:inline-flex sm:ms-2">Info</span>
@@ -48,7 +48,7 @@ export default function Stepper() {
           </svg>
         </li>
         <li className="flex items-center">
-          <span className="flex items-center justify-center w-5 h-5 me-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
+          <span className="flex items-center justify-center w-5 h-5 me-2 text-xs border border-gray-500 rounded-full shrink-0 ">
             3
           </span>
           Förhandsgranskning

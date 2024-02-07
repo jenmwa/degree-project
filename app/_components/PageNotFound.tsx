@@ -22,7 +22,7 @@ export default function PageNotFound() {
             <a
               href={`mailto:info@bjorbyblomster.se`}
               target="_blank"
-              className="text-sm font-semibold"
+              className=" font-semibold"
             >
               Kontakta oss <span aria-hidden="true">&rarr;</span>
             </a>

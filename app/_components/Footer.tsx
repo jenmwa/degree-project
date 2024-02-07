@@ -33,7 +33,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
             <div className="py-2">
               <h3 className="uppercase dark -text">Björby Blomster AB</h3>
               <ul className="mt-1">
@@ -92,6 +92,7 @@ export function Footer() {
                   target="_blank"
                 >
                   <svg
+                    aria-label="Facebook Logo"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
                     viewBox="0 0 32 32"
@@ -108,6 +109,7 @@ export function Footer() {
                   target="_blank"
                 >
                   <svg
+                    aria-label="Instagram Logo"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 32 32"
                     fill="currentColor"
@@ -120,9 +122,7 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="py-6 text-sm text-center dark-text">
-          © 2024 Björby Blomster
-        </div>
+        <div className="py-6 text-center dark-text">© 2024 Björby Blomster</div>
       </footer>
     </>
   );

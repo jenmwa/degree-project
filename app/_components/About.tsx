@@ -4,6 +4,8 @@ import logo from "../../public/img/logoisch.png";
 import flowers from "../../public/svg/flowers-bouquet-svgrepo-com.svg";
 import leaves from "../../public/svg/four-leaves-svgrepo-com.svg";
 import heart from "../../public/svg/heart-svgrepo-com.svg";
+import ImageCarousel from "./ImageCarousel";
+import { useProductContext } from "app/_context/ProductsContext";
 
 const features = [
   {
@@ -27,6 +29,12 @@ const features = [
 ];
 
 export default function ContactSection() {
+  const { products, isLoading, isError } = useProductContext();
+
+  const foundProduct = products?.find(
+    (product) => product.productId === "e882cbce-fa72-43c9-af7d-dc631c927278"
+  );
+
   return (
     <section id="about" className="overflow-hidden bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -65,17 +73,8 @@ export default function ContactSection() {
             </div>
           </div>
 
-          <div className="two-column-img ">
-            <div className="max-w-full w-full">
-              <Image
-                src={logo}
-                alt="Björnby blomster"
-                layout="responsive"
-                width={400}
-                height={400}
-                objectFit="contain"
-              />
-            </div>
+          <div className="max-w-full w-full">
+            <ImageCarousel foundProduct={foundProduct} />
           </div>
         </div>
       </div>

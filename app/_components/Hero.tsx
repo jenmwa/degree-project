@@ -25,10 +25,11 @@ export function Hero() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="mx-auto sm:max-w-2xl md:max-w-full md:px-32 xl:max-w-7xl lg:px-8  py-32 text-white sm:py-36 grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-1">
+      <div className="mx-auto custom-shadowsm:max-w-2xl md:max-w-full md:px-32 xl:max-w-7xl lg:px-8  py-32 text-white sm:py-36 grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-1">
         <div className="lg:w-full lg:max-w-2xl lg:pt-4">
-          <h1 className="custom-shadow  text-4xl font-bold tracking-tight sm:text-6xl text-shadow-lg">
-            <span className="text-rust-100">Blommor</span> för <br />
+          <h1 className="custom-shadow custom-shadow text-4xl font-bold tracking-tight sm:text-6xl text-shadow-lg">
+            <span className="text-rust-100 custom-shadow">Blommor</span> för{" "}
+            <br />
             livets alla tillfällen
           </h1>
           <p className="custom-shadow mt-6 text-lg leading-8 ">
