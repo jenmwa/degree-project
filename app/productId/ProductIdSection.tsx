@@ -41,12 +41,14 @@ export default function ProductIdSection({
               <span className="mt-4 text-3xl font-bold tracking-tight text-rust-500 sm:text-4xl">
                 {foundProduct?.productTitle}
               </span>
-              <p className="mt-6 text-lg leading-8 text-gray-600">
+              <p className="mt-6 text-lg leading-8 text-gray-600 italic">
                 {foundProduct?.productShortDescription}
               </p>
             </div>
             <div>
-              <p>{foundProduct?.productLongDescription}</p>
+              <p className="my-8 text-lg">
+                {foundProduct?.productLongDescription}
+              </p>
               <p>
                 Pris från <span>{foundProduct?.productPrice}</span> sek
               </p>
@@ -55,7 +57,7 @@ export default function ProductIdSection({
               className="primary-button mt-4"
               onClick={() => handleRequestOffer(foundProduct?.productId)}
             >
-              Boka
+              Gör en Beställningsförfrågan
             </button>
           </div>
         </div>

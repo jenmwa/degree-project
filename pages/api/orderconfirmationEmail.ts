@@ -1,9 +1,10 @@
 import { IMailData } from 'app/_models/IMailData';
+import { getTodaysDate } from 'app/_utilities/getTodaysDate';
 import { readFileSync } from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
-const template = readFileSync('app/_components/orderConfirmationTemplate.html', 'utf-8');
+const template = readFileSync('app/_email-templates/orderRequestTemplate.html', 'utf-8');
 
 export default async function handler(
   req: NextApiRequest,
@@ -30,11 +31,33 @@ export default async function handler(
   }
 
   let mailData: IMailData;
+  const requestedDate = bookingData.requestedDate;
+  const formattedRequestDate = requestedDate ? new Date(requestedDate).toLocaleDateString('sv-SE') : '';
+  const requestedDateListItem = formattedRequestDate !== '' ? `<li>Önskat datum: ${formattedRequestDate}</li>` : '';
+
+
+  const formattedCreatedDate = getTodaysDate();
+
+  const phoneNumber = userData.userPhoneNumber;
+  const phoneListItem = phoneNumber !== '' ? `<li>Telefonnummer: ${phoneNumber}</li>` : '';
+
+
+
 
   const htmlContent = template
-    .replace('{{ email }}', `${emailData.email}`)
-    .replace('{{ bookingData }}', `${bookingData.productId}`)
-    .replace('{{ userData }}', `${userData.userFirstName}`)
+    .replace('{{ email-type }}', `${emailData.type}`)
+    .replace('{{ email-email }}', `${emailData.email}`)
+    .replace('{{ email-message }}', `${emailData.message}`)
+    .replace('{{ email-name }}', `${emailData.name}`)
+    .replace('{{ bookingDataId }}', `${bookingData.productId}`)
+    .replace('{{ bookingDataBookingmessage }}', `${bookingData.bookingMessage}`)
+    .replace('{{ bookingDataRequestedDate }}', requestedDateListItem)
+    .replace('{{ bookingDataCreated }}', formattedCreatedDate)
+    .replace('{{ bookingData-customerEmail }}', `${bookingData.customerEmail}`)
+    .replace('{{ bookingDataProductTitle }}', `${bookingData.productTitle}`)
+    .replace('{{ userDataFirstname }}', `${userData.userFirstName}`)
+    .replace('{{ userData-lastname }}', `${userData.userLastName}`)
+    .replace('{{ userDataPhone }}', phoneListItem)
 
   if (emailData.type === 'order_confirmation') {
     mailData = {

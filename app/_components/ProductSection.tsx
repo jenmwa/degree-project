@@ -27,13 +27,13 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
                 <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-12 lg:space-y-0 ">
                   {products?.map((foundProduct) => (
                     <div key={foundProduct.productId} className=" relative">
-                      <div className="relative h-80 w-full overflow-hidden bg-black sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 sm:h-96">
+                      <div className="relative h-88 w-full overflow-hidden bg-black sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 sm:h-96">
                         <ImageCarousel foundProduct={foundProduct} />
                       </div>
                       <div
                         tabIndex={0}
                         aria-label={`Läs mer om ${foundProduct.productTitle}`}
-                        className="cursor-pointer  min-h-48 bg-gray-200 w-4/5 mx-auto relative p-10 z-10 text-center -mt-16 lg:-mt-12 sm:-mt-16 hover:bg-gray-300"
+                        className="cursor-pointer sm:min-h-none md:min-h-64 bg-gray-200 w-4/5 mx-auto relative p-10 z-10 text-center -mt-16 lg:-mt-12 sm:-mt-16 hover:bg-gray-300"
                         onClick={(e) => {
                           e.currentTarget.focus();
                           showProduct(foundProduct);
@@ -44,11 +44,11 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
                           }
                         }}
                       >
-                        <h3 className="mt-6 text-rust-500">
+                        <h3 className="mt-6 text-rust-500  sm:text-base md:text-base ">
                           <span className="absolute inset-0" />
                           {foundProduct.productTitle}
                         </h3>
-                        <p className="text-base font-semibold">
+                        <p className="text-lg font-semibold">
                           {foundProduct.productShortDescription}
                         </p>
                       </div>

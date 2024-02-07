@@ -43,7 +43,7 @@ export default function Login() {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium leading-6 "
+                    className="block  font-medium leading-6 "
                   >
                     Epost
                   </label>
@@ -54,7 +54,7 @@ export default function Login() {
                       type="email"
                       autoComplete="email"
                       required
-                      className="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      className="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:leading-6"
                     />
                   </div>
                 </div>
@@ -62,7 +62,7 @@ export default function Login() {
                 <div>
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    className="block font-medium leading-6 text-gray-900"
                   >
                     Lösenord
                   </label>
@@ -74,7 +74,7 @@ export default function Login() {
                       type="password"
                       autoComplete="current-password"
                       required
-                      className="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-600 sm:text-sm sm:leading-6"
+                      className="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-600 sm:leading-6"
                     />
                   </div>
                 </div>
@@ -89,11 +89,11 @@ export default function Login() {
               <LoginMagic />
             )}
 
-            <div className="mt-10 text-center text-sm text-gray-500">
+            <div className="mt-10 text-center  text-gray-500">
               {!showLoginMagic ? "Admin" : ""}
               <div
                 onClick={handleLoginMagicClick}
-                className="font-semibold leading-6 text-rust-300 hover:text-rust-500 cursor-pointer ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-600 sm:text-sm sm:leading-6"
+                className="font-semibold leading-6 text-rust-300 hover:text-rust-500 cursor-pointer ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:leading-6"
               >
                 {!showLoginMagic
                   ? "Logga in utan lösenord"
@@ -107,7 +107,7 @@ export default function Login() {
               <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block font-medium leading-6 text-gray-900"
                 >
                   Epost
                 </label>
@@ -118,7 +118,7 @@ export default function Login() {
                   autoComplete="email"
                   onChange={emailadressOnChange}
                   required
-                  className="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="block w-full border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rust-500 sm:leading-6"
                 />
               </div>
             </div>

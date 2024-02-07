@@ -74,10 +74,6 @@ input::file-selector-button {
   @apply bg-white px-6 py-3 font-semibold border border-gray-500 text-gray-900 shadow-sm hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500
 }
 
-/* .button-secondary {  
-  @apply bg-white px-6 py-3 font-semibold text-gray-900 shadow-sm hover:bg-gray-50   focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500
-} */
-
 a[href]:focus {
   @apply  hover:text-rust-400 focus:outline-none focus:ring-2 focus:ring-opacity-50 focus:ring-rust-500 hover:focus-within:text-white hover:focus-within:bg-rust-300;
 }

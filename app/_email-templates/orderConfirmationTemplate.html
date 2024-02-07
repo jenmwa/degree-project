@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BeställningsBekräftelse</title>
+</head>
+
+<body>
+  <div>
+    <p>{{ email }}</p>
+    <p>{{ bookingData }}</p>
+    <p>{{ userData }}</p>
+    <h1>Beställningsbekräftelse</h1>
+    <p>Hej {{ customerName }},</p>
+    <p>Din order är bekräftad. Här är information om din beställning:</p>
+    <ul>
+      <li>Produkt: {{ productName }}</li>
+      <li>Datum: {{ date }}</li>
+      <li>Meddelande: {{ message }}</li>
+    </ul>
+    <p>Dina uppgifter du angett:</p>
+    <ul>
+      <li>Epostadress: {{ email }}</li>
+      <li>Telefonnummer: {{ phone }}</li>
+    </ul>
+    <p>Tack för din beställningsförfrågan!</p>
+    <br>
+    <br>
+    <p>Emma, Björby Blomster:</p>
+    <ul>
+      <li>Epostadress: {{ BBemail }}</li>
+      <li>Hemsida: {{ webpage }}</li>
+    </ul>
+  </div>
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orderbekräftelse</title>
+</head>
+
+<body>
+  <p><small>Du kan inte svara på detta mail men kontaktuppgifter finns längst ner i detta mail.</small></p>
+  <div>
+    <h1>Tack för din beställning!</h1>
+
+
+    <h3>Hej {{ userDataFirstname }},</h3>
+    <p>Din beställning är nu bekräftad.:</p>
+    <ul>
+      <li>Beställningsdatum: {{ bookingDataCreated }}</li>
+      <li>Bokningsreferens: {{ bookingDataId }}</li>
+      <li>Produkt: {{ bookingDataProductTitle }}</li>
+
+      <li>Ev datum för leverans: {{ bookingDataRequestedDate }}</li>
+
+      <li>Meddelande:<br> {{ bookingDataBookingmessage }}</li>
+    </ul>
+    <br>
+    <p>Dina kontaktuppgifter du angett:</p>
+    <ul>
+      <li>Epostadress: {{ email-email }}</li>
+
+      <li>Telefonnummer: {{ userData-phone }}</li>
+
+    </ul><br><br></br>
+    <h4>Tack för din beställning!</h4>
+    <br>
+    <p> Har du frågor kring din beställning eller vill ändra några uppgifter, hör av dig!</p>
+    <ul>
+      <li>Epostadress: <a href="mailto:emma@bjorbyblomster.se" target="_blank">emma@bjorbyblomster.se</a></li>
+      <li>Hemsida: <a href="https://www.bjorbyblomster.se" target="_blank">https://www.bjorbyblomster.se</a></li>
+    </ul>
+    <br>
+    <p>MVH</p>
+    <p>Emma,<br>
+      Björby Blomster.</p><br><br>
+  </div>
+  <footer> <small>Du får detta mail för att du gjort en beställningsförfrågan på <a href="https://www.bjorbyblomster.se"
+        target="_blank">Björby Blomster</a>.<br>
+      Om detta inte stämmer eller om någon uppgift inte är korrekt hör gärna av dig till oss.</small>
+    <p>
+
+    </p>
+  </footer>
+</body>
+
+</html>

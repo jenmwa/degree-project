@@ -8,7 +8,7 @@ interface IUserFormProps {
 export default function UserForm({ handleUserOnChange }: IUserFormProps) {
   return (
     <>
-      <div className="sm:col-span-2"></div>
+      <div className="sm:col-span-2 mt-8"></div>
       <div>
         <label htmlFor="first-name" className="block font-semibold leading-6">
           Förnamn
