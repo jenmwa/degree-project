@@ -14,7 +14,7 @@ export function Header() {
 
   const signoutAdmin = async () => {
     await supabaseAuthClient.auth.signOut();
-    router.push("/admin");
+    router.push("/");
   };
 
   const menuOpenClose = () => {

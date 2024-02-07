@@ -1,10 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 export function Hero() {
-  const imageSizeSM = 200;
+  const [isBuketter, setIsBuketter] = useState<boolean>(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    console.log("Current route:", pathname);
+    if (pathname === "/buketter") {
+      setIsBuketter(true);
+    }
+  }, []);
 
   return (
     <div
@@ -30,19 +39,20 @@ export function Hero() {
             dagarna långa. Hör av dig om du vill ha min hjälp. Ingen fråga är
             för stor eller för liten.
           </p>
-
-          <div className="mt-10 flex items-center lg:justify-start gap-x-6">
-            <Link href="/buketter" className="primary-button">
-              Buketter
-            </Link>
-            <Link
-              href="/#kontakt"
-              passHref
-              className="custom-shadow  text-sm font-semibold leading-6"
-            >
-              Kontakta mig <span aria-hidden="true">→</span>
-            </Link>
-          </div>
+          {!isBuketter && (
+            <div className="CTAwrapper mt-10 flex items-center lg:justify-start gap-x-6">
+              <Link href="/buketter" className="primary-button">
+                Buketter
+              </Link>
+              <Link
+                href="/#kontakt"
+                passHref
+                className="custom-shadow  text-sm font-semibold leading-6"
+              >
+                Kontakta mig <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>
