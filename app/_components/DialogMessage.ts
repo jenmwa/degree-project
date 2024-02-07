@@ -54,6 +54,15 @@ export const REQUEST_ERROR_DIALOG: IDialog = {
   // redirectLink?: string;
 };
 
+export const PRODUCTUPDATE_ERROR_DIALOG: IDialog = {
+  type: "warning",
+  title: "Något gick fel.",
+  message:
+    "Bokningen kunde inte uppdateras. Vänligen försök igen eller kontakta IT-ansvarig.",
+  primaryButton: "Ok",
+  // redirectLink?: string;
+};
+
 export const PRODUCTUPDATE_SUCCESS_DIALOG: IDialog = {
   type: "ok",
   title: "Artikeln är uppdaterad!",
@@ -72,14 +81,33 @@ export const PRODUCTUPDATE_CONTROL_DIALOG: IDialog = {
   // redirectLink?: string;
 };
 
+export const PRODUCTUPDATE_IMGSRC_DIALOG: IDialog = {
+  type: "warning",
+  title: "Uppladdningen stödjer ej bildformatet.",
+  message:
+    "Bilder som laddas upp måste vara av format  .jpg, .jpeg, .png.",
+  primaryButton: "Ok",
+  // redirectLink?: string;
+};
+
+export const PRODUCTUPDATE_IMGSUCCESS_DIALOG: IDialog = {
+  type: "ok",
+  title: "Bilden är uppladdad.",
+  message:
+    "Bilden är nu uppladdad till databasen.",
+  primaryButton: "Ok",
+  // redirectLink?: string;
+};
+
 export const BOOKINGUPDATE_SUCCESS_DIALOG: IDialog = {
   type: "ok",
   title: "Bokningen är uppdaterad!",
   message:
     "Bokningens status är uppdaterad i databasen.",
   primaryButton: "Ok",
-  // redirectLink?: string;
+  // redirectLink: '/admin/dashboard',
 };
+
 
 export const BOOKINGUPDATE_ERROR_DIALOG: IDialog = {
   type: "warning",

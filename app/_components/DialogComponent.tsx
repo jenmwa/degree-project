@@ -1,7 +1,4 @@
 "use client";
-import { useRef } from "react";
-
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { Transition } from "@headlessui/react";
 import { Dialog } from "@headlessui/react";
 import { IDialog } from "../_models/IDialog";
@@ -55,9 +52,7 @@ export default function DialogComponent({
                         {dialog.title}
                       </Dialog.Title>
                       <div className="mt-2">
-                        <p className="text-sm text-gray-500">
-                          {dialog.message}
-                        </p>
+                        <p className=" text-gray-500">{dialog.message}</p>
                       </div>
                     </div>
                   </div>
@@ -69,7 +64,7 @@ export default function DialogComponent({
                       dialog.type === "warning"
                         ? "button-warning "
                         : "primary-button"
-                    }  text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto`}
+                    }  font-semibold text-white shadow-sm sm:ml-3 sm:w-auto`}
                     onClick={() => {
                       dialog.type === "warning" ? closeDialog() : closeDialog();
                     }}

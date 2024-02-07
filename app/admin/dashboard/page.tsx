@@ -20,9 +20,11 @@ import { initialDialog } from "app/_helpers/initialDialog";
 import {
   BOOKINGUPDATE_ERROR_DIALOG,
   BOOKINGUPDATE_SUCCESS_DIALOG,
-  CONTACT_SUCCESS_DIALOG,
+  PRODUCTUPDATE_ERROR_DIALOG,
+  PRODUCTUPDATE_SUCCESS_DIALOG,
 } from "app/_components/DialogMessage";
 import { updateBookingService } from "app/_services/updateBookingStatusService";
+import { getTodaysDate } from "app/_utilities/getTodaysDate";
 
 export default function Dashboard() {
   const { isLoading } = useProductContext();
@@ -63,7 +65,6 @@ export default function Dashboard() {
     try {
       const response = await updateBookingService(status, booking);
       if (response.ok) {
-        console.log("Booking updated successfully");
         setShowDialog(true);
         setDialog(BOOKINGUPDATE_SUCCESS_DIALOG);
         const updatedBookings = bookings.map((book) => {
@@ -98,14 +99,20 @@ export default function Dashboard() {
 
   const handleFormData = async (formData: IProduct) => {
     try {
-      await updateProductService(formData);
+      const response = await updateProductService(formData);
+      if (response.ok) {
+        console.log("success");
+        setDialog(PRODUCTUPDATE_SUCCESS_DIALOG);
+        setShowDialog(true);
+      }
     } catch (error) {
       console.error("Error updating product:", error);
+      setDialog(PRODUCTUPDATE_ERROR_DIALOG);
+      setShowDialog(true);
     }
   };
 
   const handleReviewModal = (booking: IBooking) => {
-    console.log("click on:", booking.bookingId);
     setShowTableModal(true);
     if (booking) {
       setSelectedBooking(booking);
@@ -113,21 +120,20 @@ export default function Dashboard() {
   };
 
   const closeDialog = () => {
+    setShowModal(false);
     setShowDialog(false);
+    close();
   };
 
   return (
     <>
       <div className="flex flex-1 flex-col px-6 py-12 lg:px-8">
         <span className="mt-24">Dagens datum:</span>
-        {/* <h1 className=" text-3xl font-extraboldmd:text-5xl lg:text-6xl">
-          {new Date().toLocaleDateString()}
-        </h1> */}
+        <h1 className=" text-3xl font-extraboldmd:text-5xl lg:text-6xl">
+          {getTodaysDate()}
+        </h1>
         <br></br>
         jag vill: Ändra produkt eller kolla förfrågningar
-        {/* {isLoading ? ( */}
-        {/* <p>Laddar...</p> */}
-        {/* ) : ( */}
         <>
           {showModal && (
             <EditProductModal
@@ -137,11 +143,8 @@ export default function Dashboard() {
               handleFormData={handleFormData}
             ></EditProductModal>
           )}
-          {/* <AdminTableSection
-            handleReviewModal={handleReviewModal}
-            bookings={bookings}
-            isLoading={false}
-          ></AdminTableSection> */}
+          <h2>Ändra produkt:</h2>
+          <ProductSection showProduct={showProduct}></ProductSection>
           <p>GÖM TABELLEN MED EN KNAPP /EXPAND/DECREASE</p>
           <AdminTable
             bookings={bookings}
@@ -149,7 +152,6 @@ export default function Dashboard() {
             isLoading={isLoading}
           ></AdminTable>
 
-          <ProductSection showProduct={showProduct}></ProductSection>
           {showTableModal && selectedBooking && (
             <ReviewRequestModal
               updateBooking={updateBooking}

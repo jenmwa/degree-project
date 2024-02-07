@@ -14,9 +14,9 @@ export default function ReviewRequestBookingStatus({
   };
 
   return (
-    <select value={value} onChange={handleStatusChange}>
+    <select value={value} onChange={handleStatusChange} className="flex w-full">
       {Object.values(bookingStatus).map((status) => (
-        <option key={status} value={status}>
+        <option key={status} value={status} className="block w-full">
           {status}
         </option>
       ))}
