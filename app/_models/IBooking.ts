@@ -5,7 +5,7 @@ export interface IBooking {
   customer: IUser;
   product: string;
   bookingMessage: string;
-  requestedDate?: string;
+  requestedDate?: string | undefined;
   // deliveryalternative: string;
   bookingStatus: bookingStatus;
   created_at: Date | null;

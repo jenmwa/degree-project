@@ -105,7 +105,9 @@ export default function AdminTable({
                   </td>
                   <td className="px-4 py-4">{booking.customerEmail}</td>
                   <td className="px-4 py-4 hidden md:table-cell">
-                    {new Date(booking.requestedDate).toLocaleDateString()}
+                    {booking.requestedDate
+                      ? new Date(booking.requestedDate).toLocaleDateString()
+                      : ""}
                   </td>
                   <td className="px-4 py-4">{booking.bookingStatus}</td>
                 </tr>
