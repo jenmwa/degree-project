@@ -1,15 +1,25 @@
-import { IProduct } from "./IProduct";
 import { IUser } from "./IUser";
 
 export interface IBooking {
-  // data: {}
   bookingId: string;
   customer: IUser;
   product: string;
   bookingMessage: string;
-  requestedDate: string;
+  requestedDate?: string | undefined;
   // deliveryalternative: string;
-  bookingStatus: string;
+  bookingStatus: bookingStatus;
   created_at: Date | null;
-  updated_at: Date | null;
+  updated_at?: Date | null;
+}
+
+export interface IBookingWithCustomerEmail extends IBooking {
+  customerEmail?: string;
+  productTitle?: string
+}
+
+export enum bookingStatus {
+  Request = 'Request',
+  Confirmed = 'Confirmed',
+  Payed = "Payed",
+  Delivered = "Delivered"
 }

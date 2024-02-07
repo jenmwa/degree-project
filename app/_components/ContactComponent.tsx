@@ -9,7 +9,7 @@ import { IDialog } from "../_models/IDialog";
 import { contactEmailService } from "../_services/contactEmailService";
 
 import {
-  CONTACT_400_DIALOG,
+  CONTACT_ERROR_DIALOG,
   CONTACT_EMAILMISMATCH_DIALOG,
   CONTACT_SUCCESS_DIALOG,
 } from "./DialogMessage";
@@ -53,7 +53,7 @@ export default function Contact() {
       if (result?.error === "Email addresses do not match") {
         setDialog(CONTACT_EMAILMISMATCH_DIALOG);
       } else {
-        setDialog(CONTACT_400_DIALOG);
+        setDialog(CONTACT_ERROR_DIALOG);
       }
       setShowDialog(true);
     } else {
@@ -62,7 +62,6 @@ export default function Contact() {
       clearEmailFields();
     }
   }
-
   return (
     <section className="flex flex-col">
       <div className="relative flex place-items-center bg-white"></div>

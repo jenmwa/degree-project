@@ -8,6 +8,13 @@ export async function imageUploadService(fileImage: File, selectedProduct: IProd
       return;
     }
 
+    const fileNameParts = fileImage.name.split('.');
+    const fileExtension = fileNameParts[fileNameParts.length - 1].toLowerCase();
+
+    if (!['jpeg', 'jpg', 'png'].includes(fileExtension)) {
+      throw new Error("Invalid file type. Please upload a JPEG, JPG, or PNG file.");
+    }
+
     const uuid = self.crypto.randomUUID();
     const { data, error } = await supabaseAuthClient.storage
       .from("productImages")

@@ -10,6 +10,7 @@ interface IEditProductsFormProps {
   handleFileImageChange: (e: ChangeEvent<HTMLInputElement>) => void;
   fileImage: File | null;
   removeSelectedImage: () => void;
+  close: () => void;
 }
 
 export default function EditProductForm({
@@ -20,6 +21,7 @@ export default function EditProductForm({
   fileImage,
   handleFileImageChange,
   removeSelectedImage,
+  close,
 }: IEditProductsFormProps) {
   return (
     <>
@@ -31,28 +33,27 @@ export default function EditProductForm({
       >
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Ändra Produkt
-            </h2>
+            <h2 className="text-base font-semibold leading-7">Ändra Produkt</h2>
             <p className="mt-1 text-sm leading-6 text-gray-600">
               Genom att ändra information här så ändrar du direkt på hemsidan.
             </p>
 
-            <div className="w-full mt-10 grid grid-cols-1  gap-y-8 ">
+            <div className="w-full mt-10 grid grid-cols-1 gap-y-8">
               <div className="w-full block">
                 <label
                   htmlFor="productId"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block text-sm font-medium leading-6 "
                 >
                   ProduktId
                 </label>
                 <div className="mt-2">
-                  <div className="flex w-full shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-rust-500">
+                  <div className="flex w-full shadow-sm ring-1 ring-inset  ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-rust-500">
                     <input
+                      disabled
                       type="text"
                       name="productId"
                       id="productId"
-                      className="block input-base flex-1 border-0 bg-white-100 py-1.5 pl-1  placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                      className="block pl-4 bg-rust-500 text-white flex-1 border-0 py-1.5 focus:ring-0 sm:text-sm sm:leading-6"
                       readOnly={true}
                       defaultValue={selectedProduct.productId}
                     />
@@ -98,7 +99,7 @@ export default function EditProductForm({
                 </div>
               </div>
 
-              <div className="sm:col-span">
+              <div className="sm:col-span-3">
                 <label
                   htmlFor="productShortDescription"
                   className="block text-sm font-medium leading-6 "
@@ -117,7 +118,7 @@ export default function EditProductForm({
                 </div>
               </div>
 
-              <div className="col-span-full">
+              <div className="sm:col-span-3 col-span-full">
                 <label
                   htmlFor="productLongDescription"
                   className="block text-sm font-medium leading-6 "

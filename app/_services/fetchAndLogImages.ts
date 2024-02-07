@@ -24,12 +24,12 @@ export async function fetchAndLogImages() {
     }
 
     if (data) {
-      console.log('List of images:', data);
       const transformedData = data.map((file: FileObject) => ({
         ...file,
         size: 0,
         type: 'image/png',
       })) as StorageFile[];
+      console.log('List of images:', transformedData);
       return { data: transformedData };
     }
   } catch (error) {

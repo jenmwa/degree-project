@@ -11,9 +11,9 @@ export function useMenuOptions() {
   useEffect(() => {
     if (isDashboardRoute) {
       setNavigation([
-        { name: "Orders", href: "/admin/dashboard" },
-        { name: "Produkter", href: "/admin/users" },
-        { name: "Settings", href: "/admin/settings" },
+        { name: "Ändra Produkter", href: "/" },
+        { name: "Förfrågningar", href: "/" },
+        { name: "Hemsidans info", href: "/" },
       ]);
     } else {
       setNavigation([

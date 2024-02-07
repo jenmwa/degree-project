@@ -20,7 +20,6 @@ export default function LoginMagic() {
     //   setSuccess(true);
     // }
     try {
-      console.log("dataUser", data);
       await supabaseAuthClient.auth.signInWithOtp({
         email: data.email,
         options: {

@@ -1,6 +1,7 @@
 "use client";
 import DialogComponent from "../../_components/DialogComponent";
 import {
+  REQUEST_ERROR_DIALOG,
   REQUEST_MISSINGFIELDS_DIALOG,
   REQUEST_SUCCESS_DIALOG,
 } from "../../_components/DialogMessage";
@@ -11,14 +12,15 @@ import OrderForm from "../../_components/OrderForm";
 import { useProductContext } from "../../_context/ProductsContext";
 import { initialUser } from "../../_helpers/initialUser";
 import { initialDialog } from "../../_helpers/initialDialog";
-import { IBooking } from "../../_models/IBooking";
+import { IBooking, bookingStatus } from "../../_models/IBooking";
 import { IDialog } from "../../_models/IDialog";
 import { IUser } from "../../_models/IUser";
 import { validatePhone } from "../../_utilities/validation";
 import Stepper from "../../_components/Stepper";
-import { sendEmailService } from "app/_services/sendEmailService";
+import { serviceEmailService } from "app/_services/serviceEmailService";
 import { createUserService } from "app/_services/createUserService";
 import { createBookingService } from "app/_services/createBookingService";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const [showDialog, setShowDialog] = useState(false);
@@ -36,7 +38,7 @@ export default function Page() {
     product: selectedProduct,
     bookingMessage: "",
     requestedDate: "",
-    bookingStatus: "Request",
+    bookingStatus: bookingStatus.Request,
     created_at: null,
     updated_at: null,
   });
@@ -57,6 +59,7 @@ export default function Page() {
       }));
     }
   }, []);
+  const router = useRouter();
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -95,6 +98,9 @@ export default function Page() {
 
   const closeDialog = () => {
     setShowDialog(false);
+    if (dialog.redirectLink) {
+      router.push(dialog.redirectLink);
+    }
   };
 
   const clearInputFields = () => {
@@ -105,7 +111,7 @@ export default function Page() {
       product: selectedProduct,
       bookingMessage: "",
       requestedDate: "",
-      bookingStatus: "Request",
+      bookingStatus: bookingStatus.Request,
       created_at: null,
       updated_at: null,
     });
@@ -114,7 +120,11 @@ export default function Page() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!userData.userEmail) {
+    if (
+      !userData.userEmail ||
+      !userData.userFirstName ||
+      !bookingData.bookingMessage
+    ) {
       setDialog(REQUEST_MISSINGFIELDS_DIALOG);
       setShowDialog(true);
       return;
@@ -128,10 +138,10 @@ export default function Page() {
         type: "order_confirmation",
         name: userData.userFirstName,
         email: userEmail,
-        message: "Your order has been confirmed. Details: ",
+        message: "Din förfrågan är emottagen. ",
       };
 
-      await sendEmailService(emailData, bookingData, userData);
+      await serviceEmailService(emailData, bookingData, userData);
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
 
@@ -140,14 +150,16 @@ export default function Page() {
       console.log("Booking created successfully:", createdBooking);
     } catch (error) {
       console.error("Error handling submission:", error);
+      setDialog(REQUEST_ERROR_DIALOG);
+      setShowDialog(true);
     }
   };
 
   return (
     <>
-      <section className="overflow-hidden bg-white py-24 sm:py-32">
+      <section className="overflow-hidden  py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <Stepper></Stepper>
+          {/* <Stepper></Stepper> */}
 
           <OrderForm
             handleSubmit={handleSubmit}

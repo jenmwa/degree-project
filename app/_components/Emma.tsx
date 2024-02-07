@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ProductInfo from "./ProductInfo";
-import emma from "../../public/img/emma.jpg";
+import emma from "../../public/img/emma2.jpg";
 
 import React from "react";
 
@@ -23,10 +23,10 @@ export default function Emma() {
             <div className="lg:pl-8 lg:pt-4">
               <div className="lg:max-w-lg">
                 <h2 className="text-base font-semibold leading-7 text-rust-500">
-                  Det är jag som är Björby Blomster
+                  Björby Blomster
                 </h2>
                 <span className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                  Emma
+                  Det är jag som är Emma
                 </span>
 
                 <ProductInfo></ProductInfo>

@@ -1,13 +1,19 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import logo from "/public/img/logoisch.png";
-import hero from "/public/img/hero.webp";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 export function Hero() {
-  const imageSizeSM = 200;
+  const [isBuketter, setIsBuketter] = useState<boolean>(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    console.log("Current route:", pathname);
+    if (pathname === "/buketter") {
+      setIsBuketter(true);
+    }
+  }, []);
 
   return (
     <div
@@ -33,25 +39,22 @@ export function Hero() {
             dagarna långa. Hör av dig om du vill ha min hjälp. Ingen fråga är
             för stor eller för liten.
           </p>
-
-          <div className="mt-10 flex items-center lg:justify-start gap-x-6">
-            <Link href="/buketter" className="primary-button">
-              Buketter
-            </Link>
-            <Link
-              href="/#kontakt"
-              passHref
-              className="custom-shadow  text-sm font-semibold leading-6"
-            >
-              Kontakta mig <span aria-hidden="true">→</span>
-            </Link>
-          </div>
+          {!isBuketter && (
+            <div className="CTAwrapper mt-10 flex items-center lg:justify-start gap-x-6">
+              <Link href="/buketter" className="primary-button">
+                Buketter
+              </Link>
+              <Link
+                href="/#kontakt"
+                passHref
+                className="custom-shadow font-semibold leading-6"
+              >
+                Kontakta mig <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
-      {/* <div
-          className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
-          aria-hidden="true"
-        ></div> */}
     </div>
   );
 }
