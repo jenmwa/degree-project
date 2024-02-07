@@ -35,12 +35,7 @@ export default function DialogComponent({
 
   return (
     <Transition.Root show={showDialog} as="div">
-      <Dialog
-        as="div"
-        className="fixed inset-0 z-50"
-        onClose={closeDialog}
-        initialFocus={cancelButtonRef}
-      >
+      <Dialog as="div" className="fixed inset-0 z-50" onClose={closeDialog}>
         <Transition.Child
           as="div"
           enter="ease-out duration-300"
@@ -115,8 +110,7 @@ export default function DialogComponent({
                   <button
                     type="button"
                     className="mt-4 inline-flex justify-center w-full sm:w-auto button-secondary sm:mt-0 sm:justify-start"
-                    onClick={() => close()}
-                    ref={cancelButtonRef}
+                    onClick={closeDialog}
                   >
                     Avbryt
                   </button>

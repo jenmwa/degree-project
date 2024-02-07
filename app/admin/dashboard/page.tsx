@@ -3,13 +3,25 @@ import React, { useEffect, useState } from "react";
 import { useProductContext } from "../../_context/ProductsContext";
 import { initialProduct } from "../../_helpers/initialProduct";
 import ProductSection from "../../_components/ProductSection";
-import { IBooking, IBookingWithCustomerEmail } from "../../_models/IBooking";
+import {
+  IBooking,
+  IBookingWithCustomerEmail,
+  bookingStatus,
+} from "../../_models/IBooking";
 import { IProduct } from "../../_models/IProduct";
 import EditProductModal from "../../_components/EditProductModal";
 import { getBookingsService } from "app/_services/getBookingsService";
 import { updateProductService } from "app/_services/updateProductService";
 import ReviewRequestModal from "app/_components/ReviewRequestModal";
 import AdminTable from "../../_components/AdminTable";
+import DialogComponent from "app/_components/DialogComponent";
+import { IDialog } from "app/_models/IDialog";
+import { initialDialog } from "app/_helpers/initialDialog";
+import {
+  BOOKINGUPDATE_ERROR_DIALOG,
+  BOOKINGUPDATE_SUCCESS_DIALOG,
+  CONTACT_SUCCESS_DIALOG,
+} from "app/_components/DialogMessage";
 
 export default function Dashboard() {
   const { isLoading } = useProductContext();
@@ -21,6 +33,8 @@ export default function Dashboard() {
   const [selectedBooking, setSelectedBooking] = useState<
     IBookingWithCustomerEmail | undefined
   >();
+  const [dialog, setDialog] = useState<IDialog>(initialDialog);
+  const [showDialog, setShowDialog] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,18 +58,42 @@ export default function Dashboard() {
     fetchData();
   }, []);
 
+  const updateBooking = async (status: bookingStatus, booking: IBooking) => {
+    try {
+      const response = await fetch("/api/updateBooking", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          bookingId: booking.bookingId,
+          bookingStatus: status,
+        }),
+      });
+      if (response.ok) {
+        console.log("Booking updated successfully");
+        setShowDialog(true);
+        setDialog(BOOKINGUPDATE_SUCCESS_DIALOG);
+        close();
+      } else {
+        console.error("Failed to update product");
+        setShowDialog(true);
+        setDialog(BOOKINGUPDATE_ERROR_DIALOG);
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
+      throw error;
+    }
+  };
+
   const close = () => {
     setShowModal(false);
     setShowTableModal(false);
   };
 
-  const handleShowDialog = () => {
-    setShowModal(true);
-  };
-
   const showProduct = (product: IProduct) => {
     setSelectedProduct(product);
-    handleShowDialog();
+    setShowModal(true);
   };
 
   const handleFormData = async (formData: IProduct) => {
@@ -72,6 +110,10 @@ export default function Dashboard() {
     if (booking) {
       setSelectedBooking(booking);
     }
+  };
+
+  const closeDialog = () => {
+    setShowDialog(false);
   };
 
   return (
@@ -110,12 +152,20 @@ export default function Dashboard() {
           <ProductSection showProduct={showProduct}></ProductSection>
           {showTableModal && selectedBooking && (
             <ReviewRequestModal
+              updateBooking={updateBooking}
               selectedBooking={selectedBooking}
               showTableModal={showTableModal}
               close={close}
             ></ReviewRequestModal>
           )}
-        </>{" "}
+          {showDialog && (
+            <DialogComponent
+              dialog={dialog}
+              closeDialog={closeDialog}
+              showDialog={showDialog}
+            ></DialogComponent>
+          )}
+        </>
       </div>
     </>
   );

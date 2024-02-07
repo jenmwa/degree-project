@@ -1,11 +1,6 @@
-
 import { IMailData } from 'app/_models/IMailData';
-import { readFileSync } from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
-
-const template = readFileSync('app/_components/orderConfirmationTemplate.html', 'utf-8');
-
 
 
 export default async function handler(
@@ -22,39 +17,30 @@ export default async function handler(
     secure: false,
   });
 
-  const { emailData, bookingData, userData } = req.body;
-  console.log(req.body)
-  console.log('userData:', userData)
-  console.log('bookingData', bookingData)
-  console.log('emaildata:', emailData)
+  const { name, email, message, type } = req.body;
 
-  if (!emailData.name || !emailData.email || !emailData.message || !emailData.type) {
+  if (!name || !email || !message || !type) {
     return res.status(400).json({ message: 'Invalid request' });
   }
 
   let mailData: IMailData;
 
-  const htmlContent = template
-    .replace('{{ email }}', `${emailData.email}`)
-    .replace('{{ bookingData }}', `${bookingData.productId}`)
-    .replace('{{ userData }}', `${userData.userFirstName}`)
-
-  if (emailData.type === 'contact') {
+  if (type === 'contact') {
     mailData = {
       from: process.env.EMAIL_FROM,
       to: process.env.EMAIL_SERVER_USER,
-      subject: `${emailData.type} Message from ${userData.name}`,
-      text: `Website contact: ${emailData.message} | Sent from: ${emailData.email}`,
-      html: `<div>${emailData.message}</div><p>Sent from: ${emailData.email}</p>`,
+      subject: `${type} Message from ${name}`,
+      text: `Website contact: ${message} | Sent from: ${email}`,
+      html: `<div>${message}</div><p>Sent from: ${email}</p>`,
     };
-  } else if (emailData.type === 'order_confirmation') {
+  } else if (type === 'order_confirmation') {
+    // Construct the order confirmation email content based on the message field
     mailData = {
       from: process.env.EMAIL_FROM,
-      to: `${emailData.email}`,
-      bcc: process.env.EMAIL_SERVER_USER,
-      subject: `${emailData.type}: Order Confirmation`,
-      text: `Order Confirmation: ${emailData.message}`,
-      html: htmlContent,
+      to: email,
+      subject: `${type}: Order Confirmation`,
+      text: `Order Confirmation: ${message}`,
+      html: `<div>${message}</div>`,
     };
   } else {
     return res.status(400).json({ message: 'Invalid request type' });

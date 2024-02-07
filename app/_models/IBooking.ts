@@ -5,11 +5,11 @@ export interface IBooking {
   customer: IUser;
   product: string;
   bookingMessage: string;
-  requestedDate: string;
+  requestedDate?: string;
   // deliveryalternative: string;
   bookingStatus: bookingStatus;
   created_at: Date | null;
-  updated_at: Date | null;
+  updated_at?: Date | null;
 }
 
 export interface IBookingWithCustomerEmail extends IBooking {

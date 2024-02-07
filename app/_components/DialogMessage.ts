@@ -63,6 +63,24 @@ export const PRODUCTUPDATE_CONTROL_DIALOG: IDialog = {
   // redirectLink?: string;
 };
 
+export const BOOKINGUPDATE_SUCCESS_DIALOG: IDialog = {
+  type: "ok",
+  title: "Bokningen är uppdaterad!",
+  message:
+    "Bokningens status är uppdaterad i databasen.",
+  primaryButton: "Ok",
+  // redirectLink?: string;
+};
+
+export const BOOKINGUPDATE_ERROR_DIALOG: IDialog = {
+  type: "warning",
+  title: "Något gick fel.",
+  message:
+    "Bokningen kunde inte uppdateras. Vänligen försök igen eller kontakta IT-ansvarig.",
+  primaryButton: "Ok",
+  // redirectLink?: string;
+};
+
 // export const PRODUCTUPDATE_IMGMISMATCH_DIALOG: IDialog = {
 //   type: "warning",
 //   title: "Bilderna måste ha format .jp",

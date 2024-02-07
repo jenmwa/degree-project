@@ -5,12 +5,17 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useRef } from "react";
 
 import ReviewRequestData from "./ReviewRequestData";
-import { IBookingWithCustomerEmail } from "app/_models/IBooking";
+import { IBookingWithCustomerEmail, bookingStatus } from "app/_models/IBooking";
 
 export interface IDialogProps {
   close: () => void;
   showTableModal: boolean;
   selectedBooking: IBookingWithCustomerEmail;
+  updateBooking: (
+    status: bookingStatus,
+    selectedBooking: IBookingWithCustomerEmail
+  ) => void;
+
   // closeModal: () => void;
   // selectedProduct: IProduct;
   // handleFormData: (formData: IProduct) => void;
@@ -20,6 +25,7 @@ export default function ReviewRequestModal({
   close,
   showTableModal,
   selectedBooking,
+  updateBooking,
 }: // closeModal,
 // handleFormData,
 // selectedProduct,
@@ -98,6 +104,7 @@ IDialogProps) {
                       <ReviewRequestData
                         selectedBooking={selectedBooking}
                         close={close}
+                        updateBooking={updateBooking}
                       ></ReviewRequestData>
                     </div>
                   </div>

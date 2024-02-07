@@ -2,12 +2,12 @@ import { IBooking } from "app/_models/IBooking";
 import { IOrderMailData } from "app/_models/IOrderMailData";
 import { IUser } from "app/_models/IUser";
 
-export async function sendEmailService(emailData: IOrderMailData, bookingData: IBooking, userData: IUser) {
+export async function serviceEmailService(emailData: IOrderMailData, bookingData: IBooking, userData: IUser) {
   try {
     const values = { emailData, bookingData, userData };
     emailData.type = "order_confirmation";
 
-    const response = await fetch("/api/contactEmail", {
+    const response = await fetch("/api/orderconfirmationEmail", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
