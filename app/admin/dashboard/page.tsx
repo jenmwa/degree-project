@@ -130,7 +130,7 @@ export default function Dashboard() {
       <div className="flex flex-1 flex-col px-6 py-12 lg:px-8">
         <span className="mt-24">Dagens datum:</span>
         <h1 className=" text-3xl font-extraboldmd:text-5xl lg:text-6xl">
-          {getTodaysDate()}
+          {/* {getTodaysDate()} */}
         </h1>
         <br></br>
         jag vill: Ändra produkt eller kolla förfrågningar

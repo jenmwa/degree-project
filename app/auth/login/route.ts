@@ -20,6 +20,10 @@ export async function POST(req: NextRequest) {
     });
 
   if (data?.user) {
+    const expiration = new Date();
+    expiration.setTime(expiration.getTime() + 3600 * 1000);
+    const cookieOptions = { expires: expiration };
+
     const dashboardUrl = new URL('/admin/dashboard', `http://${req.headers.get('host')}`);
     return NextResponse.redirect(dashboardUrl.toString(), { status: 301 });
   }
