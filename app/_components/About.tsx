@@ -11,19 +11,19 @@ const features = [
   {
     name: "Lokalt & småskaligt.",
     description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
+      "Jag strävar efter att stödja lokala blomsterodlare och småskaliga leverantörer för mer levande arrangemang",
     img: flowers,
   },
   {
     name: "Kreativt efter säsong.",
     description:
-      "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.",
+      "Dina önskemål men med säsongens utbud coh inspiration att utgå ifrån.",
     img: leaves,
   },
   {
     name: "Personligt och Unikt.",
     description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.",
+      "Jag förstår att varje tillfälle är speciellt och vi strävar efter att skapa blomsterarrangemang som är helt anpassade efter dina önskemål och behov. ",
     img: heart,
   },
 ];
@@ -48,9 +48,13 @@ export default function ContactSection() {
                 Inga raka rosor
               </p>
               <p className="mt-6 text-lg leading-8">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Maiores impedit perferendis suscipit eaque, iste dolor
-                cupiditate blanditiis ratione.
+                Björby Blomsters signaturbuketter kännetecknas av vilda och
+                yviga buketter. De består ofta av en grön bas där jag gärna
+                skapar med inslag från naturen i form av grenar och kvistar. Jag
+                gör aldrig någon bukett halvdan utan varje bukett är viktigt för
+                mig och mitt skapande. Jag vill såklart att du som mottagare av
+                buketten ska bli överraskad och känna att de var skapade med
+                kärlek.
               </p>
               <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 lg:max-w-none">
                 {features.map((feature) => (

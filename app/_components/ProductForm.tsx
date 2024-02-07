@@ -57,7 +57,6 @@ export default function ProductForm({
                   />
                   <span className="ml-2">{product.productTitle}</span>
                 </label>
-                {/* </div> */}
               </li>
             ))}
           </ul>
