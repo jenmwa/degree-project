@@ -66,6 +66,14 @@ export default function Dashboard() {
         console.log("Booking updated successfully");
         setShowDialog(true);
         setDialog(BOOKINGUPDATE_SUCCESS_DIALOG);
+        const updatedBookings = bookings.map((book) => {
+          if (book.bookingId === booking.bookingId) {
+            return { ...book, bookingStatus: status };
+          } else {
+            return book;
+          }
+        });
+        setBookings(updatedBookings);
         close();
       } else {
         console.error("Failed to update product");
