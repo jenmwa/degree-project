@@ -13,7 +13,7 @@ export default function ConfirmSwitch({
   isAgreed,
   handleSwitchOnChange,
 }: IConfirmSwitchProps) {
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();

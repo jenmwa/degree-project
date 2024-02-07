@@ -22,6 +22,7 @@ import {
   BOOKINGUPDATE_SUCCESS_DIALOG,
   CONTACT_SUCCESS_DIALOG,
 } from "app/_components/DialogMessage";
+import { updateBookingService } from "app/_services/updateBookingStatusService";
 
 export default function Dashboard() {
   const { isLoading } = useProductContext();
@@ -60,16 +61,7 @@ export default function Dashboard() {
 
   const updateBooking = async (status: bookingStatus, booking: IBooking) => {
     try {
-      const response = await fetch("/api/updateBooking", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          bookingId: booking.bookingId,
-          bookingStatus: status,
-        }),
-      });
+      const response = await updateBookingService(status, booking);
       if (response.ok) {
         console.log("Booking updated successfully");
         setShowDialog(true);

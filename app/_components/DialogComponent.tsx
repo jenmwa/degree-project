@@ -6,7 +6,6 @@ import { Transition } from "@headlessui/react";
 import { Dialog } from "@headlessui/react";
 import { IDialog } from "../_models/IDialog";
 import React from "react";
-import Link from "next/link";
 
 export interface IDialogProps {
   dialog: IDialog;
@@ -19,19 +18,6 @@ export default function DialogComponent({
   closeDialog,
   showDialog,
 }: IDialogProps) {
-  // const cancelButtonRef = useRef(null);
-
-  // const handlePrimaryButtonClick = () => {
-  //   close();
-  //   if (dialog.redirectLink) {
-  //     return (
-  //       <Link href={dialog.redirectLink}>
-  //         <a>{dialog.primaryButton}</a>
-  //       </Link>
-  //     );
-  //   }
-  // };
-
   return (
     <Transition.Root show={showDialog} as="div">
       <Dialog as="div" className="fixed inset-0 z-50" onClose={closeDialog}>
@@ -61,26 +47,10 @@ export default function DialogComponent({
               <div className="relative transform overflow-hidden bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
-                    <div
-                      className={` ${
-                        dialog.type === "warning"
-                          ? " mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100"
-                          : ""
-                      } sm:mx-0 sm:h-10 sm:w-10`}
-                    >
-                      {dialog.type === "warning" ? (
-                        <ExclamationTriangleIcon
-                          className="h-6 w-6 text-red-600"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                    <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                    <div className="mt-3 text-center sm:mt-0 sm:text-left">
                       <Dialog.Title
                         as="h3"
-                        className="text-base font-semibold leading-6 text-gray-900"
+                        className="text-base font-semibold leading-6"
                       >
                         {dialog.title}
                       </Dialog.Title>

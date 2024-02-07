@@ -2,7 +2,6 @@ import { supabaseClient } from "lib/supabase";
 
 
 export default async function handler(req: any, res: any) {
-  console.log('req,', req)
   if (req.method === 'PUT') {
     console.log(req.body)
     try {
@@ -24,8 +23,8 @@ export default async function handler(req: any, res: any) {
 
       res.status(200).json({ updatedBooking: data[0] });
     } catch (error) {
-      console.error('Error updating product:', error);
-      res.status(500).json({ error: 'Error updating product' });
+      console.error('Error updating booking:', error);
+      res.status(500).json({ error: 'Error updating booking' });
     }
   } else {
     res.status(405).json({ error: 'Method Not Allowed' });

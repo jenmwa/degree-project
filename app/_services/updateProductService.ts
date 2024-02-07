@@ -23,6 +23,7 @@ export async function updateProductService(formData: IProduct) {
     } else {
       console.error("Failed to update product");
     }
+    return response;
   } catch (error) {
     console.error("Error updating product:", error);
     throw error;

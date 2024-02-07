@@ -47,7 +47,7 @@ export function Hero() {
               <Link
                 href="/#kontakt"
                 passHref
-                className="custom-shadow  text-sm font-semibold leading-6"
+                className="custom-shadow text-sm font-semibold leading-6"
               >
                 Kontakta mig <span aria-hidden="true">→</span>
               </Link>
