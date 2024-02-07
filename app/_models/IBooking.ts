@@ -7,7 +7,7 @@ export interface IBooking {
   bookingMessage: string;
   requestedDate: string;
   // deliveryalternative: string;
-  bookingStatus: string;
+  bookingStatus: bookingStatus;
   created_at: Date | null;
   updated_at: Date | null;
 }
@@ -15,4 +15,11 @@ export interface IBooking {
 export interface IBookingWithCustomerEmail extends IBooking {
   customerEmail?: string;
   productTitle?: string
+}
+
+export enum bookingStatus {
+  Request = 'Request',
+  Confirmed = 'Confirmed',
+  Payed = "Payed",
+  Delivered = "Delivered"
 }

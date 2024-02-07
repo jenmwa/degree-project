@@ -97,6 +97,7 @@ IDialogProps) {
                     <div className="relative mt-6 flex-1 px-4 sm:px-6">
                       <ReviewRequestData
                         selectedBooking={selectedBooking}
+                        close={close}
                       ></ReviewRequestData>
                     </div>
                   </div>

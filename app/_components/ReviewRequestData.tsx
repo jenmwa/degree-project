@@ -1,12 +1,53 @@
-import { PaperClipIcon } from "@heroicons/react/24/outline";
-import { IBookingWithCustomerEmail } from "app/_models/IBooking";
+import { IBookingWithCustomerEmail, bookingStatus } from "app/_models/IBooking";
+import { useState } from "react";
+import ReviewRequestBookingStatus from "./ReviewRequestBookingStatus";
+import { CONTACT_SUCCESS_DIALOG } from "./DialogMessage";
+import { initialDialog } from "app/_helpers/initialDialog";
+import { IDialog } from "app/_models/IDialog";
 
 interface IReviewRequestDataProps {
   selectedBooking: IBookingWithCustomerEmail;
+  close: () => void;
 }
 export default function ReviewRequestData({
   selectedBooking,
+  close,
 }: IReviewRequestDataProps) {
+  const [status, setStatus] = useState<bookingStatus>(bookingStatus.Request);
+
+  const handleStatusChange = (newStatus: bookingStatus) => {
+    setStatus(newStatus);
+  };
+
+  const updateStatusOnClick = () => {
+    console.log("click", status, selectedBooking.bookingId);
+    updateBooking(status, selectedBooking.bookingId);
+  };
+
+  const updateBooking = async (status: bookingStatus, bookingId: string) => {
+    try {
+      const response = await fetch("/api/updateBooking", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          bookingId: bookingId,
+          bookingStatus: status,
+        }),
+      });
+      if (response.ok) {
+        console.log("Booking updated successfully");
+        close();
+      } else {
+        console.error("Failed to update product");
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
+      throw error;
+    }
+  };
+
   console.log(selectedBooking);
   return (
     <>
@@ -53,15 +94,38 @@ export default function ReviewRequestData({
                 {selectedBooking.bookingMessage}
               </dd>
             </div>
-            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+
+            <div>
+              <h2>Booking Status</h2>
+              <ReviewRequestBookingStatus
+                value={status}
+                onChange={handleStatusChange}
+              />
+              <p>Selected Status: {status}</p>
+            </div>
+
+            <div className="mt-6 flex items-center justify-end gap-x-6">
+              <button
+                type="button"
+                className="text-sm font-semibold leading-6 text-gray-900"
+                onClick={() => close()}
+              >
+                Avbryt
+              </button>
+              <button className=" primary-button" onClick={updateStatusOnClick}>
+                Uppdatera produkt
+              </button>
+            </div>
+
+            {/* <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="text-sm font-medium leading-6 ">Status</dt>
               <dd className="mt-2 text-sm  sm:col-span-2 sm:mt-0">
                 <button
                   id="dropdownDefaultButton"
                   data-dropdown-toggle="dropdown"
-                  className="primary-button"
+                  className="primary-button inline-flex items-center"
                 >
-                  VÄLJ STATUUUUUUUS{" "}
+                  Status{" "}
                   <svg
                     className="w-2.5 h-2.5 ms-3"
                     aria-hidden="true"
@@ -95,7 +159,7 @@ export default function ReviewRequestData({
                   </ul>
                 </div>
               </dd>
-            </div>
+            </div> */}
           </dl>
         </div>
       </div>
