@@ -130,10 +130,10 @@ export default function Page() {
     }
     try {
       const user = await createUserService(userData);
-      const createdBooking: IBooking = await createBookingService(
+      const createdBooking = (await createBookingService(
         bookingData,
         user
-      );
+      )) as IBooking;
 
       const userEmail = userData.userEmail;
       const emailData = {
