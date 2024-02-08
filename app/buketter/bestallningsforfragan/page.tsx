@@ -16,7 +16,6 @@ import { IBooking, bookingStatus } from "../../_models/IBooking";
 import { IDialog } from "../../_models/IDialog";
 import { IUser } from "../../_models/IUser";
 import { validatePhone } from "../../_utilities/validation";
-import Stepper from "../../_components/Stepper";
 import { serviceEmailService } from "app/_services/serviceEmailService";
 import { createUserService } from "app/_services/createUserService";
 import { createBookingService } from "app/_services/createBookingService";
@@ -138,10 +137,11 @@ export default function Page() {
         type: "order_confirmation",
         name: userData.userFirstName,
         email: userEmail,
-        message: "Din förfrågan är emottagen. ",
+        message: createdBooking.bookingMessage,
       };
 
-      await serviceEmailService(emailData, bookingData, userData);
+      await serviceEmailService(emailData, createdBooking, userData);
+
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
 

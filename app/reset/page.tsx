@@ -58,7 +58,7 @@ export default function Reset() {
           maxLength={80}
           name="password"
           type={showPassword ? "text" : "password"}
-          className="mb-6 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+          className="mb-6 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300  focus:ring-2"
           onChange={handleChange}
         />
 
@@ -73,7 +73,7 @@ export default function Reset() {
           maxLength={80}
           name="confirmPassword"
           type={showPassword ? "text" : "password"}
-          className="mb-6 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300 dark:focus:ring-rust-500 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+          className="mb-6 text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300  focus:ring-2"
           onChange={handleChange}
         />
 
@@ -81,9 +81,7 @@ export default function Reset() {
           className="cursor-pointer hover:underline"
           onClick={() => setShowPassword(!showPassword)}
         >
-          <p className="text-sm">
-            {showPassword ? "Göm Lösenord" : "Visa Lösenord"}
-          </p>
+          <p className="">{showPassword ? "Göm Lösenord" : "Visa Lösenord"}</p>
         </div>
         <div>
           <button className="primary-button" onClick={confirmPasswords}>

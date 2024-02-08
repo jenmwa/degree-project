@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beställningsförfrågan emottagen</title>
+</head>
+
+<body>
+  <p><small>Du kan inte svara på detta mail men kontaktuppgifter finns längst ner i detta mail.</small></p>
+  <div>
+    <h1>Tack för ditt mail!</h1>
+
+
+    <h3>Hej {{ userDataFirstname }},</h3>
+    <p>Din beställningsförfrågan är skickad till mig och jag kommer svara inom kort. Här är information om
+      din beställningsförfrågan:</p>
+    <ul>
+      <li>Beställningsdatum: {{ bookingDataCreated }}</li>
+      <li>Beställningsreferens: {{ bookingDataId }}</li>
+      <li>Produkt: {{ bookingDataProductTitle }}</li>
+
+      <li>Ev datum för leverans: {{ bookingDataRequestedDate }}</li>
+
+      <li>Meddelande:<br> {{ bookingDataBookingmessage }}</li>
+    </ul>
+    <br>
+    <p>Dina kontaktuppgifter du angett:</p>
+    <ul>
+      <li>Epostadress: {{ email-email }}</li>
+
+      <li>Telefonnummer: {{ userDataPhone }}</li>
+
+    </ul><br><br></br>
+    <h4>Tack för din beställningsförfrågan!</h4>
+    <br>
+    <p> Har du frågor kring din beställning eller vill prata om alternativ, hör av dig!</p>
+    <ul>
+      <li>Epostadress: <a href="mailto:emma@bjorbyblomster.se" target="_blank">emma@bjorbyblomster.se</a></li>
+      <li>Hemsida: <a href="https://www.bjorbyblomster.se" target="_blank">https://www.bjorbyblomster.se</a></li>
+    </ul>
+    <br>
+    <p>MVH</p>
+    <p>Emma,<br>
+      Björby Blomster.</p><br><br>
+  </div>
+  <footer> <small>Du får detta mail för att du gjort en beställningsförfrågan på <a href="https://www.bjorbyblomster.se"
+        target="_blank">Björby Blomster</a>.<br>
+      Om detta inte stämmer eller om någon uppgift inte är korrekt hör gärna av dig till oss.</small>
+    <p>
+
+    </p>
+  </footer>
+</body>
+
+</html>

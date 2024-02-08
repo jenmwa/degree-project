@@ -4,8 +4,10 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* --background-start-rgb: 234, 236, 236;
+  --background-end-rgb: 255, 255, 255; */
+  --background-start-rgb:  250, 250, 250;
+  --background-end-rgb: 234, 236, 236; 
 }
 
 .cormorant-garamond-regular {
@@ -24,7 +26,7 @@ background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
-    ) */
+    ) 
     rgb(var(--background-start-rgb));
     min-height: 100dvh;
 }
@@ -74,10 +76,6 @@ input::file-selector-button {
   @apply bg-white px-6 py-3 font-semibold border border-gray-500 text-gray-900 shadow-sm hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500
 }
 
-/* .button-secondary {  
-  @apply bg-white px-6 py-3 font-semibold text-gray-900 shadow-sm hover:bg-gray-50   focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500
-} */
-
 a[href]:focus {
   @apply  hover:text-rust-400 focus:outline-none focus:ring-2 focus:ring-opacity-50 focus:ring-rust-500 hover:focus-within:text-white hover:focus-within:bg-rust-300;
 }
@@ -92,7 +90,11 @@ a[href]:focus {
 }
 
 .input-base {
-  @apply border-0   bg-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6 focus:bg-gray-100 text-rust-500  border-gray-300 focus:ring-rust-300
+  @apply border-0   bg-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:leading-6 focus:bg-gray-100 text-rust-500  border-gray-300 focus:ring-rust-300
+}
+
+.input-base-light {
+  @apply border-0   bg-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:leading-6 focus:bg-gray-100 text-rust-500  border-gray-300 focus:ring-rust-300
 }
 
 input:focus {
@@ -116,6 +118,7 @@ textarea:focus {
   .custom-shadow {
 
     text-shadow: 2px 2px 4px #2d2d2d;
+    text-shadow: 1px  1px 8px #2d2d2d;
   }
 }
 

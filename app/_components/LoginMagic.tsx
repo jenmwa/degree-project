@@ -50,7 +50,7 @@ export default function LoginMagic() {
       <form onSubmit={handleOnSubmit}>
         <label
           htmlFor="email"
-          className="block text-sm font-medium leading-6 text-gray-900"
+          className="block font-medium leading-6 text-gray-900"
         >
           Epost
         </label>
@@ -61,14 +61,14 @@ export default function LoginMagic() {
             type="email"
             autoComplete="email"
             required
-            className="block w-full mb-6 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full mb-6 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6"
             onChange={handleChange}
           />
         </div>
 
         {success && (
           <div
-            className="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+            className="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50"
             role="alert"
           >
             <svg

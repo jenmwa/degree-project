@@ -9,54 +9,41 @@ interface IAdminOrderTableProps {
   handleReviewModal: (booking: IBooking) => void;
 }
 
-// interface ITableHeaders {
-//   name: string;
-// }
-
-// export const tableHeader: ITableHeaders[] = [
-//   {
-//     name: "id",
-//   },
-//   {
-//     name: "Datum",
-//   },
-//   {
-//     name: "Produkter",
-//   },
-//   {
-//     name: "från",
-//   },
-//   {
-//     name: "önskat datum",
-//   },
-//   {
-//     name: "status",
-//   },
-// ];
-
 export default function AdminTable({
   bookings,
   isLoading,
   handleReviewModal,
 }: IAdminOrderTableProps) {
-  const userId = "4f7b657b-a75f-456b-b58b-823dc1f8310f";
+  // const userId = "4f7b657b-a75f-456b-b58b-823dc1f8310f";
 
-  const fetchData = async (userId: string) => {
-    try {
-      const response = await getUserService(userId);
-      return response;
-    } catch (error) {
-      console.error("Error fetching users:", error);
+  // const fetchData = async (userId: string) => {
+  //   try {
+  //     const response = await getUserService(userId);
+  //     return response;
+  //   } catch (error) {
+  //     console.error("Error fetching users:", error);
+  //   }
+  // };
+
+  const getBackgroundColor = (bookingStatus: string) => {
+    if (bookingStatus === "Confirmed") {
+      return "bg-green-100 bg-opacity-50";
+    } else if (bookingStatus === "Payed") {
+      return "bg-yellow-100 bg-opacity-50";
+    } else if (bookingStatus === "Delivered") {
+      return "bg-rust-50 bg-opacity-50";
+    } else {
+      return "bg-white";
     }
   };
 
   return (
     <>
-      <button onClick={() => fetchData(userId)}>CLICK TO GET USER</button>
+      {/* <button onClick={() => fetchData(userId)}>CLICK TO GET USER</button> */}
 
       <section className="relative overflow-x-auto my-16">
-        <table className="w-full text-left rtl:text-right text-gray-500 ">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+        <table className="w-full text-left rtl:text-right">
+          <thead className="text-xs text-gray-100 uppercase bg-gray-700 ">
             <tr>
               <th scope="col" className="px-4 py-3 hidden md:table-cell">
                 Id
@@ -87,8 +74,19 @@ export default function AdminTable({
               bookings?.map((booking) => (
                 <tr
                   key={booking.bookingId}
-                  className="bg-white border-b cursor-pointer  hover:bg-gray-300 "
-                  onClick={() => handleReviewModal(booking)}
+                  tabIndex={0}
+                  className={` border-b border-gray-700 cursor-pointer hover:bg-gray-300 ${getBackgroundColor(
+                    booking.bookingStatus
+                  )}`}
+                  onClick={(e) => {
+                    e.currentTarget.focus();
+                    handleReviewModal(booking);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleReviewModal(booking);
+                    }
+                  }}
                 >
                   <td className="px-4 py-4 hidden md:table-cell">
                     {booking.bookingId}

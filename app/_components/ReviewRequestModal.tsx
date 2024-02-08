@@ -57,7 +57,7 @@ export default function ReviewRequestModal({
                 leaveTo="translate-x-full"
               >
                 <Dialog.Panel
-                  className="pointer-events-auto relative w-screen max-w-md "
+                  className="pointer-events-auto relative w-screen max-w-md xl:max-w-xl"
                   tabIndex={0}
                 >
                   <Transition.Child

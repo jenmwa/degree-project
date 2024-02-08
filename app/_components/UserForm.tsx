@@ -8,12 +8,9 @@ interface IUserFormProps {
 export default function UserForm({ handleUserOnChange }: IUserFormProps) {
   return (
     <>
-      <div className="sm:col-span-2"></div>
+      <div className="sm:col-span-2 mt-8"></div>
       <div>
-        <label
-          htmlFor="first-name"
-          className="block text-sm font-semibold leading-6"
-        >
+        <label htmlFor="first-name" className="block font-semibold leading-6">
           Förnamn
         </label>
         <div className="mt-2.5">
@@ -29,10 +26,7 @@ export default function UserForm({ handleUserOnChange }: IUserFormProps) {
         </div>
       </div>
       <div>
-        <label
-          htmlFor="last-name"
-          className="block text-sm font-semibold leading-6"
-        >
+        <label htmlFor="last-name" className="block  font-semibold leading-6">
           Efternamn
         </label>
         <div className="mt-2.5">
@@ -47,10 +41,7 @@ export default function UserForm({ handleUserOnChange }: IUserFormProps) {
         </div>
       </div>
       <div className="sm:col-span-2">
-        <label
-          htmlFor="userEmail"
-          className="block text-sm font-semibold leading-6 "
-        >
+        <label htmlFor="userEmail" className="block  font-semibold leading-6 ">
           Epost
         </label>
         <div className="mt-2.5">
@@ -68,7 +59,7 @@ export default function UserForm({ handleUserOnChange }: IUserFormProps) {
       <div className="sm:col-span-2">
         <label
           htmlFor="phone-number"
-          className="block text-sm font-semibold leading-6"
+          className="block  font-semibold leading-6"
         >
           Telefonnummer
         </label>

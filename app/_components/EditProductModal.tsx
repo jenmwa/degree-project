@@ -2,9 +2,10 @@
 
 import { Transition, Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import EditProduct from "./EditProduct";
 import { IProduct } from "app/_models/IProduct";
+import { usePathname } from "next/navigation";
 
 export interface IDialogProps {
   close: () => void;

@@ -6,7 +6,6 @@ import UserForm from "./UserForm";
 import ProductForm from "./ProductForm";
 import ConfirmSwitch from "./ConfirmSwitch";
 import OrderInfo from "./OrderInfo";
-
 import React from "react";
 import { IProduct } from "../_models/IProduct";
 
@@ -62,7 +61,7 @@ export default function OrderForm({
               handleOnChange={handleOnChange}
               handleUserMessageOnChange={handleUserMessageOnChange}
             ></ProductForm>
-            <p>ANVÄNDARE</p>
+
             <UserForm handleUserOnChange={handleUserOnChange}></UserForm>
             <ConfirmSwitch
               isAgreed={isAgreed}
@@ -78,7 +77,7 @@ export default function OrderForm({
               )}
               disabled={!isAgreed}
             >
-              Skicka beställning
+              Skicka beställningsförfrågan
             </button>
           </div>
         </form>
