@@ -11,6 +11,9 @@ interface IEditProductsFormProps {
   fileImage: File | null;
   removeSelectedImage: () => void;
   close: () => void;
+  toggleImage: (img: string) => void;
+  selectedImages: string[];
+  // updateFormData: () => void;
 }
 
 export default function EditProductForm({
@@ -22,7 +25,10 @@ export default function EditProductForm({
   handleFileImageChange,
   removeSelectedImage,
   close,
+  toggleImage,
+  selectedImages,
 }: IEditProductsFormProps) {
+  console.log(selectedProduct.productImagesUrl);
   return (
     <>
       <form
@@ -121,7 +127,7 @@ export default function EditProductForm({
               <div className="sm:col-span-3 col-span-full">
                 <label
                   htmlFor="productLongDescription"
-                  className="block  font-medium leading-6 "
+                  className="block font-medium leading-6 "
                 >
                   Lång produktbeskrivning
                 </label>
@@ -136,9 +142,40 @@ export default function EditProductForm({
                     onChange={handleTextareaChange}
                   />
                 </div>
-                <p className="mt-3 leading-6 text-gray-600">
-                  Lång produktbeskrivning. Skriv allt du vill.
+                <p className="mt-3 leading-6 sm:text-sm italic text-gray-600">
+                  Skriv allt du vill.
                 </p>
+              </div>
+
+              <div className="sm:col-span-3 col-span-full">
+                <div>
+                  <p className="leading-6 mb-2">
+                    Bilder som hör till produkten.<br></br>
+                    <small> klicka för att ta bort.</small>
+                  </p>
+                </div>
+
+                <div className="md:flex">
+                  <div className="flex gap-4">
+                    {selectedProduct.productImagesUrl.map((img, index) => (
+                      <div
+                        key={index}
+                        className="relative cursor-pointer"
+                        onClick={() => toggleImage(img)}
+                      >
+                        <Image
+                          src={img}
+                          alt={selectedProduct.productShortDescription}
+                          width={100}
+                          height={100}
+                        />
+                        {selectedImages.includes(img) && (
+                          <div className="absolute inset-0 bg-black opacity-50"></div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div className="sm:col-span-3">
@@ -158,21 +195,14 @@ export default function EditProductForm({
                   />
                 </div>
               </div>
-              <div>
-                <p>Bilder</p>
-                <ul>
-                  {selectedProduct.productImagesUrl.map((img, index) => (
-                    <li key={index}>{img}</li>
-                  ))}
-                </ul>
-              </div>
+
               {fileImage && (
                 <div>
                   <p>Preview av vald bild:</p>
                   <Image
                     src={URL.createObjectURL(fileImage)}
                     alt="Thumb"
-                    width={200}
+                    width={100}
                     height={100}
                   />
                   <button onClick={removeSelectedImage}>

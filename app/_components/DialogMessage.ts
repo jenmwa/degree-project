@@ -118,6 +118,14 @@ export const BOOKINGUPDATE_ERROR_DIALOG: IDialog = {
   // redirectLink?: string;
 };
 
+export const ADMIN_REMOVEIMG_IMG: IDialog = {
+  type: "warning",
+  title: "Vill du ta bort denna bild?",
+  message:
+    "Tar du bort bilden kommer den inte längre visas på produkten.",
+  primaryButton: "Tabort",
+  // redirectLink?: string;
+};
 // export const PRODUCTUPDATE_IMGMISMATCH_DIALOG: IDialog = {
 //   type: "warning",
 //   title: "Bilderna måste ha format .jp",

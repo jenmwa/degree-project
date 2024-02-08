@@ -35,13 +35,10 @@ export default async function handler(
   const formattedRequestDate = requestedDate ? new Date(requestedDate).toLocaleDateString('sv-SE') : '';
   const requestedDateListItem = formattedRequestDate !== '' ? `<li>Önskat datum: ${formattedRequestDate}</li>` : '';
 
-
   const formattedCreatedDate = getTodaysDate();
 
   const phoneNumber = userData.userPhoneNumber;
   const phoneListItem = phoneNumber !== '' ? `<li>Telefonnummer: ${phoneNumber}</li>` : '';
-
-
 
 
   const htmlContent = template
