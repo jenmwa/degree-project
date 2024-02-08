@@ -61,7 +61,7 @@ export default async function handler(
       from: process.env.EMAIL_FROM,
       to: `${emailData.email}`,
       bcc: process.env.EMAIL_SERVER_USER,
-      subject: `${emailData.type}: Order Confirmation`,
+      subject: `Order Confirmation, ${bookingData.productTitle}`,
       text: `Order Confirmation: ${emailData.message}`,
       html: htmlContent,
     };
