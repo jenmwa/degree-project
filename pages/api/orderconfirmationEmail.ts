@@ -4,7 +4,7 @@ import { readFileSync } from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
-const template = readFileSync('app/_email-templates/orderRequestTemplate.html', 'utf-8');
+const template = readFileSync('app/email-templates/orderRequestTemplate.html', 'utf-8');
 
 export default async function handler(
   req: NextApiRequest,
