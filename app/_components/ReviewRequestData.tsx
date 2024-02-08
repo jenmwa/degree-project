@@ -19,15 +19,15 @@ export default function ReviewRequestData({
   const [status, setStatus] = useState<bookingStatus>(
     selectedBooking.bookingStatus
   );
-  const [sendConfirmMail, setSendConfirmMail] = useState<boolean>(false);
+  // const [sendConfirmMail, setSendConfirmMail] = useState<boolean>(false);
 
   const handleStatusChange = (newStatus: bookingStatus) => {
     if (newStatus === "Confirmed") {
-      console.log("want to send confirmedmail?");
-      setSendConfirmMail(true);
+      // console.log("want to send confirmedmail?");
+      // setSendConfirmMail(true);
     }
     if (newStatus === "Request") {
-      setSendConfirmMail(false);
+      // setSendConfirmMail(false);
     }
     setStatus(newStatus);
   };
@@ -96,7 +96,7 @@ export default function ReviewRequestData({
                 onChange={handleStatusChange}
               />
             </div>
-            {sendConfirmMail && (
+            {/* {sendConfirmMail && (
               <div className="flex w-full">
                 <div className="w-full px-4 py-6 sm:px-0">
                   <button
@@ -108,7 +108,7 @@ export default function ReviewRequestData({
                   </button>
                 </div>
               </div>
-            )}
+            )} */}
 
             <div className="pt-6 flex items-center justify-end gap-x-6">
               <button
