@@ -27,11 +27,11 @@ export default function AdminTable({
 
   const getBackgroundColor = (bookingStatus: string) => {
     if (bookingStatus === "Confirmed") {
-      return "bg-green-100";
+      return "bg-green-100 bg-opacity-50";
     } else if (bookingStatus === "Payed") {
-      return "bg-yellow-100";
+      return "bg-yellow-100 bg-opacity-50";
     } else if (bookingStatus === "Delivered") {
-      return "bg-rust-50";
+      return "bg-rust-50 bg-opacity-50";
     } else {
       return "bg-white";
     }
@@ -43,7 +43,7 @@ export default function AdminTable({
 
       <section className="relative overflow-x-auto my-16">
         <table className="w-full text-left rtl:text-right">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-100 ">
+          <thead className="text-xs text-gray-100 uppercase bg-gray-700 ">
             <tr>
               <th scope="col" className="px-4 py-3 hidden md:table-cell">
                 Id
@@ -75,7 +75,7 @@ export default function AdminTable({
                 <tr
                   key={booking.bookingId}
                   tabIndex={0}
-                  className={` border-b cursor-pointer hover:bg-gray-300 ${getBackgroundColor(
+                  className={` border-b border-gray-700 cursor-pointer hover:bg-gray-300 ${getBackgroundColor(
                     booking.bookingStatus
                   )}`}
                   onClick={(e) => {
