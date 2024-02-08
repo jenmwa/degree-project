@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (bookingError) {
         throw bookingError;
       }
-
+      console.log('booking is createde :', bookingData)
       const created_at = bookingData[0]?.created_at;
 
       const { data: newBookingData, error: getError } = await supabaseAuthClient
@@ -40,8 +40,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (getError) {
         throw getError;
       }
+      console.log('bookingId is:', newBookingData)
 
-      res.status(200).json({ success: true, bookingData: newBookingData });
+      const productId = bookingData[0]?.product;
+
+      const { data: productData, error: getProductError } = await supabaseAuthClient
+        .from('Product')
+        .select('productTitle')
+        .eq('productId', productId)
+        .single();
+
+      if (getProductError) {
+        throw getProductError;
+      }
+      console.log('getting productTitle is:', productData)
+      const completeBookingData = { ...bookingData[0], productTitle: productData.productTitle };
+
+      res.status(200).json({ success: true, bookingData: completeBookingData });
     } catch (error) {
       console.error('Error creating booking:', error);
       res.status(500).json({ error: 'Error creating booking' });

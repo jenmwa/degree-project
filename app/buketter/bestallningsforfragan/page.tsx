@@ -138,18 +138,18 @@ export default function Page() {
         type: "order_confirmation",
         name: userData.userFirstName,
         email: userEmail,
-        message: "Din förfrågan är emottagen. ",
+        message: createdBooking.bookingMessage,
       };
 
-      await serviceEmailService(emailData, bookingData, userData);
-      console.log(
-        "emaildata",
-        emailData,
-        "bookingdata",
-        bookingData,
-        "userdata",
-        userData
-      );
+      await serviceEmailService(emailData, createdBooking, userData);
+      // console.log(
+      //   "emaildata",
+      //   emailData,
+      //   "bookingdata",
+      //   bookingData,
+      //   "userdata",
+      //   userData
+      // );
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
 

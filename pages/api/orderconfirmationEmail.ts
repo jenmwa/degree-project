@@ -33,12 +33,12 @@ export default async function handler(
   let mailData: IMailData;
   const requestedDate = bookingData.requestedDate;
   const formattedRequestDate = requestedDate ? new Date(requestedDate).toLocaleDateString('sv-SE') : '';
-  const requestedDateListItem = formattedRequestDate !== '' ? `<li>Önskat datum: ${formattedRequestDate}</li>` : '';
+  const requestedDateListItem = formattedRequestDate !== '' ? `${formattedRequestDate}` : 'Inget specifikt datum angivet';
 
   const formattedCreatedDate = getTodaysDate();
 
   const phoneNumber = userData.userPhoneNumber;
-  const phoneListItem = phoneNumber !== '' ? `<li>Telefonnummer: ${phoneNumber}</li>` : '';
+  const phoneListItem = phoneNumber !== '' ? `${phoneNumber}` : 'Inget telefonnummer angett';
 
 
   const htmlContent = template
@@ -46,7 +46,7 @@ export default async function handler(
     .replace('{{ email-email }}', `${emailData.email}`)
     .replace('{{ email-message }}', `${emailData.message}`)
     .replace('{{ email-name }}', `${emailData.name}`)
-    .replace('{{ bookingDataId }}', `${bookingData.productId}`)
+    .replace('{{ bookingDataId }}', `${bookingData.bookingId}`)
     .replace('{{ bookingDataBookingmessage }}', `${bookingData.bookingMessage}`)
     .replace('{{ bookingDataRequestedDate }}', requestedDateListItem)
     .replace('{{ bookingDataCreated }}', formattedCreatedDate)
