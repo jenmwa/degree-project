@@ -36,16 +36,13 @@ export default function Requests() {
     const fetchData = async () => {
       try {
         const data = await getBookingsService();
-        const updatedBookings = data.map(
-          (booking: {
-            bookingId: string;
-            customerEmail: string;
-            product: string;
-          }) => {
-            return booking;
-          }
-        );
-        setBookings(updatedBookings);
+        setBookings(data);
+        const sortedBookings = [...data].sort((a, b) => {
+          return (
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          );
+        });
+        setBookings(sortedBookings);
       } catch (error) {
         console.error("Error fetching bookings:", error);
       }
