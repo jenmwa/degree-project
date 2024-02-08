@@ -143,7 +143,7 @@ export default function Page() {
         message: createdBooking.bookingMessage,
       };
 
-      await serviceEmailService(emailData, createdBooking, userData);
+      await serviceEmailService(emailData, bookingData, userData);
 
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
