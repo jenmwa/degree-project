@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ProductInfo from "./ProductInfo";
-import emma from "../../public/img/emma2.jpg";
+import emma from "../../public/img/emma-hagelin-bjorby_blomster.png";
 
 import React from "react";
 

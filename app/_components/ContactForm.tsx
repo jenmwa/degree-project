@@ -36,7 +36,7 @@ export default function ContactForm({
             value={email.name}
             maxLength={50}
             name="name"
-            className="mb-6 input-base"
+            className="mb-6 input-base-light"
             onChange={handleOnChange}
           />
 
@@ -52,7 +52,7 @@ export default function ContactForm({
             maxLength={80}
             name="email"
             type="email"
-            className="mb-6 input-base"
+            className="mb-6 input-base-light"
             onChange={handleOnChange}
           />
           {validateEmail(email.email) && (
@@ -68,7 +68,7 @@ export default function ContactForm({
                 maxLength={80}
                 name="confirmEmail"
                 type="email"
-                className="mb-6 input-base"
+                className="mb-6 input-base-light"
                 onChange={handleOnChange}
               />
             </>
@@ -84,7 +84,7 @@ export default function ContactForm({
             name="message"
             value={email.message}
             rows={5}
-            className="mb-6 block w-full input-base bg-white"
+            className="mb-6 block w-full input-base-light"
             onChange={handleOnChangeTextarea}
           />
         </div>
