@@ -29,18 +29,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         throw bookingError;
       }
       console.log('********booking is created :', bookingData)
-      // const created_at = bookingData[0]?.created_at;
+      const created_at = bookingData[0]?.created_at;
 
-      // const { data: newBookingData, error: getError } = await supabaseAuthClient
-      //   .from('Booking')
-      //   .select('*')
-      //   .eq('created_at', created_at)
-      //   .single();
+      const { data: newBookingData, error: getError } = await supabaseAuthClient
+        .from('Booking')
+        .select('*')
+        .eq('created_at', created_at)
+        .single();
 
-      // if (getError) {
-      //   throw getError;
-      // }
-      // console.log('bookingId is:', newBookingData)
+      if (getError) {
+        throw getError;
+      }
+      console.log('bookingId is:', newBookingData)
 
       const productId = bookingData[0]?.product;
 

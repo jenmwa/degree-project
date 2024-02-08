@@ -33,10 +33,10 @@ export default function Page() {
   const [userPhoneNumber, setUserPhoneNumber] = useState("");
   const [bookingData, setBookingData] = useState<IBooking>({
     bookingId: "",
-    customer: userData,
+    customer: {} as IUser,
     product: selectedProduct,
     bookingMessage: "",
-    requestedDate: "",
+    requestedDate: undefined,
     bookingStatus: bookingStatus.Request,
     created_at: null,
     updated_at: null,
@@ -85,12 +85,12 @@ export default function Page() {
     }
     setUserData({ ...userData, [name]: value });
   };
-
+  console.log("****setUSERDATA", userData);
   const handleUserMessageOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     console.log(e.target.value);
     setBookingData({ ...bookingData, bookingMessage: e.target.value });
   };
-
+  console.log("****setBOOKINGDATAMESSAGE", bookingData);
   const handleSwitchOnChange = () => {
     setIsAgreed(!isAgreed);
   };
@@ -130,20 +130,24 @@ export default function Page() {
     }
     try {
       const user = await createUserService(userData);
-      const createdBooking = (await createBookingService(
-        bookingData,
-        user
-      )) as IBooking;
-
+      console.log("**** USER", user);
+      const createdBooking = await createBookingService(bookingData, user);
+      console.log("**** createdBooking", createdBooking);
       const userEmail = userData.userEmail;
+      console.log("**** userEmail", userEmail);
       const emailData = {
         type: "order_confirmation",
         name: userData.userFirstName,
         email: userEmail,
         message: "msg",
       };
-
-      await serviceEmailService(emailData, bookingData, userData);
+      console.log("**** emailData", emailData);
+      const serviceEmail = await serviceEmailService(
+        emailData,
+        createdBooking,
+        userData
+      );
+      console.log("**** serviceEmail", serviceEmail);
 
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
