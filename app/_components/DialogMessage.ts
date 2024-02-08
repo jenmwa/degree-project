@@ -49,7 +49,7 @@ export const REQUEST_ERROR_DIALOG: IDialog = {
   type: "warning",
   title: "Något gick fel.",
   message:
-    "Bokningen kunde inte uppdateras. Vänligen försök igen eller kontakta IT-ansvarig.",
+    "Bokningen kunde inte uppdateras. Vänligen försök igen eller kontakta oss.",
   primaryButton: "Ok",
   // redirectLink?: string;
 };

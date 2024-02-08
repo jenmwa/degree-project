@@ -64,7 +64,7 @@ export default function Contact() {
   }
   return (
     <section className="flex flex-col">
-      <div className="relative flex place-items-center bg-white"></div>
+      <div className="relative flex place-items-center"></div>
       <ContactForm
         handleSubmit={handleSubmit}
         email={email}

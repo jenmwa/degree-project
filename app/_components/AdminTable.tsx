@@ -25,12 +25,24 @@ export default function AdminTable({
   //   }
   // };
 
+  const getBackgroundColor = (bookingStatus: string) => {
+    if (bookingStatus === "Confirmed") {
+      return "bg-green-100";
+    } else if (bookingStatus === "Payed") {
+      return "bg-yellow-100";
+    } else if (bookingStatus === "Delivered") {
+      return "bg-rust-50";
+    } else {
+      return "bg-white";
+    }
+  };
+
   return (
     <>
       {/* <button onClick={() => fetchData(userId)}>CLICK TO GET USER</button> */}
 
       <section className="relative overflow-x-auto my-16">
-        <table className="w-full text-left rtl:text-right text-gray-500 ">
+        <table className="w-full text-left rtl:text-right">
           <thead className="text-xs text-gray-700 uppercase bg-gray-100 ">
             <tr>
               <th scope="col" className="px-4 py-3 hidden md:table-cell">
@@ -62,8 +74,19 @@ export default function AdminTable({
               bookings?.map((booking) => (
                 <tr
                   key={booking.bookingId}
-                  className="bg-white border-b cursor-pointer  hover:bg-gray-300 "
-                  onClick={() => handleReviewModal(booking)}
+                  tabIndex={0}
+                  className={` border-b cursor-pointer hover:bg-gray-300 ${getBackgroundColor(
+                    booking.bookingStatus
+                  )}`}
+                  onClick={(e) => {
+                    e.currentTarget.focus();
+                    handleReviewModal(booking);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleReviewModal(booking);
+                    }
+                  }}
                 >
                   <td className="px-4 py-4 hidden md:table-cell">
                     {booking.bookingId}

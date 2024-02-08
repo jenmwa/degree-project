@@ -1,29 +1,20 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useProductContext } from "../../_context/ProductsContext";
 import { initialProduct } from "../../_helpers/initialProduct";
 import ProductSection from "../../_components/ProductSection";
-import {
-  IBooking,
-  IBookingWithCustomerEmail,
-  bookingStatus,
-} from "../../_models/IBooking";
+import { IBookingWithCustomerEmail } from "../../_models/IBooking";
 import { IProduct } from "../../_models/IProduct";
 import EditProductModal from "../../_components/EditProductModal";
-import { getBookingsService } from "app/_services/getBookingsService";
 import { updateProductService } from "app/_services/updateProductService";
-import ReviewRequestModal from "app/_components/ReviewRequestModal";
-import AdminTable from "../../_components/AdminTable";
 import DialogComponent from "app/_components/DialogComponent";
 import { IDialog } from "app/_models/IDialog";
 import { initialDialog } from "app/_helpers/initialDialog";
 import {
-  BOOKINGUPDATE_ERROR_DIALOG,
-  BOOKINGUPDATE_SUCCESS_DIALOG,
   PRODUCTUPDATE_ERROR_DIALOG,
   PRODUCTUPDATE_SUCCESS_DIALOG,
 } from "app/_components/DialogMessage";
-import { updateBookingService } from "app/_services/updateBookingStatusService";
+
 import { getTodaysDate } from "app/_utilities/getTodaysDate";
 
 export default function Dashboard() {
@@ -127,7 +118,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="flex flex-1 flex-col px-6 py-12 lg:px-8">
+      <div className="flex flex-1 flex-col px-6 py-12 lg:px-8 ">
         <span className="mt-20">Dagens datum:</span>
         <h1 className=" text-3xl mb-12 font-extraboldmd:text-5xl lg:text-6xl">
           {getTodaysDate()}

@@ -26,7 +26,7 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
   //
   return (
     <>
-      <section className="bg-gray-100">
+      <section className="bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
             {isLoading ? (
@@ -56,7 +56,7 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
                     <p>Klicka för att läsa mer.</p>
                   </>
                 )}
-                <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-12 lg:space-y-0 ">
+                <div className=" mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-12 lg:space-y-0 ">
                   {products?.map((foundProduct) => (
                     <div key={foundProduct.productId} className=" relative">
                       <div className="relative h-88 w-full overflow-hidden bg-black sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 sm:h-96">
@@ -65,7 +65,7 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
                       <div
                         tabIndex={0}
                         aria-label={`Läs mer om ${foundProduct.productTitle}`}
-                        className="cursor-pointer sm:min-h-none md:min-h-64 bg-gray-200 w-4/5 mx-auto relative p-10 z-10 text-center -mt-16 lg:-mt-12 sm:-mt-16 hover:bg-gray-300"
+                        className="cursor-pointer sm:min-h-none md:min-h-64 bg-greyish-100 w-4/5 mx-auto relative p-10 z-10 text-center -mt-16 lg:-mt-12 sm:-mt-16 hover:bg-gray-200"
                         onClick={(e) => {
                           e.currentTarget.focus();
                           showProduct(foundProduct);

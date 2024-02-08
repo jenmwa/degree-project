@@ -6,7 +6,6 @@ import UserForm from "./UserForm";
 import ProductForm from "./ProductForm";
 import ConfirmSwitch from "./ConfirmSwitch";
 import OrderInfo from "./OrderInfo";
-
 import React from "react";
 import { IProduct } from "../_models/IProduct";
 
