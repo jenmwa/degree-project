@@ -33,7 +33,7 @@ export default function Page() {
   const [userPhoneNumber, setUserPhoneNumber] = useState("");
   const [bookingData, setBookingData] = useState<IBooking>({
     bookingId: "",
-    customer: userData,
+    customer: {} as IUser,
     product: selectedProduct,
     bookingMessage: "",
     requestedDate: "",

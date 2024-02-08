@@ -1,3 +1,4 @@
+import { IBooking } from "app/_models/IBooking";
 import { supabaseAuthClient } from "lib/supabaseAuthClient";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -9,11 +10,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const userId = req.body.customer;
 
-      const bookingObject: any = {
+      const bookingObject: IBooking = {
+        bookingId: '',
         product: product,
         bookingMessage: bookingMessage,
         bookingStatus: bookingStatus,
         customer: userId,
+        created_at: null,
       };
 
       if (requestedDate) {
