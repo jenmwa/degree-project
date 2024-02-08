@@ -58,7 +58,7 @@ import { supabaseClient } from "lib/supabase";
 //   );
 // }
 import { useState } from "react";
-
+import PageNotFound from "../../app/_components/PageNotFound";
 import React from "react";
 export default function Admin() {
   const [data, setData] = useState<string>("");
