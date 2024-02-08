@@ -22,7 +22,7 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
     else {
       setIsAdmin(false);
     }
-  }, []);
+  }, [pathname]);
   //
   return (
     <>
