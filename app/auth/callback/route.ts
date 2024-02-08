@@ -15,6 +15,7 @@ export async function GET(req: NextRequest) {
     await supabase.auth.exchangeCodeForSession(code)
   }
 
-  return NextResponse.redirect('http://localhost:3000/login')
+  return NextResponse.redirect('https://degree-project-two.vercel.app//login')
+  // return NextResponse.redirect('https://degree-project-two.vercel.app//login')
 
 }

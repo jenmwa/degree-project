@@ -4,7 +4,7 @@ import { readFileSync } from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
-const template = readFileSync('app/_email-templates/orderRequestTemplate.html', 'utf-8');
+const template = readFileSync('app/email-templates/orderRequestTemplate.html', 'utf-8');
 
 export default async function handler(
   req: NextApiRequest,
@@ -61,7 +61,7 @@ export default async function handler(
       from: process.env.EMAIL_FROM,
       to: `${emailData.email}`,
       bcc: process.env.EMAIL_SERVER_USER,
-      subject: `${emailData.type}: Order Confirmation`,
+      subject: `Order Confirmation, ${bookingData.productTitle}`,
       text: `Order Confirmation: ${emailData.message}`,
       html: htmlContent,
     };
