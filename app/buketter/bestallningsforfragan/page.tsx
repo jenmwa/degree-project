@@ -140,7 +140,7 @@ export default function Page() {
         type: "order_confirmation",
         name: userData.userFirstName,
         email: userEmail,
-        message: createdBooking.bookingMessage,
+        message: "msg",
       };
 
       await serviceEmailService(emailData, bookingData, userData);
