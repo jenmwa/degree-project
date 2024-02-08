@@ -21,6 +21,10 @@ export default async function handler(
   });
 
   const { emailData, bookingData, userData } = req.body;
+  console.log(req.body)
+  console.log('userData:', userData)
+  console.log('bookingData', bookingData)
+  console.log('emaildata:', emailData)
 
   if (!emailData.name || !emailData.email || !emailData.message || !emailData.type) {
     return res.status(400).json({ message: 'Invalid request' });
