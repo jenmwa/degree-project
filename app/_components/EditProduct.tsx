@@ -153,7 +153,6 @@ export default function EditProduct({
             close={close}
             toggleImage={toggleImage}
             selectedImages={selectedImages}
-            // updateFormData={updateFormData}
           ></EditProductForm>
         </div>
         <DialogComponent

@@ -31,7 +31,7 @@ export default function AdminTable({
 
       <section className="relative overflow-x-auto my-16">
         <table className="w-full text-left rtl:text-right text-gray-500 ">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-100 ">
             <tr>
               <th scope="col" className="px-4 py-3 hidden md:table-cell">
                 Id

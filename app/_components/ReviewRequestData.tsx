@@ -57,16 +57,14 @@ export default function ReviewRequestData({
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className="  leading-6 ">Vad</dt>
               <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                {selectedBooking.requestedDate
-                  ? new Date(selectedBooking.requestedDate).toLocaleDateString()
-                  : "N/A"}
+                {selectedBooking.productTitle}
               </dd>
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt className=" leading-6">Önskat Datum</dt>
+              <dt className=" leading-6">Till ev Datum</dt>
               <dd className="mt-1 leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                 {selectedBooking.requestedDate
-                  ? selectedBooking.requestedDate
+                  ? new Date(selectedBooking.requestedDate).toLocaleDateString()
                   : "N/A"}
               </dd>
             </div>
@@ -86,7 +84,7 @@ export default function ReviewRequestData({
             </div>
             <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
               <dt className=" leading-6">Meddelande</dt>
-              <dd className="mt-1  leading-6 sm:col-span-2 sm:mt-0">
+              <dd className="mt-1 leading-6 sm:col-span-2 sm:mt-0">
                 {selectedBooking.bookingMessage}
               </dd>
             </div>

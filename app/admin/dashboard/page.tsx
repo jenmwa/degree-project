@@ -39,53 +39,53 @@ export default function Dashboard() {
   const [dialog, setDialog] = useState<IDialog>(initialDialog);
   const [showDialog, setShowDialog] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getBookingsService();
-        const updatedBookings = data.map(
-          (booking: {
-            bookingId: string;
-            customerEmail: string;
-            product: string;
-          }) => {
-            return booking;
-          }
-        );
-        setBookings(updatedBookings);
-      } catch (error) {
-        console.error("Error fetching bookings:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const data = await getBookingsService();
+  //       const updatedBookings = data.map(
+  //         (booking: {
+  //           bookingId: string;
+  //           customerEmail: string;
+  //           product: string;
+  //         }) => {
+  //           return booking;
+  //         }
+  //       );
+  //       setBookings(updatedBookings);
+  //     } catch (error) {
+  //       console.error("Error fetching bookings:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
-  const updateBooking = async (status: bookingStatus, booking: IBooking) => {
-    try {
-      const response = await updateBookingService(status, booking);
-      if (response.ok) {
-        setShowDialog(true);
-        setDialog(BOOKINGUPDATE_SUCCESS_DIALOG);
-        const updatedBookings = bookings.map((book) => {
-          if (book.bookingId === booking.bookingId) {
-            return { ...book, bookingStatus: status };
-          } else {
-            return book;
-          }
-        });
-        setBookings(updatedBookings);
-        close();
-      } else {
-        console.error("Failed to update product");
-        setShowDialog(true);
-        setDialog(BOOKINGUPDATE_ERROR_DIALOG);
-      }
-    } catch (error) {
-      console.error("Error updating product:", error);
-      throw error;
-    }
-  };
+  // const updateBooking = async (status: bookingStatus, booking: IBooking) => {
+  //   try {
+  //     const response = await updateBookingService(status, booking);
+  //     if (response.ok) {
+  //       setShowDialog(true);
+  //       setDialog(BOOKINGUPDATE_SUCCESS_DIALOG);
+  //       const updatedBookings = bookings.map((book) => {
+  //         if (book.bookingId === booking.bookingId) {
+  //           return { ...book, bookingStatus: status };
+  //         } else {
+  //           return book;
+  //         }
+  //       });
+  //       setBookings(updatedBookings);
+  //       close();
+  //     } else {
+  //       console.error("Failed to update product");
+  //       setShowDialog(true);
+  //       setDialog(BOOKINGUPDATE_ERROR_DIALOG);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error updating product:", error);
+  //     throw error;
+  //   }
+  // };
 
   const close = () => {
     setShowModal(false);
@@ -112,12 +112,12 @@ export default function Dashboard() {
     }
   };
 
-  const handleReviewModal = (booking: IBooking) => {
-    setShowTableModal(true);
-    if (booking) {
-      setSelectedBooking(booking);
-    }
-  };
+  // const handleReviewModal = (booking: IBooking) => {
+  //   setShowTableModal(true);
+  //   if (booking) {
+  //     setSelectedBooking(booking);
+  //   }
+  // };
 
   const closeDialog = () => {
     setShowModal(false);
@@ -128,12 +128,11 @@ export default function Dashboard() {
   return (
     <>
       <div className="flex flex-1 flex-col px-6 py-12 lg:px-8">
-        <span className="mt-24">Dagens datum:</span>
+        <span className="mt-20">Dagens datum:</span>
         <h1 className=" text-3xl mb-12 font-extraboldmd:text-5xl lg:text-6xl">
           {getTodaysDate()}
         </h1>
-        <br></br>
-        jag vill: Ändra produkt eller kolla förfrågningar
+
         <>
           {showModal && (
             <EditProductModal
@@ -143,10 +142,9 @@ export default function Dashboard() {
               handleFormData={handleFormData}
             ></EditProductModal>
           )}
-          <h2>Ändra produkt:</h2>
           <ProductSection showProduct={showProduct}></ProductSection>
-          <p>GÖM TABELLEN MED EN KNAPP /EXPAND/DECREASE</p>
-          <AdminTable
+
+          {/* <AdminTable
             bookings={bookings}
             handleReviewModal={handleReviewModal}
             isLoading={isLoading}
@@ -159,7 +157,7 @@ export default function Dashboard() {
               showTableModal={showTableModal}
               close={close}
             ></ReviewRequestModal>
-          )}
+          )} */}
           {showDialog && (
             <DialogComponent
               dialog={dialog}

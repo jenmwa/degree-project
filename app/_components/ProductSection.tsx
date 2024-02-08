@@ -1,17 +1,29 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useProductContext } from "../_context/ProductsContext";
 import { IProduct } from "../_models/IProduct";
 import ImageCarousel from "./ImageCarousel";
 import Spinner from "./Spinner";
+import { usePathname } from "next/navigation";
 
 interface IProductsSectionProps {
   showProduct: (product: IProduct) => void;
 }
 
 export default function ProductSection({ showProduct }: IProductsSectionProps) {
-  const { products, isLoading, isError } = useProductContext();
+  const { products, isLoading } = useProductContext();
+  const [isAdmin, setIsAdmin] = useState<boolean>(true);
 
+  const pathname = usePathname();
+
+  useEffect(() => {
+    console.log("Current route:", pathname);
+    if (pathname === "/admin/dashboard") setIsAdmin(true);
+    else {
+      setIsAdmin(false);
+    }
+  }, []);
+  //
   return (
     <>
       <section className="bg-gray-100">
@@ -21,9 +33,29 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
               <Spinner></Spinner>
             ) : (
               <>
-                <h2 className="text-2xl font-bold">Buketter</h2>
-                <p>Blomsterarrangemang för livets alla tillfällen.</p>
-                <p>Klicka för att läsa mer.</p>
+                {isAdmin ? (
+                  <>
+                    <h2 className="text-2xl font-bold">Ändra produkt</h2>
+                    <p>
+                      Här ändrar du texter och bilder som hör till produkter som
+                      syns på hemsidan.
+                    </p>{" "}
+                    <p>
+                      Klicka på den artikel du vill ändra så får du tillgång
+                      till redigeringspanelen.
+                    </p>
+                    <p className="italic mt-4">
+                      Tänk på att du uppdaterar i realtid och det syns på
+                      hemsidan med en gång.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="text-2xl font-bold">Buketter</h2>
+                    <p>Blomsterarrangemang för livets alla tillfällen.</p>
+                    <p>Klicka för att läsa mer.</p>
+                  </>
+                )}
                 <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-12 lg:space-y-0 ">
                   {products?.map((foundProduct) => (
                     <div key={foundProduct.productId} className=" relative">

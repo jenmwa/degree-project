@@ -29,7 +29,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         throw bookingError;
       }
 
-      res.status(200).json({ success: true, bookingData });
+      const created_at = bookingData[0]?.created_at;
+
+      const { data: newBookingData, error: getError } = await supabaseAuthClient
+        .from('Booking')
+        .select('*')
+        .eq('created_at', created_at)
+        .single();
+
+      if (getError) {
+        throw getError;
+      }
+
+      res.status(200).json({ success: true, bookingData: newBookingData });
     } catch (error) {
       console.error('Error creating booking:', error);
       res.status(500).json({ error: 'Error creating booking' });

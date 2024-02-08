@@ -142,6 +142,14 @@ export default function Page() {
       };
 
       await serviceEmailService(emailData, bookingData, userData);
+      console.log(
+        "emaildata",
+        emailData,
+        "bookingdata",
+        bookingData,
+        "userdata",
+        userData
+      );
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
 

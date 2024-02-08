@@ -5,24 +5,33 @@ import { INavigation } from "app/_models/INavigation";
 export function useMenuOptions() {
   const pathname = usePathname();
   const isDashboardRoute = pathname === "/admin/dashboard";
+  const isRequestsRoute = pathname === "/admin/dashboard/requests";
+
 
   const [navigation, setNavigation] = useState<INavigation[]>([]);
 
   useEffect(() => {
     if (isDashboardRoute) {
       setNavigation([
-        { name: "Ändra Produkter", href: "/" },
-        { name: "Förfrågningar", href: "/" },
+        { name: "Ändra Produkter", href: "/admin/dashboard" },
+        { name: "Förfrågningar", href: "/admin/dashboard/requests" },
         { name: "Hemsidans info", href: "/" },
       ]);
-    } else {
+    } else if (isRequestsRoute) {
+      setNavigation([
+        { name: "Ändra Produkter", href: "/admin/dashboard" },
+        { name: "Förfrågningar", href: "/admin/dashboard/requests" },
+        { name: "Hemsidans info", href: "/" },
+      ])
+    }
+    else {
       setNavigation([
         { name: "Hem", href: "/" },
         { name: "Emma", href: "/#emma" },
         { name: "Kontakt", href: "/#contact" },
       ]);
     }
-  }, [isDashboardRoute]);
+  }, [isDashboardRoute, isRequestsRoute]);
 
   let linkText = "Buketter";
   let href = "/buketter";
