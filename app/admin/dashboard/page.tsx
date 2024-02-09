@@ -35,7 +35,6 @@ export default function Dashboard() {
     try {
       const response = await updateProductService(formData);
       if (response.ok) {
-        console.log("success");
         setDialog(PRODUCTUPDATE_SUCCESS_DIALOG);
         setShowDialog(true);
       }

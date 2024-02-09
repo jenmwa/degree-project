@@ -29,7 +29,6 @@ export default function ReviewRequestData({
   };
 
   const updateStatusOnClick = () => {
-    console.log("click", status, selectedBooking.bookingId);
     updateBooking(status, selectedBooking);
   };
 

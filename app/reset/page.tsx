@@ -36,7 +36,6 @@ export default function Reset() {
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     const { name, value } = e.target;
     setData((prev) => ({
       ...prev,
