@@ -3,7 +3,6 @@
 export interface IUser {
   userId: string;
   userEmail: string,
-  // userPassword: string,
   userFirstName: string,
   userLastName: string,
   userPhoneNumber: number,

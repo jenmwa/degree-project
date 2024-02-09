@@ -3,7 +3,6 @@ import { supabaseClient } from "lib/supabase";
 
 export default async function handler(req: any, res: any) {
   if (req.method === 'PUT') {
-    console.log(req.body)
     try {
       const { bookingId, bookingStatus } = req.body;
 
