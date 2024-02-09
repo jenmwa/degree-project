@@ -1,4 +1,4 @@
-import { IRequestEmail } from "app/_models/IContactEmail";
+
 import { IMailData } from "app/_models/IMailData";
 import { createRequestMailData } from "app/_utilities/createMailData";
 import { readFileSync } from "fs";
@@ -14,7 +14,7 @@ export default async function handler(
 ) {
 
   const { type, name, email, message, bookingDataId, booking_requestedDate, booking_created_at, productTitle } = req.body;
-  console.log(type, name, email, message, bookingDataId, booking_requestedDate, booking_created_at, productTitle)
+
   const htmlContent = template
     .replace('{{ emailType }}', type)
     .replace('{{ emailEmail }}', email)
@@ -24,8 +24,6 @@ export default async function handler(
     .replace('{{ bookingDataRequestDate }}', booking_requestedDate)
     .replace('{{ bookingDataCreated }}', booking_created_at)
     .replace('{{ bookingDataProductTitle }}', productTitle);
-
-
 
   try {
     const mailData = createRequestMailData(type, name, email, htmlContent);

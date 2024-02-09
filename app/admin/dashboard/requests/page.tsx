@@ -9,7 +9,7 @@ import {
 import ReviewRequestModal from "app/_components/ReviewRequestModal";
 import { useProductContext } from "app/_context/ProductsContext";
 import { initialDialog } from "app/_helpers/initialDialog";
-import { IBooking, IBookingCreated, bookingStatus } from "app/_models/IBooking";
+import { IBookingCreated, bookingStatus } from "app/_models/IBooking";
 import { IDialog } from "app/_models/IDialog";
 import { getBookingsService } from "app/_services/getBookingsService";
 import { updateBookingService } from "app/_services/updateBookingStatusService";
