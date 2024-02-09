@@ -29,7 +29,6 @@ export async function fetchAndLogImages() {
         size: 0,
         type: 'image/png',
       })) as StorageFile[];
-      console.log('List of images:', transformedData);
       return { data: transformedData };
     }
   } catch (error) {

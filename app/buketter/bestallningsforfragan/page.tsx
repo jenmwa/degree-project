@@ -138,7 +138,7 @@ export default function Page() {
 
       const createdBooking = await createBookingService(bookingData, user);
 
-      const userEmail = userData.userEmail;
+      // const userEmail = userData.userEmail;
 
       // const emailData = {
       //   type: "requestEmail",

@@ -78,20 +78,16 @@ export default function EditProduct({
 
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const toggleImage = (img: string) => {
-    console.log(selectedImages);
     if (selectedImages.includes(img)) {
       setSelectedImages(selectedImages.filter((image) => image !== img));
     } else {
       setSelectedImages([...selectedImages, img]);
     }
   };
-  console.log("setselectedimg:", selectedImages);
 
   const handleFileImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      console.log(e.target.files);
       setFileImage(e.target.files[0]);
-      console.log("setfile:", fileImage);
     }
   };
 
@@ -112,15 +108,11 @@ export default function EditProduct({
       }
       const updatedFormData = updateFormDataWithImageUrl(formData, imageUrl);
 
-      console.log("updatedformdata:", updatedFormData);
-      console.log("selectedImg:", selectedImages);
-
       updatedFormData.productImagesUrl.forEach((imageUrl, index) => {
         if (selectedImages.includes(imageUrl)) {
           updatedFormData.productImagesUrl.splice(index, 1);
         }
       });
-      console.log();
       handleFormData(updatedFormData);
     } catch (error) {
       console.error("Error submitting form:", error);

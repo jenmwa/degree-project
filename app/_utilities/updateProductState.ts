@@ -2,7 +2,6 @@ import { IProduct } from "app/_models/IProduct";
 
 export function updateProductState(prevProducts: IProduct[] | null, payload: any): IProduct[] | null {
   if (!prevProducts) {
-    console.log("No Previous Products");
     return prevProducts;
   }
 

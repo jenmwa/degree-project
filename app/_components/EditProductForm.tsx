@@ -27,7 +27,6 @@ export default function EditProductForm({
   toggleImage,
   selectedImages,
 }: IEditProductsFormProps) {
-  console.log(selectedProduct.productImagesUrl);
   return (
     <>
       <form
