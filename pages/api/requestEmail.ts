@@ -14,7 +14,7 @@ export default async function handler(
 ) {
 
   const { type, name, email, message, bookingDataId, booking_requestedDate, booking_created_at, productTitle } = req.body;
-
+  console.log(type, name, email, message, bookingDataId, booking_requestedDate, booking_created_at, productTitle)
   const htmlContent = template
     .replace('{{ emailType }}', type)
     .replace('{{ emailEmail }}', email)

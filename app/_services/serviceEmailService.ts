@@ -1,7 +1,6 @@
-import { IBookingWithCustomerEmail } from "app/_models/IBooking";
+
 import { IRequestEmail } from "app/_models/IContactEmail";
-import { IOrderMailData } from "app/_models/IOrderMailData";
-import { IUser } from "app/_models/IUser";
+
 
 export async function serviceEmailService(emailData: IRequestEmail) {
   if (!emailData.bookingId) {
