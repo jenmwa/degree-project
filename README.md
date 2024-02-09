@@ -45,7 +45,7 @@ Visit the live site [here](https://degree-project-two.vercel.app)
 
 ## Demo
 
-Insert gif or link to demo
+![demo Björby Blomster](/public/bjorby.gif)
 
 ## Tech
 
