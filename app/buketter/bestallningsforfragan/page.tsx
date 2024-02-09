@@ -8,7 +8,7 @@ import {
 
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import React from "react";
-import OrderForm from "../../_components/OrderForm";
+import OrderForm from "../../_components/RequestForm";
 import { useProductContext } from "../../_context/ProductsContext";
 import { initialUser } from "../../_helpers/initialUser";
 import { initialDialog } from "../../_helpers/initialDialog";
@@ -138,20 +138,20 @@ export default function Page() {
 
       const createdBooking = await createBookingService(bookingData, user);
 
-      const userEmail = userData.userEmail;
+      // const userEmail = userData.userEmail;
 
-      const emailData = {
-        type: "requestEmail",
-        name: userData.userFirstName,
-        email: userEmail,
-        message: "msg",
-      };
+      // const emailData = {
+      //   type: "requestEmail",
+      //   name: userData.userFirstName,
+      //   email: userEmail,
+      //   message: "msg",
+      // };
 
-      const serviceEmail = await serviceEmailService(
-        emailData,
-        createdBooking,
-        userData
-      );
+      // const serviceEmail = await serviceEmailService(
+      //   emailData,
+      //   createdBooking,
+      //   userData
+      // );
 
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);

@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent } from "react";
 import { IContactEmail } from "../_models/IContactEmail";
 import { validateEmail } from "../_utilities/validation";
 import ConfirmSwitch from "./ConfirmSwitch";
-import { classNames } from "./OrderForm";
+import { classNames } from "./RequestForm";
 import React from "react";
 
 interface IContactFormProps {

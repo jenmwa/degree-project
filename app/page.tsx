@@ -6,7 +6,7 @@ import Quote from "./_components/Quote";
 import About from "./_components/About";
 import ProductSection from "./_components/ProductSection";
 import { IProduct } from "./_models/IProduct";
-import ImgSection from "./_components/ImgSection";
+import ImgSection from "./_components/ImageSection";
 import { useRouter } from "next/navigation";
 import ContactSection from "./_components/ContactSection";
 
