@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    
     "target": "esnext",
     "lib": [
       "dom",
@@ -15,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@/styles/*": ["styles/*"],
-      "@/components/*": ["_components/*"]
+      "@/components/*": ["_components/*"],
+      
     },
     "jsx": "preserve",
     "resolveJsonModule": true,

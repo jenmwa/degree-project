@@ -3,7 +3,7 @@
  */
 
 import { NextApiRequest, NextApiResponse } from 'next';
-import handler from '../pages/api/contactEmail';
+import handler from '/Users/jennywaller/Documents/degree-project/pages/api/contactEmail';
 import nodemailer from 'nodemailer';
 
 jest.mock('nodemailer');
