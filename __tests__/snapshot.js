@@ -3,7 +3,7 @@
  */
 
 import { render } from "@testing-library/react";
-import Page from "../app/_components/Page";
+import Page from "/Users/jennywaller/Documents/degree-project/app/jenny-testar/Page";
 
 it("renders homepage unchanged", () => {
   const { container } = render(<Page />);

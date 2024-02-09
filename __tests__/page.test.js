@@ -4,7 +4,7 @@
 
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import Page from "../app/_components/Page";
+import Page from "/Users/jennywaller/Documents/degree-project/app/jenny-testar/Page.tsx";
 
 describe("Page", () => {
   it("renders a heading", () => {

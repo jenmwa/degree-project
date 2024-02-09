@@ -22,10 +22,11 @@ import { IUser } from "../../_models/IUser";
 import { validatePhone } from "../../_utilities/validation";
 import { serviceEmailService } from "app/_services/serviceEmailService";
 import { createUserService } from "app/_services/createUserService";
-import { createBookingService } from "app/_services/createBookingService";
+
 import { useRouter } from "next/navigation";
 import { contactEmailService } from "app/_services/contactEmailService";
 import { IContactEmail } from "app/_models/IContactEmail";
+import { createRequestService } from "app/_services/createRequestService";
 
 export default function Page() {
   const [showDialog, setShowDialog] = useState(false);
@@ -136,22 +137,22 @@ export default function Page() {
     try {
       const user = await createUserService(userData);
 
-      const createdBooking = await createBookingService(bookingData, user);
+      const createdBooking = await createRequestService(bookingData, user);
 
-      // const userEmail = userData.userEmail;
+      const userEmail = userData.userEmail;
 
-      // const emailData = {
-      //   type: "requestEmail",
-      //   name: userData.userFirstName,
-      //   email: userEmail,
-      //   message: "msg",
-      // };
+      const emailData = {
+        type: "requestEmail",
+        name: userData.userFirstName,
+        email: userEmail,
+        message: "msg",
+      };
 
-      // const serviceEmail = await serviceEmailService(
-      //   emailData,
-      //   createdBooking,
-      //   userData
-      // );
+      const serviceEmail = await serviceEmailService(
+        emailData,
+        createdBooking,
+        userData
+      );
 
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);

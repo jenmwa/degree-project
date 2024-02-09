@@ -1,8 +1,8 @@
 
-import { IBooking } from "app/_models/IBooking";
-import { IUser } from "app/_models/IUser";
+import { IBooking } from "/Users/jennywaller/Documents/degree-project/app/_models/IBooking";
+import { IUser } from "/Users/jennywaller/Documents/degree-project/app/_models/IUser";
 
-export async function createBookingService(bookingData: IBooking, userId: IUser) {
+export async function createRequestService(bookingData: IBooking, userId: IUser) {
   try {
     bookingData.customer = userId;
     const response = await fetch("/api/createBooking", {
