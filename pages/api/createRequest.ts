@@ -1,3 +1,4 @@
+import { IRequestEmail } from "app/_models/IContactEmail";
 import { supabaseAuthClient } from "lib/supabaseAuthClient";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -41,6 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         throw getError;
       }
 
+      console.log('New booking data:', newBookingData);
 
       const productId = bookingData[0]?.product;
 
@@ -54,7 +56,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         throw getProductError;
       }
 
-      const completeBookingData = { ...bookingData[0], productTitle: productData.productTitle };
+      const completeBookingData = {
+        ...bookingData[0],
+        productTitle: productData.productTitle,
+        booking_created_at: bookingData[0]?.created_at
+      }
 
       res.status(200).json({ success: true, bookingData: completeBookingData });
     } catch (error) {

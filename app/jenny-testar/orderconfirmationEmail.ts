@@ -11,7 +11,6 @@ export default async function handler(
 ) {
 
   const { booking } = req.body;
-  console.log('!!! BOOKING', booking)
   if (!booking || !booking.customerEmail || !booking.bookingId || !booking.bookingMessage) {
     return res.status(400).json({ message: 'Invalid request' });
   }

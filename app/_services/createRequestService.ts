@@ -5,7 +5,7 @@ import { IUser } from "app/_models/IUser";
 export async function createRequestService(bookingData: IBooking, userId: IUser) {
   try {
     bookingData.customer = userId;
-    const response = await fetch("/api/createBooking", {
+    const response = await fetch("/api/createRequest", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
