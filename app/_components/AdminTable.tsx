@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import { IBooking, IBookingWithCustomerEmail } from "../_models/IBooking";
+import { IBooking, IBookingCreated } from "../_models/IBooking";
 
 interface IAdminOrderTableProps {
-  bookings: IBookingWithCustomerEmail[];
+  bookings: IBookingCreated[];
   isLoading: boolean;
   handleReviewModal: (booking: IBooking) => void;
 }
