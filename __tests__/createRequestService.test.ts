@@ -1,8 +1,9 @@
-import { createBookingService } from "/Users/jennywaller/Documents/degree-project/app/_services/createBookingService";
+
+import { createRequestService } from "/Users/jennywaller/Documents/degree-project/app/_services/createRequestService";
 import { IBooking, bookingStatus } from "/Users/jennywaller/Documents/degree-project/app/_models/IBooking";
 import { IUser, Role } from "/Users/jennywaller/Documents/degree-project/app/_models/IUser";
 
-describe("createBookingService", () => {
+describe("createRequestService", () => {
   it("should call the API with the correct parameters", async () => {
 
     const user: IUser = {
@@ -32,9 +33,8 @@ describe("createBookingService", () => {
       json: jest.fn().mockResolvedValue({ bookingData }),
     });
 
-    await createBookingService(bookingData, user);
-
-    expect(fetch).toHaveBeenCalledWith("/api/createBooking", {
+    await createRequestService(bookingData, user);
+    expect(fetch).toHaveBeenCalledWith("/api/createRequest", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
