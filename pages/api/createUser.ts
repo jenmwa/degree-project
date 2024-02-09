@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     try {
-      console.log('createUser:', req.body);
+
       const { userFirstName, userLastName, userEmail, userPhoneNumber } = req.body;
 
       if (!userEmail) {
@@ -25,7 +25,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       if (existingUser && existingUser.length > 0) {
         userId = existingUser[0]?.userId;
-        console.log('existing:', userId)
       } else {
         const { data: newUser, error: createUserError } = await supabaseAuthClient
           .from('User')
@@ -39,9 +38,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
 
         userId = newUser[0]?.userId;
-        console.log('new:', userId)
+
       }
-      console.log('createUser:', req.body);
+
       res.status(200).json({ success: true, userId });
     } catch (error) {
       console.error('Error updating user:', error);
