@@ -91,12 +91,11 @@ export default function Page() {
     }
     setUserData({ ...userData, [name]: value });
   };
-  console.log("****setUSERDATA", userData);
+
   const handleUserMessageOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.target.value);
     setBookingData({ ...bookingData, bookingMessage: e.target.value });
   };
-  console.log("****setBOOKINGDATAMESSAGE", bookingData);
+
   const handleSwitchOnChange = () => {
     setIsAgreed(!isAgreed);
   };
@@ -136,32 +135,28 @@ export default function Page() {
     }
     try {
       const user = await createUserService(userData);
-      console.log("**** USER", user);
+
       const createdBooking = await createBookingService(bookingData, user);
-      console.log("**** createdBooking", createdBooking);
 
       const userEmail = userData.userEmail;
-      console.log("**** userEmail", userEmail);
+
       const emailData = {
         type: "requestEmail",
         name: userData.userFirstName,
         email: userEmail,
         message: "msg",
       };
-      console.log("**** emailData", emailData);
+
       const serviceEmail = await serviceEmailService(
         emailData,
         createdBooking,
         userData
       );
-      console.log("**** serviceEmail", serviceEmail);
 
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
 
       clearInputFields();
-
-      console.log("Booking created successfully:", createdBooking);
     } catch (error) {
       console.error("Error handling submission:", error);
       setDialog(REQUEST_ERROR_DIALOG);

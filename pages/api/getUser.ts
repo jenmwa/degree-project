@@ -2,9 +2,6 @@ import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
 
 export default async function getUser(req: any, res: any) {
   const { userId } = req.query;
-  console.log(req.query)
-
-
   if (req.method === 'GET') {
     try {
       let { data, error } = await supabaseAuthClient

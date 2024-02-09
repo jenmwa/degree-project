@@ -28,7 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (bookingError) {
         throw bookingError;
       }
-      console.log('********booking is created :', bookingData)
+
       const created_at = bookingData[0]?.created_at;
 
       const { data: newBookingData, error: getError } = await supabaseAuthClient
@@ -40,7 +40,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (getError) {
         throw getError;
       }
-      console.log('bookingId is:', newBookingData)
+
 
       const productId = bookingData[0]?.product;
 
@@ -53,7 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (getProductError) {
         throw getProductError;
       }
-      console.log('getting productTitle is:', productData)
+
       const completeBookingData = { ...bookingData[0], productTitle: productData.productTitle };
 
       res.status(200).json({ success: true, bookingData: completeBookingData });
