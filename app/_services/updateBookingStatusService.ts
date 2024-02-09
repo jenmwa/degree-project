@@ -1,6 +1,6 @@
-import { IBooking, bookingStatus } from "app/_models/IBooking";
+import { IBooking, IBookingCreated, bookingStatus } from "app/_models/IBooking";
 
-export async function updateBookingService(status: bookingStatus, booking: IBooking) {
+export async function updateBookingService(status: bookingStatus, booking: IBookingCreated) {
   try {
     const response = await fetch("/api/updateBooking", {
       method: "PUT",

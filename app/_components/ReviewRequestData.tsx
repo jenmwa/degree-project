@@ -1,14 +1,14 @@
-import { IBookingWithCustomerEmail, bookingStatus } from "app/_models/IBooking";
+import { IBookingCreated, bookingStatus } from "app/_models/IBooking";
 import { useState } from "react";
 import ReviewRequestBookingStatus from "./ReviewRequestBookingStatus";
 import { Dialog } from "@headlessui/react";
 
 interface IReviewRequestDataProps {
-  selectedBooking: IBookingWithCustomerEmail;
+  selectedBooking: IBookingCreated;
   close: () => void;
   updateBooking: (
     status: bookingStatus,
-    selectedBooking: IBookingWithCustomerEmail
+    selectedBooking: IBookingCreated
   ) => void;
 }
 export default function ReviewRequestData({

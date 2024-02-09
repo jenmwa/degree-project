@@ -18,7 +18,6 @@ describe("createRequestService", () => {
       updated_at: null
     };
     const bookingData: IBooking = {
-      bookingId: "123",
       requestedDate: '',
       customer: user,
       product: "",

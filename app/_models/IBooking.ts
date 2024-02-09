@@ -1,7 +1,6 @@
 import { IUser } from "./IUser";
 
 export interface IBooking {
-  bookingId: string;
   customer: IUser;
   product: string;
   bookingMessage: string;
@@ -11,9 +10,10 @@ export interface IBooking {
   updated_at?: Date | null;
 }
 
-export interface IBookingWithCustomerEmail extends IBooking {
-  customerEmail?: string;
-  productTitle?: string;
+export interface IBookingCreated extends IBooking {
+  bookingId: string;
+  customerEmail: string;
+  productTitle: string;
 }
 
 export enum bookingStatus {

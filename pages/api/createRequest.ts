@@ -1,4 +1,4 @@
-import { IRequestEmail } from "app/_models/IContactEmail";
+import { IBooking, IBookingCreated } from "app/_models/IBooking";
 import { supabaseAuthClient } from "lib/supabaseAuthClient";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -10,12 +10,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const userId = req.body.customer;
 
-      const bookingObject: any = {
+      const bookingObject: IBooking = {
         product: product,
         bookingMessage: bookingMessage,
+        requestedDate: requestedDate,
         bookingStatus: bookingStatus,
         customer: userId,
+
+        created_at: new Date(),
+        updated_at: null,
       };
+
 
       if (requestedDate) {
         bookingObject.requestedDate = requestedDate;
@@ -28,6 +33,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       if (bookingError) {
         throw bookingError;
+      }
+
+      const bookingId = bookingData[0]?.bookingId;
+
+
+      if (!bookingId) {
+        throw new Error('BookingId not found in response');
       }
 
       const created_at = bookingData[0]?.created_at;
@@ -56,7 +68,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         throw getProductError;
       }
 
-      const completeBookingData = {
+      const completeBookingData: IBookingCreated = {
         ...bookingData[0],
         productTitle: productData.productTitle,
         booking_created_at: bookingData[0]?.created_at

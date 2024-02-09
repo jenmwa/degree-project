@@ -14,7 +14,7 @@ import { initialUser } from "../../_helpers/initialUser";
 import { initialDialog } from "../../_helpers/initialDialog";
 import {
   IBooking,
-  IBookingWithCustomerEmail,
+  IBookingCreated,
   bookingStatus,
 } from "../../_models/IBooking";
 import { IDialog } from "../../_models/IDialog";
@@ -24,8 +24,7 @@ import { serviceEmailService } from "app/_services/serviceEmailService";
 import { createUserService } from "app/_services/createUserService";
 
 import { useRouter } from "next/navigation";
-import { contactEmailService } from "app/_services/contactEmailService";
-import { IContactEmail, IRequestEmail } from "app/_models/IContactEmail";
+import { IRequestEmail } from "app/_models/IContactEmail";
 import { createRequestService } from "app/_services/createRequestService";
 
 export default function Page() {
@@ -39,7 +38,6 @@ export default function Page() {
   const [selectedProduct, setSelectedProduct] = useState<string>("");
   const [userPhoneNumber, setUserPhoneNumber] = useState("");
   const [bookingData, setBookingData] = useState<IBooking>({
-    bookingId: "",
     customer: {} as IUser,
     product: selectedProduct,
     bookingMessage: "",
@@ -72,9 +70,11 @@ export default function Page() {
 
     if (name === "date") {
       setSelectedDate(value);
+      const createdAt = new Date();
       setBookingData((prevBookingData) => ({
         ...prevBookingData,
         requestedDate: new Date(value).toLocaleString(),
+        created_at: createdAt,
       }));
     } else if (name === "product") {
       setSelectedProduct(value);
@@ -111,7 +111,6 @@ export default function Page() {
   const clearInputFields = () => {
     setUserData(initialUser);
     setBookingData({
-      bookingId: "",
       customer: userData,
       product: selectedProduct,
       bookingMessage: "",
@@ -137,8 +136,10 @@ export default function Page() {
     try {
       const user = await createUserService(userData);
 
-      const createdBooking: IBookingWithCustomerEmail =
-        await createRequestService(bookingData, user);
+      const createdBooking: IBookingCreated = await createRequestService(
+        bookingData,
+        user
+      );
 
       const emailData: IRequestEmail = {
         type: "requestEmail",
@@ -150,7 +151,7 @@ export default function Page() {
         booking_created_at: bookingData.created_at,
         productTitle: createdBooking.productTitle,
       };
-
+      console.log(emailData);
       await serviceEmailService(emailData);
 
       setDialog(REQUEST_SUCCESS_DIALOG);

@@ -5,15 +5,15 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { Fragment, useRef } from "react";
 
 import ReviewRequestData from "./ReviewRequestData";
-import { IBookingWithCustomerEmail, bookingStatus } from "app/_models/IBooking";
+import { IBookingCreated, bookingStatus } from "app/_models/IBooking";
 
 export interface IDialogProps {
   close: () => void;
   showTableModal: boolean;
-  selectedBooking: IBookingWithCustomerEmail;
+  selectedBooking: IBookingCreated;
   updateBooking: (
     status: bookingStatus,
-    selectedBooking: IBookingWithCustomerEmail
+    selectedBooking: IBookingCreated
   ) => void;
 }
 
