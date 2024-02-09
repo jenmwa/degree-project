@@ -59,25 +59,6 @@ export const ProductProvider: React.FC<{ children: React.ReactNode }> = ({
           setProducts((prevProducts: IProduct[] | null) =>
             updateProductState(prevProducts, payload)
           );
-          // setProducts((prevProducts: IProduct[] | null) => {
-          //   if (prevProducts) {
-          //     const updatedProduct = payload.new as IProduct;
-          //     const updatedIndex = prevProducts.findIndex(
-          //       (product) => product.productId === updatedProduct.productId
-          //     );
-
-          //     if (updatedIndex !== -1) {
-          //       const newProducts = [...prevProducts];
-          //       newProducts[updatedIndex] = updatedProduct;
-          //       return newProducts;
-          //     } else {
-          //       return [...prevProducts, updatedProduct];
-          //     }
-          //   } else {
-          //     console.log("No Previous Products");
-          //     return prevProducts;
-          //   }
-          // });
         }
       )
       .subscribe();

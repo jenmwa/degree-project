@@ -12,7 +12,11 @@ import OrderForm from "../../_components/OrderForm";
 import { useProductContext } from "../../_context/ProductsContext";
 import { initialUser } from "../../_helpers/initialUser";
 import { initialDialog } from "../../_helpers/initialDialog";
-import { IBooking, bookingStatus } from "../../_models/IBooking";
+import {
+  IBooking,
+  IBookingWithCustomerEmail,
+  bookingStatus,
+} from "../../_models/IBooking";
 import { IDialog } from "../../_models/IDialog";
 import { IUser } from "../../_models/IUser";
 import { validatePhone } from "../../_utilities/validation";
@@ -20,6 +24,8 @@ import { serviceEmailService } from "app/_services/serviceEmailService";
 import { createUserService } from "app/_services/createUserService";
 import { createBookingService } from "app/_services/createBookingService";
 import { useRouter } from "next/navigation";
+import { contactEmailService } from "app/_services/contactEmailService";
+import { IContactEmail } from "app/_models/IContactEmail";
 
 export default function Page() {
   const [showDialog, setShowDialog] = useState(false);
@@ -133,21 +139,22 @@ export default function Page() {
       console.log("**** USER", user);
       const createdBooking = await createBookingService(bookingData, user);
       console.log("**** createdBooking", createdBooking);
-      // const userEmail = userData.userEmail;
-      // console.log("**** userEmail", userEmail);
-      // const emailData = {
-      //   type: "order_confirmation",
-      //   name: userData.userFirstName,
-      //   email: userEmail,
-      //   message: "msg",
-      // };
-      // console.log("**** emailData", emailData);
-      // const serviceEmail = await serviceEmailService(
-      //   emailData,
-      //   createdBooking,
-      //   userData
-      // );
-      // console.log("**** serviceEmail", serviceEmail);
+
+      const userEmail = userData.userEmail;
+      console.log("**** userEmail", userEmail);
+      const emailData = {
+        type: "requestEmail",
+        name: userData.userFirstName,
+        email: userEmail,
+        message: "msg",
+      };
+      console.log("**** emailData", emailData);
+      const serviceEmail = await serviceEmailService(
+        emailData,
+        createdBooking,
+        userData
+      );
+      console.log("**** serviceEmail", serviceEmail);
 
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
@@ -166,8 +173,6 @@ export default function Page() {
     <>
       <section className="overflow-hidden  py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          {/* <Stepper></Stepper> */}
-
           <OrderForm
             handleSubmit={handleSubmit}
             selectedProduct={selectedProduct}

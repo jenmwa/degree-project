@@ -1,11 +1,11 @@
 "use Client";
 
 import React from "react";
-import ImageCarousel from "../../app/_components/ImageCarousel";
+import ImageCarousel from "../../_components/ImageCarousel";
 
-import { IProduct } from "../../app/_models/IProduct";
+import { IProduct } from "../../_models/IProduct";
 import { useRouter } from "next/navigation";
-import Spinner from "../_components/Spinner";
+import Spinner from "../../_components/Spinner";
 
 interface IProductsectionProps {
   foundProduct: IProduct | undefined;

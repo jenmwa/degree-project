@@ -140,7 +140,7 @@ export default function EditProduct({
 
   return (
     <>
-      <section className="bg-gray-50">
+      <section>
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <EditProductForm
             handleFormSubmit={handleFormSubmit}

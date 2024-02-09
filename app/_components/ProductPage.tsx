@@ -4,7 +4,7 @@ import React from "react";
 import { useProductContext } from "../_context/ProductsContext";
 
 export default function ProductPage() {
-  const { products, isLoading, isError } = useProductContext();
+  const { products } = useProductContext();
 
   const foundProduct = products?.find(
     (product) => product.productId === "e882cbce-fa72-43c9-af7d-dc631c927278"

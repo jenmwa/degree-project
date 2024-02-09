@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import logo from "../../public/img/logoisch.png";
 import flowers from "../../public/svg/flowers-bouquet-svgrepo-com.svg";
 import leaves from "../../public/svg/four-leaves-svgrepo-com.svg";
 import heart from "../../public/svg/heart-svgrepo-com.svg";
@@ -29,7 +28,7 @@ const features = [
 ];
 
 export default function ContactSection() {
-  const { products, isLoading, isError } = useProductContext();
+  const { products } = useProductContext();
 
   const foundProduct = products?.find(
     (product) => product.productId === "e882cbce-fa72-43c9-af7d-dc631c927278"
