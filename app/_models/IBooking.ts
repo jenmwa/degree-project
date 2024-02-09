@@ -13,7 +13,7 @@ export interface IBooking {
 
 export interface IBookingWithCustomerEmail extends IBooking {
   customerEmail?: string;
-  productTitle?: string
+  productTitle?: string;
 }
 
 export enum bookingStatus {

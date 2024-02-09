@@ -15,21 +15,21 @@
     <h1>Ny förfrågan via hemsidan!</h1>
     <p>Här är information om beställningsförfrågan:</p>
     <ul>
-      <li>Från {{ userDataFirstname }},</li>
+      <li>Från {{ emailName }},</li>
       <li>Beställningsdatum: {{ bookingDataCreated }}</li>
       <li>Beställningsreferens: {{ bookingDataId }}</li>
       <li>Produkt: {{ bookingDataProductTitle }}</li>
 
-      <li>Ev datum för leverans: {{ bookingDataRequestedDate }}</li>
+      <li>Ev datum för leverans: {{ bookingDataRequestDate }}</li>
 
-      <li>Meddelande:<br> {{ bookingDataBookingmessage }}</li>
+      <li>Meddelande:<br> {{ emailMessage }}</li>
     </ul>
     <br>
     <p>Kundens kontaktuppgifter som angetts:</p>
     <ul>
-      <li>Epostadress: {{ email-email }}</li>
+      <li>Epostadress: {{ emailEmail }}</li>
 
-      <li>Telefonnummer: {{ userDataPhone }}</li>
+      <!-- <li>Telefonnummer: {{ userDataPhone }}</li> -->
 
     </ul><br><br></br>
 

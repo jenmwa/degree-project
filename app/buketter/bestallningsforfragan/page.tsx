@@ -25,7 +25,7 @@ import { createUserService } from "app/_services/createUserService";
 
 import { useRouter } from "next/navigation";
 import { contactEmailService } from "app/_services/contactEmailService";
-import { IContactEmail } from "app/_models/IContactEmail";
+import { IContactEmail, IRequestEmail } from "app/_models/IContactEmail";
 import { createRequestService } from "app/_services/createRequestService";
 
 export default function Page() {
@@ -137,22 +137,21 @@ export default function Page() {
     try {
       const user = await createUserService(userData);
 
-      const createdBooking = await createRequestService(bookingData, user);
+      const createdBooking: IBookingWithCustomerEmail =
+        await createRequestService(bookingData, user);
 
-      const userEmail = userData.userEmail;
-
-      const emailData = {
+      const emailData: IRequestEmail = {
         type: "requestEmail",
         name: userData.userFirstName,
-        email: userEmail,
-        message: "msg",
+        email: userData.userEmail,
+        message: bookingData.bookingMessage,
+        bookingId: createdBooking.bookingId,
+        booking_requestedDate: bookingData.requestedDate,
+        booking_created_at: bookingData.created_at,
+        productTitle: createdBooking.productTitle,
       };
 
-      const serviceEmail = await serviceEmailService(
-        emailData,
-        createdBooking,
-        userData
-      );
+      await serviceEmailService(emailData);
 
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
