@@ -30,3 +30,4 @@ export async function createBookingService(bookingData: IBooking, userId: IUser)
     throw error;
   }
 };
+

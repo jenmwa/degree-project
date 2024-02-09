@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beställningsförfrågan från web</title>
+</head>
+
+<body>
+  <p><small>Detta är en automatisk mailkopia på en beställningsförfrågan som är gjord på <a
+        href="https://www.bjorbyblomster.se" target="_blank">Björby Blomster</a>. Observera att du kan inte svara på
+      detta mail.</small></p>
+  <div>
+    <h1>Ny förfrågan via hemsidan!</h1>
+    <p>Här är information om beställningsförfrågan:</p>
+    <ul>
+      <li>Från {{ userDataFirstname }},</li>
+      <li>Beställningsdatum: {{ bookingDataCreated }}</li>
+      <li>Beställningsreferens: {{ bookingDataId }}</li>
+      <li>Produkt: {{ bookingDataProductTitle }}</li>
+
+      <li>Ev datum för leverans: {{ bookingDataRequestedDate }}</li>
+
+      <li>Meddelande:<br> {{ bookingDataBookingmessage }}</li>
+    </ul>
+    <br>
+    <p>Kundens kontaktuppgifter som angetts:</p>
+    <ul>
+      <li>Epostadress: {{ email-email }}</li>
+
+      <li>Telefonnummer: {{ userDataPhone }}</li>
+
+    </ul><br><br></br>
+    <h4>Förfrågan togs emot: {{ bookingDataCreated }}</h4>
+    <br>
+    <p> Mvh noreply@bjorbyblomster.se</p>
+
+    <footer> <small>Du får detta mail för att någon gjort en beställningsförfrågan på <a
+          href="https://www.bjorbyblomster.se" target="_blank">Björby Blomster</a>.<br>
+      </small>
+      <p>
+
+      </p>
+    </footer>
+</body>
+
+</html>

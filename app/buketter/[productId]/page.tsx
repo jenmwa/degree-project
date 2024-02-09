@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import React from "react";
 import { useProductContext } from "../../_context/ProductsContext";
-import ProductIdSection from "../../productId/ProductIdSection";
+import ProductIdSection from "../../jenny-testar/productId/ProductIdSection";
 import ImgSection from "app/_components/ImgSection";
 
 export default function ProductPage() {

@@ -1,10 +1,11 @@
+
 import { IMailData } from 'app/_models/IMailData';
 import { getTodaysDate } from 'app/_utilities/getTodaysDate';
 import { readFileSync } from 'fs';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
-const template = readFileSync('app/_email-templates/orderRequestTemplate.html', 'utf-8');
+const template = readFileSync('app/email-templates/ADMIN_orderRequestTemplate.html', 'utf-8');
 
 export default async function handler(
   req: NextApiRequest,
@@ -56,13 +57,13 @@ export default async function handler(
     .replace('{{ userData-lastname }}', `${userData.userLastName}`)
     .replace('{{ userDataPhone }}', phoneListItem)
 
-  if (emailData.type === 'order_confirmation') {
+  if (emailData.type === 'requestEmail') {
     mailData = {
       from: process.env.EMAIL_FROM,
-      to: `${emailData.email}`,
-      bcc: process.env.EMAIL_SERVER_USER,
+      to: process.env.EMAIL_SERVER_USER,
+      bcc: 'jenmwa@gmail.com',
       subject: `${emailData.type}: Order Confirmation`,
-      text: `Order Confirmation: ${emailData.message}`,
+      text: `Order Request Web: ${emailData.email}`,
       html: htmlContent,
     };
   } else {

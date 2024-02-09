@@ -15,13 +15,13 @@ export function useMenuOptions() {
       setNavigation([
         { name: "Ändra Produkter", href: "/admin/dashboard" },
         { name: "Förfrågningar", href: "/admin/dashboard/requests" },
-        { name: "Hemsidans info", href: "/" },
+        // { name: "Hemsidans info", href: "/" },
       ]);
     } else if (isRequestsRoute) {
       setNavigation([
         { name: "Ändra Produkter", href: "/admin/dashboard" },
         { name: "Förfrågningar", href: "/admin/dashboard/requests" },
-        { name: "Hemsidans info", href: "/" },
+        // { name: "Hemsidans info", href: "/" },
       ])
     }
     else {
@@ -42,8 +42,12 @@ export function useMenuOptions() {
   }
   if (pathname === "/admin/dashboard") {
     linkText = "Logga ut";
+    href = '/';
+  }
+  if (pathname === "/admin/dashboard/requests") {
+    linkText = "Logga ut";
 
-    href = '';
+    href = '/';
   }
 
   return { navigation, linkText, href };

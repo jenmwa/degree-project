@@ -76,6 +76,11 @@ input::file-selector-button {
   @apply bg-white px-6 py-3 font-semibold border border-gray-500 text-gray-900 shadow-sm hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust-500
 }
 
+
+
+
+/***/
+
 a[href]:focus {
   @apply  hover:text-rust-400 focus:outline-none focus:ring-2 focus:ring-opacity-50 focus:ring-rust-500 hover:focus-within:text-white hover:focus-within:bg-rust-300;
 }
@@ -89,20 +94,29 @@ a[href]:focus {
   @apply text-white hover:text-white;
 }
 
+
+
+
+/*****/
+
 .input-base {
-  @apply border-0   bg-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:leading-6 focus:bg-gray-100 text-rust-500  border-gray-300 focus:ring-rust-300
+  @apply border-0   bg-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:leading-6  text-rust-500  border-gray-300 focus:ring-rust-300
 }
 
 .input-base-light {
-  @apply border-0   bg-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:leading-6 focus:bg-gray-100 text-rust-500  border-gray-300 focus:ring-rust-300
+  @apply border-0   bg-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:leading-6  text-rust-500  border-gray-300 focus:ring-rust-300
+}
+
+.input-base-gray {
+  @apply border-0   bg-gray-100 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:leading-6 focus:bg-gray-100 text-rust-500  border-gray-300 focus:ring-rust-300
 }
 
 input:focus {
-  @apply  text-rust-500 bg-gray-100 border-gray-300 focus:ring-rust-300  focus:ring-2
+  @apply  text-rust-500 bg-white border-gray-300 focus:ring-rust-300  focus:ring-2
 } 
 
 textarea:focus {
-  @apply outline-none ring-2 ring-opacity-50 ring-rust-500;
+  @apply outline-none bg-white ring-2 ring-opacity-50 ring-rust-500;
 } 
 
 /*TEXT*/

@@ -40,7 +40,7 @@ export default function EditProductForm({
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base font-semibold leading-7">Ändra Produkt</h2>
-            <p className="mt-1 leading-6 text-gray-600">
+            <p className="mt-1 leading-6">
               Genom att ändra information här så ändrar du direkt på hemsidan.
             </p>
 

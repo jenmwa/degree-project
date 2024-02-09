@@ -58,7 +58,7 @@ export default function ContactForm({
           {validateEmail(email.email) && (
             <>
               <label className="mb-4" htmlFor="confirm-email">
-                Confirm Email
+                Bekräfta Epost:
               </label>
               <input
                 id="confirm-email"
