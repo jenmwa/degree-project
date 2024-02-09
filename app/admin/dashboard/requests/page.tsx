@@ -9,11 +9,7 @@ import {
 import ReviewRequestModal from "app/_components/ReviewRequestModal";
 import { useProductContext } from "app/_context/ProductsContext";
 import { initialDialog } from "app/_helpers/initialDialog";
-import {
-  IBooking,
-  IBookingWithCustomerEmail,
-  bookingStatus,
-} from "app/_models/IBooking";
+import { IBooking, IBookingCreated, bookingStatus } from "app/_models/IBooking";
 import { IDialog } from "app/_models/IDialog";
 import { getBookingsService } from "app/_services/getBookingsService";
 import { updateBookingService } from "app/_services/updateBookingStatusService";
@@ -22,10 +18,10 @@ import { useEffect, useState } from "react";
 
 export default function Requests() {
   const { isLoading } = useProductContext();
-  const [bookings, setBookings] = useState<IBookingWithCustomerEmail[]>([]);
+  const [bookings, setBookings] = useState<IBookingCreated[]>([]);
   const [showTableModal, setShowTableModal] = useState(true);
   const [selectedBooking, setSelectedBooking] = useState<
-    IBookingWithCustomerEmail | undefined
+    IBookingCreated | undefined
   >();
   const [dialog, setDialog] = useState<IDialog>(initialDialog);
   const [showDialog, setShowDialog] = useState(false);
@@ -49,7 +45,10 @@ export default function Requests() {
     fetchData();
   }, []);
 
-  const updateBooking = async (status: bookingStatus, booking: IBooking) => {
+  const updateBooking = async (
+    status: bookingStatus,
+    booking: IBookingCreated
+  ) => {
     try {
       const response = await updateBookingService(status, booking);
       if (response.ok) {
@@ -75,7 +74,7 @@ export default function Requests() {
     }
   };
 
-  const handleReviewModal = (booking: IBooking) => {
+  const handleReviewModal = (booking: IBookingCreated) => {
     setShowTableModal(true);
     if (booking) {
       setSelectedBooking(booking);

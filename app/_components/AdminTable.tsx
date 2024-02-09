@@ -5,7 +5,7 @@ import { IBooking, IBookingCreated } from "../_models/IBooking";
 interface IAdminOrderTableProps {
   bookings: IBookingCreated[];
   isLoading: boolean;
-  handleReviewModal: (booking: IBooking) => void;
+  handleReviewModal: (booking: IBookingCreated) => void;
 }
 
 export default function AdminTable({
