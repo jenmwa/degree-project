@@ -14,7 +14,7 @@ export default async function handler(
 ) {
 
   const { type, name, email, message, bookingDataId, booking_requestedDate, booking_created_at, productTitle } = req.body;
-  console.log(type, name, email, message, bookingDataId, booking_requestedDate, booking_created_at, productTitle)
+
   const htmlContent = template
     .replace('{{ emailType }}', type)
     .replace('{{ emailEmail }}', email)
@@ -25,7 +25,7 @@ export default async function handler(
     .replace('{{ bookingDataCreated }}', booking_created_at)
     .replace('{{ bookingDataProductTitle }}', productTitle);
 
-
+  console.log(type, name, email, message, bookingDataId, booking_requestedDate, booking_created_at, productTitle)
 
   try {
     const mailData = createRequestMailData(type, name, email, htmlContent);

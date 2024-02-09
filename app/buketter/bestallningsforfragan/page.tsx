@@ -141,18 +141,18 @@ export default function Page() {
         user
       );
 
-      const emailData: IRequestEmail = {
-        type: "requestEmail",
-        name: userData.userFirstName,
-        email: userData.userEmail,
-        message: bookingData.bookingMessage,
-        bookingId: createdBooking.bookingId,
-        booking_requestedDate: bookingData.requestedDate,
-        booking_created_at: bookingData.created_at,
-        productTitle: createdBooking.productTitle,
-      };
-      console.log(emailData);
-      await serviceEmailService(emailData);
+      // const emailData: IRequestEmail = {
+      //   type: "requestEmail",
+      //   name: userData.userFirstName,
+      //   email: userData.userEmail,
+      //   message: bookingData.bookingMessage,
+      //   bookingId: createdBooking.bookingId,
+      //   booking_requestedDate: bookingData.requestedDate,
+      //   booking_created_at: bookingData.created_at,
+      //   productTitle: createdBooking.productTitle,
+      // };
+      // console.log(emailData);
+      // await serviceEmailService(emailData);
 
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
