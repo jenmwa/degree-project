@@ -6,7 +6,6 @@ export interface IBooking {
   product: string;
   bookingMessage: string;
   requestedDate?: string | undefined;
-  // deliveryalternative: string;
   bookingStatus: bookingStatus;
   created_at: Date | null;
   updated_at?: Date | null;

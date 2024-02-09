@@ -17,7 +17,6 @@ export default function ProductSection({ showProduct }: IProductsSectionProps) {
   const pathname = usePathname();
 
   useEffect(() => {
-    console.log("Current route:", pathname);
     if (pathname === "/admin/dashboard") setIsAdmin(true);
     else {
       setIsAdmin(false);

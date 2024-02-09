@@ -27,7 +27,6 @@ export const metadata: Metadata = {
     title: "Björby Blomster",
     description: "Björby Blomster: Jag älskar att få andras dagar att blomstra",
     siteName: "Björby Blomster",
-    images: [{ url: "#" }],
   },
 };
 

@@ -8,13 +8,7 @@ import { useRouter } from "next/navigation";
 import { Hero } from "app/_components/Hero";
 
 export default function Buketter() {
-  // const { products } = useProductContext();
   const router = useRouter();
-
-  // const foundProduct = products?.find(
-  //   (product) => product.productId === "e882cbce-fa72-43c9-af7d-dc631c927278"
-  // );
-
   const showProduct = (product: IProduct) => {
     router.push(`/buketter/${product.productId}`);
   };

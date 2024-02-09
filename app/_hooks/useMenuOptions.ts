@@ -15,13 +15,13 @@ export function useMenuOptions() {
       setNavigation([
         { name: "Ändra Produkter", href: "/admin/dashboard" },
         { name: "Förfrågningar", href: "/admin/dashboard/requests" },
-        // { name: "Hemsidans info", href: "/" },
+
       ]);
     } else if (isRequestsRoute) {
       setNavigation([
         { name: "Ändra Produkter", href: "/admin/dashboard" },
         { name: "Förfrågningar", href: "/admin/dashboard/requests" },
-        // { name: "Hemsidans info", href: "/" },
+
       ])
     }
     else {

@@ -18,7 +18,6 @@ import { IDialog } from "app/_models/IDialog";
 import { getBookingsService } from "app/_services/getBookingsService";
 import { updateBookingService } from "app/_services/updateBookingStatusService";
 import { getTodaysDate } from "app/_utilities/getTodaysDate";
-import updateBooking from "pages/api/updateBooking";
 import { useEffect, useState } from "react";
 
 export default function Requests() {
@@ -30,7 +29,6 @@ export default function Requests() {
   >();
   const [dialog, setDialog] = useState<IDialog>(initialDialog);
   const [showDialog, setShowDialog] = useState(false);
-  // const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,13 +83,11 @@ export default function Requests() {
   };
 
   const closeDialog = () => {
-    // setShowModal(false);
     setShowDialog(false);
     close();
   };
 
   const close = () => {
-    // setShowModal(false);
     setShowTableModal(false);
   };
 

@@ -1,7 +1,6 @@
 "use client";
 import { Switch } from "@headlessui/react";
 import { classNames } from "./OrderForm";
-import { useRouter } from "next/navigation";
 import React from "react";
 
 interface IConfirmSwitchProps {
@@ -13,8 +12,6 @@ export default function ConfirmSwitch({
   isAgreed,
   handleSwitchOnChange,
 }: IConfirmSwitchProps) {
-  // const router = useRouter();
-
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     window.open("/personuppgiftspolicy", "_blank");

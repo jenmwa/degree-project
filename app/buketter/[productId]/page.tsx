@@ -3,8 +3,9 @@
 import { useParams } from "next/navigation";
 import React from "react";
 import { useProductContext } from "../../_context/ProductsContext";
-import ProductIdSection from "../../jenny-testar/productId/ProductIdSection";
+
 import ImgSection from "app/_components/ImgSection";
+import ProductIdSection from "app/_components/productId/ProductIdSection";
 
 export default function ProductPage() {
   const params = useParams<{ productId: string }>();

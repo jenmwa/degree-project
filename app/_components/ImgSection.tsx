@@ -7,10 +7,7 @@ export default function ImgSection() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // setIsLoading(true);
       const result = await fetchAndLogImages();
-      // setIsLoading(false);
-
       if (result && "data" in result) {
         setImageArray(result.data);
         console.log("imgsection", result.data, result);

@@ -3,7 +3,7 @@ import React from "react";
 export default function Spinner() {
   return (
     <>
-      <div role="status">
+      <div role=" status">
         <svg
           aria-hidden="true"
           className="w-8 h-8 text-gray-200 animate-spin  fill-rust-300"

@@ -13,7 +13,6 @@ interface IEditProductsFormProps {
   close: () => void;
   toggleImage: (img: string) => void;
   selectedImages: string[];
-  // updateFormData: () => void;
 }
 
 export default function EditProductForm({

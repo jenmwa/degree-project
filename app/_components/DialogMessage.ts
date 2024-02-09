@@ -126,11 +126,4 @@ export const ADMIN_REMOVEIMG_IMG: IDialog = {
   primaryButton: "Tabort",
   // redirectLink?: string;
 };
-// export const PRODUCTUPDATE_IMGMISMATCH_DIALOG: IDialog = {
-//   type: "warning",
-//   title: "Bilderna måste ha format .jp",
-//   message:
-//     "Uppdateringen sker i realtid, när du klickar OK så uppdateras artikeln på en gång. ",
-//   primaryButton: "Ok",
-//   // redirectLink?: string;
-// };
+

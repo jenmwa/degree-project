@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { IBooking, IBookingWithCustomerEmail } from "../_models/IBooking";
-import { getUserService } from "app/_services/getUserService";
 
 interface IAdminOrderTableProps {
   bookings: IBookingWithCustomerEmail[];
@@ -14,17 +13,6 @@ export default function AdminTable({
   isLoading,
   handleReviewModal,
 }: IAdminOrderTableProps) {
-  // const userId = "4f7b657b-a75f-456b-b58b-823dc1f8310f";
-
-  // const fetchData = async (userId: string) => {
-  //   try {
-  //     const response = await getUserService(userId);
-  //     return response;
-  //   } catch (error) {
-  //     console.error("Error fetching users:", error);
-  //   }
-  // };
-
   const getBackgroundColor = (bookingStatus: string) => {
     if (bookingStatus === "Confirmed") {
       return "bg-green-100 bg-opacity-50";
@@ -39,8 +27,6 @@ export default function AdminTable({
 
   return (
     <>
-      {/* <button onClick={() => fetchData(userId)}>CLICK TO GET USER</button> */}
-
       <section className="relative overflow-x-auto my-16">
         <table className="w-full text-left rtl:text-right">
           <thead className="text-xs text-gray-100 uppercase bg-gray-700 ">

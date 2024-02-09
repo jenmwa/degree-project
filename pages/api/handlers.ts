@@ -2,7 +2,6 @@
 
 import { supabaseAuthClient } from "../../lib/supabaseAuthClient";
 
-//hämtar alla produkter eller alla bokningar
 export default async function handler(req: any, res: any) {
   const { entity } = req.query;
 
