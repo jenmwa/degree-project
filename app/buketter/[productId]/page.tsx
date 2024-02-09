@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import React from "react";
 import { useProductContext } from "../../_context/ProductsContext";
 
-import ImgSection from "app/_components/ImgSection";
+import ImgSection from "app/_components/ImageSection";
 import ProductIdSection from "app/_components/productId/ProductIdSection";
 
 export default function ProductPage() {

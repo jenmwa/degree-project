@@ -10,9 +10,7 @@ export default function ImgSection() {
       const result = await fetchAndLogImages();
       if (result && "data" in result) {
         setImageArray(result.data);
-        console.log("imgsection", result.data, result);
       } else if (result && "error" in result) {
-        console.log(result);
       }
     };
 

@@ -9,11 +9,10 @@ export function Hero() {
   const pathname = usePathname();
 
   useEffect(() => {
-    console.log("Current route:", pathname);
     if (pathname === "/buketter") {
       setIsBuketter(true);
     }
-  }, []);
+  }, [pathname]);
 
   return (
     <div
