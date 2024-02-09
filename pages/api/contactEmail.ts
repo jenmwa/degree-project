@@ -1,5 +1,6 @@
-import { createMailData } from "/Users/jennywaller/Documents/degree-project/app/_utilities/createMailData";
-import { sendEmail } from "/Users/jennywaller/Documents/degree-project/app/_utilities/sendEmail";
+
+import { createMailData } from "app/_utilities/createMailData";
+import { sendEmail } from "app/_utilities/sendEmail";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
