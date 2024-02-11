@@ -20,7 +20,6 @@ import {
 import { IDialog } from "../../_models/IDialog";
 import { IUser } from "../../_models/IUser";
 import { validatePhone } from "../../_utilities/validation";
-import { serviceEmailService } from "app/_services/serviceEmailService";
 import { createUserService } from "app/_services/createUserService";
 
 import { useRouter } from "next/navigation";
@@ -175,15 +174,20 @@ export default function Page() {
 
       // console.log(emailData);
       // await serviceEmailService(emailData);
-      const email: IContactEmail = {
+      const email: IRequestEmail = {
         type: "contact",
         name: bookingCreated.customerName,
         email: bookingCreated.customerEmail,
         confirmEmail: bookingCreated.customerEmail,
         message: bookingCreated.bookingMessage,
+        bookingId: "",
+        booking_requestedDate: null,
+        booking_created_at: null,
+        productTitle: undefined,
       };
 
-      const result = await contactEmailService(email);
+      const result = await requestEmailService(email);
+
       console.log(result);
       console.log("** user is:", user);
       console.log("** booking is:", booking);
@@ -227,4 +231,7 @@ export default function Page() {
       </section>
     </>
   );
+}
+function requestEmailService(email: IContactEmail) {
+  throw new Error("Function not implemented.");
 }
