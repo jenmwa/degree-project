@@ -26,6 +26,7 @@ import { useRouter } from "next/navigation";
 import { IContactEmail, IRequestEmail } from "app/_models/IContactEmail";
 import { createBookingService } from "app/_services/createBookingService";
 import { contactEmailService } from "app/_services/contactEmailService";
+import { requestEmailService } from "app/_services/requestEmailService";
 
 export default function Page() {
   const [showDialog, setShowDialog] = useState(false);
@@ -231,7 +232,4 @@ export default function Page() {
       </section>
     </>
   );
-}
-function requestEmailService(email: IContactEmail) {
-  throw new Error("Function not implemented.");
 }
