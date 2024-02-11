@@ -9,7 +9,7 @@ export interface IContactEmail {
 export interface IRequestEmail extends IContactEmail {
 
   bookingId: string,
-  booking_requestedDate?: string | undefined,
+  booking_requestedDate: Date | null,
   booking_created_at: Date | null;
   productTitle: string | undefined,
 }

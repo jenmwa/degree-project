@@ -1,5 +1,5 @@
 
-import { createRequestService } from "/Users/jennywaller/Documents/degree-project/app/_services/createRequestService";
+import { createRequestService } from "../app/_services/createBookingService";
 import { IBooking, bookingStatus } from "/Users/jennywaller/Documents/degree-project/app/_models/IBooking";
 import { IUser, Role } from "/Users/jennywaller/Documents/degree-project/app/_models/IUser";
 
