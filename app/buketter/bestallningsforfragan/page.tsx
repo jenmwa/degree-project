@@ -176,7 +176,7 @@ export default function Page() {
       // console.log(emailData);
       // await serviceEmailService(emailData);
       const email: IRequestEmail = {
-        type: "contact",
+        type: "requestEmail",
         name: bookingCreated.customerName,
         email: bookingCreated.customerEmail,
         confirmEmail: bookingCreated.customerEmail,
