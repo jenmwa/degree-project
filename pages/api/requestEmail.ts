@@ -1,18 +1,15 @@
 
-import { createMailData, createRequestMailData } from "app/_utilities/createMailData";
+import { createRequestMailData } from "app/_utilities/createMailData";
 import { sendEmail } from "app/_utilities/sendEmail";
-import { readFileSync } from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
 
-// const template = readFileSync('app/_email-templates/ADMIN_orderRequestTemplate.html', 'utf-8');
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { name, email, message, type, booking_created_at, booking_requestedDate, bookingDataId, bookingDataProductTitle } = req.body;
 
-
+  const { name, email, message, type, booking_created_at, booking_requestedDate, bookingId, productTitle } = req.body;
 
   if (!name || !email || !message || !type) {
     return res.status(400).json({ message: 'Invalid request' });
@@ -25,23 +22,13 @@ export default async function handler(
     <p>Message: ${message}</p>
     <p>Type: ${type}</p>
     ${type === 'requestEmail' ? `
-      <p>Booking ID: ${bookingDataId}</p>
+      <p>Booking ID: ${bookingId}</p>
       <p>Booking Requested Date: ${booking_requestedDate}</p>
       <p>Booking Created At: ${booking_created_at}</p>
-      <p>Booking Product Title: ${bookingDataProductTitle}</p>
+      <p>Booking Product Title: ${productTitle}</p>
     ` : ''}
   </div>
 `;
-  // const htmlContent = template
-  //   .replace('{{ emailType }}', type)
-  //   .replace('{{ emailEmail }}', email)
-  //   .replace('{{ emailMessage }}', message)
-  //   .replace('{{ emailName }}', name)
-  // .replace('{{ bookingDataId }}', bookingDataId)
-  // .replace('{{ bookingDataRequestDate }}', booking_requestedDate)
-  // .replace('{{ bookingDataCreated }}', booking_created_at)
-  // .replace('{{ bookingDataProductTitle }}', bookingDataProductTitle);
-
   try {
     const mailData = createRequestMailData(name, email, type, htmlMessage);
     await sendEmail(mailData, res);
