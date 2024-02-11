@@ -21,17 +21,15 @@ import { IDialog } from "../../_models/IDialog";
 import { IUser } from "../../_models/IUser";
 import { validatePhone } from "../../_utilities/validation";
 import { createUserService } from "app/_services/createUserService";
-
 import { useRouter } from "next/navigation";
-import { IContactEmail, IRequestEmail } from "app/_models/IContactEmail";
 import { createBookingService } from "app/_services/createBookingService";
-import { contactEmailService } from "app/_services/contactEmailService";
 import { requestEmailService } from "app/_services/requestEmailService";
+import { IRequestEmail } from "app/_models/IContactEmail";
 
 export default function Page() {
   const [showDialog, setShowDialog] = useState(false);
   const [dialog, setDialog] = useState<IDialog>(initialDialog);
-  const { products, isLoading, isError } = useProductContext();
+  const { products } = useProductContext();
   const [isAgreed, setIsAgreed] = useState(false);
   const [userData, setUserData] = useState<IUser>(initialUser);
   const [selectedDate, setSelectedDate] = useState("");
@@ -40,7 +38,6 @@ export default function Page() {
   const [userPhoneNumber, setUserPhoneNumber] = useState("");
   const [bookingData, setBookingData] = useState<IBooking>({
     bookingId: "",
-    // customer: {} as IUser,
     customer: "",
     product: selectedProduct,
     bookingMessage: "",
@@ -115,7 +112,6 @@ export default function Page() {
     setUserData(initialUser);
     setBookingData({
       bookingId: "",
-      // customer: userData,
       customer: "",
       product: selectedProduct,
       bookingMessage: "",
@@ -140,12 +136,8 @@ export default function Page() {
     }
     try {
       const user = await createUserService(userData);
-      console.log("user IS", user);
       const userId = user.user.userId;
-      console.log("user- userIdId is:", user.user.userId);
-
       const bookingObject = await createBookingService(bookingData, userId);
-      console.log("bookingobject is", bookingObject);
       const booking: IBooking = bookingObject.booking;
 
       const bookingCreated: IBookingCreated = {
@@ -158,27 +150,16 @@ export default function Page() {
         created_at: booking.created_at,
         updated_at: booking.updated_at,
         customerEmail: user.user.userEmail,
+        customerPhoneNumber: user.user.userPhoneNumber,
         customerName: user.user.userFirstName,
         productTitle: selectedProduct,
       };
 
-      // const emailData: IRequestEmail = {
-      //   type: "requestEmail",
-      //   name: bookingCreated.customerName,
-      //   email: bookingCreated.customerEmail,
-      //   message: bookingCreated.bookingMessage,
-      //   bookingId: bookingCreated.bookingId,
-      //   booking_requestedDate: bookingCreated.requestedDate,
-      //   booking_created_at: bookingData.created_at,
-      //   productTitle: bookingCreated.productTitle,
-      // };
-
-      // console.log(emailData);
-      // await serviceEmailService(emailData);
       const email: IRequestEmail = {
         type: "requestEmail",
         name: bookingCreated.customerName,
         email: bookingCreated.customerEmail,
+        phone: bookingCreated.customerPhoneNumber,
         confirmEmail: bookingCreated.customerEmail,
         message: bookingCreated.bookingMessage,
         bookingId: bookingCreated.bookingId,
@@ -187,12 +168,7 @@ export default function Page() {
         productTitle: bookingCreated.productTitle,
       };
 
-      const result = await requestEmailService(email);
-
-      console.log(result);
-      console.log("** user is:", user);
-      console.log("** booking is:", booking);
-      console.log("** bookingCreated is:", bookingCreated);
+      await requestEmailService(email);
 
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
@@ -204,8 +180,6 @@ export default function Page() {
       setShowDialog(true);
     }
   };
-  // console.log("userData is:", userData);
-  // console.log("bookingData is:", bookingData);
 
   return (
     <>

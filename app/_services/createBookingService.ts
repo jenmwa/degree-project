@@ -1,6 +1,4 @@
 import { IBooking } from "app/_models/IBooking";
-import { IUser } from "app/_models/IUser";
-import { getTodaysDate } from "app/_utilities/getTodaysDate";
 
 
 export async function createBookingService(bookingData: IBooking, userId: string) {
@@ -15,7 +13,6 @@ export async function createBookingService(bookingData: IBooking, userId: string
       body: JSON.stringify(bookingData),
     });
     const data = await response.json();
-    console.log('data in createBookingService is:', data)
 
     if (response.ok) {
       return data;

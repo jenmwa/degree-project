@@ -12,6 +12,7 @@ export interface IRequestEmail extends IContactEmail {
   booking_requestedDate: Date | null,
   booking_created_at: Date | null;
   productTitle: string | undefined,
+  phone: number | null;
 }
 
 // export interface IRequestEmail {

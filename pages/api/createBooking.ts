@@ -1,4 +1,4 @@
-import { IBooking, IBookingCreated } from "app/_models/IBooking";
+import { IBooking } from "app/_models/IBooking";
 import { randomUUID } from "crypto";
 import { supabaseAuthClient } from "lib/supabaseAuthClient";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -21,11 +21,6 @@ export default async function createBooking(req: NextApiRequest, res: NextApiRes
         created_at: new Date(),
         updated_at: null,
       };
-      console.log('bookingObject is:', bookingObject)
-
-      // if (requestedDate) {
-      //   bookingObject.requestedDate = requestedDate;
-      // }
 
       const { data: bookingCreateData, error: bookingError } = await supabaseAuthClient
         .from('Booking')
@@ -36,50 +31,9 @@ export default async function createBooking(req: NextApiRequest, res: NextApiRes
         throw bookingError;
       }
 
-      // const bookingId = bookingData[0]?.bookingId;
-
-
-      // if (!bookingId) {
-      //   throw new Error('BookingId not found in response');
-      // }
-
-      // const created_at = bookingData[0]?.created_at;
-
-      // const { data: newBookingData, error: getError } = await supabaseAuthClient
-      //   .from('Booking')
-      //   .select('*')
-      //   .eq('created_at', created_at)
-      //   .single();
-
-      // if (getError) {
-      //   throw getError;
-      // }
-
-      // console.log('New booking data:', newBookingData);
-
-      // const productId = bookingData[0]?.product;
-
-      // const { data: productData, error: getProductError } = await supabaseAuthClient
-      //   .from('Product')
-      //   .select('productTitle')
-      //   .eq('productId', productId)
-      //   .single();
-
-      // if (getProductError) {
-      //   throw getProductError;
-      // }
-
-      // const completeBookingData: IBookingCreated = {
-      //   ...bookingData[0],
-      //   productTitle: productData.productTitle,
-      //   booking_created_at: bookingData[0]?.created_at
-      // }
-
       booking = bookingCreateData[0];
-      console.log('in creatieBooking, booking is:', booking)
 
       res.status(201).json({ booking });
-      // res.status(200).json({ success: true, bookingData: completeBookingData });
     } catch (error) {
       console.error('Error creating booking:', error);
       res.status(500).json({ error: 'Error creating booking' });
