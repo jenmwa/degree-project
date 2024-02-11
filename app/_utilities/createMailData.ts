@@ -6,9 +6,9 @@ export function createMailData(name: string, email: string, message: string, typ
     return {
       from: process.env.EMAIL_FROM,
       to: process.env.EMAIL_SERVER_USER,
-      subject: `${type} Message from ${name}`,
-      text: `Website contact: ${type} | Sent from: ${email}`,
-      html: `<div> ${message} </div><p>Sent from: ${email}</p>`,
+      subject: `${type} Från: ${name}`,
+      text: `Kontakt via hemsida ${type} | Från: ${email}`,
+      html: `<div> ${message} </div><p>Från: ${email}</p>`,
     };
   } else {
     throw new Error('Invalid request type');
@@ -21,8 +21,8 @@ export function createRequestMailData(name: string, email: string, type: string,
     return {
       from: process.env.EMAIL_FROM,
       to: process.env.EMAIL_SERVER_USER,
-      subject: `${type} Message from ${name}`,
-      text: `Website contact:  | Sent from: ${email}`,
+      subject: `${type} Från: ${name}`,
+      text: `Bokningsförfrågan via hemsida:  | Från: ${email}`,
       html: htmlMessage,
     };
   } else {

@@ -8,8 +8,6 @@ export default async function handler(
 ) {
   const { name, email, message, type } = req.body;
 
-
-
   if (!name || !email || !message || !type) {
     return res.status(400).json({ message: 'Invalid request' });
   }

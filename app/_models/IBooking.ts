@@ -14,6 +14,7 @@ export interface IBooking {
 
 export interface IBookingCreated extends IBooking {
   customerEmail: string;
+  customerPhoneNumber: number | null;
   customerName: string;
   productTitle: string;
 }
