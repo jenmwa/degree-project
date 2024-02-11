@@ -181,10 +181,10 @@ export default function Page() {
         email: bookingCreated.customerEmail,
         confirmEmail: bookingCreated.customerEmail,
         message: bookingCreated.bookingMessage,
-        bookingId: "",
-        booking_requestedDate: null,
-        booking_created_at: null,
-        productTitle: undefined,
+        bookingId: bookingCreated.bookingId,
+        booking_requestedDate: bookingCreated.requestedDate,
+        booking_created_at: bookingData.created_at,
+        productTitle: bookingCreated.productTitle,
       };
 
       const result = await requestEmailService(email);
