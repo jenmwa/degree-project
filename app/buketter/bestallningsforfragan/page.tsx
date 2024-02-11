@@ -72,7 +72,7 @@ export default function Page() {
 
     if (name === "date") {
       setSelectedDate(value);
-      const formattedDate = new Date(value).toISOString();
+      const formattedDate = new Date(value);
       setBookingData((prevBookingData) => ({
         ...prevBookingData,
         // requestedDate: value,
@@ -138,40 +138,46 @@ export default function Page() {
       return;
     }
     try {
-      const user: IUser = await createUserService(userData);
-      const userId = user.userId;
+      const user = await createUserService(userData);
+      console.log("user IS", user);
+      const userId = user.user.userId;
+      console.log("user- userIdId is:", user.user.userId);
 
-      const booking: IBooking = await createBookingService(bookingData, userId);
+      const bookingObject = await createBookingService(bookingData, userId);
+      console.log("bookingobject is", bookingObject);
+      const booking: IBooking = bookingObject.booking;
 
       const bookingCreated: IBookingCreated = {
         bookingId: booking.bookingId,
-        customer: user.userId,
+        customer: userId,
         product: booking.product,
         bookingMessage: booking.bookingMessage,
         requestedDate: booking.requestedDate,
         bookingStatus: booking.bookingStatus,
         created_at: booking.created_at,
         updated_at: booking.updated_at,
-        customerEmail: user.userEmail,
+        customerEmail: user.user.userEmail,
+        customerName: user.user.userFirstName,
         productTitle: selectedProduct,
       };
-      // const emailData: IRequestEmail = {
-      //   type: "requestEmail",
-      //   name: userData.userFirstName,
-      //   email: userData.userEmail,
-      //   message: bookingData.bookingMessage,
-      //   bookingId: createdBooking.bookingId,
-      //   booking_requestedDate: bookingData.requestedDate,
-      //   booking_created_at: bookingData.created_at,
-      //   productTitle: createdBooking.productTitle,
-      // };
-      // console.log(emailData);
-      // await serviceEmailService(emailData);
+
+      const emailData: IRequestEmail = {
+        type: "requestEmail",
+        name: bookingCreated.customerName,
+        email: bookingCreated.customerEmail,
+        message: bookingCreated.bookingMessage,
+        bookingId: bookingCreated.bookingId,
+        booking_requestedDate: bookingCreated.requestedDate,
+        booking_created_at: bookingData.created_at,
+        productTitle: bookingCreated.productTitle,
+      };
+
+      console.log(emailData);
+      await serviceEmailService(emailData);
 
       console.log("** user is:", user);
       console.log("** booking is:", booking);
       console.log("** bookingCreated is:", bookingCreated);
-      // console.log("createdBooking is", createdBooking);
 
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
@@ -183,8 +189,8 @@ export default function Page() {
       setShowDialog(true);
     }
   };
-  console.log("userData is:", userData);
-  console.log("bookingData is:", bookingData);
+  // console.log("userData is:", userData);
+  // console.log("bookingData is:", bookingData);
 
   return (
     <>

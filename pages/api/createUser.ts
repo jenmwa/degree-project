@@ -1,3 +1,4 @@
+import { IUser } from "app/_models/IUser";
 import { supabaseAuthClient } from "lib/supabaseAuthClient";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -12,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(400).json({ error: 'userEmail is required' });
       }
 
-      let user;
+      let user: IUser | null = null;
 
       const { data: existingUser, error: existingUserError } = await supabaseAuthClient
         .from('User')
@@ -44,10 +45,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         user = newUser[0];
         // userId = newUser[0]?.userId;
-
+        console.log('user is created', user)
       }
 
-      res.status(200).json({ success: true, user });
+      res.status(200).json({ user });
     } catch (error) {
       console.error('Error updating user:', error);
       res.status(500).json({ error: 'Error updating user' });

@@ -1,4 +1,5 @@
 import { IBooking, IBookingCreated } from "app/_models/IBooking";
+import { randomUUID } from "crypto";
 import { supabaseAuthClient } from "lib/supabaseAuthClient";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -8,8 +9,10 @@ export default async function createBooking(req: NextApiRequest, res: NextApiRes
     try {
       const { product, bookingMessage, requestedDate, bookingStatus, customer } = req.body;
 
+      let booking: IBooking | null = null;
+
       const bookingObject: IBooking = {
-        bookingId: '',
+        bookingId: randomUUID(),
         product: product,
         bookingMessage: bookingMessage,
         requestedDate: requestedDate,
@@ -24,14 +27,14 @@ export default async function createBooking(req: NextApiRequest, res: NextApiRes
       //   bookingObject.requestedDate = requestedDate;
       // }
 
-      // const { data: bookingData, error: bookingError } = await supabaseAuthClient
-      //   .from('Booking')
-      //   .insert([bookingObject])
-      //   .select();
+      const { data: bookingCreateData, error: bookingError } = await supabaseAuthClient
+        .from('Booking')
+        .insert([bookingObject])
+        .select();
 
-      // if (bookingError) {
-      //   throw bookingError;
-      // }
+      if (bookingError) {
+        throw bookingError;
+      }
 
       // const bookingId = bookingData[0]?.bookingId;
 
@@ -72,6 +75,10 @@ export default async function createBooking(req: NextApiRequest, res: NextApiRes
       //   booking_created_at: bookingData[0]?.created_at
       // }
 
+      booking = bookingCreateData[0];
+      console.log('in creatieBooking, booking is:', booking)
+
+      res.status(201).json({ booking });
       // res.status(200).json({ success: true, bookingData: completeBookingData });
     } catch (error) {
       console.error('Error creating booking:', error);

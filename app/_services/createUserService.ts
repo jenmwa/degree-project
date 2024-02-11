@@ -12,8 +12,7 @@ export async function createUserService(userData: IUser) {
     const data = await response.json();
 
     if (response.ok) {
-      const userId = data.newUser ? data.newUser.userId : data.userId;
-      return userId;
+      return data;
     }
     if (response.status === 400) {
       const errorBody = await response.json();

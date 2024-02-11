@@ -16,8 +16,11 @@ export async function createBookingService(bookingData: IBooking, userId: string
     });
     const data = await response.json();
     console.log('data in createBookingService is:', data)
-    if (data) {
-      return data.bookingData;
+
+    if (response.ok) {
+      return data;
+
+
     } else {
       const errorBody = await response.json();
       throw new Error(errorBody.error);

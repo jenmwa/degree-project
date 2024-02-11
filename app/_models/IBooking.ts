@@ -6,7 +6,7 @@ export interface IBooking {
   customer: string,
   product: string;
   bookingMessage: string;
-  requestedDate: String | null;
+  requestedDate: Date | null;
   bookingStatus: bookingStatus;
   created_at: Date | null;
   updated_at?: Date | null;
@@ -14,6 +14,7 @@ export interface IBooking {
 
 export interface IBookingCreated extends IBooking {
   customerEmail: string;
+  customerName: string;
   productTitle: string;
 }
 
