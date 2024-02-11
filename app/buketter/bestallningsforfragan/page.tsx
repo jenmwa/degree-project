@@ -24,8 +24,9 @@ import { serviceEmailService } from "app/_services/serviceEmailService";
 import { createUserService } from "app/_services/createUserService";
 
 import { useRouter } from "next/navigation";
-import { IRequestEmail } from "app/_models/IContactEmail";
+import { IContactEmail, IRequestEmail } from "app/_models/IContactEmail";
 import { createBookingService } from "app/_services/createBookingService";
+import { contactEmailService } from "app/_services/contactEmailService";
 
 export default function Page() {
   const [showDialog, setShowDialog] = useState(false);
@@ -161,20 +162,29 @@ export default function Page() {
         productTitle: selectedProduct,
       };
 
-      const emailData: IRequestEmail = {
-        type: "requestEmail",
+      // const emailData: IRequestEmail = {
+      //   type: "requestEmail",
+      //   name: bookingCreated.customerName,
+      //   email: bookingCreated.customerEmail,
+      //   message: bookingCreated.bookingMessage,
+      //   bookingId: bookingCreated.bookingId,
+      //   booking_requestedDate: bookingCreated.requestedDate,
+      //   booking_created_at: bookingData.created_at,
+      //   productTitle: bookingCreated.productTitle,
+      // };
+
+      // console.log(emailData);
+      // await serviceEmailService(emailData);
+      const email: IContactEmail = {
+        type: "contact",
         name: bookingCreated.customerName,
         email: bookingCreated.customerEmail,
+        confirmEmail: bookingCreated.customerEmail,
         message: bookingCreated.bookingMessage,
-        bookingId: bookingCreated.bookingId,
-        booking_requestedDate: bookingCreated.requestedDate,
-        booking_created_at: bookingData.created_at,
-        productTitle: bookingCreated.productTitle,
       };
 
-      console.log(emailData);
-      await serviceEmailService(emailData);
-
+      const result = await contactEmailService(email);
+      console.log(result);
       console.log("** user is:", user);
       console.log("** booking is:", booking);
       console.log("** bookingCreated is:", bookingCreated);
