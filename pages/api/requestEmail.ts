@@ -1,5 +1,5 @@
 
-import { createMailData } from "app/_utilities/createMailData";
+import { createMailData, createRequestMailData } from "app/_utilities/createMailData";
 import { sendEmail } from "app/_utilities/sendEmail";
 import { readFileSync } from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -18,7 +18,20 @@ export default async function handler(
     return res.status(400).json({ message: 'Invalid request' });
   }
 
-
+  const htmlMessage = `
+  <div>
+    <p>Name: ${name}</p>
+    <p>Email: ${email}</p>
+    <p>Message: ${message}</p>
+    <p>Type: ${type}</p>
+    ${type === 'requestEmail' ? `
+      <p>Booking ID: ${bookingDataId}</p>
+      <p>Booking Requested Date: ${booking_requestedDate}</p>
+      <p>Booking Created At: ${booking_created_at}</p>
+      <p>Booking Product Title: ${bookingDataProductTitle}</p>
+    ` : ''}
+  </div>
+`;
   // const htmlContent = template
   //   .replace('{{ emailType }}', type)
   //   .replace('{{ emailEmail }}', email)
@@ -30,7 +43,7 @@ export default async function handler(
   // .replace('{{ bookingDataProductTitle }}', bookingDataProductTitle);
 
   try {
-    const mailData = createMailData(name, email, message, type);
+    const mailData = createRequestMailData(name, email, type, htmlMessage);
     await sendEmail(mailData, res);
   } catch (error) {
     const err = error as Error;
