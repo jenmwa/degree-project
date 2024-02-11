@@ -6,7 +6,7 @@ export async function requestEmailService(email: IRequestEmail) {
     if (email.email !== email.confirmEmail) {
       return { success: false, error: "Email addresses do not match" };
     }
-    const res = await fetch("/api/contactEmail", {
+    const res = await fetch("/api/requestEmail", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
