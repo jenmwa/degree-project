@@ -4,7 +4,7 @@ import { sendEmail } from "app/_utilities/sendEmail";
 import { readFileSync } from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
 
-const template = readFileSync('app/_email-templates/ADMIN_orderRequestTemplate.html', 'utf-8');
+// const template = readFileSync('app/_email-templates/ADMIN_orderRequestTemplate.html', 'utf-8');
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,18 +19,18 @@ export default async function handler(
   }
 
 
-  const htmlContent = template
-    .replace('{{ emailType }}', type)
-    .replace('{{ emailEmail }}', email)
-    .replace('{{ emailMessage }}', message)
-    .replace('{{ emailName }}', name)
+  // const htmlContent = template
+  //   .replace('{{ emailType }}', type)
+  //   .replace('{{ emailEmail }}', email)
+  //   .replace('{{ emailMessage }}', message)
+  //   .replace('{{ emailName }}', name)
   // .replace('{{ bookingDataId }}', bookingDataId)
   // .replace('{{ bookingDataRequestDate }}', booking_requestedDate)
   // .replace('{{ bookingDataCreated }}', booking_created_at)
   // .replace('{{ bookingDataProductTitle }}', bookingDataProductTitle);
 
   try {
-    const mailData = createMailData(name, email, htmlContent, type);
+    const mailData = createMailData(name, email, message, type);
     await sendEmail(mailData, res);
   } catch (error) {
     const err = error as Error;
