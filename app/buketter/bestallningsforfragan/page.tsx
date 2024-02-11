@@ -175,15 +175,20 @@ export default function Page() {
 
       // console.log(emailData);
       // await serviceEmailService(emailData);
-      const email: IContactEmail = {
+      const email: IRequestEmail = {
         type: "contact",
         name: bookingCreated.customerName,
         email: bookingCreated.customerEmail,
         confirmEmail: bookingCreated.customerEmail,
         message: bookingCreated.bookingMessage,
+        bookingId: bookingCreated.bookingId,
+        booking_requestedDate: bookingCreated.requestedDate,
+        booking_created_at: bookingData.created_at,
+        productTitle: bookingCreated.productTitle,
       };
 
       const result = await contactEmailService(email);
+
       console.log(result);
       console.log("** user is:", user);
       console.log("** booking is:", booking);
