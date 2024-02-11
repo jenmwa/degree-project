@@ -29,17 +29,4 @@ export function createMailData2(name: string, email: string, message: string, ty
   }
 }
 
-// export function createRequestMailData(type: string, name: string, email: string, htmlContent: string): IMailData {
-//   if (type === 'requestEmail') {
-//     return {
-//       from: process.env.EMAIL_FROM,
-//       to: process.env.EMAIL_SERVER_USER,
-//       subject: `${type} Förfrågan via hemsida`,
-//       text: '',
-//       html: htmlContent,
-//     };
 
-//   } else {
-//     throw new Error('Invalid request type');
-//   }
-// }
