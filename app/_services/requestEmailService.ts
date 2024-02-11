@@ -1,4 +1,4 @@
-import { IContactEmail, IRequestEmail } from "app/_models/IContactEmail";
+import { IRequestEmail } from "app/_models/IContactEmail";
 
 export async function requestEmailService(email: IRequestEmail) {
 

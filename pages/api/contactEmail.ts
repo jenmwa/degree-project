@@ -1,5 +1,5 @@
 
-import { createMailData, createMailData2 } from "app/_utilities/createMailData";
+import { createMailData } from "app/_utilities/createMailData";
 import { sendEmail } from "app/_utilities/sendEmail";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -14,7 +14,7 @@ export default async function handler(
   }
 
   try {
-    const mailData = createMailData2(name, email, message, type);
+    const mailData = createMailData(name, email, message, type);
     await sendEmail(mailData, res);
   } catch (error) {
     const err = error as Error;
