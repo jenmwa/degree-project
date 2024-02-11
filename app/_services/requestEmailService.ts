@@ -1,6 +1,6 @@
-import { IContactEmail } from "app/_models/IContactEmail";
+import { IContactEmail, IRequestEmail } from "app/_models/IContactEmail";
 
-export async function contactEmailService(email: IContactEmail) {
+export async function RequestEmailService(email: IRequestEmail) {
 
   try {
     if (email.email !== email.confirmEmail) {
