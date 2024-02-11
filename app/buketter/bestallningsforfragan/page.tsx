@@ -25,7 +25,7 @@ import { createUserService } from "app/_services/createUserService";
 
 import { useRouter } from "next/navigation";
 import { IRequestEmail } from "app/_models/IContactEmail";
-import { createRequestService } from "app/_services/createRequestService";
+import { createBookingService } from "app/_services/createBookingService";
 
 export default function Page() {
   const [showDialog, setShowDialog] = useState(false);
@@ -38,14 +38,17 @@ export default function Page() {
   const [selectedProduct, setSelectedProduct] = useState<string>("");
   const [userPhoneNumber, setUserPhoneNumber] = useState("");
   const [bookingData, setBookingData] = useState<IBooking>({
-    customer: {} as IUser,
+    bookingId: "",
+    // customer: {} as IUser,
+    customer: "",
     product: selectedProduct,
     bookingMessage: "",
-    requestedDate: undefined,
+    requestedDate: null,
     bookingStatus: bookingStatus.Request,
     created_at: null,
     updated_at: null,
   });
+  const router = useRouter();
 
   useEffect(() => {
     const today = new Date();
@@ -63,18 +66,17 @@ export default function Page() {
       }));
     }
   }, []);
-  const router = useRouter();
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     if (name === "date") {
       setSelectedDate(value);
-      const createdAt = new Date();
+      const formattedDate = new Date(value).toISOString();
       setBookingData((prevBookingData) => ({
         ...prevBookingData,
-        requestedDate: new Date(value).toLocaleString(),
-        created_at: createdAt,
+        // requestedDate: value,
+        requestedDate: formattedDate,
       }));
     } else if (name === "product") {
       setSelectedProduct(value);
@@ -111,10 +113,12 @@ export default function Page() {
   const clearInputFields = () => {
     setUserData(initialUser);
     setBookingData({
-      customer: userData,
+      bookingId: "",
+      // customer: userData,
+      customer: "",
       product: selectedProduct,
       bookingMessage: "",
-      requestedDate: "",
+      requestedDate: null,
       bookingStatus: bookingStatus.Request,
       created_at: null,
       updated_at: null,
@@ -134,13 +138,23 @@ export default function Page() {
       return;
     }
     try {
-      const user = await createUserService(userData);
+      const user: IUser = await createUserService(userData);
+      const userId = user.userId;
 
-      const createdBooking: IBookingCreated = await createRequestService(
-        bookingData,
-        user
-      );
+      const booking: IBooking = await createBookingService(bookingData, userId);
 
+      const bookingCreated: IBookingCreated = {
+        bookingId: booking.bookingId,
+        customer: user.userId,
+        product: booking.product,
+        bookingMessage: booking.bookingMessage,
+        requestedDate: booking.requestedDate,
+        bookingStatus: booking.bookingStatus,
+        created_at: booking.created_at,
+        updated_at: booking.updated_at,
+        customerEmail: user.userEmail,
+        productTitle: selectedProduct,
+      };
       // const emailData: IRequestEmail = {
       //   type: "requestEmail",
       //   name: userData.userFirstName,
@@ -154,6 +168,11 @@ export default function Page() {
       // console.log(emailData);
       // await serviceEmailService(emailData);
 
+      console.log("** user is:", user);
+      console.log("** booking is:", booking);
+      console.log("** bookingCreated is:", bookingCreated);
+      // console.log("createdBooking is", createdBooking);
+
       setDialog(REQUEST_SUCCESS_DIALOG);
       setShowDialog(true);
 
@@ -164,6 +183,8 @@ export default function Page() {
       setShowDialog(true);
     }
   };
+  console.log("userData is:", userData);
+  console.log("bookingData is:", bookingData);
 
   return (
     <>
